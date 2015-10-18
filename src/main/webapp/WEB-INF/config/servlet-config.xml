@@ -48,8 +48,8 @@
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://178.62.228.69:5432/testDB" />
-		<property name="username" value="postgres_username" />
-		<property name="password" value="postgres_password" />
+		<property name="username" value="postgres" />
+		<property name="password" value="practice123" />
 	</bean>
 	
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
