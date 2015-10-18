@@ -1,0 +1,23 @@
+<HTML>
+<BODY>
+List of books:
+<table>
+<tr>
+    <th>
+         <b>ID</b>
+        </th>
+        <th>
+          <b>Title</b>
+        </th>
+     </tr>
+#foreach( $book in $books )
+      <tr>
+        <td>
+          $book.getId()
+        </td>
+        <td>
+          $book.getTitle()	
+        </td>
+      </tr>
+#end
+</table>
