@@ -6,7 +6,6 @@ import javax.transaction.Transactional;
 
 import org.exschool.pocketworld.model.Book;
 import org.exschool.pocketworld.service.BookService;
-import org.exschool.pocketworld.service.BookServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class BookController {
 	@Autowired
 	BookService bookService;
 	
-	@RequestMapping(value = "/index")
+	@RequestMapping(value = "/")
 	public String showIndexPage(Model model){
 		return "index";
 	}
