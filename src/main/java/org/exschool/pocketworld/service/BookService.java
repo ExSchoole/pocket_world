@@ -6,9 +6,9 @@ import org.exschool.pocketworld.model.Book;
 
 public interface BookService {
 	
-	List<Book> findAllBooks();
+	List<Book> allBooks();
 	
-	Book findOne(long id);
+	Book get(long id);
 
-	void create(Book entity);
+	void save(Book entity);
 }

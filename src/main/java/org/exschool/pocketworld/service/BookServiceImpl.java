@@ -9,21 +9,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("bookService")
+@Transactional
 public class BookServiceImpl implements BookService{
 
 	@Autowired
 	private BookDao bookDao;
 	
-	public List<Book> findAllBooks() {
+	public List<Book> allBooks() {
 		return bookDao.findAll();
 	}
 	
-	public Book findOne(final long id) {
+	public Book get(final long id) {
 	    return bookDao.findOne(id);
 	}
 
-	@Transactional
-	public void create(final Book entity) {
+	public void save(final Book entity) {
 		bookDao.create(entity);
 	}
 	  

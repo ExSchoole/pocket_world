@@ -26,7 +26,6 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter{
 	public VelocityConfig velocityConfig() {
 	    VelocityConfigurer cfg = new VelocityConfigurer();
 	    cfg.setResourceLoaderPath("/WEB-INF/views/");
-	    //cfg.setConfigLocation(context.getResource("/WEB-INF/velocity.properties"));
 	    return cfg;
 	}
 	

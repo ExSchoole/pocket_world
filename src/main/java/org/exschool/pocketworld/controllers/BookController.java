@@ -31,7 +31,7 @@ public class BookController {
 	@RequestMapping(value = "/list")
 	public String listChildren(Model model){
 		logger.info("/list is invoked on a controller");
-		List<Book> books = bookService.findAllBooks();
+		List<Book> books = bookService.allBooks();
 		model.addAttribute("books",books);
 		return "books";
 	}
@@ -43,7 +43,7 @@ public class BookController {
 		Book book = new Book();
 		String title = "Title_"+ System.currentTimeMillis();
 		book.setTitle(title);
-		bookService.create(book);
+		bookService.save(book);
 		model.addAttribute("title",title);
 		return "book";
 	}

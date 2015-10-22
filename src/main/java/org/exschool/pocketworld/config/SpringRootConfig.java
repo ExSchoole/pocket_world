@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @ComponentScan({"org.exschool.pocketworld.dao", "org.exschool.pocketworld.service" })
-@Import(PersistenceJPAConfig.class)
+@Import(HibernateConfiguration.class)
 public class SpringRootConfig {
 
 }
