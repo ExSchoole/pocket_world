@@ -10,5 +10,7 @@ public interface BookService {
 	
 	Book get(long id);
 
+	List<Book> getByTitle(String title);
+	
 	void save(Book entity);
 }

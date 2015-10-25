@@ -29,6 +29,10 @@ public class Book  implements Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", title=" + title + "]";
+	}
 	  
 	  
 	
