@@ -33,6 +33,6 @@ public class BookServiceImpl implements BookService{
 	public List<Book> getByTitle(String title) {
 		Map<String,String> map = new HashMap<>();
 		map.put("title",title);
-		return dao.getAllBy(Book.class,map);  
+		return dao.getAllBy("from Book where title = :title",map);
 	}
 }
