@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.exschool</groupId>
-        <artifactId>pocket_world_parent</artifactId>
+        <artifactId>pocket_world</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>common</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    
+    <packaging>jar</packaging>
     <build>
         <plugins>
             <plugin>
