@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap  Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/Style.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+   
+      
+<!--      Вверхняя панель навигации-->
+      <div class = "navbar navbar-inverse">
+                 <div class = "container">
+                     <div class = "navbar-header">
+                        <button type = "button"  class="navbar-toggle"  data-toggle="collapse" data-target="#esponsive-menu">
+                            <span class="sr-only">Открыть навигацию</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>                                                
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                         </button>
+                        <a  class = "navbar-brand" href="#" > <i class="fa fa-home fa-fw"></i>&nbsp;</a>
+                          </div>
+                     <div class = "collapse navbar-collapse" id = "esponsive-menu">
+                          <ul class = "nav navbar-nav">
+                              <li><a   href="#" >Пункт 1 </a></li>
+                              <li class="dropdown">
+                                  <a   href="#" class="dropdown-toggle" data-toggle="dropdown" >Пункт 2 <b class="caret"></b> </a>
+                              <ul class = "dropdown-menu">
+                                  <li><a   href="#"> Пункт 2.1 </a></li>
+                                  <li class="divider"></li>
+                                  <li><a   href="#" >Пункт 2.2 </a></li>
+                                  <li class="divider"></li>
+                                  <li><a   href="#" >Пункт 2.3 </a></li>
+                                  <li class="divider"></li>
+                                  <li><a   href="#" >Пункт 2.3 </a></li>
+                                  <li class="divider"></li>
+                                  <li><a   href="#" >Пункт 2.4 </a></li>
+                                  <li class="divider"></li>
+                                  <li><a   href="#" >Пункт 2.5 </a></li>
+                                  <li class="divider"></li>
+                                  <li><a   href="#" >Пункт 2.6 </a></li>
+                                  </ul>                         
+                              </li>
+                              <li><a   href="#" >Пункт 3 </a></li>
+                              <li><a   href="#" >Пункт 4 </a></li>
+                         </ul>
+                    </div>
+          </div>
+      </div>
+      
+        <div class="container body-content">
+          <div class="row">
+              <h1>Pocket World</h1>             
+          </div>
+      </div>    	
+      <p></p>
+      
+<!-- Карта "окраины" города     -->
+      <div  class = "container">
+          <div class = "row">
+              <div class="col-md-7">
+           <div class = "row">
+                <div class="col-md-3" >
+                    <img src="images/museum39.png">
+                </div>
+               <div class="col-md-3 col-md-offset-0.5">
+                   <img src="images/museum39.png">
+                </div>
+               <div class="col-md-3 col-md-offset-0.5">
+                   <img src="images/museum39.png">
+                </div>
+                <div class="col-md-3 col-offset-0.5">
+                   <img src="images/museum39.png">
+                </div>
+          </div>
+           <div class = "row">
+                <div class="col-md-3">
+                    <img src="images/museum39.png">
+                </div>
+               <div class="col-md-3">
+                   
+                </div>
+               <div class="col-md-3">
+                   
+                </div>
+                <div class="col-md-3">
+                   <img src="images/museum39.png">
+                </div>
+          </div>
+          <div class = "row">
+                <div class="col-md-3">
+                    <img src="images/museum39.png">
+                </div>
+               <div class="col-md-3">
+                   
+                </div>
+               <div class="col-md-3">
+                   
+                </div>
+                <div class="col-md-3">
+                   <img src="images/museum39.png">
+                </div>
+          </div>
+          <div class = "row">
+                <div class="col-md-3">
+                    <img src="images/museum39.png">
+                </div>
+               <div class="col-md-3">
+                   <img src="images/museum39.png">
+                </div>
+               <div class="col-md-3">
+                   <img src="images/museum39.png">
+                </div>
+                <div class="col-md-3">
+                   <img src="images/museum39.png">
+                </div>
+          </div>     
+              </div>
+              
+              <div class="col-md-5">
+                  <div id="myCarousel" class="vertical-slider carousel vertical slide col-md-12" data-ride="carousel">
+                      <div class="row">
+                          <div class="col-md-4">
+                              <span data-slide="next" class="btn-vertical-slider glyphicon glyphicon-circle-arrow-up "
+                                    style="font-size: 60px"></span>  
+                          </div>
+                          <div class="col-md-8"> 
+                          </div>
+                      </div>
+                      <div class="carousel-inner">
+                          <div class="item active">
+                              <div class="row">
+                                  <div class="col-xs-6 col-sm-5 col-md-5">
+                                      <a href="http://dotstrap.com/"> <img src="images/building78.png"
+                                                                           alt="Image" /></a>
+                                      <a > <img src="images/house34.png"   class="thumbnail"
+                                alt="Image" /></a>
+                                  </div>
+                                  <div class="col-xs-6 col-sm-7 col-md-7">                        
+                                      Здание 2                 
+                                  </div>
+                              </div>
+                    <!--/row-fluid-->
+                </div>
+                <!--/item-->
+                <div class="item ">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-5 col-md-5">
+                            <a > <img src="images/house34.png"   class="thumbnail"
+                                alt="Image" /></a>
+                            <a > <img src="images/house34.png"   class="thumbnail"
+                                alt="Image" /></a>
+                        </div>
+                        
+                        <div class="col-xs-6 col-sm-7 col-md-7">
+                            Здание 1
+                        </div>
+                    </div>
+                    <!--/row-fluid-->
+                </div>
+                <!--/item-->
+                <div class="item ">
+                    <div class="row">
+                      <div class="col-xs-6 col-sm-5 col-md-5">
+                            <a href="http://dotstrap.com/"> <img src="images/factory6.png" class="thumbnail"
+                                alt="Image" /></a>
+                          <a > <img src="images/house34.png"   class="thumbnail"
+                                alt="Image" /></a>
+                        </div>
+                        <div class="col-xs-6 col-sm-7 col-md-7">
+                            здание 3
+                        </div>
+                    </div>
+                    <!--/row-fluid-->
+                </div>
+                <!--/item-->
+            </div>
+                      <div class="row">
+                          <div class="col-md-4">
+                              <span data-slide="prev" class="btn-vertical-slider glyphicon glyphicon-circle-arrow-down"
+                                    style="color: Black; font-size: 60px"></span>
+                          </div>
+                          <div class="col-md-8">
+                          </div>
+                      </div>
+              </div>
+              </div>
+              
+          </div>
+      </div>
+      
+              
+<!-- Панель навигации слева от таблицы    -->
+      <div  class = "container">
+          <div class = "row">
+              <h1>Database</h1>
+                  <div class="col-md-2">
+                      <a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; Add</a>
+                      <a class="list-group-item" href="#"><i class="fa fa-trash-o fa-fw"></i>&nbsp; Delete</a>
+                      <a class="list-group-item" href="#"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a>
+                      <a class="list-group-item" href="#"><i class="fa fa-circle-thin fa-fw"></i>&nbsp; something</a>
+                  </div>
+                  
+<!--     Таблица     -->
+              <div class="col-md-10">
+                  
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th>Building type</th>
+                              <th>Count resources</th>
+                              <th>Location</th>                              
+                              <th>Building time</th>
+                              <th>Evolution</th>
+                              <th>Production</th>
+                              <th>Yet</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>Something</td> <td>Something</td> <td>Something</td> 
+                              <td>Something</td> <td>Something</td><td>Something</td> 
+                          </tr>
+                          <tr>
+                              <td>Something</td> <td>Something</td> <td>Something</td> 
+                              <td>Something</td> <td>Something</td> <td>Something</td> 
+                          </tr>
+                          <tr>
+                              <td>Something</td> <td>Something</td> <td>Something</td> 
+                              <td>Something</td> <td>Something</td> <td>Something</td> 
+                          </tr>
+                            <tr>
+                              <td>Something</td> <td>Something</td> <td>Something</td> 
+                              <td>Something</td> <td>Something</td> <td>Something</td> 
+                          </tr>
+                          <tr>
+                              <td>Something</td> <td>Something</td> <td>Something</td>
+                              <td>Something</td> <td>Something</td> <td>Something</td> 
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>             
+          </div>
+      </div>
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.js"></script>
+    <script src="js/sl.js"></script>   <!--Мой скрипт для слайдера    -->
+  </body>
+</html>
