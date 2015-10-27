@@ -79,21 +79,21 @@
               <div class="col-md-7">
            <div class = "row">
                 <div class="col-md-3" >
-                    <img src="images/museum39.png">
+                    <img src="../images/museum39.png">
                 </div>
                <div class="col-md-3 col-md-offset-0.5">
-                   <img src="images/museum39.png">
+                   <img src="../images/museum39.png">
                 </div>
                <div class="col-md-3 col-md-offset-0.5">
-                   <img src="images/museum39.png">
+                   <img src="../images/museum39.png">
                 </div>
                 <div class="col-md-3 col-offset-0.5">
-                   <img src="images/museum39.png">
+                   <img src="../images/museum39.png">
                 </div>
           </div>
            <div class = "row">
                 <div class="col-md-3">
-                    <img src="images/museum39.png">
+                    <img src="../images/museum39.png">
                 </div>
                <div class="col-md-3">
                    
@@ -102,12 +102,12 @@
                    
                 </div>
                 <div class="col-md-3">
-                   <img src="images/museum39.png">
+                   <img src="../images/museum39.png">
                 </div>
           </div>
           <div class = "row">
                 <div class="col-md-3">
-                    <img src="images/museum39.png">
+                    <img src="../images/museum39.png">
                 </div>
                <div class="col-md-3">
                    
@@ -116,21 +116,21 @@
                    
                 </div>
                 <div class="col-md-3">
-                   <img src="images/museum39.png">
+                   <img src="../images/museum39.png">
                 </div>
           </div>
           <div class = "row">
                 <div class="col-md-3">
-                    <img src="images/museum39.png">
+                    <img src="../images/museum39.png">
                 </div>
                <div class="col-md-3">
-                   <img src="images/museum39.png">
+                   <img src="../images/museum39.png">
                 </div>
                <div class="col-md-3">
-                   <img src="images/museum39.png">
+                   <img src="../images/museum39.png">
                 </div>
                 <div class="col-md-3">
-                   <img src="images/museum39.png">
+                   <img src="../images/museum39.png">
                 </div>
           </div>     
               </div>
@@ -149,9 +149,9 @@
                           <div class="item active">
                               <div class="row">
                                   <div class="col-xs-6 col-sm-5 col-md-5">
-                                      <a href="http://dotstrap.com/"> <img src="images/building78.png"
+                                      <a href="http://dotstrap.com/"> <img src="../images/building78.png"
                                                                            alt="Image" /></a>
-                                      <a > <img src="images/house34.png"   class="thumbnail"
+                                      <a > <img src="../images/house34.png"   class="thumbnail"
                                 alt="Image" /></a>
                                   </div>
                                   <div class="col-xs-6 col-sm-7 col-md-7">                        
@@ -164,9 +164,9 @@
                 <div class="item ">
                     <div class="row">
                         <div class="col-xs-6 col-sm-5 col-md-5">
-                            <a > <img src="images/house34.png"   class="thumbnail"
+                            <a > <img src="../images/house34.png"   class="thumbnail"
                                 alt="Image" /></a>
-                            <a > <img src="images/house34.png"   class="thumbnail"
+                            <a > <img src="../images/house34.png"   class="thumbnail"
                                 alt="Image" /></a>
                         </div>
                         
@@ -180,9 +180,9 @@
                 <div class="item ">
                     <div class="row">
                       <div class="col-xs-6 col-sm-5 col-md-5">
-                            <a href="http://dotstrap.com/"> <img src="images/factory6.png" class="thumbnail"
+                            <a href="http://dotstrap.com/"> <img src="../images/factory6.png" class="thumbnail"
                                 alt="Image" /></a>
-                          <a > <img src="images/house34.png"   class="thumbnail"
+                          <a > <img src="../images/house34.png"   class="thumbnail"
                                 alt="Image" /></a>
                         </div>
                         <div class="col-xs-6 col-sm-7 col-md-7">
