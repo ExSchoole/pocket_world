@@ -18,12 +18,14 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter{
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
-        registry.addResourceHandler("/images/**").addResourceLocations("/images/").setCachePeriod(31556926);
-        registry.addResourceHandler("/fonts/**").addResourceLocations("/fonts/").setCachePeriod(31556926);
-        registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926);
+		registry.addResourceHandler("/css/**").addResourceLocations("/css/");
+        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
+        registry.addResourceHandler("/fonts/**").addResourceLocations("/fonts/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/js/");
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
+	
+	
 	
 	@Bean
 	public VelocityConfig velocityConfig() {
