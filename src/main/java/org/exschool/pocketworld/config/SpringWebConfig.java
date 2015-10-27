@@ -18,9 +18,14 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter{
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**")
-                        .addResourceLocations("/resources/");
+		registry.addResourceHandler("/css/**").addResourceLocations("/css/");
+        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
+        registry.addResourceHandler("/fonts/**").addResourceLocations("/fonts/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/js/");
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
+	
+	
 	
 	@Bean
 	public VelocityConfig velocityConfig() {
@@ -37,4 +42,5 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter{
 		return viewResolver;
 	}
 	
+
 }

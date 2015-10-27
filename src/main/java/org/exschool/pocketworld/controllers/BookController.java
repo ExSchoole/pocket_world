@@ -30,6 +30,13 @@ public class BookController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "/city")
+	public String showCity(Model model){
+		logger.info(model.toString());
+		return "city_center";
+	}
+	
+	
 	@RequestMapping(value = "/list")
 	public String listBooks(@RequestParam Map<String,String> allRequestParams,Model model){
 		List<Book> books = null;
