@@ -1,11 +1,19 @@
 *.iml
+*.iws
+/target/
+/*/target/
 .idea/
+/*/.idea/
 .settings/
+/*/.settings/
 bin/
+/*/bin/
 build/
-target/
+/*/build/
 .project
 .classpath
 .springBeans
+*~
+
 
 
