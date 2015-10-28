@@ -7,7 +7,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>pocket_world_application</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <build>
         <plugins>
             <plugin>
@@ -54,6 +54,7 @@
         <junit.version>4.12</junit.version>
 
     </properties>
+<!--
     <dependencies>
         <dependency>
             <groupId>org.exschool</groupId>
@@ -61,6 +62,6 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
+-->
 
 </project>
