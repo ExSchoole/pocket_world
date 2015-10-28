@@ -3,6 +3,5 @@
 <h1>Hello to a Skeleton Project!</h1>
 Add a book - /add.html <br>
 Get list of books - /list.html <br>
-Get a book with a specific title - /list.html?title=Title_to_search_for <br>
 </BODY>
 </HTML>
