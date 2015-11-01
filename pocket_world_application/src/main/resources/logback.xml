@@ -21,8 +21,11 @@
 		</encoder>>
 	</appender>
  
+   <logger name="org.apache.velocity" level="DEBUG"/>
+   <logger name="org.hibernate" level="INFO"/>
+  
 	<root>
-		<level value="info" />
+		<level value="DEBUG" />
 		<appender-ref ref="consoleAppender" />
 		<appender-ref ref="fileAppender" />
 	</root>
