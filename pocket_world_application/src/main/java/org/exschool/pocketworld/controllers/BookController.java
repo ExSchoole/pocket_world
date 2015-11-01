@@ -23,13 +23,7 @@ public class BookController {
 	
 	@Autowired
 	BookService bookService;
-	
-	@RequestMapping(value = "/")
-	public String showIndexPage(Model model){
-		logger.info(model.toString());
-		return "index";
-	}
-	
+		
 	@RequestMapping(value = "/list")
 	public String listBooks(@RequestParam Map<String,String> allRequestParams,Model model){
 		List<Book> books = null;
