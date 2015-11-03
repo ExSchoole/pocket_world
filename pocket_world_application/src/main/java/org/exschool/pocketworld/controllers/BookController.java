@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BookController {
-	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(BookController.class);
+
 	@Autowired
-	BookService bookService;
+	private BookService bookService;
 	
 	@RequestMapping(value = "/")
 	public String showIndexPage(Model model){
-		logger.info(model.toString());
+		LOGGER.info(model.toString());
 		return "index";
 	}
 	
@@ -34,8 +34,8 @@ public class BookController {
 	public String listBooks(@RequestParam Map<String,String> allRequestParams,Model model){
 		List<Book> books = null;
 		final String TITLE = "title";
-		logger.info("Input model:" + model.toString());
-		logger.info("Requested params:" + allRequestParams);
+		LOGGER.info("Input model:" + model.toString());
+		LOGGER.info("Requested params:" + allRequestParams);
 		
 		if(allRequestParams.containsKey(TITLE)){
 			books = bookService.getByTitle(allRequestParams.get(TITLE));
@@ -43,20 +43,20 @@ public class BookController {
 			books = bookService.allBooks();
 		}
 		model.addAttribute("books",books);
-		logger.info("Output model:" + model.toString());
+		LOGGER.info("Output model:" + model.toString());
 		return "books";
 	}
 	
 	@RequestMapping(value = "/add")
 	@Transactional
 	public String addBook(Model model){
-		logger.info("Input model:" + model.toString());
+		LOGGER.info("Input model:" + model.toString());
 		Book book = new Book();
 		String title = "Title_"+ System.currentTimeMillis();
 		book.setTitle(title);
 		bookService.save(book);
 		model.addAttribute("title",title);
-		logger.info("Output model:" + model.toString());
+		LOGGER.info("Output model:" + model.toString());
 		return "book";
 	}
 	
