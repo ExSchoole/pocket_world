@@ -15,10 +15,10 @@ import javax.persistence.JoinColumn;
 @Embeddable
 public class CityBuildings {
 	
-	@ElementCollection(targetClass=Building.class,fetch = FetchType.EAGER)
+	//@ElementCollection(targetClass=Building.class,fetch = FetchType.EAGER)
 	
-	//@Embedded
-	@CollectionTable(name="city_buildings", joinColumns=@JoinColumn(name="city_id"))
+	@Embedded
+	//@CollectionTable(name="city_buildings", joinColumns=@JoinColumn(name="player_id"))
 	List<Building> city_buildings= new ArrayList<>();
 	
 	public List<Building> getBuildings() {

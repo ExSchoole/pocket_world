@@ -11,9 +11,6 @@ import org.exschool.pocketworld.building.model.Building;
 
 @Embeddable
 public class Production {
-	@ManyToOne
-	@JoinColumn(name="building")
-	private Building building;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "production_type")
@@ -41,12 +38,7 @@ public class Production {
 		this.level = level;
 	}
 	
-	public Building getBilding() {
-		return building;
-	}
-	public void setBilding(Building building) {
-		this.building = building;
-	}
+
 	
 	
 }

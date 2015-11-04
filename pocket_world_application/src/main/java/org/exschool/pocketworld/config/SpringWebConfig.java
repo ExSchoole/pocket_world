@@ -1,5 +1,9 @@
 package org.exschool.pocketworld.config;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.velocity.app.event.implement.IncludeRelativePath;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
