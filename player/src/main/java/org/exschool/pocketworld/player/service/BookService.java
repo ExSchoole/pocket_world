@@ -1,8 +1,8 @@
-package org.exschool.pocketworld.service;
+package org.exschool.pocketworld.player.service;
 
 import java.util.List;
 
-import org.exschool.pocketworld.model.Book;
+import org.exschool.pocketworld.player.model.Book;
 
 public interface BookService {
 	

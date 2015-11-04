@@ -1,7 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.exschool</groupId>
@@ -11,40 +9,43 @@
     
 
     <modules>
-    	<module>common</module>
+        <module>common</module>
         <module>pocket_world_application</module>
-    </modules>
+       <!-- <module>building</module>-->
+        <module>player</module>
+    <module>resource</module>
+  </modules>
 
     <build>
-	        <plugins>
-	            <plugin>
-	                <artifactId>maven-compiler-plugin</artifactId>
-	                <version>3.3</version>
-	                <configuration>
-	                    <source>1.7</source>
-	                    <target>1.7</target>
-	                </configuration>
-	            </plugin>
-	            <plugin>
-	                <artifactId>maven-war-plugin</artifactId>
-	                <version>2.4</version>
-	                <configuration>
-	                    <failOnMissingWebXml>false</failOnMissingWebXml>
-	                </configuration>
-	            </plugin>
-	            <plugin>
-	                <groupId>org.apache.tomcat.maven</groupId>
-	                <artifactId>tomcat7-maven-plugin</artifactId>
-	                <version>2.2</version>
-	                <configuration>
-	                    <path>/pocket-world</path>
-	                    <port>8080</port>
-	                    <contextReloadable>true</contextReloadable>
-	                </configuration>
-	                <executions></executions>
-	            </plugin>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>2.2</version>
+                    <configuration>
+                        <path>/pocket-world</path>
+                        <port>8080</port>
+                        <contextReloadable>true</contextReloadable>
+                    </configuration>
+                    <executions/>
+                </plugin>
                      <plugin>
-  	               <groupId>org.apache.maven.plugins</groupId>
+                   <groupId>org.apache.maven.plugins</groupId>
                        <artifactId>maven-checkstyle-plugin</artifactId>
                        <version>2.17</version>
                          <configuration>
@@ -59,7 +60,7 @@
                             </execution>
                          </executions>
                        </plugin>
-	            </plugins>
+                </plugins>
     </build>
 
      <properties>

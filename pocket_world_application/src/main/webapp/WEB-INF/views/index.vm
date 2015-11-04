@@ -1,8 +1,14 @@
 <HTML>
 <BODY>
 <h1>Hello to a Skeleton Project!</h1>
-Add a book - /add.html <br>
-Get list of books - /list.html <br>
-Get a book with a specific title - /list.html?title=Title_to_search_for <br>
+
+City center - /city_center?login= <br>
+<a href="#springUrl('/city_center')">City center with default user (testPlayer1)</a><br>
+<a href="#springUrl('/city_center?login=testPlayer2')">City center with testPlayer2 user</a><br>
+<a href="#springUrl('/city_center?login=testPlayer3')">City center with testPlayer3 user</a><br>										
+Periphery -  /periphery?login= <br>  
+<a href="#springUrl('/periphery')">periphery with default user (testPlayer1)</a><br>			
+<a href="#springUrl('/periphery?login=testPlayer2')">periphery with testPlayer2 user</a><br>
+<a href="#springUrl('/periphery?login=testPlayer3')">periphery with testPlayer3 user</a><br>				
 </BODY>
 </HTML>
