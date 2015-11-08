@@ -3,27 +3,25 @@ package org.exschool.pocketworld.resource.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 import org.exschool.pocketworld.building.model.BuildingType;
 
-@Embeddable
+@Entity
 public class Time {
 	
-	private int level;
+
+	private int nextLevel;
 	private int time;
-	@Enumerated(EnumType.STRING)
-	@Column(name = "building_type")
+	@Id
 	private BuildingType buildingType;
 	
 	
 	public int getLevel() {
-		return level;
+		return nextLevel;
 	}
-	public void setLevel(int level) {
-		this.level = level;
+	public void setLevel(int nextLevel) {
+		this.nextLevel = nextLevel;
 	}
 	public int getTime() {
 		return time;
@@ -31,12 +29,12 @@ public class Time {
 	public void setTime(int time) {
 		this.time = time;
 	}
-	public BuildingType getBuildingsType() {
+	/*public BuildingType getBuildingsType() {
 		return buildingType;
 	}
 	public void setBuildingsType(BuildingType buildingType) {
 		this.buildingType = buildingType;
-	}
+	}*/
 	
 	
 	

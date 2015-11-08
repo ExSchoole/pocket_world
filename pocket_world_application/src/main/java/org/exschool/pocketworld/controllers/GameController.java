@@ -6,10 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.exschool.pocketworld.player.model.Player;
-import org.exschool.pocketworld.resource.model.Resource;
-import org.exschool.pocketworld.resource.model.ResourceBalance;
-import org.exschool.pocketworld.resource.model.ResourceType;
 import org.exschool.pocketworld.player.service.PlayerService;
+import org.exschool.pocketworld.resource.model.Resource;
+import org.exschool.pocketworld.resource.model.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +56,7 @@ public class GameController {
 			model.addAttribute(RESOURCES, createListOfResourcesWithZeroAmount());
 			model.addAttribute(ERROR_MSG,"No user with login "+currentPlayerLogin);
 		} else {
-			List<Resource> resources = player.getResourceBalance()
-					.getResources();
+			List<Resource> resources = player.getResources();
 			model.addAttribute(RESOURCES, resources);
 			model.addAttribute(LOGIN,currentPlayerLogin);
 		}
@@ -81,8 +79,8 @@ public class GameController {
 			model.addAttribute(RESOURCES, createListOfResourcesWithZeroAmount());
 			model.addAttribute(ERROR_MSG,"No user with login "+currentPlayerLogin);
 		} else {
-			List<Resource> resources = player.getResourceBalance()
-					.getResources();
+			List<Resource> resources = player.getResources();
+					
 			model.addAttribute(RESOURCES, resources);
 			model.addAttribute(LOGIN,currentPlayerLogin);
 		}
@@ -106,12 +104,12 @@ public class GameController {
 		resources
 				.add(createResource(ResourceType.Timber, resourceAmount.get(3)));
 
-		ResourceBalance rBalance = new ResourceBalance();
-		rBalance.setResources(resources);
+		//ResourceBalance rBalance = new ResourceBalance();
+		//rBalance.setResources(resources);
 
 		Player player = new Player();
 		player.setLogin(login);
-		player.setResourceBalance(rBalance);
+		player.setResources(resources);
 		playerService.savePlayer(player);
 	}
 

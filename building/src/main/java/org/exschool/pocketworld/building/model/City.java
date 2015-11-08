@@ -1,29 +1,31 @@
 package org.exschool.pocketworld.building.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-@Embeddable
+@Entity
 public class City {
-
-	
-	
-	
-	
+	@Id
 	@GeneratedValue
-	@Column(name = "city_id")
-	private Long cityId;
+	@Column(name="idPk")
+	private int id;
 	
 	private String name;
-	
-	@Embedded
-	@Column(name = "buildings")
-	private CityBuildings cityBuildings;
+	@OneToMany(targetEntity=Building.class,mappedBy="city",
+			cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Building> buildings;
 	
 	
 	
@@ -34,21 +36,22 @@ public class City {
 		this.name = name;
 	}
 	
-
-	public CityBuildings getCityBuildings() {
-		return cityBuildings;
+	
+	public List<Building> getBildings() {
+		return buildings;
 	}
-	public void setCityBuildings(CityBuildings cityBuildings) {
-		this.cityBuildings = cityBuildings;
+	public void setBildings(List<Building> buildings) {
+		this.buildings = buildings;
 	}
 	
-	public Long getCityId() {
-		return cityId;
+	
+	
+	public int getId() {
+		return id;
 	}
-	public void setCityId(Long cityId) {
-		this.cityId = cityId;
+	public void setId(int id) {
+		this.id = id;
 	}
-
 	
 	
 	

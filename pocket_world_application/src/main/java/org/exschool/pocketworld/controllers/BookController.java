@@ -23,8 +23,7 @@ public class BookController {
 	
 	@Autowired
 	BookService bookService;
-	
-	
+		
 	@RequestMapping(value = "/list")
 	public String listBooks(@RequestParam Map<String,String> allRequestParams,Model model){
 		List<Book> books = null;

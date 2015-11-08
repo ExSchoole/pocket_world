@@ -2,19 +2,19 @@ package org.exschool.pocketworld.resource.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.exschool.pocketworld.building.model.Building;
-
 @Embeddable
 public class Production {
-	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "production_type")
 	private ProductionType productionType;
+	@Column(name = "amount")
 	private int amount;
 	private int level;
 	
@@ -38,7 +38,7 @@ public class Production {
 		this.level = level;
 	}
 	
-
+	
 	
 	
 }

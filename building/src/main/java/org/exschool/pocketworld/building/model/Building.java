@@ -1,42 +1,76 @@
 package org.exschool.pocketworld.building.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import org.exschool.pocketworld.resource.model.ProductionBalance;
+import org.exschool.pocketworld.resource.model.BuildingResource;
+import org.exschool.pocketworld.resource.model.Production;
 import org.exschool.pocketworld.resource.model.Time;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Table;
 
-@Embeddable
+@Entity
 public class Building {
+	@ManyToOne
+	@JoinColumn(name="city")
+	private City city;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "building_type")
+	@Id
 	private BuildingType buildingType;
+	
+	
 	private int level;
 	
 	@Embedded
-	@Column(name = "building_balance")
-	private BuildingResource bildingResouces;
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name="building_resources", joinColumns=@JoinColumn(name="type"))
+
+	private List<BuildingResource> bildingResouces;
 	
 	@Embedded
-	@Column(name = "production_balance")
-	private ProductionBalance productionBalance;
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name="building_production", joinColumns=@JoinColumn(name="type"))
 	
-	@Embedded
-	@Column(name = "time")
-	Time time;
+	private List<Production> productions;
+	
+	
+	
+	//private Time time;
 	
 	int position;
 	
 	
-	public BuildingType getBildingType() {
+	
+	/*public Time getTime() {
+		return time;
+	}
+	public void setTime(Time time) {
+		this.time = time;
+	}*/
+	public int getPosition() {
+		return position;
+	}
+	public void setPosition(int position) {
+		this.position = position;
+	}
+	public BuildingType getBuildingType() {
 		return buildingType;
 	}
-	public void setBildingType(BuildingType bildingType) {
-		this.buildingType = bildingType;
+	public void setBuildingType(BuildingType buildingType) {
+		this.buildingType = buildingType;
 	}
 	public int getLevel() {
 		return level;
@@ -45,18 +79,28 @@ public class Building {
 		this.level = level;
 	}
 	
-
-	public ProductionBalance getProductionBalance() {
-		return productionBalance;
-	}
-	public void setProductionBalance(ProductionBalance productionBalance) {
-		this.productionBalance = productionBalance;
-	}
-	public BuildingResource getBildingResouces() {
+	/*public List<BuildingResource> getBildingResouces() {
 		return bildingResouces;
 	}
-	public void setBildingResouces(BuildingResource bildingResouces) {
+	public void setBildingResouces(List<BuildingResource> bildingResouces) {
 		this.bildingResouces = bildingResouces;
+	}*/
+	
+	
+	public List<Production> getProductions() {
+		return productions;
+	}
+	public void setProductions(List<Production> productions) {
+		this.productions = productions;
+	}
+	
+	
+	
+	public City getCity() {
+		return city;
+	}
+	public void setCity(City city) {
+		this.city = city;
 	}
 	
 }

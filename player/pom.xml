@@ -55,13 +55,17 @@
 
     </properties>
 
-    <dependencies>
-         <!--<dependency>
+   <dependencies>
+        <!--   <dependency>
             <groupId>org.exschool</groupId>
             <artifactId>common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>-->
-
+        </dependency>
+        <dependency>
+            <groupId>org.exschool</groupId>
+            <artifactId>resource</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency> -->
         
 
     </dependencies>
