@@ -1,7 +1,7 @@
 <HTML>
 <BODY>
-<h1>Hello to a Skeleton Project!</h1>
-<a href="#springUrl('/populate')">Populate a database</a><br>
+<h1>Database is populated!</h1>
+
 City center - /city_center?login= <br>
 <a href="#springUrl('/city_center')">City center with default user (testPlayer1)</a><br>
 <a href="#springUrl('/city_center?login=testPlayer2')">City center with testPlayer2 user</a><br>

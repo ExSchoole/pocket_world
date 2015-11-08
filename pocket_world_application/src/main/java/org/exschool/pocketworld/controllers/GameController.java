@@ -36,13 +36,19 @@ public class GameController {
 	@RequestMapping(value = "/")
 	public String showIndexPage(Model model) {
 		logger.info(model.toString());
-
+		return "index";
+	}
+	
+	@RequestMapping(value = "/populate")
+	public String populateDatabase(Model model) {
+		logger.info(model.toString());
 		// add initial Users data to Database
 		createPlayerWithResources(DEFAULT_PLAYER_LOGIN, Arrays.asList(1, 2, 3, 4));
 		createPlayerWithResources("testPlayer2", Arrays.asList(10, 20, 30, 40));
 		createPlayerWithResources("testPlayer3",Arrays.asList(100, 200, 300, 400));
-		return "index";
+		return "init";
 	}
+	
 
 	@RequestMapping(value = "/city_center", method = RequestMethod.GET)
 	public String showCityCenter(
