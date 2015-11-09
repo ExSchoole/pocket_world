@@ -1,11 +1,11 @@
-package org.exschool.pocketworld.service;
+package org.exschool.pocketworld.player.service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.exschool.pocketworld.dao.Dao;
-import org.exschool.pocketworld.model.Book;
+import org.exschool.pocketworld.player.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

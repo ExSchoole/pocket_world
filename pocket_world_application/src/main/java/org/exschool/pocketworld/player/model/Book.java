@@ -1,4 +1,4 @@
-package org.exschool.pocketworld.model;
+package org.exschool.pocketworld.player.model;
 
 import java.io.Serializable;
 

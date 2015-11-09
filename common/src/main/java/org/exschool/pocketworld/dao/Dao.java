@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class Dao {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Dao.class);
+    private static final Logger logger = LoggerFactory.getLogger(Dao.class);
 
     @Autowired
     private SessionFactory sessionFactory;

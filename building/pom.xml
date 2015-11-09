@@ -6,8 +6,8 @@
         <artifactId>pocket_world</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>pocket_world_application</artifactId>
-    <packaging>war</packaging>
+    <artifactId>building</artifactId>
+    <packaging>jar</packaging>
     <build>
         <plugins>
             <plugin>
@@ -57,18 +57,10 @@
 
     <dependencies>
 
+
+
         
-         <dependency>
-         	<groupId>org.exschool</groupId>
-         	<artifactId>common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-         </dependency>
-         
-         <dependency>
-            <groupId>org.exschool</groupId>
-            <artifactId>building</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-         </dependency>
+
     </dependencies>
 
 
