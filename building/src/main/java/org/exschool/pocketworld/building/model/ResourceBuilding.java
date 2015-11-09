@@ -20,10 +20,12 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name="Building") 
+@Table(name="Resource_building") 
 @SecondaryTable(name="Time",pkJoinColumns=@PrimaryKeyJoinColumn(name="id"))
-public class Building {
+public class ResourceBuilding {
+	
 	@ManyToOne
 	@JoinColumn(name="city")
 	private City city;
@@ -34,7 +36,8 @@ public class Building {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "building_type")
-	private BuildingType buildingType;
+	private ResourceBuildingType resourceBuildingType;
+	
 	
 	
 	private int level;
@@ -62,55 +65,69 @@ public class Building {
 	
 	int position;
 	
-	
-	
-	public Time getTime() {
-		return time;
-	}
-	public void setTime(Time time) {
-		this.time = time;
-	}
-	public int getPosition() {
-		return position;
-	}
-	public void setPosition(int position) {
-		this.position = position;
-	}
-	public BuildingType getBuildingType() {
-		return buildingType;
-	}
-	public void setBuildingType(BuildingType buildingType) {
-		this.buildingType = buildingType;
-	}
-	public int getLevel() {
-		return level;
-	}
-	public void setLevel(int level) {
-		this.level = level;
-	}
-	
-	public List<BuildingResource> getBildingResouces() {
-		return bildingResouces;
-	}
-	public void setBildingResouces(List<BuildingResource> bildingResouces) {
-		this.bildingResouces = bildingResouces;
-	}
-	
-	
-	public List<Production> getProductions() {
-		return productions;
-	}
-	public void setProductions(List<Production> productions) {
-		this.productions = productions;
-	}
-	
-	
-	
 	public City getCity() {
 		return city;
 	}
+
 	public void setCity(City city) {
 		this.city = city;
 	}
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public ResourceBuildingType getResourceBuildingType() {
+		return resourceBuildingType;
+	}
+
+	public void setResourceBuildingType(ResourceBuildingType resourceBuildingType) {
+		this.resourceBuildingType = resourceBuildingType;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public List<BuildingResource> getBildingResouces() {
+		return bildingResouces;
+	}
+
+	public void setBildingResouces(List<BuildingResource> bildingResouces) {
+		this.bildingResouces = bildingResouces;
+	}
+
+	public List<Production> getProductions() {
+		return productions;
+	}
+
+	public void setProductions(List<Production> productions) {
+		this.productions = productions;
+	}
+
+	public Time getTime() {
+		return time;
+	}
+
+	public void setTime(Time time) {
+		this.time = time;
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
+
 }

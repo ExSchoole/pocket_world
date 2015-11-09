@@ -26,6 +26,11 @@ public class City {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Building> buildings;
 	
+	@OneToMany(targetEntity=Building.class,mappedBy="city",
+			cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<ResourceBuilding> resourceBuilding;
+	
 	
 	
 	public String getName() {
