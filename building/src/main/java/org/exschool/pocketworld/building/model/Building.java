@@ -2,64 +2,72 @@ package org.exschool.pocketworld.building.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import org.exschool.pocketworld.resource.model.BuildingResource;
-import org.exschool.pocketworld.resource.model.Production;
-import org.exschool.pocketworld.resource.model.Time;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.Table;
-
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 @Entity
+@javax.persistence.Table(name="Building") 
+@SecondaryTable(name="Time",pkJoinColumns=@PrimaryKeyJoinColumn(name="id"))
 public class Building {
 	@ManyToOne
 	@JoinColumn(name="city")
 	private City city;
 	
 	@Id
+	@GeneratedValue
+	private int id;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "building_type")
 	private BuildingType buildingType;
 	
 	
 	private int level;
 	
-	@Embedded
+
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name="building_resources", joinColumns=@JoinColumn(name="type"))
+	@CollectionTable(name="building_resources", joinColumns=@JoinColumn(name="id"))
 
 	private List<BuildingResource> bildingResouces;
 	
-	@Embedded
+
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name="building_production", joinColumns=@JoinColumn(name="type"))
+	@CollectionTable(name="building_production", joinColumns=@JoinColumn(name="id"))
 	
 	private List<Production> productions;
 	
-	
-	
-	//private Time time;
+	@Embedded
+	@AttributeOverrides({
+        @AttributeOverride(name="buildingType", column=@Column(table="Time")),
+        @AttributeOverride(name="level", column=@Column(name="CITY", table="Time")),
+        @AttributeOverride(name="time", column=@Column(name="STATE", table="Time")),
+        
+	})
+	private Time time;
 	
 	int position;
 	
 	
 	
-	/*public Time getTime() {
+	public Time getTime() {
 		return time;
 	}
 	public void setTime(Time time) {
 		this.time = time;
-	}*/
+	}
 	public int getPosition() {
 		return position;
 	}
@@ -79,12 +87,12 @@ public class Building {
 		this.level = level;
 	}
 	
-	/*public List<BuildingResource> getBildingResouces() {
+	public List<BuildingResource> getBildingResouces() {
 		return bildingResouces;
 	}
 	public void setBildingResouces(List<BuildingResource> bildingResouces) {
 		this.bildingResouces = bildingResouces;
-	}*/
+	}
 	
 	
 	public List<Production> getProductions() {
