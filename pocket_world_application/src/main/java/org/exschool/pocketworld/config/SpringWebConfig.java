@@ -1,6 +1,5 @@
 package org.exschool.pocketworld.config;
 
-import com.sun.corba.se.spi.resolver.LocalResolver;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
