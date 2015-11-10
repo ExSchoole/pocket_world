@@ -1,7 +1,6 @@
 <HTML>
 <BODY>
-<h1>Hello to a Skeleton Project!</h1>
-<a href="#springUrl('/populate')">Populate a database</a><br>								
+<h1>Database is populated!</h1>
 Periphery -  /periphery <br>
 <a href="#springUrl('/periphery')">periphery</a><br>
 </BODY>
