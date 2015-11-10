@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>City center</title>
+    <style>
+        div .placeholder {
+
+        }
+        div .building {
+
+        }
+    </style>
+
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/jquery.verticalCarousel.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+
+    <script>
+        $( init );
+        function init() {
+
+
+            $(".building").draggable({
+             appendTo: 'body',
+             helper: 'clone',
+             revert: 'invalid'
+
+            });
+              $(".placeholder").droppable({
+                accept: '.building',
+                drop: function(ev, ui) {
+                    $(this).html("");
+                    $(ui.draggable).appendTo(this);
+                    console.log(ui);
+
+
+                     }
+    });
+        }
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $("#carouselId").verticalCarousel({nSlots: 4, speed: 800});
+        });
+    </script>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/carousel-style.css" rel="stylesheet">
+    
+
+
+</head>
+<body>
+    <header class="container">
+
+        <!-- Top navigation panel -->
+        <div class = "navbar navbar-inverse">
+            <div class = "container">
+                <div class = "navbar-header">
+                    <button type = "button"  class="navbar-toggle"  data-toggle="collapse" data-target="#esponsive-menu">
+                        <span class="sr-only">Open navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a  class = "navbar-brand" href="#" > <i class="fa fa-home fa-fw"></i>&nbsp;</a>
+                </div>
+                <div class = "collapse navbar-collapse" id = "esponsive-menu">
+                    <ul class = "nav navbar-nav">
+                        <li><a   href="#" > Item 1 </a></li>
+                        <li class="dropdown">
+                            <a   href="#" class="dropdown-toggle" data-toggle="dropdown" >Item 2<b class="caret"></b> </a>
+                            <ul class = "dropdown-menu">
+                                <li><a   href="#">Item 2.1 </a></li>
+                                <li class="divider"></li>
+                                <li><a   href="#" >Item 2.2 </a></li>
+                                <li class="divider"></li>
+                                <li><a   href="#" >Item 2.3 </a></li>
+                                <li class="divider"></li>
+                                <li><a   href="#" >Item 2.4 </a></li>
+                                <li class="divider"></li>
+                                <li><a   href="#" >Item 2.5 </a></li>
+                                <li class="divider"></li>
+                                <li><a   href="#" >Item 2.6 </a></li>
+                                <li class="divider"></li>
+                                <li><a   href="#" >Item 2.7 </a></li>
+                            </ul>
+                        </li>
+                        <li><a   href="#" >Item 3</a></li>
+                        <li><a   href="#" >Item 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        #if ($errorMsg)
+	       <div class="container">
+	          <div class="alert alert-danger" role="alert">$errorMsg</div>
+	      </div>
+      #end  
+      
+      <div class="container">
+          <div class="row">
+              <h1>City centre</h1> 
+              <a href="#springUrl("/periphery")" class="btn btn-primary">Go to the periphery</a>
+          </div>
+      </div>    	
+      <p></p>
+      
+      
+      <div class="container">
+          <div class="row success">
+              <b>Player's resources:</b>
+				<ul class="list-inline">
+					#foreach ($resource in $resources)
+					<li>$resource.getResourceType():
+							<span class="badge badge-warning">$resource.getAmount()</span>
+					</li>
+					#end
+				</ul>			  
+          </div>
+      </div>    
+	  
+    </header>
+
+    <section id="body" class="container">
+        <!-- City center map -->
+        <section id="city_center" class="col-md-9">
+
+                <div  class = "container">
+                <div class = "row">
+                    <div class="col-md-7">
+                        <div class = "row">
+                            <div class="col-md-3 placeholder" id="placeholder_1">
+                                <img src="images/museum39.png">
+                            </div>
+                            <div class="col-md-3 placeholder">
+                                <img src="images/museum39.png">
+                            </div>
+                            <div class="col-md-3 placeholder">
+                                <img src="images/museum39.png">
+                            </div>
+                            <div class="col-md-3 placeholder">
+                                <img src="images/museum39.png">
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-3 placeholder">
+                                <img src="images/museum39.png">
+
+                            </div>
+                            <div class="col-md-6">
+
+                            </div>
+                            <div class="col-md-3 placeholder">
+                                <img src="images/museum39.png">
+
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-3 placeholder">
+
+                                <img src="images/museum39.png">
+                            </div>
+                            <div class="col-md-6">
+
+                            </div>
+                            <div class="col-md-3 placeholder">
+
+                                <img src="images/museum39.png">
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-3 placeholder">
+                                <img src="images/museum39.png">
+                            </div>
+                            <div class="col-md-3 placeholder">
+                                <img src="images/museum39.png">
+                            </div>
+                            <div class="col-md-3 placeholder">
+                                <img src="images/museum39.png">
+                            </div>
+                            <div class="col-md-3 placeholder">
+                                <img src="images/museum39.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="sidebar" class="col-md-3">
+            <div id="carouselId" class="vertical-carousel">
+                <a href="#" class="scru">Scroll Up</a>
+                <div class="vertical-carousel-container">
+                    <ul class="vertical-carousel-list" id ="vertical-carousel-list_id">
+                        <li id="house"><img src="images/house34.png"   class="thumbnail building" alt="House"  /></li>
+                        <li id="building"><img src="images/building78.png" class="thumbnail building" alt="Building" /></li>
+                        <li id="factory"><img src="images/factory6.png" class="thumbnail building" alt="Factory" /></li>
+                        <li id="farm"><img src="images/farm.png" class="thumbnail building" alt="Farm" /></li>
+                    </ul>
+                </div>
+                 <a href="#" class="scrd">Scroll Down</a>
+            </div>
+        </section>
+    </section>
+
+    <footer>
+        <!-- Left navigation Panel   -->
+        <div  class = "container">
+            <div class = "row">
+                <h1>Database</h1>
+                <div class="col-md-2">
+                    <a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; Add</a>
+                    <a class="list-group-item" href="#"><i class="fa fa-trash-o fa-fw"></i>&nbsp; Delete</a>
+                    <a class="list-group-item" href="#"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a>
+                    <a class="list-group-item" href="#"><i class="fa fa-circle-thin fa-fw"></i>&nbsp; something</a>
+                </div>
+
+                <!--     Table     -->
+                <div class="col-md-10">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Building type</th>
+                            <th>Count resources</th>
+                            <th>Location</th>
+                            <th>Building time</th>
+                            <th>Evolution</th>
+                            <th>Production</th>
+                            <th>Yet</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Something</td> <td>Something</td> <td>Something</td>
+                            <td>Something</td> <td>Something</td><td>Something</td>
+                        </tr>
+                        <tr>
+                            <td>Something</td> <td>Something</td> <td>Something</td>
+                            <td>Something</td> <td>Something</td> <td>Something</td>
+                        </tr>
+                        <tr>
+                            <td>Something</td> <td>Something</td> <td>Something</td>
+                            <td>Something</td> <td>Something</td> <td>Something</td>
+                        </tr>
+                        <tr>
+                            <td>Something</td> <td>Something</td> <td>Something</td>
+                            <td>Something</td> <td>Something</td> <td>Something</td>
+                        </tr>
+                        <tr>
+                            <td>Something</td> <td>Something</td> <td>Something</td>
+                            <td>Something</td> <td>Something</td> <td>Something</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+</body>
+</html>

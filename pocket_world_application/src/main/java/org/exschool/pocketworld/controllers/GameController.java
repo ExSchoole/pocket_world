@@ -27,12 +27,12 @@ public class GameController {
 		return "init";
 	}
 
-	@RequestMapping(value = "/periphery", method = RequestMethod.GET)
+	@RequestMapping(value = "/city_center", method = RequestMethod.GET)
 	public String showPeriphery(
 			@RequestParam Map<String, String> allRequestParams, Model model) {
 		logger.info("Requested params:" + allRequestParams);
 		logger.info("Out:"+ model);
-		return "periphery";
+		return "city_center";
 	}
 
 }
