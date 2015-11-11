@@ -1,13 +1,16 @@
 package org.exschool.pocketworld.building.model;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-@Embeddable
+@Entity
 public class Time {
 	
 	private BuildingType buildingType;
 
 	private int level;
+	@Id
 	private int time;
 
 	

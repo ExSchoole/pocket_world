@@ -10,10 +10,7 @@ public class Resource {
 
 	public Resource() {}
 
-	public Resource(ResourceType resourceType, int amount) {
-		this.resourceType = resourceType;
-		this.amount = amount;
-	}
+	
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "resource_type")
@@ -37,7 +34,11 @@ public class Resource {
 	public void setAmount(int count) {
 		this.amount = count;
 	}
-
+	
+	public Resource(ResourceType resourceType, int amount) {
+		this.resourceType = resourceType;
+		this.amount = amount;
+	}
 	@Override
 	public String toString() {
 		return "Resource [resourceType=" + resourceType + ", amount=" + amount

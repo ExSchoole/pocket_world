@@ -2,15 +2,18 @@ package org.exschool.pocketworld.building.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Id;
 
 import org.exschool.pocketworld.resource.model.ResourceType;
 
-@Embeddable
+@Entity
 public class BuildingResource {
 
 	protected ResourceType resourceType;
+	@Id
 	protected int amount;
 	private int level;
 	

@@ -8,8 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+import org.exschool.pocketworld.player.model.Player;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -19,6 +22,10 @@ public class City {
 	@GeneratedValue
 	@Column(name="idPk")
 	private int id;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="playerFk")
+	private Player player;
 	
 	private String name;
 	@OneToMany(targetEntity=Building.class,mappedBy="city",

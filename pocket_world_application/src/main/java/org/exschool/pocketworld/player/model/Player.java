@@ -32,13 +32,11 @@ public class Player {
 	
 
 	//private Long password;
-	@OneToOne(cascade=CascadeType.ALL)
+	/*@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cityFk")
 	private City city;
-	
+*/	
 	@Embedded
-	/*@Column(name = "resource_balance")
-	private ResourceBalance resourceBalance;*/
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name="player_resources", joinColumns=@JoinColumn(name="player_id"))
 	List<Resource> resources = new ArrayList<>();
@@ -64,13 +62,13 @@ public class Player {
 		this.login = login;
 	}
 
-	public City getCity() {
+	/*public City getCity() {
 		return city;
 	}
 
 	public void setCity(City city) {
 		this.city = city;
-	}
+	}*/
 
 	public List<Resource> getResources() {
 		return resources;
