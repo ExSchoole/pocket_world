@@ -11,8 +11,7 @@ public class TimePK {
 
     private Integer level;
     public TimePK() {}
-    public TimePK(BuildingType buildingType, Integer level)
-    {
+    public TimePK(BuildingType buildingType, Integer level) {
         this.buildingType=buildingType;
         this.level= level;
     }

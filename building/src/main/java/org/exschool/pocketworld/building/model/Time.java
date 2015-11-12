@@ -1,9 +1,9 @@
 package org.exschool.pocketworld.building.model;
 
-import javax.persistence.Embeddable;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+
 
 @Entity
 public class Time {

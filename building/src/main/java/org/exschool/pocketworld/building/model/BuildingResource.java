@@ -1,15 +1,23 @@
 package org.exschool.pocketworld.building.model;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 
-import org.exschool.pocketworld.resource.model.ResourceType;
 
 @Entity
 public class BuildingResource {
 
 	@EmbeddedId
-	BuildingResourcePK buildingResourcePK;
-	protected int amount;
+	private BuildingResourcePK buildingResourcePK;
+	private int amount;
+
+	public BuildingResourcePK getBuildingResourcePK() {
+		return buildingResourcePK;
+	}
+
+	public void setBuildingResourcePK(BuildingResourcePK buildingResourcePK) {
+		this.buildingResourcePK = buildingResourcePK;
+	}
 
 	public int getAmount() {
 		return amount;
