@@ -12,6 +12,7 @@
 
     <modules>
     	<module>common</module>
+        <module>building</module>
         <module>pocket_world_application</module>
     </modules>
 
