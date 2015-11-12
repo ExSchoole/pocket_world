@@ -7,17 +7,12 @@ import javax.persistence.Enumerated;
 
 @Embeddable
 public class Resource {
-
-	public Resource() {}
-
-	
-
 	@Enumerated(EnumType.STRING)
 	@Column(name = "resource_type")
-	protected ResourceType resourceType;
+	private ResourceType resourceType;
 
 	@Column(name = "amount")
-	protected int amount;
+	private int amount;
 
 	public ResourceType getResourceType() {
 		return resourceType;
@@ -34,6 +29,7 @@ public class Resource {
 	public void setAmount(int count) {
 		this.amount = count;
 	}
+	public Resource() {}
 	
 	public Resource(ResourceType resourceType, int amount) {
 		this.resourceType = resourceType;
