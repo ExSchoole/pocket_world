@@ -75,7 +75,7 @@
         <jcloverslf4j.version>1.7.12</jcloverslf4j.version>
         <mockito.version>1.10.19</mockito.version>
         <junit.version>4.12</junit.version>
-
+        <servlet.api>2.5</servlet.api>
     </properties>
 
     <dependencies>

@@ -1,8 +1,8 @@
 <HTML>
 <BODY>
-<h1>Hello to a Skeleton Project!</h1>
-Add a book - /add.html <br>
-Get list of books - /list.html <br>
-Get a book with a specific title - /list.html?title=Title_to_search_for <br>
+<h1>#springMessage("index.page.hello")</h1>
+#springMessage("index.page.add_book") - /add.html <br>
+#springMessage("index.page.get_list_of_books") - /list.html <br>
+#springMessage("index.page.get_book_with_title") - /list.html?title=#springMessage("index.page.title_to_search") <br>
 </BODY>
 </HTML>
