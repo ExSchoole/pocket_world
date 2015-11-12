@@ -3,7 +3,7 @@ package org.exschool.pocketworld.building.model;
 import org.exschool.pocketworld.resource.model.ResourceType;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Id;
+
 
 /**
  * Created by skandy on 12.11.15.
