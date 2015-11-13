@@ -28,7 +28,9 @@ public class HibernateConfiguration {
 	public LocalSessionFactoryBean sessionFactory(){
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] {"org.exschool.pocketworld.model"});
+		sessionFactory.setPackagesToScan(new String[] {"org.exschool.pocketworld.player.model",
+				"org.exschool.pocketworld.building.model",
+				"org.exschool.pocketworld.resource.model"});
 		sessionFactory.setHibernateProperties(additionalProperties());
 		return sessionFactory;
 	}
@@ -56,7 +58,7 @@ public class HibernateConfiguration {
 	      properties.setProperty("hibernate.hbm2ddl.auto", "create");
 	      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 	      properties.setProperty("hibernate.format_sql", "true");
-	      properties.setProperty("shibernate.show_sql", "true");
+	      properties.setProperty("hibernate.show_sql", "true");
 	      return properties;
 	 }
 	
