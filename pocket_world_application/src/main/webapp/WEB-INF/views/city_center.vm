@@ -110,7 +110,21 @@
       <div class="container">
           <div class="row">
               <h1>City centre</h1> 
-              <a href="#springUrl("/periphery")" class="btn btn-primary">Go to the periphery</a>
+               <div class="col-md-4" id="res1">
+                 <a href="#springUrl("/periphery")" class="btn btn-primary">Go to the periphery</a>
+               </div>
+               <div class="col-md-2" id="res1">
+                <h3>Rock: ${obj.rock}</h3>
+              </div>
+              <div class="col-md-2" id="res2">
+                <h3>Metal: ${obj.metal}</h3>
+              </div>
+              <div class="col-md-2" id="res3">
+                <h3>Wood: ${obj.wood}</h3>
+              </div>
+              <div class="col-md-2" id="res4">
+                <h3>Break: ${obj.brek}</h3>
+              </div>
           </div>
       </div>    	
       <p></p>
@@ -140,56 +154,103 @@
                     <div class="col-md-7">
                         <div class = "row">
                             <div class="col-md-3 placeholder" id="placeholder_1">
+                            
+                            #if (${BuildObj.containsKey(1)})
+                                <img src=${BuildObj.get(1)}>
+                            #else
                                 <img src="images/museum39.png">
+                            #end
+                           
                             </div>
                             <div class="col-md-3 placeholder">
+                            #if (${BuildObj.containsKey(2)})
+                                <img src=${BuildObj.get(2)}>
+                            #else
                                 <img src="images/museum39.png">
+                            #end
                             </div>
                             <div class="col-md-3 placeholder">
+                            #if (${BuildObj.containsKey(3)})
+                                <img src=${BuildObj.get(3)}>
+                            #else
                                 <img src="images/museum39.png">
+                            #end
                             </div>
                             <div class="col-md-3 placeholder">
+                           #if (${BuildObj.containsKey(4)})
+                                <img src=${BuildObj.get(4)}>
+                            #else
                                 <img src="images/museum39.png">
+                            #end
                             </div>
                         </div>
                         <div class = "row">
                             <div class="col-md-3 placeholder">
+                           #if (${BuildObj.containsKey(5)})
+                                <img src=${BuildObj.get(5)}>
+                            #else
                                 <img src="images/museum39.png">
-
+                            #end
                             </div>
                             <div class="col-md-6">
 
                             </div>
                             <div class="col-md-3 placeholder">
+                          #if (${BuildObj.containsKey(6)})
+                                <img src=${BuildObj.get(6)}>
+                            #else
                                 <img src="images/museum39.png">
+                            #end
 
                             </div>
                         </div>
                         <div class = "row">
                             <div class="col-md-3 placeholder">
-
+                            #if (${BuildObj.containsKey(7)})
+                                <img src=${BuildObj.get(7)}>
+                            #else
                                 <img src="images/museum39.png">
+                            #end
                             </div>
                             <div class="col-md-6">
 
                             </div>
                             <div class="col-md-3 placeholder">
-
+                             #if (${BuildObj.containsKey(8)})
+                                <img src=${BuildObj.get(8)}>
+                            #else
                                 <img src="images/museum39.png">
+                            #end
                             </div>
                         </div>
                         <div class = "row">
                             <div class="col-md-3 placeholder">
+                             #if (${BuildObj.containsKey(9)})
+                                <img src=${BuildObj.get(9)}>
+                            #else
                                 <img src="images/museum39.png">
+                            #end
                             </div>
                             <div class="col-md-3 placeholder">
+                            #if (${BuildObj.containsKey(10)})
+                                <img src=${BuildObj.get(10)}>
+                            #else
                                 <img src="images/museum39.png">
+                            #end
                             </div>
                             <div class="col-md-3 placeholder">
+                            #if (${BuildObj.containsKey(11)})
+                                <img src=${BuildObj.get(11)}>
+                            #else
                                 <img src="images/museum39.png">
+                            #end
                             </div>
                             <div class="col-md-3 placeholder">
+                             #if (${BuildObj.containsKey(12)})
+                                <img src=${BuildObj.get(12)}>
+                            #else
                                 <img src="images/museum39.png">
+                            #end
                             </div>
                         </div>
                     </div>
