@@ -15,6 +15,14 @@ public class PlayerServiceImpl implements PlayerService{
 	@Autowired
 	private Dao dao;
 
+	public Dao getDao() {
+		return dao;
+	}
+
+	public void setDao(Dao dao) {
+		this.dao = dao;
+	}
+
 	@Override
 	public void savePlayer(Player player) {
 		dao.save(player);

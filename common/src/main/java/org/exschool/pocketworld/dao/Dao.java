@@ -12,13 +12,14 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 /**
  * Created by kgavrylchenko on 10/23/2015.
  */
 @Repository
-public class Dao {
+public class Dao  {
     private static final Logger logger = LoggerFactory.getLogger(Dao.class);
 
     @Autowired
@@ -130,7 +131,7 @@ public class Dao {
         return executableCriteria.list();
     }
 
-
+    
     protected Session currentSession() {
         return sessionFactory.getCurrentSession();
     }

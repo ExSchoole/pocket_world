@@ -28,16 +28,10 @@ public class Player {
 	@Column(name = "player_id")
 	private Long playerId;
 	
-
-	//private Long password;
-	/*@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="cityFk")
-	private City city;
-*/	
-	@Embedded
+	/*@Embedded
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name="player_resources", joinColumns=@JoinColumn(name="player_id"))
-	List<Long> resourcesID = new ArrayList<>();
+	@CollectionTable(name="player_resources", joinColumns=@JoinColumn(name="player_id"))*/
+	Long resourcesID ;
 	
 
 	@Column(name = "login")
@@ -60,14 +54,20 @@ public class Player {
 		this.login = login;
 	}
 
-	public List<Long> getResourcesID() {
+	public Long getResourcesID() {
 		return resourcesID;
 	}
 
-	public void setResourcesID(List<Long> resourcesID) {
+	public void setResourcesID(Long resourcesID) {
 		this.resourcesID = resourcesID;
 	}
 
+	public Player(Player player) {
+		this.login=player.getLogin();
+	}
+	public Player() {
+		this.login="";
+	}
 	
 
 	
