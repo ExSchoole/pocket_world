@@ -32,4 +32,8 @@ public class BuildingServiceImpl  implements BuildingService {
         dao.save(entity);
 
     }
+
+    public void setDao(Dao dao) {
+        this.dao = dao;
+    }
 }
