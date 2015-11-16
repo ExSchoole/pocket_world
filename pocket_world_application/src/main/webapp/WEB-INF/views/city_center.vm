@@ -47,14 +47,49 @@
         });
     </script>
 
+    #macro( ImgRef )
+     #set( $TypeHouses = ["Mall", "Factory", "Market", "Shop"] )
+     
+     #foreach ($BuildObj in ${DTO.getbuildings()})
+      #if (${BuildObj.getType()}==${TypeHouses.get(0)})
+          ${BuildObj.setType("images/house34.png")}
+      #elseif (${BuildObj.getType()}==${TypeHouses.get(1)})
+          ${BuildObj.setType("images/building78.png")}
+      #elseif (${BuildObj.getType()}==${TypeHouses.get(2)})
+          ${BuildObj.setType("images/factory6.png")}
+      #elseif (${BuildObj.getType()}==${TypeHouses.get(3)})
+          ${BuildObj.setType("images/farm.png")}
+      #else 
+          ${BuildObj.setType("images/museum39.png")}
+      #end  
+     #end
+    #end
+
+     
+    #macro( ViewBuilding $index )
+      #set( $flag = "false" )
+      #foreach ($BuildObj in ${DTO.getbuildings()})
+         #if (${BuildObj.getPos()}==$index)
+             <img src=${BuildObj.getType()}>
+             #set( $flag = "true" )
+         #end
+      #end
+      
+      #if ($flag == false) 
+           <img src="images/museum39.png"}> 
+      #end
+    #end
+    
+                            
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/carousel-style.css" rel="stylesheet">
     
 
-
 </head>
 <body>
+    #ImgRef()
+    
     <header class="container">
 
         <!-- Top navigation panel -->
@@ -109,21 +144,21 @@
       
       <div class="container">
           <div class="row">
-              <h1>City centre</h1> 
+              <h1>${DTO.NickName}'s city center</h1> 
                <div class="col-md-4" id="res1">
                  <a href="#springUrl("/periphery")" class="btn btn-primary">Go to the periphery</a>
                </div>
                <div class="col-md-2" id="res1">
-                <h3>Rock: ${obj.rock}</h3>
+                <h3>Gold: ${DTO.getMyRes().getGold()}</h3>
               </div>
               <div class="col-md-2" id="res2">
-                <h3>Metal: ${obj.metal}</h3>
+                <h3>Timber: ${DTO.getMyRes().getTimber()}</h3>
               </div>
               <div class="col-md-2" id="res3">
-                <h3>Wood: ${obj.wood}</h3>
+                <h3>Clay: ${DTO.getMyRes().getClay()}</h3>
               </div>
               <div class="col-md-2" id="res4">
-                <h3>Break: ${obj.brek}</h3>
+                <h3>Corn: ${DTO.getMyRes().getCorn()}</h3>
               </div>
           </div>
       </div>    	
@@ -153,104 +188,53 @@
                 <div class = "row">
                     <div class="col-md-7">
                         <div class = "row">
-                            <div class="col-md-3 placeholder" id="placeholder_1">
-                            
-                            #if (${BuildObj.containsKey(1)})
-                                <img src=${BuildObj.get(1)}>
-                            #else
-                                <img src="images/museum39.png">
-                            #end
-                           
+                            <div class="col-md-3 placeholder" id="placeholder_1">                           
+                              #ViewBuilding(1)                            
                             </div>
                             <div class="col-md-3 placeholder">
-                            #if (${BuildObj.containsKey(2)})
-                                <img src=${BuildObj.get(2)}>
-                            #else
-                                <img src="images/museum39.png">
-                            #end
+                              #ViewBuilding(2)
                             </div>
                             <div class="col-md-3 placeholder">
-                            #if (${BuildObj.containsKey(3)})
-                                <img src=${BuildObj.get(3)}>
-                            #else
-                                <img src="images/museum39.png">
-                            #end
+                              #ViewBuilding(3)
                             </div>
                             <div class="col-md-3 placeholder">
-                           #if (${BuildObj.containsKey(4)})
-                                <img src=${BuildObj.get(4)}>
-                            #else
-                                <img src="images/museum39.png">
-                            #end
+                              #ViewBuilding(4)
                             </div>
                         </div>
                         <div class = "row">
                             <div class="col-md-3 placeholder">
-                           #if (${BuildObj.containsKey(5)})
-                                <img src=${BuildObj.get(5)}>
-                            #else
-                                <img src="images/museum39.png">
-                            #end
+                              #ViewBuilding(5)
                             </div>
                             <div class="col-md-6">
 
                             </div>
                             <div class="col-md-3 placeholder">
-                          #if (${BuildObj.containsKey(6)})
-                                <img src=${BuildObj.get(6)}>
-                            #else
-                                <img src="images/museum39.png">
-                            #end
-
+                              #ViewBuilding(6)
                             </div>
                         </div>
                         <div class = "row">
                             <div class="col-md-3 placeholder">
-                            #if (${BuildObj.containsKey(7)})
-                                <img src=${BuildObj.get(7)}>
-                            #else
-                                <img src="images/museum39.png">
-                            #end
+                               #ViewBuilding(7)
                             </div>
                             <div class="col-md-6">
 
                             </div>
                             <div class="col-md-3 placeholder">
-                             #if (${BuildObj.containsKey(8)})
-                                <img src=${BuildObj.get(8)}>
-                            #else
-                                <img src="images/museum39.png">
-                            #end
+                                #ViewBuilding(8)
                             </div>
                         </div>
                         <div class = "row">
                             <div class="col-md-3 placeholder">
-                             #if (${BuildObj.containsKey(9)})
-                                <img src=${BuildObj.get(9)}>
-                            #else
-                                <img src="images/museum39.png">
-                            #end
+                               #ViewBuilding(9)
                             </div>
                             <div class="col-md-3 placeholder">
-                            #if (${BuildObj.containsKey(10)})
-                                <img src=${BuildObj.get(10)}>
-                            #else
-                                <img src="images/museum39.png">
-                            #end
+                                #ViewBuilding(10)
                             </div>
                             <div class="col-md-3 placeholder">
-                            #if (${BuildObj.containsKey(11)})
-                                <img src=${BuildObj.get(11)}>
-                            #else
-                                <img src="images/museum39.png">
-                            #end
+                                #ViewBuilding(11)
                             </div>
                             <div class="col-md-3 placeholder">
-                             #if (${BuildObj.containsKey(12)})
-                                <img src=${BuildObj.get(12)}>
-                            #else
-                                <img src="images/museum39.png">
-                            #end
+                                #ViewBuilding(12)
                             </div>
                         </div>
                     </div>
