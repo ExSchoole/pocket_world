@@ -11,28 +11,50 @@ import java.util.List;
 /**
  * Created by skandy on 12.11.15.
  */
+
+
 @Service("buildingService")
 @Transactional
 public class BuildingServiceImpl  implements BuildingService {
+    /**
+     * dao - data access object
+     */
     @Autowired
     private Dao dao;
 
+    /**
+     * Gets all buildings from DB
+     * @return list of buildings
+     */
     @Override
     public List<Building> allBuildings() {
         return dao.all(Building.class);
     }
 
+    /**
+     * Returns building by id
+     * @param id
+     * @return Building object
+     */
     @Override
     public Building get(long id) {
         return dao.get(Building.class, id);
     }
 
+    /**
+     * Saves entity object to DB
+     * @param entity
+     */
     @Override
     public void save(Building entity) {
         dao.save(entity);
 
     }
 
+    /**
+     * Setter for dao
+     * @param dao
+     */
     public void setDao(Dao dao) {
         this.dao = dao;
     }
