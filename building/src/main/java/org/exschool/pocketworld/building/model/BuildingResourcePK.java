@@ -12,6 +12,15 @@ import javax.persistence.Embeddable;
 public class BuildingResourcePK {
     private ResourceType resourceType;
     private Integer level;
+
+    public ResourceType getResourceType() {
+        return resourceType;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
     public BuildingResourcePK(){}
     public BuildingResourcePK(ResourceType resourceType, Integer level) {
         this.resourceType = resourceType;

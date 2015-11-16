@@ -10,6 +10,15 @@ public class TimePK {
     private BuildingType buildingType;
 
     private Integer level;
+
+    public BuildingType getBuildingType() {
+        return buildingType;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
     public TimePK() {}
     public TimePK(BuildingType buildingType, Integer level) {
         this.buildingType=buildingType;
