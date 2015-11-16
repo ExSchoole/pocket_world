@@ -28,9 +28,9 @@ public class BuildingServiceTest {
 
     @Test
     public void getTest() {
-        Mockito.when (dao.get(Building.class, 1)).thenReturn(building1);
-        Assert.assertEquals(building1, service.get(1));
-        Assert.assertNull(service.get(0));
+        Mockito.when (dao.get(Building.class, 1L)).thenReturn(building1);
+        Assert.assertEquals(building1, service.get(1L));
+        Assert.assertNull(service.get(0L));
     }
 
 }
