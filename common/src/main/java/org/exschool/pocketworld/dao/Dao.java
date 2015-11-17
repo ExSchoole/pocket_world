@@ -1,6 +1,8 @@
 package org.exschool.pocketworld.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +60,18 @@ public class Dao  {
      */
     public <T> void save(T entity) {
         currentSession().saveOrUpdate(entity);
+    }
+
+    public <T> void saveAll(Collection<T> entities) {
+        Session session = currentSession();
+        List<T> entitiesList = new ArrayList<>(entities);
+        for (int i = 0; i < entities.size(); i++) {
+            session.save(entitiesList.get(i));
+            if (i %20 == 0) {
+                session.flush();
+                session.clear();
+            }
+        }
     }
 
     /**

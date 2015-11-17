@@ -69,4 +69,13 @@ public class Player {
         result = 31 * result + (login != null ? login.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerId=" + playerId +
+                ", resourcesID=" + resourcesID +
+                ", login='" + login + '\'' +
+                '}';
+    }
 }

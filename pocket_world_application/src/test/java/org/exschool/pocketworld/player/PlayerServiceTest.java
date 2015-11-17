@@ -3,54 +3,66 @@ package org.exschool.pocketworld.player;
 import org.exschool.pocketworld.config.TestSpringConfig;
 import org.exschool.pocketworld.dao.Dao;
 import org.exschool.pocketworld.player.model.Player;
-import org.exschool.pocketworld.player.service.PlayerServiceImpl;
+import org.exschool.pocketworld.player.service.PlayerService;
+import org.exschool.pocketworld.util.builder.PlayerBuilder;
 import org.junit.*;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import java.util.Iterator;
-import java.util.List;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
 public class PlayerServiceTest {
 
-    @Mock
+    @Autowired
+    PlayerService playerService;
+    @Autowired
+    PlayerBootstrap bootstrap;
+    @Autowired
     Dao dao;
-
-    @InjectMocks
-    PlayerServiceImpl playerService;
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
+        bootstrap.fillDatabase();
     }
 
     @Test
-    public void testSave() {
-        Player player = new Player();
-        player.setPlayerId(1L);
-        player.setLogin("player-login");
+    public void testCreate() {
+        String login = "test-login";
+        Player player = PlayerBuilder.builder().login(login).build();
         playerService.savePlayer(player);
-        assert playerService.getPlayerByLogin("player-login").equals(player);
+        Player savedPlayer = playerService.getPlayerByLogin(login);
+        assertNotNull(savedPlayer);
+        assertNotNull(savedPlayer.getPlayerId());
+    }
+
+    @Test
+    public void testUpdate() {
+        String existingPlayerLogin = "login-2";
+        Player existingPlayer = playerService.getPlayerByLogin(existingPlayerLogin);
+        assertNotNull(existingPlayer);
+        existingPlayer.setResourcesID(123L);
+        playerService.savePlayer(existingPlayer);
+        Player savedPlayer = playerService.getPlayerByLogin(existingPlayerLogin);
+        assertTrue(savedPlayer.equals(existingPlayer));
+    }
+
+    @Test(expected = Exception.class)
+    public void testSaveNull() {
+        playerService.savePlayer(null);
     }
 
 
     @Test
     public void testGetByLogin() {
+        Player existingPlayer = playerService.getPlayerByLogin("login-3");
+        assertNotNull(existingPlayer);
     }
-
-
 }
 
 
