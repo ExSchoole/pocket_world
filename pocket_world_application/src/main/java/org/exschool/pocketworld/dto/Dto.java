@@ -1,17 +1,16 @@
 package org.exschool.pocketworld.dto;
 
-import java.util.ArrayList;
+import java.util.Map;
 
-import org.exschool.pocketworld.building.Building;
 import org.exschool.pocketworld.resource.Resource;
 
 public class Dto {
 
-	private ArrayList<Building> buildings;
-	private Resource MyRes;
-	private String NickName;
+	private Map<Integer,String> buildings;
+	private Resource resources;
+	private String nickName;
 	
-	public Dto(ArrayList<Building> buildings, Resource MyRes, String NickName){
+	public Dto(Map<Integer,String> buildings, Resource MyRes, String NickName){
 	     this.setMyRes(MyRes);
 	     this.setNickName(NickName);
 	   	 this.buildings = buildings;   	 
@@ -19,24 +18,24 @@ public class Dto {
 
 	
 	public String getNickName() {
-	    return NickName;
+	    return nickName;
 	}
 
 	public void setNickName(String nickName) {
-		NickName = nickName;
+		this.nickName = nickName;
 	}
     
-	public Resource getMyRes() {
-		return MyRes;
+	public Resource getResources() {
+		return resources;
 	}
-    public void setMyRes(Resource myRes) {
-		MyRes = myRes;
+    public void setMyRes(Resource res) {
+		resources = res;
 	}
     
-    public ArrayList<Building> getbuildings() {
+    public  Map<Integer,String> getbuildings() {
 		return buildings;
 	}
-    public void setbuildings(ArrayList<Building> buildings) {
+    public void setbuildings(Map<Integer,String> buildings) {
     	this.buildings = buildings;
 	}
 }

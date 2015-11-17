@@ -47,49 +47,15 @@
         });
     </script>
 
-    #macro( ImgRef )
-     #set( $TypeHouses = ["Mall", "Factory", "Market", "Shop"] )
-     
-     #foreach ($BuildObj in ${DTO.getbuildings()})
-      #if (${BuildObj.getType()}==${TypeHouses.get(0)})
-          ${BuildObj.setType("images/house34.png")}
-      #elseif (${BuildObj.getType()}==${TypeHouses.get(1)})
-          ${BuildObj.setType("images/building78.png")}
-      #elseif (${BuildObj.getType()}==${TypeHouses.get(2)})
-          ${BuildObj.setType("images/factory6.png")}
-      #elseif (${BuildObj.getType()}==${TypeHouses.get(3)})
-          ${BuildObj.setType("images/farm.png")}
-      #else 
-          ${BuildObj.setType("images/museum39.png")}
-      #end  
-     #end
-    #end
-
-     
-    #macro( ViewBuilding $index )
-      #set( $flag = "false" )
-      #foreach ($BuildObj in ${DTO.getbuildings()})
-         #if (${BuildObj.getPos()}==$index)
-             <img src=${BuildObj.getType()}>
-             #set( $flag = "true" )
-         #end
-      #end
-      
-      #if ($flag == false) 
-           <img src="images/museum39.png"}> 
-      #end
-    #end
     
                             
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/carousel-style.css" rel="stylesheet">
-    
+    <link href="css/buildings.css" rel="stylesheet">
 
 </head>
-<body>
-    #ImgRef()
-    
+<body>   
     <header class="container">
 
         <!-- Top navigation panel -->
@@ -149,16 +115,16 @@
                  <a href="#springUrl("/periphery")" class="btn btn-primary">Go to the periphery</a>
                </div>
                <div class="col-md-2" id="res1">
-                <h3>Gold: ${DTO.getMyRes().getGold()}</h3>
+                <h3>Gold: ${DTO.getResources().getGold()}</h3>
               </div>
               <div class="col-md-2" id="res2">
-                <h3>Timber: ${DTO.getMyRes().getTimber()}</h3>
+                <h3>Timber: ${DTO.getResources().getTimber()}</h3>
               </div>
               <div class="col-md-2" id="res3">
-                <h3>Clay: ${DTO.getMyRes().getClay()}</h3>
+                <h3>Clay: ${DTO.getResources().getClay()}</h3>
               </div>
               <div class="col-md-2" id="res4">
-                <h3>Corn: ${DTO.getMyRes().getCorn()}</h3>
+                <h3>Corn: ${DTO.getResources().getCorn()}</h3>
               </div>
           </div>
       </div>    	
@@ -188,53 +154,101 @@
                 <div class = "row">
                     <div class="col-md-7">
                         <div class = "row">
-                            <div class="col-md-3 placeholder" id="placeholder_1">                           
-                              #ViewBuilding(1)                            
+                            <div class="col-md-3 placeholder" id="placeholder_1">                          
+                             #if( ${DTO.getbuildings().containsKey(1)} == true ) 
+                                <div class=${DTO.getbuildings().get(1)}></div>
+                             #else                            
+                                <img src="images/museum39.png">
+                             #end
                             </div>
                             <div class="col-md-3 placeholder">
-                              #ViewBuilding(2)
+                              #if( ${DTO.getbuildings().containsKey(2)} == true ) 
+                                <div class=${DTO.getbuildings().get(2)}></div>
+                             #else                            
+                                <img src="images/museum39.png">
+                             #end
                             </div>
                             <div class="col-md-3 placeholder">
-                              #ViewBuilding(3)
+                              #if( ${DTO.getbuildings().containsKey(3)} == true ) 
+                                <div class=${DTO.getbuildings().get(3)}></div>
+                             #else                            
+                                <img src="images/museum39.png">
+                             #end
                             </div>
                             <div class="col-md-3 placeholder">
-                              #ViewBuilding(4)
+                              #if( ${DTO.getbuildings().containsKey(4)} == true ) 
+                                <div class=${DTO.getbuildings().get(4)}></div>
+                             #else                            
+                                <img src="images/museum39.png">
+                             #end
                             </div>
                         </div>
                         <div class = "row">
                             <div class="col-md-3 placeholder">
-                              #ViewBuilding(5)
+                             #if( ${DTO.getbuildings().containsKey(5)} == true ) 
+                                <div class=${DTO.getbuildings().get(5)}></div>
+                             #else                            
+                                <img src="images/museum39.png">
+                             #end
                             </div>
                             <div class="col-md-6">
 
                             </div>
                             <div class="col-md-3 placeholder">
-                              #ViewBuilding(6)
+                              #if( ${DTO.getbuildings().containsKey(6)} == true ) 
+                                <div class=${DTO.getbuildings().get(6)}></div>
+                             #else                            
+                                <img src="images/museum39.png">
+                             #end
                             </div>
                         </div>
                         <div class = "row">
                             <div class="col-md-3 placeholder">
-                               #ViewBuilding(7)
+                             #if( ${DTO.getbuildings().containsKey(7)} == true ) 
+                                <div class=${DTO.getbuildings().get(7)}></div>
+                             #else                            
+                                <img src="images/museum39.png">
+                             #end
                             </div>
                             <div class="col-md-6">
 
                             </div>
                             <div class="col-md-3 placeholder">
-                                #ViewBuilding(8)
+                             #if( ${DTO.getbuildings().containsKey(8)} == true ) 
+                                <div class=${DTO.getbuildings().get(8)}></div>
+                             #else                            
+                                <img src="images/museum39.png">
+                             #end
                             </div>
                         </div>
                         <div class = "row">
                             <div class="col-md-3 placeholder">
-                               #ViewBuilding(9)
+                              #if( ${DTO.getbuildings().containsKey(9)} == true ) 
+                                <div class=${DTO.getbuildings().get(9)}></div>
+                             #else                            
+                                <img src="images/museum39.png">
+                             #end
                             </div>
                             <div class="col-md-3 placeholder">
-                                #ViewBuilding(10)
+                              #if( ${DTO.getbuildings().containsKey(10)} == true ) 
+                                <div class=${DTO.getbuildings().get(10)}></div>
+                             #else                            
+                                <img src="images/museum39.png">
+                             #end
                             </div>
                             <div class="col-md-3 placeholder">
-                                #ViewBuilding(11)
+                              #if( ${DTO.getbuildings().containsKey(11)} == true ) 
+                                <div class=${DTO.getbuildings().get(11)}></div>
+                             #else                            
+                                <img src="images/museum39.png">
+                             #end
                             </div>
                             <div class="col-md-3 placeholder">
-                                #ViewBuilding(12)
+                              #if( ${DTO.getbuildings().containsKey(12)} == true ) 
+                                <div class=${DTO.getbuildings().get(12)}></div>
+                             #else                            
+                                <img src="images/museum39.png">
+                             #end
                             </div>
                         </div>
                     </div>

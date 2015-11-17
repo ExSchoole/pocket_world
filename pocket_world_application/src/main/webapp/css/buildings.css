@@ -1,0 +1,29 @@
+div.building_mall {
+    background-image: url(../images/house34.png);
+    height: 154px;
+    width: 142px;
+}
+
+div.building_factory {
+    background-image: url(../images/building78.png);
+    height: 154px;
+    width: 142x;
+}
+
+div.building_market {
+    background-image: url(../images/factory6.png);
+    height: 154px;
+    width: 142px;
+}
+
+div.building_shop {
+    background-image: url(../images/farm.png);
+    height: 154px;
+    width: 142px;
+}
+
+div.building_null {
+    background-image: url(../images/museum39.png);
+    height: 100px;
+    width: 100px;
+}
