@@ -3,331 +3,166 @@
 <html>
 <head>
     <title>City center</title>
-    <style>
-        div .placeholder {
 
-        }
-        div .building {
-
-        }
-    </style>
-
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/jquery.verticalCarousel.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-
-    <script>
-        $( init );
-        function init() {
-
-
-            $(".building").draggable({
-             appendTo: 'body',
-             helper: 'clone',
-             revert: 'invalid'
-
-            });
-              $(".placeholder").droppable({
-                accept: '.building',
-                drop: function(ev, ui) {
-                    $(this).html("");
-                    $(ui.draggable).appendTo(this);
-                    console.log(ui);
-
-
-                     }
-    });
-        }
-    </script>
-
-    <script>
-        $(document).ready(function(){
-            $("#carouselId").verticalCarousel({nSlots: 4, speed: 800});
-        });
-    </script>
-
-    
-                            
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="#springUrl('/css/bootstrap/bootstrap.css')" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/carousel-style.css" rel="stylesheet">
-    <link href="css/buildings.css" rel="stylesheet">
+    <link href="#springUrl('/css/buildings.css')" rel="stylesheet">
 
 </head>
-<body>   
-    <header class="container">
 
-        <!-- Top navigation panel -->
-        <div class = "navbar navbar-inverse">
-            <div class = "container">
-                <div class = "navbar-header">
-                    <button type = "button"  class="navbar-toggle"  data-toggle="collapse" data-target="#esponsive-menu">
-                        <span class="sr-only">Open navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a  class = "navbar-brand" href="#" > <i class="fa fa-home fa-fw"></i>&nbsp;</a>
+<body class="container">
+
+    #if ($errorMsg)
+    <div class="container">
+        <div class="alert alert-danger" role="alert">$errorMsg</div>
+    </div>
+    #end
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" id="res1">
+            <a href="#springUrl("/periphery")" class="btn btn-primary">Go to the periphery</a>
+        </div>
+    </div>
+    <div class="row">
+        <h1>${dto.NickName}'s city center</h1>
+        <div class="col-md-2" id="res1">
+            <h3>Gold: ${dto.getResourceDto().getGold()}</h3>
+        </div>
+        <div class="col-md-2" id="res2">
+            <h3>Timber: ${dto.getResourceDto().getTimber()}</h3>
+        </div>
+        <div class="col-md-2" id="res3">
+            <h3>Clay: ${dto.getResourceDto().getClay()}</h3>
+        </div>
+        <div class="col-md-2" id="res4">
+            <h3>Corn: ${dto.getResourceDto().getCorn()}</h3>
+        </div>
+    </div>
+</div>
+<p/>
+<!-- City center map -->
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="row">
+            #foreach($position in [1,2,3,4])
+                <div class="col-md-3 building_position" id="position_$position">
+                    #set($building = false)
+                    #set($building = ${dto.getBuildings().get($position)})
+
+                    #if(  $building  )
+                        <div class="building_$building.getType() building"></div>
+                    #else
+                        <div class="building_empty"></div>
+                    #end
                 </div>
-                <div class = "collapse navbar-collapse" id = "esponsive-menu">
-                    <ul class = "nav navbar-nav">
-                        <li><a   href="#" > Item 1 </a></li>
-                        <li class="dropdown">
-                            <a   href="#" class="dropdown-toggle" data-toggle="dropdown" >Item 2<b class="caret"></b> </a>
-                            <ul class = "dropdown-menu">
-                                <li><a   href="#">Item 2.1 </a></li>
-                                <li class="divider"></li>
-                                <li><a   href="#" >Item 2.2 </a></li>
-                                <li class="divider"></li>
-                                <li><a   href="#" >Item 2.3 </a></li>
-                                <li class="divider"></li>
-                                <li><a   href="#" >Item 2.4 </a></li>
-                                <li class="divider"></li>
-                                <li><a   href="#" >Item 2.5 </a></li>
-                                <li class="divider"></li>
-                                <li><a   href="#" >Item 2.6 </a></li>
-                                <li class="divider"></li>
-                                <li><a   href="#" >Item 2.7 </a></li>
-                            </ul>
-                        </li>
-                        <li><a   href="#" >Item 3</a></li>
-                        <li><a   href="#" >Item 4</a></li>
-                    </ul>
-                </div>
+            #end
+        </div>
+        <div class="row">
+            #set($position = 5)
+            <div class="col-md-3 building_position" id="position_$position">
+                #set($building = false)
+                #set($building = ${dto.getBuildings().get($position)})
+
+                #if(  $building  )
+                    <div class="building_$building.getType() building"></div>
+                #else
+                    <div class="building_empty"></div>
+                #end
+            </div>
+
+            <div class="col-md-6"></div>
+
+            #set($position = 6)
+            <div class="col-md-3 building_position" id="position_$position">
+                #set($building = false)
+                #set($building = ${dto.getBuildings().get($position)})
+
+                #if(  $building  )
+                    <div class="building_$building.getType() building"></div>
+                #else
+                    <div class="building_empty"></div>
+                #end
             </div>
         </div>
+        <div class="row">
+            #set($position = 7)
+            <div class="col-md-3 building_position" id="position_$position">
+                #set($building = false)
+                #set($building = ${dto.getBuildings().get($position)})
 
-        #if ($errorMsg)
-	       <div class="container">
-	          <div class="alert alert-danger" role="alert">$errorMsg</div>
-	      </div>
-      #end  
-      
-      <div class="container">
-          <div class="row">
-              <h1>${CityCenterDTO.NickName}'s city center</h1>
-               <div class="col-md-4" id="res1">
-                 <a href="#springUrl("/periphery")" class="btn btn-primary">Go to the periphery</a>
-               </div>
-               <div class="col-md-2" id="res1">
-                <h3>Gold: ${CityCenterDTO.getResources().getGold()}</h3>
-              </div>
-              <div class="col-md-2" id="res2">
-                <h3>Timber: ${CityCenterDTO.getResources().getTimber()}</h3>
-              </div>
-              <div class="col-md-2" id="res3">
-                <h3>Clay: ${CityCenterDTO.getResources().getClay()}</h3>
-              </div>
-              <div class="col-md-2" id="res4">
-                <h3>Corn: ${CityCenterDTO.getResources().getCorn()}</h3>
-              </div>
-          </div>
-      </div>    	
-      <p></p>
-      
-      
-      <div class="container">
-          <div class="row success">
-              <b>Player's resources:</b>
-				<ul class="list-inline">
-					#foreach ($resource in $resources)
-					<li>$resource.getResourceType():
-							<span class="badge badge-warning">$resource.getAmount()</span>
-					</li>
-					#end
-				</ul>			  
-          </div>
-      </div>    
-	  
-    </header>
-
-    <section id="body" class="container">
-        <!-- City center map -->
-        <section id="city_center" class="col-md-9">
-
-                <div  class = "container">
-                <div class = "row">
-                    <div class="col-md-7">
-                        <div class = "row">
-                            <div class="col-md-3 placeholder" id="placeholder_1">                          
-                             #if( ${CityCenterDTO.getbuildings().containsKey(1)} == true )
-                                <div class=${CityCenterDTO.getbuildings().get(1)}></div>
-                             #else                            
-                                <img src="images/museum39.png">
-                             #end
-                            </div>
-                            <div class="col-md-3 placeholder">
-                              #if( ${CityCenterDTO.getbuildings().containsKey(2)} == true )
-                                <div class=${CityCenterDTO.getbuildings().get(2)}></div>
-                             #else                            
-                                <img src="images/museum39.png">
-                             #end
-                            </div>
-                            <div class="col-md-3 placeholder">
-                              #if( ${CityCenterDTO.getbuildings().containsKey(3)} == true )
-                                <div class=${CityCenterDTO.getbuildings().get(3)}></div>
-                             #else                            
-                                <img src="images/museum39.png">
-                             #end
-                            </div>
-                            <div class="col-md-3 placeholder">
-                              #if( ${CityCenterDTO.getbuildings().containsKey(4)} == true )
-                                <div class=${CityCenterDTO.getbuildings().get(4)}></div>
-                             #else                            
-                                <img src="images/museum39.png">
-                             #end
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class="col-md-3 placeholder">
-                             #if( ${CityCenterDTO.getbuildings().containsKey(5)} == true )
-                                <div class=${CityCenterDTO.getbuildings().get(5)}></div>
-                             #else                            
-                                <img src="images/museum39.png">
-                             #end
-                            </div>
-                            <div class="col-md-6">
-
-                            </div>
-                            <div class="col-md-3 placeholder">
-                              #if( ${CityCenterDTO.getbuildings().containsKey(6)} == true )
-                                <div class=${CityCenterDTO.getbuildings().get(6)}></div>
-                             #else                            
-                                <img src="images/museum39.png">
-                             #end
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class="col-md-3 placeholder">
-                             #if( ${CityCenterDTO.getbuildings().containsKey(7)} == true )
-                                <div class=${CityCenterDTO.getbuildings().get(7)}></div>
-                             #else                            
-                                <img src="images/museum39.png">
-                             #end
-                            </div>
-                            <div class="col-md-6">
-
-                            </div>
-                            <div class="col-md-3 placeholder">
-                             #if( ${CityCenterDTO.getbuildings().containsKey(8)} == true )
-                                <div class=${CityCenterDTO.getbuildings().get(8)}></div>
-                             #else                            
-                                <img src="images/museum39.png">
-                             #end
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class="col-md-3 placeholder">
-                              #if( ${CityCenterDTO.getbuildings().containsKey(9)} == true )
-                                <div class=${CityCenterDTO.getbuildings().get(9)}></div>
-                             #else                            
-                                <img src="images/museum39.png">
-                             #end
-                            </div>
-                            <div class="col-md-3 placeholder">
-                              #if( ${CityCenterDTO.getbuildings().containsKey(10)} == true )
-                                <div class=${CityCenterDTO.getbuildings().get(10)}></div>
-                             #else                            
-                                <img src="images/museum39.png">
-                             #end
-                            </div>
-                            <div class="col-md-3 placeholder">
-                              #if( ${CityCenterDTO.getbuildings().containsKey(11)} == true )
-                                <div class=${CityCenterDTO.getbuildings().get(11)}></div>
-                             #else                            
-                                <img src="images/museum39.png">
-                             #end
-                            </div>
-                            <div class="col-md-3 placeholder">
-                              #if( ${CityCenterDTO.getbuildings().containsKey(12)} == true )
-                                <div class=${CityCenterDTO.getbuildings().get(12)}></div>
-                             #else                            
-                                <img src="images/museum39.png">
-                             #end
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                #if(  $building  )
+                    <div class="building_$building.getType() building"></div>
+                #else
+                    <div class="building_empty"></div>
+                #end
             </div>
 
-        </section>
+            <div class="col-md-6"></div>
 
-        <section id="sidebar" class="col-md-3">
-            <div id="carouselId" class="vertical-carousel">
-                <a href="#" class="scru">Scroll Up</a>
-                <div class="vertical-carousel-container">
-                    <ul class="vertical-carousel-list" id ="vertical-carousel-list_id">
-                        <li id="house"><img src="images/house34.png"   class="thumbnail building" alt="House"  /></li>
-                        <li id="building"><img src="images/building78.png" class="thumbnail building" alt="Building" /></li>
-                        <li id="factory"><img src="images/factory6.png" class="thumbnail building" alt="Factory" /></li>
-                        <li id="farm"><img src="images/farm.png" class="thumbnail building" alt="Farm" /></li>
-                    </ul>
-                </div>
-                 <a href="#" class="scrd">Scroll Down</a>
-            </div>
-        </section>
-    </section>
+            #set($position = 8)
+            <div class="col-md-3 building_position" id="position_$position">
+                #set($building = false)
+                #set($building = ${dto.getBuildings().get($position)})
 
-    <footer>
-        <!-- Left navigation Panel   -->
-        <div  class = "container">
-            <div class = "row">
-                <h1>Database</h1>
-                <div class="col-md-2">
-                    <a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; Add</a>
-                    <a class="list-group-item" href="#"><i class="fa fa-trash-o fa-fw"></i>&nbsp; Delete</a>
-                    <a class="list-group-item" href="#"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a>
-                    <a class="list-group-item" href="#"><i class="fa fa-circle-thin fa-fw"></i>&nbsp; something</a>
-                </div>
-
-                <!--     Table     -->
-                <div class="col-md-10">
-
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Building type</th>
-                            <th>Count resources</th>
-                            <th>Location</th>
-                            <th>Building time</th>
-                            <th>Evolution</th>
-                            <th>Production</th>
-                            <th>Yet</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Something</td> <td>Something</td> <td>Something</td>
-                            <td>Something</td> <td>Something</td><td>Something</td>
-                        </tr>
-                        <tr>
-                            <td>Something</td> <td>Something</td> <td>Something</td>
-                            <td>Something</td> <td>Something</td> <td>Something</td>
-                        </tr>
-                        <tr>
-                            <td>Something</td> <td>Something</td> <td>Something</td>
-                            <td>Something</td> <td>Something</td> <td>Something</td>
-                        </tr>
-                        <tr>
-                            <td>Something</td> <td>Something</td> <td>Something</td>
-                            <td>Something</td> <td>Something</td> <td>Something</td>
-                        </tr>
-                        <tr>
-                            <td>Something</td> <td>Something</td> <td>Something</td>
-                            <td>Something</td> <td>Something</td> <td>Something</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                #if(  $building  )
+                    <div class="building_$building.getType() building"></div>
+                #else
+                    <div class="building_empty"></div>
+                #end
             </div>
         </div>
+        <div class="row">
+            #foreach($position in [9,10,11,12])
+                <div class="col-md-3 building_position" id="position_$position">
+                    #set($building = false)
+                    #set($building = ${dto.getBuildings().get($position)})
 
-    </footer>
+                    #if(  $building  )
+                        <div class="building_$building.getType() building"></div>
+                    #else
+                        <div class="building_empty"></div>
+                    #end
+                </div>
+            #end
+        </div>
+    </div>
+</div>
+
+<script src="#springUrl('/js/jquery-2.1.4.min.js')"/>
+<script src="js/jquery.verticalCarousel.js"/>
+<script src="js/bootstrap.min.js"/>
+<script src="#springUrl('/js/jquery-ui.min.js')"/>
+
+<script type="text/javascript">
+
+    function init() {
+        $(".building").draggable({
+            appendTo: 'body',
+            helper: 'clone',
+            revert: 'invalid'
+
+        });
+        $(".placeholder").droppable({
+            accept: '.building',
+            drop: function (ev, ui) {
+                $(this).html("");
+                $(ui.draggable).appendTo(this);
+                console.log(ui);
+
+
+            }
+        });
+    }
+    ;
+
+    $(document).ready(function () {
+        $("#carouselId").verticalCarousel({nSlots: 4, speed: 800});
+        init();
+    });
+</script>
 
 </body>
 </html>

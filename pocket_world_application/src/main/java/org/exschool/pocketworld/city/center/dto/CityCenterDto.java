@@ -39,4 +39,8 @@ public class CityCenterDto {
     public void setResourceDto(ResourceDto resourceDto) {
         this.resourceDto = resourceDto;
     }
+
+    public ResourceDto getResourceDto() {
+        return resourceDto;
+    }
 }

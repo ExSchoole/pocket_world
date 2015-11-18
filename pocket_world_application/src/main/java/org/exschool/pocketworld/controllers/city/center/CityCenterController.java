@@ -1,4 +1,4 @@
-package org.exschool.pocketworld.city.center.controller;
+package org.exschool.pocketworld.controllers.city.center;
 
 import java.util.Map;
 
@@ -15,16 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
+@RequestMapping("/city/center")
 public class CityCenterController {
     private static final Logger logger = LoggerFactory.getLogger(CityCenterController.class);
     @Autowired
     private CityCenterService cityCenterService;
-
-    @RequestMapping(value = "/")
-    public String showIndexPage(Model model) {
-        logger.info(model.toString());
-        return "index";
-    }
 
     @RequestMapping(value = "/populate")
     public String populateDatabase(Model model) {
@@ -33,13 +28,13 @@ public class CityCenterController {
         return "init";
     }
 
-    @RequestMapping(value = "/city_center", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showPeriphery(
             @RequestParam Map<String, String> allRequestParams, Model model) {
         logger.info("Requested params:" + allRequestParams);
 
-        CityCenterDto CityCenterDTO = cityCenterService.cityCenterInfo();
-        model.addAttribute("DTO", CityCenterDTO);
+        CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
+        model.addAttribute("dto", cityCenterDto);
         logger.info("Out:" + model);
         return "city_center";
     }
