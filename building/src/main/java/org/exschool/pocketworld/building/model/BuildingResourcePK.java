@@ -3,13 +3,14 @@ package org.exschool.pocketworld.building.model;
 import org.exschool.pocketworld.resource.model.ResourceType;
 
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 
 /**
  * Created by skandy on 12.11.15.
  */
 @Embeddable
-public class BuildingResourcePK {
+public class BuildingResourcePK implements Serializable {
     private ResourceType resourceType;
     private Integer level;
 

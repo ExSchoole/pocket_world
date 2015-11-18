@@ -11,8 +11,7 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Building") 
-@SecondaryTable(name="Time",pkJoinColumns=@PrimaryKeyJoinColumn(name="id"))
+@Table(name="Building")
 public class Building {
 
 	@Id
