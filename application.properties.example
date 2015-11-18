@@ -1,3 +1,4 @@
+db.driver=org.postgresql.Driver
 db.url=jdbc\:postgresql\://localhost\:5432/testDB
 db.userName=postgres
 db.password=11111
