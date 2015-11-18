@@ -15,7 +15,7 @@ public class BuildingBuilder {
     public static BuildingBuilder builder() {
         return new BuildingBuilder();
     }
-    private BuildingBuilder(){};
+    private BuildingBuilder(){}
     public BuildingBuilder buildingId(Long buildingId) {
         this.buildingId=buildingId;
         return this;
