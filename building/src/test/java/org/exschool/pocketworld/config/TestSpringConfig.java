@@ -12,11 +12,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
+@EnableTransactionManagement
 @ComponentScan({"org.exschool.pocketworld.dao", "org.exschool.pocketworld.building.service" })
 public class TestSpringConfig {
 
@@ -32,7 +34,7 @@ public class TestSpringConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("");
+        sessionFactory.setPackagesToScan("org.exschool.pocketworld.building.model");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }

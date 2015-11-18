@@ -7,21 +7,26 @@ import javax.persistence.Entity;
 
 @Entity
 public class Time {
-	
-	@EmbeddedId
-	private TimePK timePK;
 
-	private int time;
+    @EmbeddedId
+    private TimeId timeId;
 
-	public int getTime() {
-		return time;
-	}
-	public void setTime(int time) {
-		this.time = time;
-	}
+    private int time;
 
-	
-	
-	
-	
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+
+    public TimeId getTimeId() {
+        return timeId;
+    }
+
+    public void setTimeId(TimeId timeId) {
+        this.timeId = timeId;
+    }
 }

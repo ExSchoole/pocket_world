@@ -8,15 +8,15 @@ import javax.persistence.Entity;
 public class BuildingResource {
 
 	@EmbeddedId
-	private BuildingResourcePK buildingResourcePK;
+	private BuildingResourceId buildingResourceId;
 	private int amount;
 
-	public BuildingResourcePK getBuildingResourcePK() {
-		return buildingResourcePK;
+	public BuildingResourceId getBuildingResourceId() {
+		return buildingResourceId;
 	}
 
-	public void setBuildingResourcePK(BuildingResourcePK buildingResourcePK) {
-		this.buildingResourcePK = buildingResourcePK;
+	public void setBuildingResourceId(BuildingResourceId buildingResourceId) {
+		this.buildingResourceId = buildingResourceId;
 	}
 
 	public int getAmount() {
