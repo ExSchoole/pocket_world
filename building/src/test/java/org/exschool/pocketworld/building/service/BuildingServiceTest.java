@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
 import static org.junit.Assert.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
 public class BuildingServiceTest {
@@ -23,23 +25,17 @@ public class BuildingServiceTest {
     Dao dao;
 
     @Before
-    public void before()
-    {
+    public void before() {
         bootstrap.fillDatabase();
 
     }
 
     @Test
-    public void testCreate()
-    {
-        Long biuldingId= 5L;
-        Building building = BuildingBuilder.builder().buildingId(biuldingId).build();
-        buildingService.save(building);
-        Building savedBuilding = buildingService.get(biuldingId);
+    public void testCreate() {
+        Building building = BuildingBuilder.builder().build();
+        Building savedBuilding = buildingService.save(building);
         assertNotNull(savedBuilding);
         assertNotNull(savedBuilding.getId());
-
-
     }
 
     @Test

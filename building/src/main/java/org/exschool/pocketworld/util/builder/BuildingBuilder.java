@@ -12,32 +12,41 @@ public class BuildingBuilder {
     private int level;
     private int position;
     private Long cityId;
+
     public static BuildingBuilder builder() {
         return new BuildingBuilder();
     }
-    private BuildingBuilder(){}
+
+    private BuildingBuilder() {
+    }
+
     public BuildingBuilder buildingId(Long buildingId) {
-        this.buildingId=buildingId;
+        this.buildingId = buildingId;
         return this;
 
     }
-    public  BuildingBuilder buildingType(BuildingType buildingType) {
-        this.buildingType=buildingType;
+
+    public BuildingBuilder buildingType(BuildingType buildingType) {
+        this.buildingType = buildingType;
         return this;
     }
-    public BuildingBuilder level( int level) {
+
+    public BuildingBuilder level(int level) {
         this.level = level;
         return this;
     }
-    public BuildingBuilder position( int position) {
+
+    public BuildingBuilder position(int position) {
         this.position = position;
         return this;
     }
+
     public BuildingBuilder cityId(Long cityId) {
         this.cityId = cityId;
         return this;
 
     }
+
     public Building build() {
         Building building = new Building();
         building.setId(buildingId);
@@ -47,8 +56,4 @@ public class BuildingBuilder {
         building.setCityId(cityId);
         return building;
     }
-
-
-
-
 }

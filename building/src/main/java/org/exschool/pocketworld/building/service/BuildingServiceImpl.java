@@ -5,6 +5,7 @@ import org.exschool.pocketworld.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Service("buildingService")
 @Transactional
-public class BuildingServiceImpl  implements BuildingService {
+public class BuildingServiceImpl implements BuildingService {
     /**
      * dao - data access object
      */
@@ -24,6 +25,7 @@ public class BuildingServiceImpl  implements BuildingService {
 
     /**
      * Gets all buildings from DB
+     *
      * @return list of buildings
      */
     @Override
@@ -33,6 +35,7 @@ public class BuildingServiceImpl  implements BuildingService {
 
     /**
      * Returns building by id
+     *
      * @param id
      * @return Building object
      */
@@ -43,16 +46,17 @@ public class BuildingServiceImpl  implements BuildingService {
 
     /**
      * Saves entity object to DB
+     *
      * @param entity
      */
     @Override
-    public void save(Building entity) {
-        dao.save(entity);
-
+    public Building save(Building entity) {
+        return dao.save(entity);
     }
 
     /**
      * Setter for dao
+     *
      * @param dao
      */
     public void setDao(Dao dao) {
