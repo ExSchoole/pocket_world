@@ -11,10 +11,19 @@ public class Player {
     @Column(name = "player_id")
     private Long playerId;
 
-    Long resourcesID;
+    private Long resourcesID;
 
     @Column(name = "login")
     private String login;
+
+    public Player() {
+        this.login = "";
+    }
+
+    public Player(Long resourcesID, String login) {
+        this.resourcesID = resourcesID;
+        this.login = login;
+    }
 
     public Long getPlayerId() {
         return playerId;
@@ -41,13 +50,6 @@ public class Player {
         this.resourcesID = resourcesID;
     }
 
-    public Player(Player player) {
-        this.login = player.getLogin();
-    }
-
-    public Player() {
-        this.login = "";
-    }
 
     @Override
     public boolean equals(Object o) {
