@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * Created by kgavrylchenko on 10/23/2015.
  */
-@Repository
+//@Repository
 public class Dao {
     private static final Logger LOG = LoggerFactory.getLogger(Dao.class);
 
