@@ -2,74 +2,67 @@ package org.exschool.pocketworld.building.service;
 
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.dao.Dao;
-import org.junit.Assert;
+import org.exschool.pocketworld.util.builder.BuildingBuilder;
 import org.junit.*;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.exschool.pocketworld.config.TestSpringConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-
-
-import java.util.Arrays;
-import java.util.LinkedList;
-
+import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
 public class BuildingServiceTest {
-    @InjectMocks
-    private BuildingServiceImpl service;
-    @Mock
-    private Dao dao;
-    private Building building1, building2;
+    @Autowired
+    BuildingService buildingService;
+    @Autowired
+    BuildingBootstrap bootstrap;
+    @Autowired
+    Dao dao;
 
     @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-        service = new BuildingServiceImpl();
-        dao = Mockito.mock(Dao.class);
-        service.setDao(dao);
-        building1 = new Building();
-        building1.setId(1L);
-
-        building1.setLevel(1);
-        building1.setPosition(1);
-        building1.setCityId(1L);
-        building1.setId(1L);
-    }
-
-    @Test
-    public void getTest() {
-        Mockito.when (dao.get(Building.class, 1L)).thenReturn(building1);
-        Assert.assertEquals(building1, service.get(1L));
-        Assert.assertNull(service.get(0L));
-    }
-
-    @Test
-    public void getAllTest() {
-        LinkedList<Building> allBuildings = new LinkedList<Building>(Arrays.asList(building1));
-        Mockito.when(dao.all(Building.class)).thenReturn(allBuildings);
-        Assert.assertEquals(allBuildings, service.allBuildings());
-        Mockito.when (dao.all(Building.class)).thenReturn(null);
-        Assert.assertNull(service.allBuildings());
-    }
-
-/*    @Test
-    public void saveTest()
+    public void before()
     {
-        *//*playerService.savePlayer(player);
-        assert playerService.getPlayerByLogin("player-login").equals(player);
-*//*
-        service.save(building1);
-        assert service.get(1L).equals(building1);
+        bootstrap.fillDatabase();
+
+    }
+
+    @Test
+    public void testCreate()
+    {
+        Long biuldingId= 5L;
+        Building building = BuildingBuilder.builder().buildingId(biuldingId).build();
+        buildingService.save(building);
+        Building savedBuilding = buildingService.get(biuldingId);
+        assertNotNull(savedBuilding);
+        assertNotNull(savedBuilding.getId());
 
 
-    }*/
+    }
 
+    @Test
+    public void testUpdate() {
+        Long existingBuildingId = 1L;
+        Building existingBuilding = buildingService.get(existingBuildingId);
+        assertNotNull(existingBuilding);
+        existingBuilding.setCityId(10L);
+        buildingService.save(existingBuilding);
+        Building savedBuilding = buildingService.get(existingBuildingId);
+        assertTrue(savedBuilding.equals(existingBuilding));
+
+    }
+
+    @Test(expected = Exception.class)
+    public void testSaveNull() {
+        buildingService.save(null);
+    }
+
+    @Test
+    public void testGetById() {
+        Building existingBuilding = buildingService.get(3L);
+        assertNotNull(existingBuilding);
+    }
 
 
 }

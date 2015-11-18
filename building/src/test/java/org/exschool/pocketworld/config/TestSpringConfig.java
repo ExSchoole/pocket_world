@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan({"org.exschool.pocketworld.dao", "org.exschool.pocketworld.player.service" })
+@ComponentScan({"org.exschool.pocketworld.dao", "org.exschool.pocketworld.building.service" })
 public class TestSpringConfig {
 
     @Bean
