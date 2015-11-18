@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("org.exschool.pocketworld.config")
-@PropertySource("classpath:application.properties")
+@PropertySource("file:${user.home}/application.properties")
 public class HibernateConfiguration {
 	
 	@Autowired
