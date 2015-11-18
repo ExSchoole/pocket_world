@@ -11,7 +11,6 @@
         <module name="ConstantName"/>
         <module name="EmptyBlock"/>
         <module name="LeftCurly"/>
-        <module name="NeedBraces"/>
         <module name="RightCurly"/>
         <module name="AvoidNestedBlocks"/>
 
@@ -20,22 +19,15 @@
         <module name="FinalClass"/>
         <module name="InterfaceIsType"/>
         <module name="HideUtilityClassConstructor"/>
-        <!--<module name="MutableException"/>-->
         <module name="ThrowsCount">
             <property name="max" value="2"/>
         </module>
-        <!--<module name="InnerTypeLast"/> cant find-->
 
-        <module name="AvoidStarImport"/>
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
-        <module name="NeedBraces"/>
         <module name="LineLength">
             <property name="max" value="120"/>
         </module>
-      
-
-
     </module>
     <module name="FileLength">
         <property name="max" value="700"/>
