@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.exschool.pocketworld.config.TestSpringConfig;
 import org.springframework.test.context.ContextConfiguration;
-
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 
 import java.util.Arrays;
@@ -35,6 +35,7 @@ public class BuildingServiceTest {
         service.setDao(dao);
         building1 = new Building();
         building1.setId(1L);
+
         building1.setLevel(1);
         building1.setPosition(1);
         building1.setCityId(1L);
