@@ -110,21 +110,21 @@
       
       <div class="container">
           <div class="row">
-              <h1>${DTO.NickName}'s city center</h1> 
+              <h1>${CityCenterDTO.NickName}'s city center</h1>
                <div class="col-md-4" id="res1">
                  <a href="#springUrl("/periphery")" class="btn btn-primary">Go to the periphery</a>
                </div>
                <div class="col-md-2" id="res1">
-                <h3>Gold: ${DTO.getResources().getGold()}</h3>
+                <h3>Gold: ${CityCenterDTO.getResources().getGold()}</h3>
               </div>
               <div class="col-md-2" id="res2">
-                <h3>Timber: ${DTO.getResources().getTimber()}</h3>
+                <h3>Timber: ${CityCenterDTO.getResources().getTimber()}</h3>
               </div>
               <div class="col-md-2" id="res3">
-                <h3>Clay: ${DTO.getResources().getClay()}</h3>
+                <h3>Clay: ${CityCenterDTO.getResources().getClay()}</h3>
               </div>
               <div class="col-md-2" id="res4">
-                <h3>Corn: ${DTO.getResources().getCorn()}</h3>
+                <h3>Corn: ${CityCenterDTO.getResources().getCorn()}</h3>
               </div>
           </div>
       </div>    	
@@ -155,29 +155,29 @@
                     <div class="col-md-7">
                         <div class = "row">
                             <div class="col-md-3 placeholder" id="placeholder_1">                          
-                             #if( ${DTO.getbuildings().containsKey(1)} == true ) 
-                                <div class=${DTO.getbuildings().get(1)}></div>
+                             #if( ${CityCenterDTO.getbuildings().containsKey(1)} == true )
+                                <div class=${CityCenterDTO.getbuildings().get(1)}></div>
                              #else                            
                                 <img src="images/museum39.png">
                              #end
                             </div>
                             <div class="col-md-3 placeholder">
-                              #if( ${DTO.getbuildings().containsKey(2)} == true ) 
-                                <div class=${DTO.getbuildings().get(2)}></div>
+                              #if( ${CityCenterDTO.getbuildings().containsKey(2)} == true )
+                                <div class=${CityCenterDTO.getbuildings().get(2)}></div>
                              #else                            
                                 <img src="images/museum39.png">
                              #end
                             </div>
                             <div class="col-md-3 placeholder">
-                              #if( ${DTO.getbuildings().containsKey(3)} == true ) 
-                                <div class=${DTO.getbuildings().get(3)}></div>
+                              #if( ${CityCenterDTO.getbuildings().containsKey(3)} == true )
+                                <div class=${CityCenterDTO.getbuildings().get(3)}></div>
                              #else                            
                                 <img src="images/museum39.png">
                              #end
                             </div>
                             <div class="col-md-3 placeholder">
-                              #if( ${DTO.getbuildings().containsKey(4)} == true ) 
-                                <div class=${DTO.getbuildings().get(4)}></div>
+                              #if( ${CityCenterDTO.getbuildings().containsKey(4)} == true )
+                                <div class=${CityCenterDTO.getbuildings().get(4)}></div>
                              #else                            
                                 <img src="images/museum39.png">
                              #end
@@ -185,8 +185,8 @@
                         </div>
                         <div class = "row">
                             <div class="col-md-3 placeholder">
-                             #if( ${DTO.getbuildings().containsKey(5)} == true ) 
-                                <div class=${DTO.getbuildings().get(5)}></div>
+                             #if( ${CityCenterDTO.getbuildings().containsKey(5)} == true )
+                                <div class=${CityCenterDTO.getbuildings().get(5)}></div>
                              #else                            
                                 <img src="images/museum39.png">
                              #end
@@ -195,8 +195,8 @@
 
                             </div>
                             <div class="col-md-3 placeholder">
-                              #if( ${DTO.getbuildings().containsKey(6)} == true ) 
-                                <div class=${DTO.getbuildings().get(6)}></div>
+                              #if( ${CityCenterDTO.getbuildings().containsKey(6)} == true )
+                                <div class=${CityCenterDTO.getbuildings().get(6)}></div>
                              #else                            
                                 <img src="images/museum39.png">
                              #end
@@ -204,8 +204,8 @@
                         </div>
                         <div class = "row">
                             <div class="col-md-3 placeholder">
-                             #if( ${DTO.getbuildings().containsKey(7)} == true ) 
-                                <div class=${DTO.getbuildings().get(7)}></div>
+                             #if( ${CityCenterDTO.getbuildings().containsKey(7)} == true )
+                                <div class=${CityCenterDTO.getbuildings().get(7)}></div>
                              #else                            
                                 <img src="images/museum39.png">
                              #end
@@ -214,8 +214,8 @@
 
                             </div>
                             <div class="col-md-3 placeholder">
-                             #if( ${DTO.getbuildings().containsKey(8)} == true ) 
-                                <div class=${DTO.getbuildings().get(8)}></div>
+                             #if( ${CityCenterDTO.getbuildings().containsKey(8)} == true )
+                                <div class=${CityCenterDTO.getbuildings().get(8)}></div>
                              #else                            
                                 <img src="images/museum39.png">
                              #end
@@ -223,29 +223,29 @@
                         </div>
                         <div class = "row">
                             <div class="col-md-3 placeholder">
-                              #if( ${DTO.getbuildings().containsKey(9)} == true ) 
-                                <div class=${DTO.getbuildings().get(9)}></div>
+                              #if( ${CityCenterDTO.getbuildings().containsKey(9)} == true )
+                                <div class=${CityCenterDTO.getbuildings().get(9)}></div>
                              #else                            
                                 <img src="images/museum39.png">
                              #end
                             </div>
                             <div class="col-md-3 placeholder">
-                              #if( ${DTO.getbuildings().containsKey(10)} == true ) 
-                                <div class=${DTO.getbuildings().get(10)}></div>
+                              #if( ${CityCenterDTO.getbuildings().containsKey(10)} == true )
+                                <div class=${CityCenterDTO.getbuildings().get(10)}></div>
                              #else                            
                                 <img src="images/museum39.png">
                              #end
                             </div>
                             <div class="col-md-3 placeholder">
-                              #if( ${DTO.getbuildings().containsKey(11)} == true ) 
-                                <div class=${DTO.getbuildings().get(11)}></div>
+                              #if( ${CityCenterDTO.getbuildings().containsKey(11)} == true )
+                                <div class=${CityCenterDTO.getbuildings().get(11)}></div>
                              #else                            
                                 <img src="images/museum39.png">
                              #end
                             </div>
                             <div class="col-md-3 placeholder">
-                              #if( ${DTO.getbuildings().containsKey(12)} == true ) 
-                                <div class=${DTO.getbuildings().get(12)}></div>
+                              #if( ${CityCenterDTO.getbuildings().containsKey(12)} == true )
+                                <div class=${CityCenterDTO.getbuildings().get(12)}></div>
                              #else                            
                                 <img src="images/museum39.png">
                              #end

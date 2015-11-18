@@ -1,27 +1,28 @@
 package org.exschool.pocketworld.building;
 
 public class Building {
-	
-	private int position;
-	private String type;
-	
-	public Building(int position, String TypeOfBuilding){
-		this.position = position;
-		type = TypeOfBuilding;
-	}
-	
-	public int getPosition() {
-		return position;
-	}
-	public void setPosition(int pos) {
-		this.position = pos;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	
 
+    private String type;
+    private int level;
+
+    public Building(String type, int level) {
+        this.type = type;
+        this.level = level;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 }

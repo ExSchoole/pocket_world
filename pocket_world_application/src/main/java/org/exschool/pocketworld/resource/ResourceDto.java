@@ -1,12 +1,12 @@
 package org.exschool.pocketworld.resource;
 
-public class Resource {
+public class ResourceDto {
 	  private int gold;
       private int timber;
       private int clay;
       private int corn;
       
-    public Resource(int gold, int timber, int clay, int corn){
+    public ResourceDto(int gold, int timber, int clay, int corn){
     	this.gold = gold;
     	this.timber = timber;
     	this.clay = clay;

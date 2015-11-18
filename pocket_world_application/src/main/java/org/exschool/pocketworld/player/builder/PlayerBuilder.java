@@ -1,4 +1,4 @@
-package org.exschool.pocketworld.util.builder;
+package org.exschool.pocketworld.player.builder;
 
 import org.exschool.pocketworld.player.model.Player;
 

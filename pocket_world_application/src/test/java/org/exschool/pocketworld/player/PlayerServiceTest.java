@@ -4,7 +4,7 @@ import org.exschool.pocketworld.config.TestSpringConfig;
 import org.exschool.pocketworld.dao.Dao;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.service.PlayerService;
-import org.exschool.pocketworld.util.builder.PlayerBuilder;
+import org.exschool.pocketworld.player.builder.PlayerBuilder;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
