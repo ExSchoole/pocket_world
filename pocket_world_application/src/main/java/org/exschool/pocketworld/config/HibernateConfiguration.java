@@ -54,10 +54,10 @@ public class HibernateConfiguration {
 	 
 	 private Properties additionalProperties() {
 	      Properties properties = new Properties();
-	      properties.setProperty("hibernate.hbm2ddl.auto", "create");
-	      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-	      properties.setProperty("hibernate.format_sql", "true");
-	      properties.setProperty("hibernate.show_sql", "true");
+	      properties.setProperty("hibernate.hbm2ddl.auto",env.getRequiredProperty("hibernate.hbm2ddl.auto"));
+	      properties.setProperty("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
+	      properties.setProperty("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
+	      properties.setProperty("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
 	      return properties;
 	 }
 	
