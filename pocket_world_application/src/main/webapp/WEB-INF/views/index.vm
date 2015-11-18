@@ -1,8 +1,0 @@
-<HTML>
-<BODY>
-<h1>#springMessage("index.page.hello")</h1>
-#springMessage("index.page.add_book") - /add.html <br>
-#springMessage("index.page.get_list_of_books") - /list.html <br>
-#springMessage("index.page.get_book_with_title") - /list.html?title=#springMessage("index.page.title_to_search") <br>
-</BODY>
-</HTML>
