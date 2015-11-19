@@ -6,7 +6,7 @@ import org.exschool.pocketworld.building.model.BuildingType;
 /**
  * Created by skandy on 18.11.15.
  */
-public class BuildingBuilder {
+public final class BuildingBuilder {
     private Long buildingId;
     private BuildingType buildingType;
     private int level;
