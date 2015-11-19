@@ -35,7 +35,6 @@ public class BuildingServiceTest {
         Building savedBuilding = buildingService.save(building);
         assertNotNull(savedBuilding);
         assertNotNull(savedBuilding.getId());
-        assertTrue(savedBuilding.equals(building));
         assertAllFieldsEquals(building, savedBuilding);
     }
 
