@@ -79,8 +79,13 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet.api}</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- Logging  http://www.codingpedia.org/ama/how-to-log-in-spring-with-slf4j-and-logback/ -->
-
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -110,7 +115,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>4.2.2.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
         
 
@@ -195,5 +200,8 @@
             <version>1.4</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
+
+
 </project>
