@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("org.exschool.pocketworld.config")
-@PropertySource("classpath:application.properties")
+@PropertySource("file:${user.home}/application.properties")
 public class HibernateConfiguration {
 	
 	@Autowired
@@ -37,7 +37,7 @@ public class HibernateConfiguration {
 	 @Bean
 	 public DriverManagerDataSource dataSource(){
 	      DriverManagerDataSource dataSource = new DriverManagerDataSource();
-	      dataSource.setDriverClassName("org.postgresql.Driver");
+	      dataSource.setDriverClassName(env.getRequiredProperty("db.driver"));
 	      dataSource.setUrl(env.getRequiredProperty("db.url"));
 	      dataSource.setUsername(env.getRequiredProperty("db.userName"));
 	      dataSource.setPassword(env.getRequiredProperty("db.password"));
@@ -54,10 +54,10 @@ public class HibernateConfiguration {
 	 
 	 private Properties additionalProperties() {
 	      Properties properties = new Properties();
-	      properties.setProperty("hibernate.hbm2ddl.auto", "create");
-	      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-	      properties.setProperty("hibernate.format_sql", "true");
-	      properties.setProperty("hibernate.show_sql", "true");
+	      properties.setProperty("hibernate.hbm2ddl.auto",env.getRequiredProperty("hibernate.hbm2ddl.auto"));
+	      properties.setProperty("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
+	      properties.setProperty("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
+	      properties.setProperty("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
 	      return properties;
 	 }
 }

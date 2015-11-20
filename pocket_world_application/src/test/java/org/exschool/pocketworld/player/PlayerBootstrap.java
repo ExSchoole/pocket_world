@@ -2,7 +2,7 @@ package org.exschool.pocketworld.player;
 
 import org.exschool.pocketworld.dao.Dao;
 import org.exschool.pocketworld.player.model.Player;
-import org.exschool.pocketworld.util.builder.PlayerBuilder;
+import org.exschool.pocketworld.player.builder.PlayerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

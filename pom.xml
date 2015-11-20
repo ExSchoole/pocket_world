@@ -81,8 +81,13 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet.api}</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- Logging  http://www.codingpedia.org/ama/how-to-log-in-spring-with-slf4j-and-logback/ -->
-
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -197,11 +202,7 @@
             <version>1.4</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.190</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
+
+
 </project>
