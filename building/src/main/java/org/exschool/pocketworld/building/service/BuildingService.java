@@ -10,7 +10,7 @@ import java.util.List;
 public interface BuildingService {
     List<Building> allBuildings();
     Building get (long id);
-    void save(Building entity);
+    Building save(Building entity);
 
 }
 

@@ -2,73 +2,74 @@ package org.exschool.pocketworld.building.service;
 
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.dao.Dao;
-import org.junit.Assert;
+import org.exschool.pocketworld.util.builder.BuildingBuilder;
 import org.junit.*;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.exschool.pocketworld.config.TestSpringConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import static org.junit.Assert.*;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
 public class BuildingServiceTest {
-    @InjectMocks
-    private BuildingServiceImpl service;
-    @Mock
-    private Dao dao;
-    private Building building1, building2;
+    @Autowired
+    BuildingService buildingService;
+    @Autowired
+    BuildingBootstrap bootstrap;
+    @Autowired
+    Dao dao;
 
     @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-        service = new BuildingServiceImpl();
-        dao = Mockito.mock(Dao.class);
-        service.setDao(dao);
-        building1 = new Building();
-        building1.setId(1L);
+    public void before() {
+        bootstrap.fillDatabase();
 
-        building1.setLevel(1);
-        building1.setPosition(1);
-        building1.setCityId(1L);
-        building1.setId(1L);
     }
 
     @Test
-    public void getTest() {
-        Mockito.when (dao.get(Building.class, 1L)).thenReturn(building1);
-        Assert.assertEquals(building1, service.get(1L));
-        Assert.assertNull(service.get(0L));
+    public void testCreate() {
+        Building building = BuildingBuilder.builder().build();
+        Building savedBuilding = buildingService.save(building);
+        assertNotNull(savedBuilding);
+        assertNotNull(savedBuilding.getId());
+        assertAllFieldsEquals(building, savedBuilding);
     }
 
     @Test
-    public void getAllTest() {
-        LinkedList<Building> allBuildings = new LinkedList<Building>(Arrays.asList(building1));
-        Mockito.when(dao.all(Building.class)).thenReturn(allBuildings);
-        Assert.assertEquals(allBuildings, service.allBuildings());
-        Mockito.when (dao.all(Building.class)).thenReturn(null);
-        Assert.assertNull(service.allBuildings());
+    public void testUpdate() {
+        Long existingBuildingId = 1L;
+        Building existingBuilding = buildingService.get(existingBuildingId);
+        assertNotNull(existingBuilding);
+        existingBuilding.setCityId(10L);
+        buildingService.save(existingBuilding);
+        Building savedBuilding = buildingService.get(existingBuildingId);
+        assertAllFieldsEquals(existingBuilding,savedBuilding);
+
     }
 
-/*    @Test
-    public void saveTest()
+    @Test(expected = Exception.class)
+    public void testSaveNull() {
+        buildingService.save(null);
+    }
+
+    @Test
+    public void testGetById() {
+        Building existingBuilding = buildingService.get(3L);
+        assertNotNull(existingBuilding);
+    }
+
+    private void assertAllFieldsEquals(Building building1, Building building2)
     {
-        *//*playerService.savePlayer(player);
-        assert playerService.getPlayerByLogin("player-login").equals(player);
-*//*
-        service.save(building1);
-        assert service.get(1L).equals(building1);
+        assertEquals(building2.getId(), building1.getId());
+        assertEquals(building2.getBuildingType(), building1.getBuildingType());
+        assertEquals(building2.getLevel(), building1.getLevel());
+        assertEquals(building2.getPosition(), building1.getPosition());
+        assertEquals(building2.getCityId(), building1.getCityId());
 
-
-    }*/
+    }
 
 
 

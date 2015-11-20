@@ -59,11 +59,12 @@ public class Dao {
      * Persist the given transient instance.
      *
      * @param entity a transient instance of a persistent class
-     * @return the generated identifier
+     * @return saved entity
      */
-    public <T> void save(T entity) {
+    public <T> T save(T entity) {
         LOG.info("going to save entity - {}", entity);
         currentSession().saveOrUpdate(entity);
+        return entity;
     }
 
     /**

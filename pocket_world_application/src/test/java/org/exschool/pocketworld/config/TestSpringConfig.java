@@ -34,7 +34,7 @@ public class TestSpringConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("");
+        sessionFactory.setPackagesToScan("org.exschool.pocketworld.player.model");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
