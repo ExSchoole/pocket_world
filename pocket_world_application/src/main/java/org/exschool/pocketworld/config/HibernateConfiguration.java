@@ -60,6 +60,4 @@ public class HibernateConfiguration {
 	      properties.setProperty("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
 	      return properties;
 	 }
-	
-	
 }
