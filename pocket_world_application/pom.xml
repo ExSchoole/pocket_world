@@ -9,6 +9,7 @@
     <artifactId>pocket_world_application</artifactId>
     <packaging>war</packaging>
     <build>
+        <finalName>pocket_world</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
