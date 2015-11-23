@@ -1,12 +1,12 @@
 <div class="col-md-2" id="res1">
-    <h3>Gold: ${dto.getResourceDto().getGold()}</h3>
+    <h3>#springMessage('resources.gold'): ${dto.getResourceDto().getGold()}</h3>
 </div>
 <div class="col-md-2" id="res2">
-    <h3>Timber: ${dto.getResourceDto().getTimber()}</h3>
+    <h3>#springMessage('resources.timber'): ${dto.getResourceDto().getTimber()}</h3>
 </div>
 <div class="col-md-2" id="res3">
-    <h3>Clay: ${dto.getResourceDto().getClay()}</h3>
+    <h3>#springMessage('resources.clay'): ${dto.getResourceDto().getClay()}</h3>
 </div>
 <div class="col-md-2" id="res4">
-    <h3>Corn: ${dto.getResourceDto().getCorn()}</h3>
+    <h3>#springMessage('resources.corn'): ${dto.getResourceDto().getCorn()}</h3>
 </div>

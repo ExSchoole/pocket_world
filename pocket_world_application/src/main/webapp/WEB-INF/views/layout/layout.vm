@@ -2,7 +2,7 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>City center</title>
+    <title></title>
     <link href="#springUrl('/css/bootstrap/bootstrap.css')" rel="stylesheet">
     <link href="#springUrl('/css/font-awesome.css')" rel="stylesheet">
     <link href="#springUrl('/css/carousel-style.css')" rel="stylesheet">
@@ -14,7 +14,6 @@
 <div class="container">
     #parse ("resources.vm")
 </div>
-<!-- City center map -->
 <div class="row">
     $screen_content
 </div>
