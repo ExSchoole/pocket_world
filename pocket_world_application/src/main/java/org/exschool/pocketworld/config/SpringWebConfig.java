@@ -14,10 +14,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.view.velocity.VelocityConfig;
-import org.springframework.web.servlet.view.velocity.VelocityConfigurer;
-import org.springframework.web.servlet.view.velocity.VelocityToolboxView;
-import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
+import org.springframework.web.servlet.view.velocity.*;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -51,9 +48,11 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public VelocityViewResolver viewResolver() {
-        VelocityViewResolver viewResolver = new VelocityViewResolver();
-        viewResolver.setViewClass(VelocityToolboxView.class);
+        VelocityLayoutViewResolver viewResolver = new VelocityLayoutViewResolver();
+        viewResolver.setViewClass(VelocityLayoutView.class);
         viewResolver.setSuffix(".vm");
+        viewResolver.setLayoutUrl("layout/layout.vm");
+        viewResolver.setLayoutKey("layout");
         viewResolver.setContentType("text/html; charset=utf-8");
         return viewResolver;
     }
