@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "Resource_building")
 public class ResourceBuilding {
 
-    int position;
+    private int position;
     @Id
     @GeneratedValue
     private Long id;
