@@ -1,7 +1,7 @@
-package org.exschool.pocketworld.building;
+package org.exschool.pocketworld.resource.building.service;
 
-import org.exschool.pocketworld.building.model.ResourceBuilding;
-import org.exschool.pocketworld.building.model.ResourceBuildingType;
+import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
+import org.exschool.pocketworld.resource.building.model.ResourceBuildingType;
 import org.exschool.pocketworld.dao.Dao;
 import org.exschool.pocketworld.util.builder.ResourceBuildingBuilder;
 import org.springframework.beans.factory.annotation.Autowired;

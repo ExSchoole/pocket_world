@@ -1,4 +1,4 @@
-package org.exschool.pocketworld.building.model;
+package org.exschool.pocketworld.resource.building.model;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;

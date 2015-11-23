@@ -1,6 +1,6 @@
-package org.exschool.pocketworld.building.service;
+package org.exschool.pocketworld.resource.building.service;
 
-import org.exschool.pocketworld.building.model.ResourceBuilding;
+import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
 
 import java.util.List;
 

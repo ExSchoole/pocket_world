@@ -1,6 +1,6 @@
-package org.exschool.pocketworld.building.service;
+package org.exschool.pocketworld.resource.building.service;
 
-import org.exschool.pocketworld.building.model.ResourceBuilding;
+import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
 import org.exschool.pocketworld.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

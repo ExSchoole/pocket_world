@@ -1,8 +1,8 @@
 package org.exschool.pocketworld.util.builder;
 
 
-import org.exschool.pocketworld.building.model.ResourceBuilding;
-import org.exschool.pocketworld.building.model.ResourceBuildingType;
+import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
+import org.exschool.pocketworld.resource.building.model.ResourceBuildingType;
 
 /**
  * Created by manoylo on 18.11.15.
