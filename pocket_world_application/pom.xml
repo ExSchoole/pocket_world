@@ -9,6 +9,7 @@
     <artifactId>pocket_world_application</artifactId>
     <packaging>war</packaging>
     <build>
+        <finalName>pocket_world</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -38,11 +39,12 @@
             </plugin>
         </plugins>
     </build>
+
     <dependencies>
         <dependency>
             <groupId>org.exschool</groupId>
             <artifactId>common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${common.version}</version>
         </dependency>
     </dependencies>
 
