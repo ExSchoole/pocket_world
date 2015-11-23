@@ -12,8 +12,8 @@
     <modules>
         <module>common</module>
         <module>building</module>
+        <module>resource_buildings</module>
         <module>pocket_world_application</module>
-
   </modules>
 
     <build>
