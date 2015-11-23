@@ -1,7 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.exschool</groupId>
@@ -11,40 +9,41 @@
     
 
     <modules>
-    	<module>common</module>
+        <module>common</module>
         <module>pocket_world_application</module>
-    </modules>
+
+  </modules>
 
     <build>
-	        <plugins>
-	            <plugin>
-	                <artifactId>maven-compiler-plugin</artifactId>
-	                <version>3.3</version>
-	                <configuration>
-	                    <source>1.7</source>
-	                    <target>1.7</target>
-	                </configuration>
-	            </plugin>
-	            <plugin>
-	                <artifactId>maven-war-plugin</artifactId>
-	                <version>2.4</version>
-	                <configuration>
-	                    <failOnMissingWebXml>false</failOnMissingWebXml>
-	                </configuration>
-	            </plugin>
-	            <plugin>
-	                <groupId>org.apache.tomcat.maven</groupId>
-	                <artifactId>tomcat7-maven-plugin</artifactId>
-	                <version>2.2</version>
-	                <configuration>
-	                    <path>/pocket-world</path>
-	                    <port>8080</port>
-	                    <contextReloadable>true</contextReloadable>
-	                </configuration>
-	                <executions></executions>
-	            </plugin>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>2.2</version>
+                    <configuration>
+                        <path>/pocket-world</path>
+                        <port>8080</port>
+                        <contextReloadable>true</contextReloadable>
+                    </configuration>
+                    <executions/>
+                </plugin>
                      <plugin>
-  	               <groupId>org.apache.maven.plugins</groupId>
+                   <groupId>org.apache.maven.plugins</groupId>
                        <artifactId>maven-checkstyle-plugin</artifactId>
                        <version>2.17</version>
                          <configuration>
@@ -59,14 +58,14 @@
                             </execution>
                          </executions>
                        </plugin>
-	            </plugins>
+                </plugins>
     </build>
 
      <properties>
         <spring.version>4.2.1.RELEASE</spring.version>
         <servlet.api.version>3.1.0</servlet.api.version>
         <jstl.version>1.2</jstl.version>
-        <hibernate.version>4.3.11.Final</hibernate.version>
+        <hibernate.version>5.0.3.Final</hibernate.version>
         <postgresql.jdbc.version>9.4-1204-jdbc42</postgresql.jdbc.version>
         <jta.version>1.1</jta.version>
         <velocity.version>1.7</velocity.version>
@@ -75,7 +74,7 @@
         <jcloverslf4j.version>1.7.12</jcloverslf4j.version>
         <mockito.version>1.10.19</mockito.version>
         <junit.version>4.12</junit.version>
-
+        <servlet.api>2.5</servlet.api>
     </properties>
 
     <dependencies>
@@ -107,6 +106,13 @@
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.2.2.RELEASE</version>
+        </dependency>
+        
 
         <!-- Spring -->
 
@@ -176,6 +182,18 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-tools</artifactId>
             <version>${velocity.tools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.190</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
