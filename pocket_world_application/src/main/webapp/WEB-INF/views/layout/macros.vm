@@ -1,13 +1,19 @@
 #macro(head $title)
-    <title>$title</title>
-    <link href="#springUrl('/css/bootstrap/bootstrap.css')" rel="stylesheet">
-    <link href="#springUrl('/css/font-awesome.css')" rel="stylesheet">
-    <link href="#springUrl('/css/carousel-style.css')" rel="stylesheet">
-    <link href="#springUrl('/css/buildings.css')" rel="stylesheet">
+    <head>
+        <title>$title</title>
+        <link href="#springUrl('/css/bootstrap/bootstrap.css')" rel="stylesheet">
+        <link href="#springUrl('/css/font-awesome.css')" rel="stylesheet">
+        <link href="#springUrl('/css/carousel-style.css')" rel="stylesheet">
+        <link href="#springUrl('/css/buildings.css')" rel="stylesheet">
+    </head>
+
 #end
 
 #macro(body)
+    <body>
     <div class="container">
-        $!content
+        $!bodyContent
     </div>
+    </body>
+
 #end
