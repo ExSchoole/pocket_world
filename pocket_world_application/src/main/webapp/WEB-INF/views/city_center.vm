@@ -1,13 +1,4 @@
 #parse("layout/macros.vm")
-#macro( showbuilding $position )
-    #set($building = false)
-    #set($building = ${dto.getBuildings().get($position)})
-    #if(  $building  )
-    <div class="building_$building.getType() building_position building"></div>
-    #else
-    <div class="building_position building_empty"></div>
-    #end
-#end
 #head("City Center")
 
 #@body()
@@ -17,7 +8,7 @@
     <div class="row">
         #foreach($position in [1,2,3,4])
             <div class="col-md-3">
-                #showbuilding( $position )
+                #showbuilding( $dto.getBuildings(), $position )
             </div>
         #end
 
@@ -26,7 +17,7 @@
     <div class="row">
         <div class="col-md-3">
             #foreach($position in [5,6])
-                   #showbuilding( $position )
+                   #showbuilding($dto.getBuildings(), $position )
                #end
         </div>
 
@@ -36,7 +27,7 @@
 
         <div class="col-md-3">
             #foreach($position in [7,8])
-                 #showbuilding( $position )
+                 #showbuilding($dto.getBuildings(), $position )
                #end
         </div>
 
@@ -45,7 +36,7 @@
     <div class="row">
         #foreach($position in [9,10,11,12])
             <div class="col-md-3">
-                #showbuilding( $position )
+                #showbuilding($dto.getBuildings(), $position )
             </div>
         #end
     </div>
@@ -71,8 +62,7 @@
 
             }
         });
-    }
-    ;
+    };
 
     $(document).ready(function () {
         $("#carouselId").verticalCarousel({nSlots: 4, speed: 800});

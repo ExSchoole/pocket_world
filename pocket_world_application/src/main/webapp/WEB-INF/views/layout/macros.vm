@@ -15,5 +15,14 @@
         $!bodyContent
     </div>
     </body>
+#end
 
+#macro( showbuilding $buildings $position )
+    #set($building = false)
+    #set($building = ${buildings.get($position)})
+    #if(  $building  )
+        <div class="building_$building.getType() building_position building"></div>
+    #else
+        <div class="building_position building_empty"></div>
+    #end
 #end

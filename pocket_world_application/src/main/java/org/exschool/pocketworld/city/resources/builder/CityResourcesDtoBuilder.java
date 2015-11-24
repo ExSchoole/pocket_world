@@ -25,7 +25,7 @@ public final class CityResourcesDtoBuilder {
         return this;
     }
 
-    public CityResourcesDtoBuilder buildings(Map<Integer, ResourceBuilding> resourceBuildings) {
+    public CityResourcesDtoBuilder resourceBuildings(Map<Integer, ResourceBuilding> resourceBuildings) {
         this.resourceBuildings = resourceBuildings;
         return this;
     }
@@ -39,7 +39,7 @@ public final class CityResourcesDtoBuilder {
         CityResourcesDto cityResourcesDto = new CityResourcesDto();
         cityResourcesDto.setNickName(nickname);
         cityResourcesDto.setResourceDto(resourceDto);
-        cityResourcesDto.setBuildings(resourceBuildings);
+        cityResourcesDto.setResourceBuildings(resourceBuildings);
         return cityResourcesDto;
     }
 }

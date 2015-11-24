@@ -28,12 +28,12 @@ public class CityResourcesDto {
         this.nickName = nickName;
     }
 
-    public Map<Integer, ResourceBuilding> getBuildings() {
+    public Map<Integer, ResourceBuilding> getResourceBuildings() {
         return resourceBuildings;
     }
 
-    public void setBuildings(Map<Integer, ResourceBuilding> buildings) {
-        this.resourceBuildings = buildings;
+    public void setResourceBuildings(Map<Integer, ResourceBuilding> resourceBuildings) {
+        this.resourceBuildings = resourceBuildings;
     }
 
     public void setResourceDto(ResourceDto resourceDto) {
