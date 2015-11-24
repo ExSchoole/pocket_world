@@ -12,8 +12,9 @@
     <modules>
         <module>common</module>
         <module>building</module>
+        <module>resource_buildings</module>
         <module>pocket_world_application</module>
-    </modules>
+  </modules>
 
     <build>
         <plugins>
@@ -113,6 +114,13 @@
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.2.2.RELEASE</version>
+        </dependency>
+        
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -189,6 +197,18 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-tools</artifactId>
             <version>${velocity.tools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.190</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
