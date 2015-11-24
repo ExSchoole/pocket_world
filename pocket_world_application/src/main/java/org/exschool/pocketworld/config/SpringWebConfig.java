@@ -14,10 +14,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.view.velocity.VelocityConfig;
-import org.springframework.web.servlet.view.velocity.VelocityConfigurer;
-import org.springframework.web.servlet.view.velocity.VelocityToolboxView;
-import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
+import org.springframework.web.servlet.view.velocity.*;
 
 import java.util.HashMap;
 import java.util.Locale;
