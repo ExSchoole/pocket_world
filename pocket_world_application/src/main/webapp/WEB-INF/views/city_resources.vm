@@ -3,9 +3,9 @@
     #set($building = false)
     #set($building = ${dto.getBuildings().get($position)})
     #if(  $building  )
-    <div class="building_$building.getType() building_position building"></div>
+    <div class="res_building_$building.getType() res_building_position res_building"></div>
     #else
-    <div class="building_position building_empty"></div>
+    <div class="res_building_position res_building_empty"></div>
     #end
 #end
 #head("City Resources")
@@ -31,7 +31,7 @@
         </div>
 
         <div class="col-md-6">
-            <div class="central_image building_position"></div>
+            <div class="central_image res_building_position"></div>
         </div>
 
         <div class="col-md-3">

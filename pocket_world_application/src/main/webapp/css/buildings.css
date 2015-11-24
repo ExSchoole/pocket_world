@@ -21,6 +21,7 @@ div.building_null {
 }
 
 div.building, div.building_empty {
+    background-repeat: no-repeat;
     height: 154px;
     width: 171px;
 }
@@ -32,6 +33,45 @@ div.central_image {
 }
 
 div.building_position {
+    border-style: outset;
+    border-color: orange;
+}
+
+div.res_building_gold {
+    background-image: url(../images/copper_mine.png);
+}
+
+div.res_building_timber {
+    background-image: url(../images/woodcutter.png);
+}
+
+div.res_building_clay {
+    background-image: url(../images/mason.png);
+}
+
+div.res_building_corn {
+    background-image: url(../images/farm.png);
+}
+
+div.res_building_null {
+    background-image: url(../images/farm_land.png);
+    height: 310px;
+    width: 310px;
+}
+
+div.res_building, div.res_building_empty {
+    background-repeat: no-repeat;
+    height: 154px;
+    width: 171px;
+}
+
+div.res_central_image {
+    background-image: url(../images/central_image.jpg);
+    height: 308px;
+    width:  335px;
+}
+
+div.res_building_position {
     border-style: outset;
     border-color: orange;
 }

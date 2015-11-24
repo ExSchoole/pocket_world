@@ -26,10 +26,10 @@ public class CityResourcesServiceImpl implements CityResourcesService {
 
     private Map<Integer, Building> buildings() {
         Map<Integer, Building> buildings = new HashMap<>();
-        buildings.put(1, new Building("mall", 1));
-        buildings.put(3, new Building("factory", 2));
-        buildings.put(6, new Building("market", 3));
-        buildings.put(9, new Building("shop", 4));
+        buildings.put(2, new Building("clay", 1));
+        buildings.put(4, new Building("gold", 2));
+        buildings.put(8, new Building("timber", 3));
+        buildings.put(12, new Building("corn", 4));
         return buildings;
     }
 }
