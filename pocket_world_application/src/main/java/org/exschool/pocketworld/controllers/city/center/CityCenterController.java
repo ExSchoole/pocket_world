@@ -1,7 +1,8 @@
 package org.exschool.pocketworld.controllers.city.center;
 
-import java.util.Map;
+import java.util.*;
 
+import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
 import org.slf4j.Logger;
@@ -29,12 +30,13 @@ public class CityCenterController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String showPeriphery(
+    public String showCityCenter(
             @RequestParam Map<String, String> allRequestParams, Model model) {
     	LOGGEG.info("Requested params:" + allRequestParams);
 
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
         model.addAttribute("dto", cityCenterDto);
+        model.addAttribute("allBuildingTypes", Arrays.asList(BuildingType.values()));
         LOGGEG.info("Out:" + model);
         return "city_center";
     }
