@@ -1,3 +1,4 @@
+#parse("layout/macros.vm")
 #macro( showbuilding $position )
     #set($building = false)
     #set($building = ${dto.getBuildings().get($position)})
@@ -7,6 +8,9 @@
     <div class="building_position building_empty"></div>
     #end
 #end
+#head("City Center")
+
+#@body()
 <div class="col-md-7">
     <h1>${dto.NickName}'s city center</h1>
 
@@ -75,3 +79,5 @@
         init();
     });
 </script>
+#end
+
