@@ -48,11 +48,9 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public VelocityViewResolver viewResolver() {
-        VelocityLayoutViewResolver viewResolver = new VelocityLayoutViewResolver();
-        viewResolver.setViewClass(VelocityLayoutView.class);
+        VelocityViewResolver viewResolver = new VelocityViewResolver();
+        viewResolver.setViewClass(VelocityToolboxView.class);
         viewResolver.setSuffix(".vm");
-        viewResolver.setLayoutUrl("layout/layout.vm");
-        viewResolver.setLayoutKey("layout");
         viewResolver.setContentType("text/html; charset=utf-8");
         return viewResolver;
     }
