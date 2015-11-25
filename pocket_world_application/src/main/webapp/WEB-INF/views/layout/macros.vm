@@ -17,6 +17,12 @@
     </body>
 #end
 
+#macro( fillcarousel $buildings)
+    #foreach($building in $buildings)
+         <li id="$building"><div class="building_$building building"/></li>
+    #end
+#end
+
 #macro( showbuilding $buildings $position )
     #set($building = false)
     #set($building = ${buildings.get($position)})

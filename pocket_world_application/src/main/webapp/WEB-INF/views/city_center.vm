@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 #parse("layout/macros.vm")
 #head("City Center")
 
@@ -11,7 +13,6 @@
                 #showbuilding( $dto.getBuildings(), $position )
             </div>
         #end
-
     </div>
 
     <div class="row">
@@ -30,7 +31,6 @@
                  #showbuilding($dto.getBuildings(), $position )
                #end
         </div>
-
     </div>
 
     <div class="row">
@@ -40,23 +40,20 @@
             </div>
         #end
     </div>
-
-    <div class="span3">
-        <div id="carouselId" class="vertical-carousel">
-            <a href="#" class="scru">Scroll Up</a>
-            <div class="vertical-carousel-container">
-                <ul class="vertical-carousel-list" id ="vertical-carousel-list_id">
-                    <li id="house"><img src="images/house34.png"   class="thumbnail building" alt="House"  /></li>
-                    <li id="building"><img src="images/building78.png" class="thumbnail building" alt="Building" /></li>
-                    <li id="factory"><img src="images/factory6.png" class="thumbnail building" alt="Factory" /></li>
-                    <li id="farm"><img src="images/farm.png" class="thumbnail building" alt="Farm" /></li>
-                </ul>
-            </div>
-            <a href="#" class="scrd">Scroll Down</a>
-        </div>
-    </div>
-
 </div>
+
+<div class="col-md-5">
+            <div id="carouselId" class="vertical-carousel">
+                <a href="#" class="scru">#springMessage('scroll.up')</a>
+                <div class="vertical-carousel-container">
+                    <ul class="vertical-carousel-list" id ="vertical-carousel-list_id">
+                        #fillcarousel($buildingTypes)
+                    </ul>
+                </div>
+                <a href="#" class="scrd">#springMessage('scroll.down')</a>
+            </div>
+</div>
+
 <script type="text/javascript" src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/jquery-ui.min.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/bootstrap.min.js')"></script>
@@ -82,9 +79,9 @@
     };
 
     $(document).ready(function () {
-        $("#carouselId").verticalCarousel({nSlots: 4, speed: 800});
+        $("#carouselId").verticalCarousel({nSlots: 3, speed: 900});
         init();
     });
 </script>
 #end
-
+</html>

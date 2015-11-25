@@ -9,6 +9,6 @@ public enum BuildingType {
 	PLANT,
 	FARM,
 	BARN,
-	SCHOOL
-
+	SCHOOL,
+	MALL,
 }

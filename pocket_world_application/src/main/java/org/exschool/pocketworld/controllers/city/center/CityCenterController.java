@@ -36,12 +36,20 @@ public class CityCenterController {
 
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
         model.addAttribute("dto", cityCenterDto);
-        model.addAttribute("allBuildingTypes", Arrays.asList(BuildingType.values()));
+        model.addAttribute("buildingTypes", getListOfBuildings(BuildingType.values()));
         LOGGEG.info("Out:" + model);
         return "city_center";
     }
 
     public void setCityCenterService(CityCenterService cityCenterService) {
         this.cityCenterService = cityCenterService;
+    }
+
+    private List<String> getListOfBuildings(BuildingType[] buildings){
+        List<String> result = new ArrayList<>();
+        for(BuildingType value: buildings){
+            result.add(value.toString().toLowerCase());
+        }
+        return result;
     }
 }
