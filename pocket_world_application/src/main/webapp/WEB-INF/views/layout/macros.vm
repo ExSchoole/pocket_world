@@ -1,0 +1,28 @@
+#macro(head $title)
+    <head>
+        <title>$title</title>
+        <link href="#springUrl('/css/bootstrap/bootstrap.css')" rel="stylesheet">
+        <link href="#springUrl('/css/font-awesome.css')" rel="stylesheet">
+        <link href="#springUrl('/css/carousel-style.css')" rel="stylesheet">
+        <link href="#springUrl('/css/buildings.css')" rel="stylesheet">
+    </head>
+
+#end
+
+#macro(body)
+    <body>
+    <div class="container">
+        $!bodyContent
+    </div>
+    </body>
+#end
+
+#macro( showbuilding $buildings $position )
+    #set($building = false)
+    #set($building = ${buildings.get($position)})
+    #if(  $building  )
+        <div class="building_$building.getType() building_position building"></div>
+    #else
+        <div class="building_position building_empty"></div>
+    #end
+#end
