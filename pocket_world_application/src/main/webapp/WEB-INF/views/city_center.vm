@@ -1,116 +1,61 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <title>City center</title>
+#parse("layout/macros.vm")
+#head("City Center")
 
-    <link href="#springUrl('/css/bootstrap/bootstrap.css')" rel="stylesheet">
-    <link href="#springUrl('/css/font-awesome.css')" rel="stylesheet">
-    <link href="#springUrl('/css/carousel-style.css')" rel="stylesheet">
-    <link href="#springUrl('/css/buildings.css')" rel="stylesheet">
+#@body()
+<div class="col-md-7">
+    <h1>${dto.NickName}'s city center</h1>
 
-
-
-    #macro( showbuilding $position )
-     #set($building = false)
-     #set($building = ${dto.getBuildings().get($position)})
-          #if(  $building  )
-              <div class="building_$building.getType() building_position building"></div>
-          #else
-              <div class="building_position building_empty"></div>
-          #end
-    #end
-
-</head>
-
-<body class="container">
-
-    #if ($errorMsg)
-    <div class="container">
-        <div class="alert alert-danger" role="alert">$errorMsg</div>
-    </div>
-    #end
-
-<div class="container">
     <div class="row">
-        <div class="col-md-4" id="res1">
-            <a href="#springUrl("/periphery")" class="btn btn-primary">Go to the periphery</a>
-        </div>
-    </div>
-    <div class="row">
-        <h1>${dto.NickName}'s city center</h1>
-        <div class="col-md-2" id="res1">
-            <h3>Gold: ${dto.getResourceDto().getGold()}</h3>
-        </div>
-        <div class="col-md-2" id="res2">
-            <h3>Timber: ${dto.getResourceDto().getTimber()}</h3>
-        </div>
-        <div class="col-md-2" id="res3">
-            <h3>Clay: ${dto.getResourceDto().getClay()}</h3>
-        </div>
-        <div class="col-md-2" id="res4">
-            <h3>Corn: ${dto.getResourceDto().getCorn()}</h3>
-        </div>
-    </div>
-</div>
-<p/>
-<!-- City center map -->
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span9">
-                <div class="col-md-7">
-                  <div class="row">
-                    #foreach($position in [1,2,3,4])
-                      <div class="col-md-3">
-                        #showbuilding( $position )
-                      </div>
-                    #end
-
-                  </div>
-
-                  <div class="row">
-                        <div class="col-md-3">
-                           #foreach($position in [5,6])
-                               #showbuilding( $position )
-                           #end
-                        </div>
-
-                        <div class="col-md-6">
-                             <div class="central_image building_position"></div>
-                        </div>
-
-                        <div class="col-md-3">
-                           #foreach($position in [7,8])
-                             #showbuilding( $position )
-                           #end
-                        </div>
-
-                  </div>
-
-                  <div class="row">
-                    #foreach($position in [9,10,11,12])
-                      <div class="col-md-3">
-                        #showbuilding( $position )
-                      </div>
-                    #end
-                  </div>
-                </div>
-        </div>
-        <div class="span3">
-            <div id="carouselId" class="vertical-carousel">
-                <a href="#" class="scru">Scroll Up</a>
-                <div class="vertical-carousel-container">
-                    <ul class="vertical-carousel-list" id ="vertical-carousel-list_id">
-                        <li id="house"><img src="images/house34.png"   class="thumbnail building" alt="House"  /></li>
-                        <li id="building"><img src="images/building78.png" class="thumbnail building" alt="Building" /></li>
-                        <li id="factory"><img src="images/factory6.png" class="thumbnail building" alt="Factory" /></li>
-                        <li id="farm"><img src="images/farm.png" class="thumbnail building" alt="Farm" /></li>
-                    </ul>
-                </div>
-                <a href="#" class="scrd">Scroll Down</a>
+        #foreach($position in [1,2,3,4])
+            <div class="col-md-3">
+                #showbuilding( $dto.getBuildings(), $position )
             </div>
+        #end
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            #foreach($position in [5,6])
+                   #showbuilding($dto.getBuildings(), $position )
+               #end
+        </div>
+
+        <div class="col-md-6">
+            <div class="central_image building_position"></div>
+        </div>
+
+        <div class="col-md-3">
+            #foreach($position in [7,8])
+                 #showbuilding($dto.getBuildings(), $position )
+               #end
+        </div>
+
+    </div>
+
+    <div class="row">
+        #foreach($position in [9,10,11,12])
+            <div class="col-md-3">
+                #showbuilding($dto.getBuildings(), $position )
+            </div>
+        #end
+    </div>
+
+    <div class="span3">
+        <div id="carouselId" class="vertical-carousel">
+            <a href="#" class="scru">Scroll Up</a>
+            <div class="vertical-carousel-container">
+                <ul class="vertical-carousel-list" id ="vertical-carousel-list_id">
+                    <li id="house"><img src="images/house34.png"   class="thumbnail building" alt="House"  /></li>
+                    <li id="building"><img src="images/building78.png" class="thumbnail building" alt="Building" /></li>
+                    <li id="factory"><img src="images/factory6.png" class="thumbnail building" alt="Factory" /></li>
+                    <li id="farm"><img src="images/farm.png" class="thumbnail building" alt="Farm" /></li>
+                </ul>
+            </div>
+            <a href="#" class="scrd">Scroll Down</a>
         </div>
     </div>
+
 </div>
 <script type="text/javascript" src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/jquery-ui.min.js')"></script>
@@ -134,13 +79,12 @@
                 console.log(ui);
             }
         });
-    }
-    ;
+    };
 
     $(document).ready(function () {
         $("#carouselId").verticalCarousel({nSlots: 4, speed: 800});
         init();
     });
 </script>
-</body>
-</html>
+#end
+
