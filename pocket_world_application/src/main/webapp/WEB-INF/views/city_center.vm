@@ -9,36 +9,7 @@
     <link href="#springUrl('/css/carousel-style.css')" rel="stylesheet">
     <link href="#springUrl('/css/buildings.css')" rel="stylesheet">
 
-    <script type="text/javascript" src="#springUrl('/js/bootstrap.min.js')"/>
-    <script type="text/javascript" src="#springUrl('/js/jquery-2.1.4.min.js')"/>
-    <script type="text/javascript" src="#springUrl('/js/jquery.verticalCarousel.js')"/>
-    <script type="text/javascript" src="#springUrl('/js/jquery-ui.min.js')"/>
 
-    <script type="text/javascript">
-
-        function init() {
-            $(".building").draggable({
-                appendTo: 'body',
-                helper: 'clone',
-                revert: 'invalid'
-
-            });
-            $(".placeholder").droppable({
-                accept: '.building',
-                drop: function (ev, ui) {
-                    $(this).html("");
-                    $(ui.draggable).appendTo(this);
-                    console.log(ui);
-                }
-            });
-        }
-        ;
-
-        $(document).ready(function () {
-            $("#carouselId").verticalCarousel({nSlots: 4, speed: 800});
-            init();
-        });
-    </script>
 
     #macro( showbuilding $position )
      #set($building = false)
@@ -141,6 +112,35 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/jquery-ui.min.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/bootstrap.min.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/jquery.verticalCarousel.js')"></script>
 
+<script type="text/javascript">
+
+    function init() {
+        $(".building").draggable({
+            appendTo: 'body',
+            helper: 'clone',
+            revert: 'invalid'
+
+        });
+        $(".placeholder").droppable({
+            accept: '.building',
+            drop: function (ev, ui) {
+                $(this).html("");
+                $(ui.draggable).appendTo(this);
+                console.log(ui);
+            }
+        });
+    }
+    ;
+
+    $(document).ready(function () {
+        $("#carouselId").verticalCarousel({nSlots: 4, speed: 800});
+        init();
+    });
+</script>
 </body>
 </html>
