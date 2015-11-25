@@ -1,22 +1,21 @@
 package org.exschool.pocketworld.building.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name="UserCity")
-public class    UserCity {
+public class  UserCity {
     @Id
     @GeneratedValue
     private Long id;
     private Long playerId;
     private String name;
+
+    @Embedded
     private List<Long> buildingsId;
+    @Embedded
     private List<Long> resourceBuildingsId;
 
 
@@ -29,9 +28,7 @@ public class    UserCity {
     public Long getId() {
         return id;
     }
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) {this.id = id;}
     public Long getPlayerId() {
         return playerId;
     }

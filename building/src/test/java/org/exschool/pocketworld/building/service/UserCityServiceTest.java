@@ -49,7 +49,7 @@ public class UserCityServiceTest {
         Long existingUserCityId = 1L;
         UserCity existingUserCity = userCityService.get(existingUserCityId);
         assertNotNull(existingUserCity);
-        existingUserCity.setId(10L); // Not sure
+        existingUserCity.setPlayerId(10L);
          userCityService.save(existingUserCity);
         UserCity savedCity = userCityService.get(existingUserCityId);
         assertAllFieldsEquals(existingUserCity,savedCity);
