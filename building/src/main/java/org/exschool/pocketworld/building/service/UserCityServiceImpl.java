@@ -48,8 +48,8 @@ public class UserCityServiceImpl implements UserCityService {
      * @param entity
      */
     @Override
-    public void save(UserCity entity) {
-        dao.save(entity);
+    public UserCity save(UserCity entity) {
+        return dao.save(entity);
 
     }
 
@@ -60,7 +60,8 @@ public class UserCityServiceImpl implements UserCityService {
     public void setDao(Dao dao) {
         this.dao = dao;
     }
-    
+
+
     public UserCity getCityByPlayerId(Long id) {
         DetachedCriteria query = DetachedCriteria.forClass(UserCity.class);
         query.add(Restrictions.eq("id", id));

@@ -5,23 +5,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.List;
 
 @Entity
-public class UserCity {
+@Table(name="UserCity")
+public class    UserCity {
     @Id
     @GeneratedValue
     private Long id;
-
-
     private Long playerId;
-
     private String name;
-
-    private Long buildingsId;
-
-
-    private Long resourceBuildingsId;
-
+    private List<Long> buildingsId;
+    private List<Long> resourceBuildingsId;
 
 
     public String getName() {
@@ -42,16 +38,17 @@ public class UserCity {
     public void setPlayerId(Long playerId) {
         this.playerId = playerId;
     }
-    public Long getBuildingsId() {
+
+    public List<Long> getBuildingsId(){
         return buildingsId;
     }
-    public void setBuildingsId(Long buildingsId) {
+    public void setBuildingsId(List<Long> buildingsId) {
         this.buildingsId = buildingsId;
     }
-    public Long getResourceBuildingsId() {
+    public List<Long> getResourceBuildingsId() {
         return resourceBuildingsId;
     }
-    public void setResourceBuildingsId(Long resourceBuildingsId) {
+    public void setResourceBuildingsId(List<Long> resourceBuildingsId) {
         this.resourceBuildingsId = resourceBuildingsId;
     }
 
@@ -82,9 +79,4 @@ public class UserCity {
         result = 31 * result + (resourceBuildingsId != null ? resourceBuildingsId.hashCode() : 0);
         return result;
     }
-
-
-
-
-
 }

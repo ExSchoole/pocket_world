@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.List;
 /**
  * Created by skandy on 18.11.15.
  */
@@ -22,9 +23,19 @@ public class UserCityBootstrap {
 
     public void fillDatabase() {
         if (bootstraped) return;
-        UserCity city1 = UserCityBuilder.builder().playerId(1L).buildingsId(2L).name("City1").resourceBuildingsId(3L).build();
-        UserCity city2 = UserCityBuilder.builder().playerId(1L).buildingsId(2L).name("City2").resourceBuildingsId(3L).build();
-        UserCity city3 = UserCityBuilder.builder().playerId(1L).buildingsId(2L).name("City3").resourceBuildingsId(3L).build();
+        List<Long> buildingsId_list  = new ArrayList<>();
+        buildingsId_list.add(21L);
+        buildingsId_list.add(22L);
+        buildingsId_list.add(23L);
+
+        List<Long>resourceBuildingsId_list = new ArrayList<>();
+        resourceBuildingsId_list.add(21L);
+        resourceBuildingsId_list.add(22L);
+        resourceBuildingsId_list.add(23L);
+
+        UserCity city1 = UserCityBuilder.builder().playerId(1L).buildingsId(buildingsId_list).name("City1").resourceBuildingsId(resourceBuildingsId_list).build();
+        UserCity city2 = UserCityBuilder.builder().playerId(1L).buildingsId(buildingsId_list).name("City2").resourceBuildingsId(resourceBuildingsId_list).build();
+        UserCity city3 = UserCityBuilder.builder().playerId(1L).buildingsId(buildingsId_list).name("City3").resourceBuildingsId(resourceBuildingsId_list).build();
 
         dao.saveAll(Arrays.asList(city1,city2,city3));
         bootstraped = true;

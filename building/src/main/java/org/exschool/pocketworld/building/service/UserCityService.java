@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserCityService {
     List<UserCity> allCities();
     UserCity get (long id);
-    void save(UserCity entity);
+    UserCity  save(UserCity entity);
     UserCity getCityByPlayerId(Long id);
 
 }
