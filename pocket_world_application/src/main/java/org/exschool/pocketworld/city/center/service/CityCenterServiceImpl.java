@@ -31,12 +31,11 @@ public class CityCenterServiceImpl implements CityCenterService {
      */
     @Override
     public List<String> getBuildingTypesAvailableToBuild(){
-        BuildingType[] buildingTypes = BuildingType.values();
         Collection<Building> alreadyBuiltBuildings = cityCenterInfo().getBuildings().values();
         Set<String> buildingTypesOfBuiltBuildings = getBuildingTypesOfBuiltBuildings(alreadyBuiltBuildings);
 
         List<String> result = new ArrayList<>();
-        for(BuildingType value: buildingTypes){
+        for(BuildingType value: BuildingType.values()){
             String buildingType = value.toString().toLowerCase();
             if(!buildingTypesOfBuiltBuildings.contains(buildingType)) {
                 result.add(buildingType);
