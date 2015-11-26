@@ -46,6 +46,11 @@
             <artifactId>common</artifactId>
             <version>${common.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.exschool</groupId>
+            <artifactId>building</artifactId>
+            <version>${building.version}</version>
+        </dependency>
     </dependencies>
 
 

@@ -78,6 +78,7 @@
         <junit.version>4.12</junit.version>
         <servlet.api>2.5</servlet.api>
         <common.version>1.0.1</common.version>
+        <building.version>0.0.1</building.version>
     </properties>
 
     <dependencies>
