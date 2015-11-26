@@ -6,7 +6,13 @@
         <link href="#springUrl('/css/carousel-style.css')" rel="stylesheet">
         <link href="#springUrl('/css/buildings.css')" rel="stylesheet">
     </head>
+#end
 
+#macro(html)
+   <!DOCTYPE html>
+   <html>
+        $!bodyContent
+   </html>
 #end
 
 #macro(body)
@@ -17,10 +23,18 @@
     </body>
 #end
 
-#macro( fillcarousel $buildings)
-    #foreach($building in $buildings)
-         <li id="$building"><div class="building_$building building"/></li>
-    #end
+#macro( addcarousel $buildings)
+    <div id="carouselId" class="vertical-carousel">
+       <a href="#" class="scru">#springMessage('scroll.up')</a>
+             <div class="vertical-carousel-container">
+                      <ul class="vertical-carousel-list" id ="vertical-carousel-list_id">
+                          #foreach($building in $buildings)
+                                  <li id="$building"><div class="building_$building building"/></li>
+                          #end
+                       </ul>
+                    </div>
+          <a href="#" class="scrd">#springMessage('scroll.down')</a>
+      </div>
 #end
 
 #macro( showbuilding $buildings $position )

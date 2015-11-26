@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+#@html()
 #parse("layout/macros.vm")
 #head("City Center")
 
@@ -43,15 +42,7 @@
 </div>
 
 <div class="col-md-5">
-            <div id="carouselId" class="vertical-carousel">
-                <a href="#" class="scru">#springMessage('scroll.up')</a>
-                <div class="vertical-carousel-container">
-                    <ul class="vertical-carousel-list" id ="vertical-carousel-list_id">
-                        #fillcarousel($buildingTypes)
-                    </ul>
-                </div>
-                <a href="#" class="scrd">#springMessage('scroll.down')</a>
-            </div>
+     #addcarousel($buildingTypes)
 </div>
 
 <script type="text/javascript" src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
@@ -84,4 +75,4 @@
     });
 </script>
 #end
-</html>
+#end
