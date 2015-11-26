@@ -17,25 +17,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/city/center")
 public class CityCenterController {
-    private static final Logger LOGGEG = LoggerFactory.getLogger(CityCenterController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CityCenterController.class);
     @Autowired
     private CityCenterService cityCenterService;
 
     @RequestMapping(value = "/populate")
     public String populateDatabase(Model model) {
-    	LOGGEG.info(model.toString());
+    	LOGGER.info(model.toString());
         // add initial Users data to Database
         return "init";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String showPeriphery(
+    public String showCityCenter(
             @RequestParam Map<String, String> allRequestParams, Model model) {
-    	LOGGEG.info("Requested params:" + allRequestParams);
+    	LOGGER.info("Requested params:" + allRequestParams);
 
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
         model.addAttribute("dto", cityCenterDto);
-        LOGGEG.info("Out:" + model);
+        LOGGER.info("Out:" + model);
         return "city_center";
     }
 

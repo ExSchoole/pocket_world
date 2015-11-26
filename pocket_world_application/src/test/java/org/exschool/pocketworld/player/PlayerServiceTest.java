@@ -3,6 +3,7 @@ package org.exschool.pocketworld.player;
 import org.exschool.pocketworld.config.TestSpringConfig;
 import org.exschool.pocketworld.dao.Dao;
 import org.exschool.pocketworld.player.model.Player;
+import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.player.builder.PlayerBuilder;
 import org.junit.*;
@@ -46,7 +47,7 @@ public class PlayerServiceTest {
         String existingPlayerLogin = "login-2";
         Player existingPlayer = playerService.getPlayerByLogin(existingPlayerLogin);
         assertNotNull(existingPlayer);
-        existingPlayer.setResourcesID(123L);
+        existingPlayer.setPlayerResources(new PlayerResources());
         playerService.savePlayer(existingPlayer);
         Player savedPlayer = playerService.getPlayerByLogin(existingPlayerLogin);
         assertTrue(savedPlayer.equals(existingPlayer));
