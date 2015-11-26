@@ -30,7 +30,7 @@ public class CityCenterServiceImpl implements CityCenterService {
      * @return list of building types
      */
     @Override
-    public List<String> getBuildingTypesAvailableToBuild(){
+    public List<String> availableForBuildBuildingTypes(){
         Collection<Building> alreadyBuiltBuildings = cityCenterInfo().getBuildings().values();
         Set<String> buildingTypesOfBuiltBuildings = getBuildingTypesOfBuiltBuildings(alreadyBuiltBuildings);
 
