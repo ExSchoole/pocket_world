@@ -7,9 +7,9 @@ import javax.persistence.*;
 @Table(name = "PLAYER")
 public class Player {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "player_id")
-    private Long playerId;
+    private Long id;
 
     private Long resourcesID;
 
@@ -25,8 +25,8 @@ public class Player {
         this.login = login;
     }
 
-    public Long getPlayerId() {
-        return playerId;
+    public Long getId() {
+        return id;
     }
 
     public String getLogin() {
@@ -34,8 +34,8 @@ public class Player {
     }
 
 
-    public void setPlayerId(Long id) {
-        this.playerId = id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setLogin(String login) {
@@ -58,7 +58,7 @@ public class Player {
 
         Player player = (Player) o;
 
-        if (playerId != null ? !playerId.equals(player.playerId) : player.playerId != null) return false;
+        if (id != null ? !id.equals(player.id) : player.id != null) return false;
         if (resourcesID != null ? !resourcesID.equals(player.resourcesID) : player.resourcesID != null) return false;
         return !(login != null ? !login.equals(player.login) : player.login != null);
 
@@ -66,7 +66,7 @@ public class Player {
 
     @Override
     public int hashCode() {
-        int result = playerId != null ? playerId.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (resourcesID != null ? resourcesID.hashCode() : 0);
         result = 31 * result + (login != null ? login.hashCode() : 0);
         return result;
@@ -75,7 +75,7 @@ public class Player {
     @Override
     public String toString() {
         return "Player{" +
-                "playerId=" + playerId +
+                "id=" + id +
                 ", resourcesID=" + resourcesID +
                 ", login='" + login + '\'' +
                 '}';

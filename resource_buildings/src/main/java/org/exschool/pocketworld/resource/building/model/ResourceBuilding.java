@@ -13,7 +13,7 @@ public class ResourceBuilding {
 
     private int position;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
     @Column(name = "building_type")

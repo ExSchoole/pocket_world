@@ -40,6 +40,11 @@
         </plugins>
     </build>
 
+    <properties>
+        <building.version>1.0.0</building.version>
+        <resource_buildings.version>1.0.0</resource_buildings.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.exschool</groupId>
@@ -52,9 +57,9 @@
             <version>${building.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <groupId>org.exschool</groupId>
+            <artifactId>resource_buildings</artifactId>
+            <version>${resource_buildings.version}</version>
         </dependency>
     </dependencies>
 

@@ -38,7 +38,7 @@ public class PlayerServiceTest {
         playerService.savePlayer(player);
         Player savedPlayer = playerService.getPlayerByLogin(login);
         assertNotNull(savedPlayer);
-        assertNotNull(savedPlayer.getPlayerId());
+        assertNotNull(savedPlayer.getId());
     }
 
     @Test
