@@ -27,9 +27,9 @@ public class CityCenterServiceImpl implements CityCenterService {
     private Map<Integer, Building> buildings() {
         Map<Integer, Building> buildings = new HashMap<>();
         buildings.put(1, new Building("mall", 1));
-        buildings.put(3, new Building("factory", 2));
-        buildings.put(6, new Building("market", 3));
-        buildings.put(9, new Building("shop", 4));
+        buildings.put(3, new Building("plant", 2));
+        buildings.put(6, new Building("marketplace", 3));
+        buildings.put(9, new Building("pool", 4));
         return buildings;
     }
 }

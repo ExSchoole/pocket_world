@@ -2,6 +2,7 @@ package org.exschool.pocketworld.controllers.city.center;
 
 import java.util.*;
 
+import org.exschool.pocketworld.building.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
@@ -33,10 +34,9 @@ public class CityCenterController {
     public String showCityCenter(
             @RequestParam Map<String, String> allRequestParams, Model model) {
     	LOGGEG.info("Requested params:" + allRequestParams);
-
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
         model.addAttribute("dto", cityCenterDto);
-        model.addAttribute("buildingTypes", getListOfBuildings(BuildingType.values()));
+        model.addAttribute("buildingTypes", getListOfBuildings(BuildingType.values(),cityCenterDto.getBuildings().values()));
         LOGGEG.info("Out:" + model);
         return "city_center";
     }
@@ -45,11 +45,24 @@ public class CityCenterController {
         this.cityCenterService = cityCenterService;
     }
 
-    private List<String> getListOfBuildings(BuildingType[] buildings){
+    private List<String> getListOfBuildings(BuildingType[] buildings, Collection<Building> alreadyBuiltBuildings){
+        Set<String> buildingTypesOfBuiltBuildings = getBuildingTypesOfBuiltBuildings(alreadyBuiltBuildings);
         List<String> result = new ArrayList<>();
         for(BuildingType value: buildings){
-            result.add(value.toString().toLowerCase());
+            String buildingType = value.toString().toLowerCase();
+            if(!buildingTypesOfBuiltBuildings.contains(buildingType)) {
+                result.add(buildingType);
+            }
         }
         return result;
     }
+
+    private Set<String> getBuildingTypesOfBuiltBuildings(Collection<Building> alreadyBuiltBuildings) {
+        Set<String> result = new HashSet();
+        for(Building building:alreadyBuiltBuildings) {
+            result.add(building.getType().toLowerCase());
+        }
+        return result;
+    }
+
 }
