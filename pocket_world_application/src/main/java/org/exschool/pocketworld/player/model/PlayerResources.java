@@ -1,13 +1,19 @@
 package org.exschool.pocketworld.player.model;
 
 import org.exschool.pocketworld.resource.model.Resource;
-import javax.persistence.Embeddable;
+
+import javax.persistence.*;
 
 /**
  * Created by skandy on 26.11.15.
  */
 @Embeddable
 public class PlayerResources {
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "resourceType", column = @Column(name = "gold_resource_type")),
+            @AttributeOverride(name = "amount", column = @Column(name = "gold_amount"))
+    })
     private Resource gold;
     private Resource timber;
     private Resource clay;
