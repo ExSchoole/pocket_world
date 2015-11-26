@@ -34,7 +34,7 @@ public class CityCenterController {
     	LOGGEG.info("Requested params:" + allRequestParams);
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
         model.addAttribute("dto", cityCenterDto);
-        model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes());
+        model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(cityCenterDto));
         LOGGEG.info("Out:" + model);
         return "city_center";
     }

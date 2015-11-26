@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CityCenterService {
     CityCenterDto cityCenterInfo();
-    List<String> availableForBuildBuildingTypes();
+    List<String> availableForBuildBuildingTypes(CityCenterDto cityCenterDto);
 }

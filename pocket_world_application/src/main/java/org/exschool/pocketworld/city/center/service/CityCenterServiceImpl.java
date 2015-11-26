@@ -27,12 +27,12 @@ public class CityCenterServiceImpl implements CityCenterService {
     /**
      * Gets list of available building types (Buildings of those types has not been built yet)
      *
+     * @param cityCenterDto
      * @return list of building types
      */
     @Override
-    public List<String> availableForBuildBuildingTypes(){
-        Collection<Building> alreadyBuiltBuildings = cityCenterInfo().getBuildings().values();
-        Set<String> buildingTypesOfBuiltBuildings = getBuildingTypesOfBuiltBuildings(alreadyBuiltBuildings);
+    public List<String> availableForBuildBuildingTypes(CityCenterDto cityCenterDto){
+        Set<String> buildingTypesOfBuiltBuildings = cityCenterDto.getBuildingTypes();
 
         List<String> result = new ArrayList<>();
         for(BuildingType value: BuildingType.values()){
@@ -44,13 +44,6 @@ public class CityCenterServiceImpl implements CityCenterService {
         return result;
     }
 
-    private Set<String> getBuildingTypesOfBuiltBuildings(Collection<Building> alreadyBuiltBuildings) {
-        Set<String> result = new HashSet();
-        for(Building building:alreadyBuiltBuildings) {
-            result.add(building.getType().toLowerCase());
-        }
-        return result;
-    }
 
     private Map<Integer, Building> buildings() {
         Map<Integer, Building> buildings = new HashMap<>();
