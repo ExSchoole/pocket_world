@@ -1,6 +1,6 @@
-package org.exschool.pocketworld.building.service;
-//import org.exschool.pocketworld.building.model.Building;
-import org.exschool.pocketworld.building.model.UserCity;
+package org.exschool.pocketworld.city.service;
+//import org.exschool.pocketworld.building.model.building.Building;
+import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.dao.Dao;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service("userCityService")
 @Transactional
-public class UserCityServiceImpl implements UserCityService {
+public class CityServiceImpl implements CityService {
     /**
      * dao - data access object
      */
@@ -29,8 +29,8 @@ public class UserCityServiceImpl implements UserCityService {
      * @return list of buildings
      */
     @Override
-    public List<UserCity> allCities() {
-        return dao.all(UserCity.class);
+    public List<City> allCities() {
+        return dao.all(City.class);
     }
 
     /**
@@ -39,8 +39,8 @@ public class UserCityServiceImpl implements UserCityService {
      * @return Building object
      */
     @Override
-    public UserCity get(long id) {
-        return dao.get(UserCity.class, id);
+    public City get(long id) {
+        return dao.get(City.class, id);
     }
 
     /**
@@ -48,10 +48,18 @@ public class UserCityServiceImpl implements UserCityService {
      * @param entity
      */
     @Override
-    public UserCity save(UserCity entity) {
+    public City save(City entity) {
         return dao.save(entity);
 
     }
+
+    @Override
+    public City getCityByPlayerId(Long playerId) {
+        DetachedCriteria query = DetachedCriteria.forClass(City.class);
+        query.add(Restrictions.eq("playerId", playerId));
+        return dao.getBy(query);
+    }
+
 
     /**
      * Setter for dao
@@ -59,12 +67,5 @@ public class UserCityServiceImpl implements UserCityService {
      */
     public void setDao(Dao dao) {
         this.dao = dao;
-    }
-
-
-    public UserCity getCityByPlayerId(Long id) {
-        DetachedCriteria query = DetachedCriteria.forClass(UserCity.class);
-        query.add(Restrictions.eq("id", id));
-        return dao.getBy(query);
     }
 }

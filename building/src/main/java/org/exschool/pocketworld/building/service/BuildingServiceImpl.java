@@ -1,5 +1,6 @@
 package org.exschool.pocketworld.building.service;
 
+
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
