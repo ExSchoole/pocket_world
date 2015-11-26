@@ -8,9 +8,7 @@
     </parent>
     <artifactId>building</artifactId>
     <packaging>jar</packaging>
-    <build>
-
-    </build>
+    <version>1.0.0</version>
 
     <dependencies>
         <dependency>
