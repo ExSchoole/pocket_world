@@ -40,6 +40,19 @@
             </div>
         #end
     </div>
+    </div>
+    
+    <div class="col-md-5">
+         <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-3">
+                 <div class="building_factory building_karusel building cursor" draggable="true"></div>
+                 <div class="building_shop building_karusel building cursor" draggable="true"></div>
+                 <div class="building_market building_karusel building cursor" draggable="true"></div>
+                 <div class="building_mall building_karusel building cursor" draggable="true"></div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -69,5 +82,114 @@
         init();
     });
 </script>
+
+<script>
+   var dragSrcEl = null;
+   var dragType = null;
+   var type = null;
+   var karuselCols = document.querySelectorAll('.building_karusel');
+   var cityCols = document.querySelectorAll('.building_empty');
+
+   [].forEach.call(karuselCols, function (kcol) {
+    kcol.addEventListener('dragstart', handleDragStartKarusel, false);
+    kcol.addEventListener('dragend', handleDragEndKarusel, false);
+    kcol.addEventListener('drop', handleDropKarusel, false);
+    kcol.addEventListener('dragover', handleDragOverKarusel, false);
+    });
+        
+   [].forEach.call(cityCols, function (ccol) {
+    ccol.addEventListener('dragenter', handleDragEnterCity, false); 
+    ccol.addEventListener('dragleave', handleDragLeaveCity, false);
+    ccol.addEventListener('dragover', handleDragOverCity, false);
+    ccol.addEventListener('drop', handleDropCity, false);
+    });
+
+    function handleDragStartKarusel(e) {        
+       this.style.opacity = '1.0';
+       
+       dragSrcEl = this;
+       dragType = this;
+       type = this.classList[0];
+    }
+     
+   function handleDragEnterCity(e) { //когда над нужным элементом
+       this.classList.remove('building_position');
+       this.classList.add('over');
+       dragSrcEl = this;
+       dragType.style.opacity = '1.0';
+    }
+    
+    function handleDragLeaveCity(e) { //когда за пределами
+       this.classList.remove('over');
+       this.classList.add('building_position');
+       dragSrcEl = dragType;
+    }
+    
+    function handleDragOverCity(e){
+       if (e.preventDefault) {
+           e.preventDefault(); 
+       }
+    }
+    
+    function handleDropCity(e){
+       if (e.stopPropagation) {
+           e.stopPropagation(); // 
+       }
+       
+       dragSrcEl = this;
+    }
+    
+    function handleDragOverKarusel(e){
+       if (e.preventDefault) {
+           e.preventDefault(); 
+       }
+    }
+    
+    function handleDropKarusel(e){
+       if (e.stopPropagation) {
+           e.stopPropagation(); 
+       }
+       
+       //dragSrcEl.classList.remove('over');
+       //dragSrcEl.classList.remove('notover');
+    }
+    
+    
+    function handleDragEndKarusel(e) {                
+       if (dragSrcEl != this) {
+         this.classList.remove(type);
+         this.classList.remove('cursor');
+          
+         dragSrcEl.classList.remove('building_empty');
+         dragSrcEl.classList.remove('over');
+         dragSrcEl.classList.add(type);
+         dragSrcEl.classList.add('building_position');
+         dragSrcEl.classList.add('building');
+           
+         dragSrcEl.removeEventListener('dragenter', handleDragEnterCity, false); 
+         dragSrcEl.removeEventListener('dragleave', handleDragLeaveCity, false);
+         dragSrcEl.removeEventListener('dragover', handleDragOverCity, false);
+         dragSrcEl.removeEventListener('drop', handleDropCity, false);
+           
+         this.removeEventListener('dragover', handleDragOverKarusel, false);
+         this.removeEventListener('drop', handleDropKarusel, false);
+         this.removeEventListener('dragstart', handleDragStartKarusel, false);
+         this.removeEventListener('dragend', handleDragEndKarusel, false);
+         
+         this.style.opacity = '0.0';
+         
+          /*<f:form method="POST" commandName="newbuilding" action="city_center">
+            <f:type path="type"/>
+            <f:1 path="level"/>
+          </f:form>*/
+       }
+       else {
+         this.classList.remove('over');
+         this.classList.remove('notover');  
+       }
+       
+    }    
+</script>
+
 #end
 
