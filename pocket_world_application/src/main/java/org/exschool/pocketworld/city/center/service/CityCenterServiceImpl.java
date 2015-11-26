@@ -1,13 +1,13 @@
 package org.exschool.pocketworld.city.center.service;
 
 import org.exschool.pocketworld.building.Building;
+import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.resource.ResourceDto;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class CityCenterServiceImpl implements CityCenterService {
@@ -22,6 +22,35 @@ public class CityCenterServiceImpl implements CityCenterService {
                 .buildings(buildings)
                 .nickname(nickname)
                 .build();
+    }
+
+    /**
+     * Gets list of available building types (Buildings of those types has not been built yet)
+     *
+     * @return list of building types
+     */
+    @Override
+    public List<String> getBuildingTypesAvailableToBuild(){
+        BuildingType[] buildingTypes = BuildingType.values();
+        Collection<Building> alreadyBuiltBuildings = cityCenterInfo().getBuildings().values();
+        Set<String> buildingTypesOfBuiltBuildings = getBuildingTypesOfBuiltBuildings(alreadyBuiltBuildings);
+
+        List<String> result = new ArrayList<>();
+        for(BuildingType value: buildingTypes){
+            String buildingType = value.toString().toLowerCase();
+            if(!buildingTypesOfBuiltBuildings.contains(buildingType)) {
+                result.add(buildingType);
+            }
+        }
+        return result;
+    }
+
+    private Set<String> getBuildingTypesOfBuiltBuildings(Collection<Building> alreadyBuiltBuildings) {
+        Set<String> result = new HashSet();
+        for(Building building:alreadyBuiltBuildings) {
+            result.add(building.getType().toLowerCase());
+        }
+        return result;
     }
 
     private Map<Integer, Building> buildings() {

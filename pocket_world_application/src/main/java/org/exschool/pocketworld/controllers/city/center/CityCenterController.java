@@ -2,8 +2,6 @@ package org.exschool.pocketworld.controllers.city.center;
 
 import java.util.*;
 
-import org.exschool.pocketworld.building.Building;
-import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
 import org.slf4j.Logger;
@@ -36,7 +34,7 @@ public class CityCenterController {
     	LOGGEG.info("Requested params:" + allRequestParams);
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
         model.addAttribute("dto", cityCenterDto);
-        model.addAttribute("buildingTypes", getListOfBuildings(BuildingType.values(),cityCenterDto.getBuildings().values()));
+        model.addAttribute("buildingTypes", cityCenterService.getBuildingTypesAvailableToBuild());
         LOGGEG.info("Out:" + model);
         return "city_center";
     }
@@ -45,24 +43,6 @@ public class CityCenterController {
         this.cityCenterService = cityCenterService;
     }
 
-    private List<String> getListOfBuildings(BuildingType[] buildings, Collection<Building> alreadyBuiltBuildings){
-        Set<String> buildingTypesOfBuiltBuildings = getBuildingTypesOfBuiltBuildings(alreadyBuiltBuildings);
-        List<String> result = new ArrayList<>();
-        for(BuildingType value: buildings){
-            String buildingType = value.toString().toLowerCase();
-            if(!buildingTypesOfBuiltBuildings.contains(buildingType)) {
-                result.add(buildingType);
-            }
-        }
-        return result;
-    }
 
-    private Set<String> getBuildingTypesOfBuiltBuildings(Collection<Building> alreadyBuiltBuildings) {
-        Set<String> result = new HashSet();
-        for(Building building:alreadyBuiltBuildings) {
-            result.add(building.getType().toLowerCase());
-        }
-        return result;
-    }
 
 }
