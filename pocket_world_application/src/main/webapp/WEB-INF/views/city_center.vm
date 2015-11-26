@@ -1,73 +1,79 @@
 #parse("layout/macros.vm")
-#head("City Center")
+#@html()
+    #head("City Center")
 
-#@body()
-<div class="col-md-7">
-    <h1>${dto.NickName}'s city center</h1>
+    #@body()
+    <div class="col-md-7">
+        <h1>${dto.NickName}'s city center</h1>
 
-    <div class="row">
-        #foreach($position in [1,2,3,4])
+        <div class="row">
+            #foreach($position in [1,2,3,4])
+                <div class="col-md-3">
+                    #showbuilding( $dto.getBuildings(), $position )
+                </div>
+            #end
+        </div>
+
+        <div class="row">
             <div class="col-md-3">
-                #showbuilding( $dto.getBuildings(), $position )
-            </div>
-        #end
-
-    </div>
-
-    <div class="row">
-        <div class="col-md-3">
-            #foreach($position in [5,6])
+                #foreach($position in [5,6])
                    #showbuilding($dto.getBuildings(), $position )
                #end
-        </div>
+            </div>
 
-        <div class="col-md-6">
-            <div class="central_image building_position"></div>
-        </div>
+            <div class="col-md-6">
+                <div class="central_image building_position"></div>
+            </div>
 
-        <div class="col-md-3">
-            #foreach($position in [7,8])
+            <div class="col-md-3">
+                #foreach($position in [7,8])
                  #showbuilding($dto.getBuildings(), $position )
                #end
+            </div>
         </div>
 
+        <div class="row">
+            #foreach($position in [9,10,11,12])
+                <div class="col-md-3">
+                    #showbuilding($dto.getBuildings(), $position )
+                </div>
+            #end
+        </div>
     </div>
 
-    <div class="row">
-        #foreach($position in [9,10,11,12])
-            <div class="col-md-3">
-                #showbuilding($dto.getBuildings(), $position )
-            </div>
-        #end
+    <div class="col-md-5">
+        #addcarousel($buildingTypes)
     </div>
 
-</div>
+    <script type="text/javascript" src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
+    <script type="text/javascript" src="#springUrl('/js/jquery-ui.min.js')"></script>
+    <script type="text/javascript" src="#springUrl('/js/bootstrap.min.js')"></script>
+    <script type="text/javascript" src="#springUrl('/js/jquery.verticalCarousel.js')"></script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    function init() {
-        $(".building").draggable({
-            appendTo: 'body',
-            helper: 'clone',
-            revert: 'invalid'
+        function init() {
+            $(".building").draggable({
+                appendTo: 'body',
+                helper: 'clone',
+                revert: 'invalid'
 
+            });
+            $(".placeholder").droppable({
+                accept: '.building',
+                drop: function (ev, ui) {
+                    $(this).html("");
+                    $(ui.draggable).appendTo(this);
+                    console.log(ui);
+                }
+            });
+        }
+        ;
+
+        $(document).ready(function () {
+            $("#carouselId").verticalCarousel({nSlots: 3, speed: 900});
+            init();
         });
-        $(".placeholder").droppable({
-            accept: '.building',
-            drop: function (ev, ui) {
-                $(this).html("");
-                $(ui.draggable).appendTo(this);
-                console.log(ui);
-
-
-            }
-        });
-    };
-
-    $(document).ready(function () {
-        $("#carouselId").verticalCarousel({nSlots: 4, speed: 800});
-        init();
-    });
-</script>
+    </script>
+    #end
 #end
-
