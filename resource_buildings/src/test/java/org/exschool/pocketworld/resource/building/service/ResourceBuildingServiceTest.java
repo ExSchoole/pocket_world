@@ -67,7 +67,7 @@ public class ResourceBuildingServiceTest {
     private void assertAllFieldsEquals(ResourceBuilding building1, ResourceBuilding building2)
     {
         assertEquals(building2.getId(), building1.getId());
-        assertEquals(building2.getResourceBuildingType(), building1.getResourceBuildingType());
+        assertEquals(building2.getResourceType(), building1.getResourceType());
         assertEquals(building2.getLevel(), building1.getLevel());
         assertEquals(building2.getPosition(), building1.getPosition());
         assertEquals(building2.getCityId(), building1.getCityId());

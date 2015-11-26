@@ -2,7 +2,7 @@ package org.exschool.pocketworld.util.builder;
 
 
 import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
-import org.exschool.pocketworld.resource.building.model.ResourceBuildingType;
+import org.exschool.pocketworld.resource.model.ResourceType;
 
 /**
  * Created by manoylo on 18.11.15.
@@ -10,7 +10,7 @@ import org.exschool.pocketworld.resource.building.model.ResourceBuildingType;
 public final class ResourceBuildingBuilder {
 
 
-    private ResourceBuildingType resourceBuildingType;
+    private ResourceType resourceBuildingType;
     private int level;
     private int position;
     private Long cityId;
@@ -22,7 +22,7 @@ public final class ResourceBuildingBuilder {
     private ResourceBuildingBuilder() {
     }
 
-    public ResourceBuildingBuilder buildingType(ResourceBuildingType resourceBuildingType) {
+    public ResourceBuildingBuilder buildingType(ResourceType resourceBuildingType) {
         this.resourceBuildingType = resourceBuildingType;
         return this;
     }
@@ -46,7 +46,7 @@ public final class ResourceBuildingBuilder {
     public ResourceBuilding build() {
         ResourceBuilding building = new ResourceBuilding();
 
-        building.setResourceBuildingType(resourceBuildingType);
+        building.setResourceType(resourceBuildingType);
         building.setLevel(level);
         building.setPosition(position);
         building.setCityId(cityId);

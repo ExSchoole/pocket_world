@@ -1,7 +1,6 @@
 package org.exschool.pocketworld.building.model;
 
 import javax.persistence.*;
-;
 
 @Entity
 @Table(name="Building")
