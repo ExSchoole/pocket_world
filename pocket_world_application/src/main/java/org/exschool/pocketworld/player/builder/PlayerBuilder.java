@@ -31,7 +31,7 @@ public final class PlayerBuilder {
     public Player build() {
         Player player = new Player();
         player.setLogin(login);
-        player.setPlayerId(playerId);
+        player.setId(playerId);
         player.setResourcesID(resourceId);
         return player;
     }
