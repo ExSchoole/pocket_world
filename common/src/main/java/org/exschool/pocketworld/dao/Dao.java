@@ -72,7 +72,7 @@ public class Dao {
      *
      * @param entities - list entities to save
      */
-    public <T> void saveAll(Collection<T> entities) {
+    public <T> Collection<T> saveAll(Collection<T> entities) {
         LOG.info("going to save entities - {}", entities);
         Session session = currentSession();
         List<T> entitiesList = new ArrayList<>(entities);
@@ -83,6 +83,7 @@ public class Dao {
                 session.clear();
             }
         }
+        return entitiesList;
     }
 
     /**
