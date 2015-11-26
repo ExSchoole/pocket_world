@@ -47,7 +47,7 @@ public class PlayerServiceTest {
         String existingPlayerLogin = "login-2";
         Player existingPlayer = playerService.getPlayerByLogin(existingPlayerLogin);
         assertNotNull(existingPlayer);
-        existingPlayer.setPlayerResources(new PlayerResources());
+        existingPlayer.setPlayerResources(new PlayerResources(90,80,70,60));
         playerService.savePlayer(existingPlayer);
         Player savedPlayer = playerService.getPlayerByLogin(existingPlayerLogin);
         assertTrue(savedPlayer.equals(existingPlayer));

@@ -22,9 +22,9 @@ public class PlayerBootstrap {
 
     public void fillDatabase() {
         if (bootstraped) return;
-        Player player1 = PlayerBuilder.builder().login("login-1").playerResources(new PlayerResources(new Resource(ResourceType.GOLD, 1), new Resource(ResourceType.TIMBER, 1), new Resource(ResourceType.CLAY, 1), new Resource(ResourceType.CORN, 1))).build();
-        Player player2 = PlayerBuilder.builder().login("login-2").playerResources(new PlayerResources(new Resource(ResourceType.GOLD, 1), new Resource(ResourceType.TIMBER, 1), new Resource(ResourceType.CLAY, 1), new Resource(ResourceType.CORN, 1))).build();
-        Player player3 = PlayerBuilder.builder().login("login-3").playerResources(new PlayerResources(new Resource(ResourceType.GOLD, 1), new Resource(ResourceType.TIMBER, 1), new Resource(ResourceType.CLAY, 1), new Resource(ResourceType.CORN, 1))).build();
+        Player player1 = PlayerBuilder.builder().login("login-1").playerResources(new PlayerResources(1,2,3,4)).build();
+        Player player2 = PlayerBuilder.builder().login("login-2").playerResources(new PlayerResources(10,20,30,40)).build();
+        Player player3 = PlayerBuilder.builder().login("login-3").playerResources(new PlayerResources(100,200,300,400)).build();
 
         dao.saveAll(Arrays.asList(player1, player2, player3));
         bootstraped = true;
