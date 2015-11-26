@@ -2,8 +2,6 @@ package org.exschool.pocketworld.util.builder;
 
 import org.exschool.pocketworld.city.model.City;
 
-import java.util.List;
-
 /**
  * Created by manoylo with baditsa on 18.11.15.
  */
