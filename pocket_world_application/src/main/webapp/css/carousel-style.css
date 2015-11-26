@@ -1,3 +1,10 @@
+
+div#carouselId{
+    position: relative;
+    top:50px;
+    left:30px;
+}
+
 .vertical-carousel {
 background-color: #EEE;
 padding: 10px;
