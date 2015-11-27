@@ -4,7 +4,7 @@
 #@body()
 <div class="col-md-7">
     <h1>${dto.NickName}'s city resources</h1>
-    <div class ="container"> #parse("layout/resources.vm") </div>
+    #include_resources()
     <div class="row">
         #foreach($position in [1,2,3,4])
             <div class="col-md-3">
