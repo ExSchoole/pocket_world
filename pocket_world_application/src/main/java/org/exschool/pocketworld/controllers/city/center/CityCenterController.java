@@ -4,11 +4,7 @@ import java.util.Map;
 
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
-import org.exschool.pocketworld.player.builder.PlayerBuilder;
-import org.exschool.pocketworld.player.model.Player;
-import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
-import org.exschool.pocketworld.resource.ResourceDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +28,6 @@ public class CityCenterController {
     @RequestMapping(value = "/populate")
     public String populateDatabase(Model model) {
     	LOGGER.info(model.toString());
-        Player player;
-        PlayerResources playerResources = new PlayerResources(99,99,99,99);
-        player=PlayerBuilder.builder().login(playerLogin).playerResources(playerResources).build();
-        playerService.savePlayer(player);
         // add initial Users data to Database
         return "init";
     }
@@ -44,13 +36,7 @@ public class CityCenterController {
     public String showCityCenter(
             @RequestParam Map<String, String> allRequestParams, Model model) {
     	LOGGER.info("Requested params:" + allRequestParams);
-        Player player = playerService.getPlayerByLogin(playerLogin);
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
-        cityCenterDto.setResourceDto(new ResourceDto(player.getPlayerResources().getGold(),
-                                                     player.getPlayerResources().getTimber(),
-                                                     player.getPlayerResources().getClay(),
-                                                     player.getPlayerResources().getCorn()));
-        cityCenterDto.setNickName(player.getLogin());
         model.addAttribute("dto", cityCenterDto);
         LOGGER.info("Out:" + model);
         return "city_center";
