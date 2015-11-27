@@ -1,5 +1,7 @@
 package org.exschool.pocketworld.resource.building.model;
 
+import org.exschool.pocketworld.resource.model.ResourceType;
+
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
@@ -8,19 +10,19 @@ import java.io.Serializable;
  */
 @Embeddable
 public class TimeId implements Serializable {
-    private ResourceBuildingType buildingType;
+    private ResourceType buildingType;
 
     private Integer level;
 
     public TimeId() {
     }
 
-    public TimeId(ResourceBuildingType buildingType, Integer level) {
+    public TimeId(ResourceType buildingType, Integer level) {
         this.buildingType = buildingType;
         this.level = level;
     }
 
-    public ResourceBuildingType getBuildingType() {
+    public ResourceType getBuildingType() {
         return buildingType;
     }
 
