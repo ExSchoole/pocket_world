@@ -2,6 +2,7 @@ package org.exschool.pocketworld.controllers.city.center;
 
 import java.util.Map;
 
+import org.exschool.pocketworld.building.Building;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
 import org.slf4j.Logger;
@@ -21,6 +22,16 @@ public class CityCenterController {
     @Autowired
     private CityCenterService cityCenterService;
 
+    @RequestMapping(value = "/addBuilding", method = RequestMethod.GET)
+    public String addBuilding(@RequestParam String obj) {
+    	LOGGEG.info("Yes");
+    	LOGGEG.info(obj);
+    	//LOGGEG.info(Integer.toString(obj.level));
+    	
+    	return "city_center";
+    }
+    
+    
     @RequestMapping(value = "/populate")
     public String populateDatabase(Model model) {
     	LOGGEG.info(model.toString());

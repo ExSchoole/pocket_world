@@ -56,6 +56,10 @@
 
 </div>
 
+<script src="#springUrl('/js/jquery-2.1.4.min.js')"/>
+<script src="js/bootstrap.min.js"/>
+<script src="#springUrl('/js/jquery-ui.min.js')"/>
+
 <script type="text/javascript">
 
     function init() {
@@ -83,7 +87,7 @@
     });
 </script>
 
-<script>
+<script language="JavaScript" type="text/javascript">
    var dragSrcEl = null;
    var dragType = null;
    var type = null;
@@ -177,11 +181,21 @@
          this.removeEventListener('dragend', handleDragEndKarusel, false);
          
          this.style.opacity = '0.0';
+         console.log("SUCCESS: ");
          
-          /*<f:form method="POST" commandName="newbuilding" action="city_center">
-            <f:type path="type"/>
-            <f:1 path="level"/>
-          </f:form>*/
+         var obj = 'Kate';
+         //obj.type = 'Kate';
+         //obj.level = 21;
+         
+          $.ajax({          
+            type: 'GET',
+            url: 'addBuilding',
+            data: JSON.stringify(obj),
+            contentType : 'application/json',
+            dataType: "json"
+  			//data : { type: 'Vlad', level: 21 },
+  			//success : function(data) { console.log("SUCCESS: 2", data , "takida"); }
+  		  });
        }
        else {
          this.classList.remove('over');
