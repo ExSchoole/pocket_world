@@ -7,51 +7,51 @@ import javax.persistence.*;
  */
 @Embeddable
 public class PlayerResources {
-    private Integer gold;
-    private Integer timber;
-    private Integer clay;
-    private Integer corn;
+    private Integer goldAmount;
+    private Integer timberAmount;
+    private Integer clayAmount;
+    private Integer cornAmount;
 
     public PlayerResources() {
     }
 
-    public PlayerResources(int gold, int timber, int clay, int corn) {
-        this.gold = gold;
-        this.timber = timber;
-        this.clay = clay;
-        this.corn = corn;
+    public PlayerResources(int goldAmount, int timberAmount, int clayAmount, int cornAmount) {
+        this.goldAmount = goldAmount;
+        this.timberAmount = timberAmount;
+        this.clayAmount = clayAmount;
+        this.cornAmount = cornAmount;
     }
 
-    public int getGold() {
-        return gold;
+    public int getGoldAmount() {
+        return goldAmount;
     }
 
-    public void setGold(int gold) {
-        this.gold = gold;
+    public void setGoldAmount(int goldAmount) {
+        this.goldAmount = goldAmount;
     }
 
-    public int getTimber() {
-        return timber;
+    public int getTimberAmount() {
+        return timberAmount;
     }
 
-    public void setTimber(int timber) {
-        this.timber = timber;
+    public void setTimberAmount(int timberAmount) {
+        this.timberAmount = timberAmount;
     }
 
-    public int getClay() {
-        return clay;
+    public int getClayAmount() {
+        return clayAmount;
     }
 
-    public void setClay(int clay) {
-        this.clay = clay;
+    public void setClayAmount(int clayAmount) {
+        this.clayAmount = clayAmount;
     }
 
-    public int getCorn() {
-        return corn;
+    public int getCornAmount() {
+        return cornAmount;
     }
 
-    public void setCorn(int corn) {
-        this.corn = corn;
+    public void setCornAmount(int cornAmount) {
+        this.cornAmount = cornAmount;
     }
 
     @Override
@@ -61,20 +61,20 @@ public class PlayerResources {
 
         PlayerResources that = (PlayerResources) o;
 
-        if (clay != null ? !clay.equals(that.clay) : that.clay != null) return false;
-        if (corn != null ? !corn.equals(that.corn) : that.corn != null) return false;
-        if (gold != null ? !gold.equals(that.gold) : that.gold != null) return false;
-        if (timber != null ? !timber.equals(that.timber) : that.timber != null) return false;
+        if (clayAmount != null ? !clayAmount.equals(that.clayAmount) : that.clayAmount != null) return false;
+        if (cornAmount != null ? !cornAmount.equals(that.cornAmount) : that.cornAmount != null) return false;
+        if (goldAmount != null ? !goldAmount.equals(that.goldAmount) : that.goldAmount != null) return false;
+        if (timberAmount != null ? !timberAmount.equals(that.timberAmount) : that.timberAmount != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = gold != null ? gold.hashCode() : 0;
-        result = 31 * result + (timber != null ? timber.hashCode() : 0);
-        result = 31 * result + (clay != null ? clay.hashCode() : 0);
-        result = 31 * result + (corn != null ? corn.hashCode() : 0);
+        int result = goldAmount != null ? goldAmount.hashCode() : 0;
+        result = 31 * result + (timberAmount != null ? timberAmount.hashCode() : 0);
+        result = 31 * result + (clayAmount != null ? clayAmount.hashCode() : 0);
+        result = 31 * result + (cornAmount != null ? cornAmount.hashCode() : 0);
         return result;
     }
 }
