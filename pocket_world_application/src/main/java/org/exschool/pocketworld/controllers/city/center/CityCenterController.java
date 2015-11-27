@@ -27,14 +27,14 @@ public class CityCenterController {
     private CityCenterService cityCenterService;
     @Autowired
     private PlayerService playerService;
-    private String playerLogin="user911";
+    private String playerLogin="test-user";
 
     @RequestMapping(value = "/populate")
     public String populateDatabase(Model model) {
     	LOGGER.info(model.toString());
         Player player;
         PlayerResources playerResources = new PlayerResources(99,99,99,99);
-        player=PlayerBuilder.builder().playerId(25L).login(playerLogin).playerResources(playerResources).build();
+        player=PlayerBuilder.builder().login(playerLogin).playerResources(playerResources).build();
         playerService.savePlayer(player);
         // add initial Users data to Database
         return "init";
@@ -50,6 +50,7 @@ public class CityCenterController {
                                                      player.getPlayerResources().getTimber(),
                                                      player.getPlayerResources().getClay(),
                                                      player.getPlayerResources().getCorn()));
+        cityCenterDto.setNickName(player.getLogin());
         model.addAttribute("dto", cityCenterDto);
         LOGGER.info("Out:" + model);
         return "city_center";
