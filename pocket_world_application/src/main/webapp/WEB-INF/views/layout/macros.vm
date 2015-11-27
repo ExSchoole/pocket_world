@@ -26,3 +26,7 @@
         <div class="building_position building_empty"></div>
     #end
 #end
+
+#macro (include_resources)
+    <div class ="container"> #parse("layout/resources.vm") </div>
+#end
