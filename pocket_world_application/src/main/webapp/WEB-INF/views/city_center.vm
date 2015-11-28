@@ -47,10 +47,10 @@
          <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-3">
-                 <div class="building_factory building_karusel building cursor" draggable="true"></div>
-                 <div class="building_shop building_karusel building cursor" draggable="true"></div>
-                 <div class="building_market building_karusel building cursor" draggable="true"></div>
-                 <div class="building_mall building_karusel building cursor" draggable="true"></div>
+                 <div class="building_factory building_karusel building cursor" draggable="true" id="building_factory"></div>
+                 <div class="building_shop building_karusel building cursor" draggable="true" id="building_shop"></div>
+                 <div class="building_market building_karusel building cursor" draggable="true" id="building_market"></div>
+                 <div class="building_mall building_karusel building cursor" draggable="true" id="building_mall"></div>
             </div>
         </div>
     </div>
@@ -59,6 +59,7 @@
 
 
 <script src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
+<script src="#springUrl('/js/jquery-ui.min.js')"></script>
 <script src="#springUrl('/js/dragdrop.js')"/></script>
 
 #end
