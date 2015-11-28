@@ -11,11 +11,12 @@ import java.util.Map;
 
 @Service
 public class CityCenterServiceImpl implements CityCenterService {
-
-    @Override
+	private Map<Integer, Building> buildings;
+    
+	@Override
     public CityCenterDto cityCenterInfo() {
         ResourceDto resourceDto = new ResourceDto(1,1,1,1);
-        Map<Integer, Building> buildings = buildings();
+        this.buildings = buildings();
         String nickname = "User login";
         return CityCenterDtoBuilder.builder()
                 .resource(resourceDto)
@@ -31,5 +32,9 @@ public class CityCenterServiceImpl implements CityCenterService {
         buildings.put(6, new Building("market", 3));
         buildings.put(9, new Building("shop", 4));
         return buildings;
+    }
+    
+    public void addBuilding(int position, Building newBuilding){
+    	this.buildings.put(position, newBuilding);
     }
 }

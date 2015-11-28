@@ -21,8 +21,8 @@
     #set($building = false)
     #set($building = ${buildings.get($position)})
     #if(  $building  )
-        <div class="building_$building.getType() building_position building"></div>
+        <div class="building_$building.getType() building_position building" id=$position></div>
     #else
-        <div class="building_position building_empty"></div>
+        <div class="building_position building_empty" id=$position></div>
     #end
 #end

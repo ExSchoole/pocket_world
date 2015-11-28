@@ -23,11 +23,10 @@ public class CityCenterController {
     private CityCenterService cityCenterService;
 
     @RequestMapping(value = "/addBuilding", method = RequestMethod.GET)
-    public String addBuilding(@RequestParam String obj) {
-    	LOGGEG.info("Yes");
-    	LOGGEG.info(obj);
-    	//LOGGEG.info(Integer.toString(obj.level));
-    	
+    public String addBuilding(@RequestParam String type, int position) {
+    	LOGGEG.info(type);
+    	LOGGEG.info(Integer.toString(position));   
+    	cityCenterService.addBuilding(position, new Building(type,1)); 
     	return "city_center";
     }
     

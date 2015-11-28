@@ -2,8 +2,9 @@
 #head("City Center")
 
 #@body()
+<h1>${dto.NickName}'s city center</h1>
+
 <div class="col-md-7">
-    <h1>${dto.NickName}'s city center</h1>
 
     <div class="row">
         #foreach($position in [1,2,3,4])
@@ -56,154 +57,9 @@
 
 </div>
 
-<script src="#springUrl('/js/jquery-2.1.4.min.js')"/>
-<script src="js/bootstrap.min.js"/>
-<script src="#springUrl('/js/jquery-ui.min.js')"/>
 
-<script type="text/javascript">
-
-    function init() {
-        $(".building").draggable({
-            appendTo: 'body',
-            helper: 'clone',
-            revert: 'invalid'
-
-        });
-        $(".placeholder").droppable({
-            accept: '.building',
-            drop: function (ev, ui) {
-                $(this).html("");
-                $(ui.draggable).appendTo(this);
-                console.log(ui);
-
-
-            }
-        });
-    };
-
-    $(document).ready(function () {
-        $("#carouselId").verticalCarousel({nSlots: 4, speed: 800});
-        init();
-    });
-</script>
-
-<script language="JavaScript" type="text/javascript">
-   var dragSrcEl = null;
-   var dragType = null;
-   var type = null;
-   var karuselCols = document.querySelectorAll('.building_karusel');
-   var cityCols = document.querySelectorAll('.building_empty');
-
-   [].forEach.call(karuselCols, function (kcol) {
-    kcol.addEventListener('dragstart', handleDragStartKarusel, false);
-    kcol.addEventListener('dragend', handleDragEndKarusel, false);
-    kcol.addEventListener('drop', handleDropKarusel, false);
-    kcol.addEventListener('dragover', handleDragOverKarusel, false);
-    });
-        
-   [].forEach.call(cityCols, function (ccol) {
-    ccol.addEventListener('dragenter', handleDragEnterCity, false); 
-    ccol.addEventListener('dragleave', handleDragLeaveCity, false);
-    ccol.addEventListener('dragover', handleDragOverCity, false);
-    ccol.addEventListener('drop', handleDropCity, false);
-    });
-
-    function handleDragStartKarusel(e) {        
-       this.style.opacity = '1.0';
-       
-       dragSrcEl = this;
-       dragType = this;
-       type = this.classList[0];
-    }
-     
-   function handleDragEnterCity(e) { //когда над нужным элементом
-       this.classList.remove('building_position');
-       this.classList.add('over');
-       dragSrcEl = this;
-       dragType.style.opacity = '1.0';
-    }
-    
-    function handleDragLeaveCity(e) { //когда за пределами
-       this.classList.remove('over');
-       this.classList.add('building_position');
-       dragSrcEl = dragType;
-    }
-    
-    function handleDragOverCity(e){
-       if (e.preventDefault) {
-           e.preventDefault(); 
-       }
-    }
-    
-    function handleDropCity(e){
-       if (e.stopPropagation) {
-           e.stopPropagation(); // 
-       }
-       
-       dragSrcEl = this;
-    }
-    
-    function handleDragOverKarusel(e){
-       if (e.preventDefault) {
-           e.preventDefault(); 
-       }
-    }
-    
-    function handleDropKarusel(e){
-       if (e.stopPropagation) {
-           e.stopPropagation(); 
-       }
-       
-       //dragSrcEl.classList.remove('over');
-       //dragSrcEl.classList.remove('notover');
-    }
-    
-    
-    function handleDragEndKarusel(e) {                
-       if (dragSrcEl != this) {
-         this.classList.remove(type);
-         this.classList.remove('cursor');
-          
-         dragSrcEl.classList.remove('building_empty');
-         dragSrcEl.classList.remove('over');
-         dragSrcEl.classList.add(type);
-         dragSrcEl.classList.add('building_position');
-         dragSrcEl.classList.add('building');
-           
-         dragSrcEl.removeEventListener('dragenter', handleDragEnterCity, false); 
-         dragSrcEl.removeEventListener('dragleave', handleDragLeaveCity, false);
-         dragSrcEl.removeEventListener('dragover', handleDragOverCity, false);
-         dragSrcEl.removeEventListener('drop', handleDropCity, false);
-           
-         this.removeEventListener('dragover', handleDragOverKarusel, false);
-         this.removeEventListener('drop', handleDropKarusel, false);
-         this.removeEventListener('dragstart', handleDragStartKarusel, false);
-         this.removeEventListener('dragend', handleDragEndKarusel, false);
-         
-         this.style.opacity = '0.0';
-         console.log("SUCCESS: ");
-         
-         var obj = 'Kate';
-         //obj.type = 'Kate';
-         //obj.level = 21;
-         
-          $.ajax({          
-            type: 'GET',
-            url: 'addBuilding',
-            data: JSON.stringify(obj),
-            contentType : 'application/json',
-            dataType: "json"
-  			//data : { type: 'Vlad', level: 21 },
-  			//success : function(data) { console.log("SUCCESS: 2", data , "takida"); }
-  		  });
-       }
-       else {
-         this.classList.remove('over');
-         this.classList.remove('notover');  
-       }
-       
-    }    
-</script>
+<script src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
+<script src="#springUrl('/js/dragdrop.js')"/></script>
 
 #end
 
