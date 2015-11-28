@@ -1,6 +1,8 @@
 package org.exschool.pocketworld.resource.building.service;
 
 import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.exschool.pocketworld.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +31,12 @@ public class ResourceBuildingServiceImpl  implements ResourceBuildingService {
     public List<ResourceBuilding> allBuildings() {
         return dao.all(ResourceBuilding.class);
     }
-
+    @Override
+    public List<ResourceBuilding> allCityBuildings(Long id) {
+    	DetachedCriteria query = DetachedCriteria.forClass(ResourceBuilding.class);
+        query.add(Restrictions.eq("cityId", id));
+        return dao.getAllBy(query);
+    }
     /**
      * Returns ResourceBuilding by id
      *

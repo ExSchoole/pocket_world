@@ -1,7 +1,8 @@
 package org.exschool.pocketworld.city.resources.dto;
 
-import org.exschool.pocketworld.building.ResourceBuilding;
+
 import org.exschool.pocketworld.resource.ResourceDto;
+import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
 
 import java.util.Map;
 

@@ -1,7 +1,0 @@
-<HTML>
-<BODY>
-<h1>Database is populated!</h1>
-Periphery -  /periphery <br>
-<a href="#springUrl('/periphery')">periphery</a><br>
-</BODY>
-</HTML>
