@@ -11,10 +11,7 @@ public interface ResourceBuildingService {
     List<ResourceBuilding> allBuildings();
     ResourceBuilding get (long id);
     ResourceBuilding save(ResourceBuilding entity);
-<<<<<<< HEAD
     List<ResourceBuilding> allCityBuildings(Long id);
-=======
->>>>>>> origin/master
 
 }
 

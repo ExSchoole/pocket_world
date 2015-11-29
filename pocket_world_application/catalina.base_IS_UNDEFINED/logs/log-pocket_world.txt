@@ -1,0 +1,200 @@
+22:52:44.779 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+22:52:44.814 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@32417348, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@66f795be, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@88821c2, org.springframework.test.context.support.DirtiesContextTestExecutionListener@21604bee, org.springframework.test.context.transaction.TransactionalTestExecutionListener@39190760, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1a334ce9]
+22:52:45.053 [main]         INFO  o.s.c.s.GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@593b8970: startup date [Sat Nov 28 22:52:45 EET 2015]; root of context hierarchy
+22:52:45.834 [main]         INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.0.3.Final}
+22:52:45.840 [main]         INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+22:52:45.842 [main]         INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+22:52:45.944 [main]         INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.0.Final}
+22:52:46.323 [main]         INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+22:52:47.153 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+22:52:47.168 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+22:52:47.480 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entities - [Player{id=null, resourcesID=1, login='login-1'}, Player{id=null, resourcesID=1, login='login-2'}, Player{id=null, resourcesID=1, login='login-3'}]
+22:52:47.536 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - null
+22:52:47.579 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-3]))
+22:52:47.633 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=3, resourcesID=1, login='login-3'}
+22:52:47.636 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=null, resourcesID=null, login='test-login'}
+22:52:47.639 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=test-login]))
+22:52:47.641 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=4, resourcesID=null, login='test-login'}
+22:52:47.645 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+22:52:47.647 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=1, login='login-2'}
+22:52:47.648 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=2, resourcesID=123, login='login-2'}
+22:52:47.671 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+22:52:47.673 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=123, login='login-2'}
+22:52:47.677 [Thread-1]     INFO  o.s.c.s.GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@593b8970: startup date [Sat Nov 28 22:52:45 EET 2015]; root of context hierarchy
+22:52:47.685 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+22:52:47.688 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+22:54:55.974 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+22:54:56.009 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@66f795be, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@88821c2, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@21604bee, org.springframework.test.context.support.DirtiesContextTestExecutionListener@39190760, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1a334ce9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1dfe626f]
+22:54:56.263 [main]         INFO  o.s.c.s.GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@53bc45d4: startup date [Sat Nov 28 22:54:56 EET 2015]; root of context hierarchy
+22:54:57.119 [main]         INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.0.3.Final}
+22:54:57.123 [main]         INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+22:54:57.125 [main]         INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+22:54:57.197 [main]         INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.0.Final}
+22:54:57.584 [main]         INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+22:54:58.490 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+22:54:58.507 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+22:54:58.931 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entities - [Player{id=null, resourcesID=1, login='login-1'}, Player{id=null, resourcesID=1, login='login-2'}, Player{id=null, resourcesID=1, login='login-3'}]
+22:54:59.013 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - null
+22:54:59.033 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-3]))
+22:54:59.073 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=3, resourcesID=1, login='login-3'}
+22:54:59.079 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=null, resourcesID=null, login='test-login'}
+22:54:59.083 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=test-login]))
+22:54:59.085 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=4, resourcesID=null, login='test-login'}
+22:54:59.090 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+22:54:59.091 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=1, login='login-2'}
+22:54:59.092 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=2, resourcesID=123, login='login-2'}
+22:54:59.119 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+22:54:59.121 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=123, login='login-2'}
+22:54:59.126 [Thread-1]     INFO  o.s.c.s.GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@53bc45d4: startup date [Sat Nov 28 22:54:56 EET 2015]; root of context hierarchy
+22:54:59.138 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+22:54:59.159 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+22:58:56.922 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+22:58:56.971 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@21072f13, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5ea39955, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@46a7cbfd, org.springframework.test.context.support.DirtiesContextTestExecutionListener@32417348, org.springframework.test.context.transaction.TransactionalTestExecutionListener@66f795be, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@88821c2]
+22:58:57.226 [main]         INFO  o.s.c.s.GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@71e2cfdc: startup date [Sat Nov 28 22:58:57 EET 2015]; root of context hierarchy
+22:58:58.005 [main]         INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.0.3.Final}
+22:58:58.009 [main]         INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+22:58:58.012 [main]         INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+22:58:58.082 [main]         INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.0.Final}
+22:58:58.460 [main]         INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+22:58:59.384 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+22:58:59.400 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+22:58:59.725 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entities - [Player{id=null, resourcesID=1, login='login-1'}, Player{id=null, resourcesID=1, login='login-2'}, Player{id=null, resourcesID=1, login='login-3'}]
+22:58:59.781 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - null
+22:58:59.796 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-3]))
+22:58:59.825 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=3, resourcesID=1, login='login-3'}
+22:58:59.829 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=null, resourcesID=null, login='test-login'}
+22:58:59.832 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=test-login]))
+22:58:59.833 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=4, resourcesID=null, login='test-login'}
+22:58:59.837 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+22:58:59.838 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=1, login='login-2'}
+22:58:59.839 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=2, resourcesID=123, login='login-2'}
+22:58:59.857 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+22:58:59.858 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=123, login='login-2'}
+22:58:59.862 [Thread-1]     INFO  o.s.c.s.GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@71e2cfdc: startup date [Sat Nov 28 22:58:57 EET 2015]; root of context hierarchy
+22:58:59.870 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+22:58:59.873 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+23:11:59.747 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+23:11:59.780 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@46a7cbfd, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@32417348, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@66f795be, org.springframework.test.context.support.DirtiesContextTestExecutionListener@88821c2, org.springframework.test.context.transaction.TransactionalTestExecutionListener@21604bee, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@39190760]
+23:12:00.014 [main]         INFO  o.s.c.s.GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@2a807bbc: startup date [Sat Nov 28 23:12:00 EET 2015]; root of context hierarchy
+23:12:00.768 [main]         INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.0.3.Final}
+23:12:00.772 [main]         INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+23:12:00.774 [main]         INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+23:12:00.842 [main]         INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.0.Final}
+23:12:01.207 [main]         INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+23:12:02.105 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+23:12:02.119 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+23:12:02.431 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entities - [Player{id=null, resourcesID=1, login='login-1'}, Player{id=null, resourcesID=1, login='login-2'}, Player{id=null, resourcesID=1, login='login-3'}]
+23:12:02.486 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - null
+23:12:02.506 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-3]))
+23:12:02.539 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=3, resourcesID=1, login='login-3'}
+23:12:02.543 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=null, resourcesID=null, login='test-login'}
+23:12:02.546 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=test-login]))
+23:12:02.547 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=4, resourcesID=null, login='test-login'}
+23:12:02.550 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+23:12:02.553 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=1, login='login-2'}
+23:12:02.554 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=2, resourcesID=123, login='login-2'}
+23:12:02.573 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+23:12:02.574 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=123, login='login-2'}
+23:12:02.577 [Thread-1]     INFO  o.s.c.s.GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@2a807bbc: startup date [Sat Nov 28 23:12:00 EET 2015]; root of context hierarchy
+23:12:02.588 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+23:12:02.591 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+00:09:52.613 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+00:09:52.673 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@56488f87, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@35c71452, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@21072f13, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5ea39955, org.springframework.test.context.transaction.TransactionalTestExecutionListener@46a7cbfd, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@32417348]
+00:09:53.032 [main]         INFO  o.s.c.s.GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@767fa665: startup date [Sun Nov 29 00:09:53 EET 2015]; root of context hierarchy
+00:09:54.258 [main]         INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.0.3.Final}
+00:09:54.264 [main]         INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+00:09:54.267 [main]         INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+00:09:54.383 [main]         INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.0.Final}
+00:09:55.018 [main]         INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+00:09:56.396 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+00:09:56.416 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+00:09:57.162 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entities - [Player{id=null, resourcesID=1, login='login-1'}, Player{id=null, resourcesID=1, login='login-2'}, Player{id=null, resourcesID=1, login='login-3'}]
+00:09:57.252 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - null
+00:09:57.279 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-3]))
+00:09:57.345 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=3, resourcesID=1, login='login-3'}
+00:09:57.349 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=null, resourcesID=null, login='test-login'}
+00:09:57.352 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=test-login]))
+00:09:57.354 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=4, resourcesID=null, login='test-login'}
+00:09:57.361 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+00:09:57.363 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=1, login='login-2'}
+00:09:57.364 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=2, resourcesID=123, login='login-2'}
+00:09:57.386 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+00:09:57.387 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=123, login='login-2'}
+00:09:57.402 [Thread-1]     INFO  o.s.c.s.GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@767fa665: startup date [Sun Nov 29 00:09:53 EET 2015]; root of context hierarchy
+00:09:57.416 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+00:09:57.421 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+00:19:58.920 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+00:19:58.970 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@14ff89d7, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@14b28d06, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@56488f87, org.springframework.test.context.support.DirtiesContextTestExecutionListener@35c71452, org.springframework.test.context.transaction.TransactionalTestExecutionListener@21072f13, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5ea39955]
+00:19:59.364 [main]         INFO  o.s.c.s.GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@2f0e73ba: startup date [Sun Nov 29 00:19:59 EET 2015]; root of context hierarchy
+00:20:00.566 [main]         INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.0.3.Final}
+00:20:00.571 [main]         INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+00:20:00.573 [main]         INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+00:20:00.701 [main]         INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.0.Final}
+00:20:01.301 [main]         INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+00:20:02.508 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+00:20:02.527 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+00:20:02.946 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entities - [Player{id=null, resourcesID=1, login='login-1'}, Player{id=null, resourcesID=1, login='login-2'}, Player{id=null, resourcesID=1, login='login-3'}]
+00:20:03.023 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - null
+00:20:03.040 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-3]))
+00:20:03.089 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=3, resourcesID=1, login='login-3'}
+00:20:03.094 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=null, resourcesID=null, login='test-login'}
+00:20:03.099 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=test-login]))
+00:20:03.101 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=4, resourcesID=null, login='test-login'}
+00:20:03.105 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+00:20:03.106 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=1, login='login-2'}
+00:20:03.108 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=2, resourcesID=123, login='login-2'}
+00:20:03.131 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+00:20:03.133 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=123, login='login-2'}
+00:20:03.139 [Thread-1]     INFO  o.s.c.s.GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@2f0e73ba: startup date [Sun Nov 29 00:19:59 EET 2015]; root of context hierarchy
+00:20:03.157 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+00:20:03.161 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+00:27:26.958 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+00:27:27.022 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@35c71452, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@21072f13, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@5ea39955, org.springframework.test.context.support.DirtiesContextTestExecutionListener@46a7cbfd, org.springframework.test.context.transaction.TransactionalTestExecutionListener@32417348, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@66f795be]
+00:27:27.410 [main]         INFO  o.s.c.s.GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@36856daa: startup date [Sun Nov 29 00:27:27 EET 2015]; root of context hierarchy
+00:27:28.478 [main]         INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.0.3.Final}
+00:27:28.483 [main]         INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+00:27:28.485 [main]         INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+00:27:28.585 [main]         INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.0.Final}
+00:27:29.099 [main]         INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+00:27:30.293 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+00:27:30.317 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+00:27:30.791 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entities - [Player{id=null, resourcesID=1, login='login-1'}, Player{id=null, resourcesID=1, login='login-2'}, Player{id=null, resourcesID=1, login='login-3'}]
+00:27:30.873 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - null
+00:27:30.891 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-3]))
+00:27:30.939 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=3, resourcesID=1, login='login-3'}
+00:27:30.946 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=null, resourcesID=null, login='test-login'}
+00:27:30.951 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=test-login]))
+00:27:30.953 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=4, resourcesID=null, login='test-login'}
+00:27:30.960 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+00:27:30.964 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=1, login='login-2'}
+00:27:30.965 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=2, resourcesID=123, login='login-2'}
+00:27:30.989 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+00:27:30.991 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=123, login='login-2'}
+00:27:31.002 [Thread-1]     INFO  o.s.c.s.GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@36856daa: startup date [Sun Nov 29 00:27:27 EET 2015]; root of context hierarchy
+00:27:31.020 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+00:27:31.027 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+14:14:09.995 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+14:14:10.027 [main]         INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@46a7cbfd, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@32417348, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@66f795be, org.springframework.test.context.support.DirtiesContextTestExecutionListener@88821c2, org.springframework.test.context.transaction.TransactionalTestExecutionListener@21604bee, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@39190760]
+14:14:10.250 [main]         INFO  o.s.c.s.GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@2a807bbc: startup date [Sun Nov 29 14:14:10 EET 2015]; root of context hierarchy
+14:14:10.978 [main]         INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.0.3.Final}
+14:14:10.982 [main]         INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+14:14:10.984 [main]         INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+14:14:11.051 [main]         INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.0.Final}
+14:14:11.406 [main]         INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+14:14:12.229 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+14:14:12.244 [main]         INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+14:14:12.617 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entities - [Player{id=null, resourcesID=1, login='login-1'}, Player{id=null, resourcesID=1, login='login-2'}, Player{id=null, resourcesID=1, login='login-3'}]
+14:14:12.670 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - null
+14:14:12.686 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-3]))
+14:14:12.714 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=3, resourcesID=1, login='login-3'}
+14:14:12.718 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=null, resourcesID=null, login='test-login'}
+14:14:12.721 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=test-login]))
+14:14:12.723 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=4, resourcesID=null, login='test-login'}
+14:14:12.726 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+14:14:12.727 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=1, login='login-2'}
+14:14:12.728 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to save entity - Player{id=2, resourcesID=123, login='login-2'}
+14:14:12.745 [main]         INFO  org.exschool.pocketworld.dao.Dao - going to find entity by criteria - DetachableCriteria(CriteriaImpl(org.exschool.pocketworld.player.model.Player:this[][login=login-2]))
+14:14:12.746 [main]         INFO  org.exschool.pocketworld.dao.Dao - Found entity - Player{id=2, resourcesID=123, login='login-2'}
+14:14:12.750 [Thread-1]     INFO  o.s.c.s.GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@2a807bbc: startup date [Sun Nov 29 14:14:10 EET 2015]; root of context hierarchy
+14:14:12.760 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+14:14:12.762 [Thread-1]     INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
