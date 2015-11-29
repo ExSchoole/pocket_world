@@ -1,8 +1,14 @@
 package org.exschool.pocketworld.city.resources.builder;
 
+<<<<<<< HEAD
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.resource.ResourceDto;
 import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
+=======
+import org.exschool.pocketworld.building.ResourceBuilding;
+import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
+import org.exschool.pocketworld.resource.ResourceDto;
+>>>>>>> origin/master
 
 import java.util.Map;
 
