@@ -2,6 +2,7 @@ package org.exschool.pocketworld.controllers.city.center;
 
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
+import org.exschool.pocketworld.player.service.PlayerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,16 @@ import java.util.Set;
 @Controller
 @RequestMapping("/city/center")
 public class CityCenterController {
-    private static final Logger LOGGEG = LoggerFactory.getLogger(CityCenterController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CityCenterController.class);
     @Autowired
     private CityCenterService cityCenterService;
+    @Autowired
+    private PlayerService playerService;
+    private String playerLogin="test-user";
 
     @RequestMapping(value = "/populate")
     public String populateDatabase(Model model) {
-    	LOGGEG.info(model.toString());
+    	LOGGER.info(model.toString());
         // add initial Users data to Database
         return "init";
     }
@@ -32,19 +36,17 @@ public class CityCenterController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showCityCenter(
             @RequestParam Map<String, String> allRequestParams, Model model) {
-    	LOGGEG.info("Requested params:" + allRequestParams);
+    	LOGGER.info("Requested params:" + allRequestParams);
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
         model.addAttribute("dto", cityCenterDto);
         Set<String> builtBuildingTypes = cityCenterDto.getBuildingTypes();
         model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(builtBuildingTypes));
-        LOGGEG.info("Out:" + model);
+        LOGGER.info("Out:" + model);
         return "city_center";
     }
 
     public void setCityCenterService(CityCenterService cityCenterService) {
         this.cityCenterService = cityCenterService;
     }
-
-
 
 }

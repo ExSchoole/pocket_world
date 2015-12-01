@@ -1,6 +1,8 @@
 package org.exschool.pocketworld.resource.building.model;
 
 
+import org.exschool.pocketworld.resource.model.ResourceType;
+
 import javax.persistence.*;
 
 /**
@@ -17,7 +19,7 @@ public class ResourceBuilding {
     private Long id;
     @Enumerated(EnumType.STRING)
     @Column(name = "building_type")
-    private ResourceBuildingType resourceBuildingType;
+    private ResourceType resourceType;
     private int level;
     private Long cityId;
 
@@ -37,12 +39,12 @@ public class ResourceBuilding {
         this.cityId = cityId;
     }
 
-    public ResourceBuildingType getResourceBuildingType() {
-        return resourceBuildingType;
+    public ResourceType getResourceType() {
+        return resourceType;
     }
 
-    public void setResourceBuildingType(ResourceBuildingType resourceBuildingType) {
-        this.resourceBuildingType = resourceBuildingType;
+    public void setResourceType(ResourceType resourceType) {
+        this.resourceType = resourceType;
     }
 
     public int getLevel() {
@@ -70,7 +72,7 @@ public class ResourceBuilding {
 
         if (level != building.level) return false;
         if (position != building.position) return false;
-        if (resourceBuildingType != building.resourceBuildingType) return false;
+        if (resourceType != building.resourceType) return false;
         if (cityId != null ? !cityId.equals(building.cityId) : building.cityId != null) return false;
         if (id != null ? !id.equals(building.id) : building.id != null) return false;
 
@@ -80,7 +82,7 @@ public class ResourceBuilding {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (resourceBuildingType != null ? resourceBuildingType.hashCode() : 0);
+        result = 31 * result + (resourceType != null ? resourceType.hashCode() : 0);
         result = 31 * result + level;
         result = 31 * result + position;
         result = 31 * result + (cityId != null ? cityId.hashCode() : 0);

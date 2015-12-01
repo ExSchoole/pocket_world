@@ -42,7 +42,7 @@
 
     <properties>
         <building.version>1.0.0</building.version>
-        <resource_buildings.version>1.0.0</resource_buildings.version>
+        <resource_buildings.version>1.0.1</resource_buildings.version>
     </properties>
 
     <dependencies>

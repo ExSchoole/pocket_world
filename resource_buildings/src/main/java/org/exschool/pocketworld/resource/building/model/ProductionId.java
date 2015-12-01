@@ -1,5 +1,7 @@
 package org.exschool.pocketworld.resource.building.model;
 
+import org.exschool.pocketworld.resource.model.ResourceType;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
@@ -13,21 +15,17 @@ import java.io.Serializable;
 public class ProductionId implements Serializable {
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "production_type")
-    private ProductionType productionType;
+    @Column(name = "resource_type")
+    private ResourceType resourceType;
 
     private int level;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "building_type")
-    private ResourceBuildingType resourceBuildingType;
-
-    public ProductionType getProductionType() {
-        return productionType;
+    public ResourceType getResourceType() {
+        return resourceType;
     }
 
-    public void setProductionType(ProductionType productionType) {
-        this.productionType = productionType;
+    public void setResourceType(ResourceType resourceType) {
+        this.resourceType = resourceType;
     }
 
     public int getLevel() {
