@@ -2,6 +2,9 @@
 #head("City Center")
 
 #@body()
+<div class="row">
+    <a href="#springUrl('/city/resources/')" class="btn btn-primary">#springMessage('city.resources')</a>
+</div>
 <div class="col-md-7">
     <h1>${dto.NickName}'s city center</h1>
 
