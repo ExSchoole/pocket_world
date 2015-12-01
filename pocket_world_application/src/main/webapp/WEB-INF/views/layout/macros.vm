@@ -11,6 +11,8 @@
 
 #macro(body)
     <body>
+    <a href="#springUrl('/city/center/')" class="btn btn-primary">#springMessage('city.center')</a>
+    <a href="#springUrl('/city/resources/')" class="btn btn-primary">#springMessage('city.resources')</a>
     <div class="container">
         $!bodyContent
     </div>
