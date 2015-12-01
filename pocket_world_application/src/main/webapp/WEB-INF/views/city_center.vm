@@ -4,7 +4,7 @@
 #@body()
 <div class="col-md-7">
     <h1>${dto.NickName}'s city center</h1>
-    #include_resources()
+    #showResources(${dto.getResourceDto().getGold()},${dto.getResourceDto().getTimber()},${dto.getResourceDto().getClay()},${dto.getResourceDto().getCorn()})
     <div class="row">
         #foreach($position in [1,2,3,4])
             <div class="col-md-3">
