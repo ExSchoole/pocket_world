@@ -1,11 +1,12 @@
 package org.exschool.pocketworld.player.builder;
 
 import org.exschool.pocketworld.player.model.Player;
+import org.exschool.pocketworld.player.model.PlayerResources;
 
 public final class PlayerBuilder {
     private String login;
     private Long playerId;
-    private Long resourceId;
+    private PlayerResources playerResources;
 
     public static PlayerBuilder builder() {
         return new PlayerBuilder();
@@ -23,8 +24,8 @@ public final class PlayerBuilder {
         return this;
     }
 
-    public PlayerBuilder resourceId(Long resourceId) {
-        this.resourceId = resourceId;
+    public PlayerBuilder playerResources(PlayerResources playerResources) {
+        this.playerResources = playerResources;
         return this;
     }
 
@@ -32,7 +33,7 @@ public final class PlayerBuilder {
         Player player = new Player();
         player.setLogin(login);
         player.setId(playerId);
-        player.setResourcesID(resourceId);
+        player.setPlayerResources(playerResources);
         return player;
     }
 }
