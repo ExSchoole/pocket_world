@@ -47,7 +47,7 @@ public class CityCenterDto {
     }
 
     public Set<String> getBuildingTypes() {
-        Set<String> result = new HashSet();
+        Set<String> result = new HashSet<String>();
         for(Building building: getBuildings().values()) {
             result.add(building.getType().toLowerCase());
         }
