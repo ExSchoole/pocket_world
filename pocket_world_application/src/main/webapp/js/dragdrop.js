@@ -1,27 +1,21 @@
-   var type = null;
-   $(function() {
-	    $( ".building_karusel" ).draggable({
-	    	revert: "invalid",
-	    	start: function() {
-	    		type = $(this).attr("id");
-	    	}
-	    });
+function CityCenter(config) {
+    var self = this;
 
-	    $( ".building_empty" ).droppable({
-	    	hoverClass: "over",
-	        drop: function( event, ui ) {
-	          $( this ).addClass( type );
-	          $( ui.draggable).removeClass( type )
-	                          .removeClass( 'building_karusel' )
-	                          .removeClass( 'cursor' );
-	          $.ajax({          
-	    		   type: 'GET',
-	    		   url: 'addBuilding',
-	    		   data : { type: type, position: $(this).attr("id")  },
-	    		   success : function(data) {
-	    			   			console.log("SUCCESS");
-	    		   			 }
-	  		   });
-	        },
-	      });
-	});
+    self.build = function(type, positionToBuild, callback) {
+        var position = getPositionNumber(positionToBuild.id);
+        $.ajax({
+            type: 'GET',
+            url: config.buildUrl,
+            data: {type: type, position: position},
+            success: function (data) {
+                console.log("SUCCESS");
+                positionToBuild.addClass(type)
+                callback();
+            }
+        });
+    }
+}
+
+function getPositionNumber(positionStr) {
+    return positionStr.substring(positionStr.lastIndexOf("_") + 1);
+}

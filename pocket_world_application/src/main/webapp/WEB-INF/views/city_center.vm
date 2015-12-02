@@ -60,7 +60,32 @@
 
 <script src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
 <script src="#springUrl('/js/jquery-ui.min.js')"></script>
-<script src="#springUrl('/js/dragdrop.js')"/></script>
+<script src="#springUrl('/js/dragdrop.js')"></script>
+<script type="text/javascript">
+    var cityConfig = {};
+    cityConfig.buildUrl = "#springUrl()";
+    var city = new CityCenter(cityConfig);
+    $(function () {
+        $(".building_karusel").draggable({
+            revert: "invalid"
+        });
+
+        $(".building_empty").droppable({
+            hoverClass: "over",
+            drop: function (event, ui) {
+                debugger
+                var positionToBuild = this;
+                var buildingFromCarousele = ui.draggable[0];
+                var buildinType = buildingFromCarousele.id;
+
+                city.build(buildinType, positionToBuild, function () {
+                    $(buildingFromCarousele).remove();
+                });
+            }
+        })
+    })
+</script>
+
 
 #end
 
