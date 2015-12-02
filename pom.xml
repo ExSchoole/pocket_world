@@ -13,6 +13,7 @@
         <module>common</module>
         <module>building</module>
         <module>resource_buildings</module>
+        <module>build_queue</module>
         <module>pocket_world_application</module>
   </modules>
 
