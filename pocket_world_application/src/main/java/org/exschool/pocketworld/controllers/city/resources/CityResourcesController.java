@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.resources.service.CityResourcesService;
+import org.exschool.pocketworld.resource.model.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class CityResourcesController {
         LOGGER.info("Requested params:" + allRequestParams);
 
         CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo();
+        model.addAttribute("resourceTypes", ResourceType.asListLowerCase());
         model.addAttribute("dto", cityResourcesDto);
         LOGGER.info("Out:" + model);
         return "city_resources";
