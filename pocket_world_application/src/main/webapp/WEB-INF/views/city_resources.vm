@@ -41,10 +41,10 @@
             <div class="col-md-3">
                  <a href="#"
                         data-toggle="popover"
-                        title="Actions"
+                        title="Build"
                         data-trigger="focus"
                         data-html="true"
-                        data-content="<b>build:</b><hr>
+                        data-content="
                                 #foreach($resourceType in $resourceTypes)
                                      <a href='#$resourceType'>$resourceType</a><br>
                                 #end
