@@ -2,6 +2,7 @@ package org.exschool.pocketworld.build_queue.model;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,26 +10,33 @@ import java.util.Date;
  */
 @Entity
 @Table(name="BUILDQUEUE")
-public class BuildQueue {
+public class BuildQueue implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "record_id")
     private Long id;
 
+    @Column(name="name")
     private String name;
 
+    @Column(name="level")
     private int level;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "build_type")
     private Type type;
 
     @Temporal(value=TemporalType.TIMESTAMP)
     private Date buildEnd;
 
+    @Column(name="user_id")
     private Long userId;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private Status status;
 
+    @Column(name="building_id")
     private Long buildingId;
 
     public Long getId() {

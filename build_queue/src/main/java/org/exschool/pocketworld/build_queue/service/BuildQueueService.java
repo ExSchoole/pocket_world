@@ -8,7 +8,7 @@ import org.exschool.pocketworld.build_queue.model.Status;
  */
 public interface BuildQueueService {
     BuildQueue save (BuildQueue entity);
-    BuildQueue changeStatus(Status status);
+    BuildQueue changeStatus(BuildQueue entity, Status status);
     BuildQueue delete(BuildQueue entity);
 
 }
