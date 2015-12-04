@@ -34,7 +34,13 @@ public class CityCenterServiceImpl implements CityCenterService {
         return buildings;
     }
     
-    public void addBuilding(int position, Building newBuilding){
-    	this.buildings.put(position, newBuilding);
+    public boolean addBuilding(int position, Building newBuilding){
+    	if (position<=12 && position>=1 && newBuilding!=null)
+    		if (buildings.containsKey(position) == false){
+    			this.buildings.put(position, newBuilding);
+    			return true;
+    		}
+    	        
+        return false;
     }
 }

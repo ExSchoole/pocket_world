@@ -22,11 +22,15 @@ public class CityCenterController {
     @Autowired
     private CityCenterService cityCenterService;
 
-    @RequestMapping(value = "/addBuilding", method = RequestMethod.GET)
-    public String addBuilding(@RequestParam String type, int position) {
-    	LOGGEG.info(type);
-    	LOGGEG.info(Integer.toString(position));   
-    	cityCenterService.addBuilding(position, new Building(type,1)); 
+    @RequestMapping(value = "/addBuilding", method = RequestMethod.POST)
+    public String addBuilding(@RequestParam String type, @RequestParam int position) {
+    	
+    	if (cityCenterService.addBuilding(position, new Building(type,1)) == true){
+    		LOGGEG.info("Added");
+    		LOGGEG.info(type);   	
+        	LOGGEG.info(Integer.toString(position));
+    	}else LOGGEG.info("Not added");
+    	
     	return "city_center";
     }
     
