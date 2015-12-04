@@ -6,6 +6,12 @@
 
 <div class="col-md-7">
 
+<div class="row">
+    <a href="#springUrl('/city/resources/')" class="btn btn-primary">#springMessage('city.resources')</a>
+</div>
+<div class="col-md-7">
+    <h1>${dto.NickName}'s city center</h1>
+    #showResources(${dto.getResourceDto().getGold()},${dto.getResourceDto().getTimber()},${dto.getResourceDto().getClay()},${dto.getResourceDto().getCorn()})
     <div class="row">
         #foreach($position in [1,2,3,4])
             <div class="col-md-3">
@@ -81,4 +87,5 @@
 	      });
 	 });
 </script>
+#end
 
