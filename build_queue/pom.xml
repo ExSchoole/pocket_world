@@ -9,5 +9,11 @@
     <artifactId>build_queue</artifactId>
     <packaging>jar</packaging>
     <version>0.0.1</version>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.exschool</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+    </dependencies>
 </project>
