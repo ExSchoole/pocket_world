@@ -30,10 +30,10 @@ public class CityCenterController {
     public String addBuilding(@RequestParam String type, @RequestParam int position) {
     	
     	if (cityCenterService.addBuilding(position, new Building(type,1)) == true){
-    		LOGGEG.info("Added");
-    		LOGGEG.info(type);   	
-        	LOGGEG.info(Integer.toString(position));
-    	}else LOGGEG.info("Not added");
+    		LOGGER.info("Added");
+    		LOGGER.info(type);   	
+        	LOGGER.info(Integer.toString(position));
+    	}else LOGGER.info("Not added");
     	
     	return "city_center";
     }

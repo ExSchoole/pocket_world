@@ -2,16 +2,12 @@
 #head("City Center")
 
 #@body()
-<h1>${dto.NickName}'s city center</h1>
-
-<div class="col-md-7">
-
 <div class="row">
     <a href="#springUrl('/city/resources/')" class="btn btn-primary">#springMessage('city.resources')</a>
 </div>
-<div class="col-md-7">
     <h1>${dto.NickName}'s city center</h1>
     #showResources(${dto.getResourceDto().getGold()},${dto.getResourceDto().getTimber()},${dto.getResourceDto().getClay()},${dto.getResourceDto().getCorn()})
+<div class="col-md-7">
     <div class="row">
         #foreach($position in [1,2,3,4])
             <div class="col-md-3">
@@ -47,9 +43,9 @@
             </div>
         #end
     </div>
-    </div>
-    
-    <div class="col-md-5">
+</div>
+
+<div class="col-md-5">
          <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-3">
@@ -59,9 +55,8 @@
                  <div class="building_mall building_karusel building cursor" draggable="true" id="building_mall"></div>
             </div>
         </div>
-    </div>
-
-</div>
+</div> 
+#end
 
 
 <script src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
@@ -86,6 +81,4 @@
 	        },
 	      });
 	 });
-</script>
-#end
-
+</script> 
