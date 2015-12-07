@@ -6,7 +6,13 @@
         <link href="#springUrl('/css/carousel-style.css')" rel="stylesheet">
         <link href="#springUrl('/css/buildings.css')" rel="stylesheet">
     </head>
+#end
 
+#macro(html)
+   <!DOCTYPE html>
+   <html>
+        $!bodyContent
+   </html>
 #end
 
 #macro(body)
@@ -17,6 +23,20 @@
     </body>
 #end
 
+#macro( addcarousel $buildings)
+    <div id="carouselId" class="vertical-carousel">
+       <a href="#" class="scru">#springMessage('scroll.up')</a>
+             <div class="vertical-carousel-container">
+                      <ul class="vertical-carousel-list" id ="vertical-carousel-list_id">
+                          #foreach($building in $buildings)
+                                  <li id="$building"><div class="building_$building building"/></li>
+                          #end
+                       </ul>
+                    </div>
+          <a href="#" class="scrd">#springMessage('scroll.down')</a>
+      </div>
+#end
+
 #macro( showbuilding $buildings $position )
     #set($building = false)
     #set($building = ${buildings.get($position)})
@@ -25,4 +45,21 @@
     #else
         <div class="building_position building_empty"></div>
     #end
+#end
+
+#macro (showResources $gold $timber $clay $corn)
+    <div class ="container">
+        <div class="col-md-2" id="res1">
+            <h3>#springMessage('resources.gold'): $gold</h3>
+        </div>
+        <div class="col-md-2" id="res2">
+            <h3>#springMessage('resources.timber'): $timber</h3>
+        </div>
+        <div class="col-md-2" id="res3">
+            <h3>#springMessage('resources.clay'): $clay</h3>
+        </div>
+        <div class="col-md-2" id="res4">
+            <h3>#springMessage('resources.corn'): $corn</h3>
+        </div>
+    </div>
 #end
