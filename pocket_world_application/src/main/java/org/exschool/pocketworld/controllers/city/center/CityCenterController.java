@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
+import java.util.Set;
 
 
 @Controller
@@ -41,6 +42,8 @@ public class CityCenterController {
         LOGGER.info("Requested params:" + allRequestParams);
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
         model.addAttribute("dto", cityCenterDto);
+        Set<String> builtBuildingTypes = cityCenterDto.getBuildingTypes();
+        model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(builtBuildingTypes));
         LOGGER.info("Out:" + model);
         return "city_center";
     }

@@ -3,7 +3,9 @@ package org.exschool.pocketworld.city.center.dto;
 import org.exschool.pocketworld.building.Building;
 import org.exschool.pocketworld.resource.ResourceDto;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class CityCenterDto {
 
@@ -43,4 +45,13 @@ public class CityCenterDto {
     public ResourceDto getResourceDto() {
         return resourceDto;
     }
+
+    public Set<String> getBuildingTypes() {
+        Set<String> result = new HashSet<>();
+        for(Building building: getBuildings().values()) {
+            result.add(building.getType().toLowerCase());
+        }
+        return result;
+    }
+
 }

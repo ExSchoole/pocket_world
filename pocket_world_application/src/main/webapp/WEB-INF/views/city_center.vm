@@ -1,5 +1,6 @@
 #parse("layout/macros.vm")
-#head("City Center")
+#@html()
+    #head("City Center")
 
 #@body()
 <div class="row">
@@ -7,78 +8,75 @@
 </div>
     <h1>${dto.NickName}'s city center</h1>
     #showResources(${dto.getResourceDto().getGold()},${dto.getResourceDto().getTimber()},${dto.getResourceDto().getClay()},${dto.getResourceDto().getCorn()})
-<div class="col-md-7">
-    <div class="row">
-        #foreach($position in [1,2,3,4])
+        <div class="row">
+            #foreach($position in [1,2,3,4])
+                <div class="col-md-3">
+                    #showbuilding( $dto.getBuildings(), $position )
+                </div>
+            #end
+        </div>
+
+        <div class="row">
             <div class="col-md-3">
-                #showbuilding( $dto.getBuildings(), $position )
-            </div>
-        #end
-
-    </div>
-
-    <div class="row">
-        <div class="col-md-3">
-            #foreach($position in [5,6])
+                #foreach($position in [5,6])
                    #showbuilding($dto.getBuildings(), $position )
                #end
-        </div>
+            </div>
 
-        <div class="col-md-6">
-            <div class="central_image building_position"></div>
-        </div>
+            <div class="col-md-6">
+                <div class="central_image building_position"></div>
+            </div>
 
-        <div class="col-md-3">
-            #foreach($position in [7,8])
+            <div class="col-md-3">
+                #foreach($position in [7,8])
                  #showbuilding($dto.getBuildings(), $position )
                #end
-        </div>
-
-    </div>
-
-    <div class="row">
-        #foreach($position in [9,10,11,12])
-            <div class="col-md-3">
-                #showbuilding($dto.getBuildings(), $position )
-            </div>
-        #end
-    </div>
-</div>
-
-<div class="col-md-5">
-         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-3">
-                 <div class="building_factory building_karusel building cursor" draggable="true" id="building_factory"></div>
-                 <div class="building_shop building_karusel building cursor" draggable="true" id="building_shop"></div>
-                 <div class="building_market building_karusel building cursor" draggable="true" id="building_market"></div>
-                 <div class="building_mall building_karusel building cursor" draggable="true" id="building_mall"></div>
             </div>
         </div>
-</div> 
+
+        <div class="row">
+            #foreach($position in [9,10,11,12])
+                <div class="col-md-3">
+                    #showbuilding($dto.getBuildings(), $position )
+                </div>
+            #end
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        #addcarousel($buildingTypes)
+    </div>
+
+    <div class="col-md-5">
+        #addcarousel($buildingTypes)
+    </div>
+
+    <script type="text/javascript" src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
+    <script type="text/javascript" src="#springUrl('/js/jquery-ui.min.js')"></script>
+    <script type="text/javascript" src="#springUrl('/js/bootstrap.min.js')"></script>
+    <script type="text/javascript" src="#springUrl('/js/jquery.verticalCarousel.js')"></script>
+    <script type="text/javascript" src="#springUrl('/js/dragdrop.js')"></script>
+
+    <script type="text/javascript">
+        var cityConfig = {};
+        cityConfig.buildUrl = "#springUrl('')";
+        $(function () {
+            $("#carouselId").verticalCarousel({nSlots: 3, speed: 900});
+            $( ".building_karusel" ).draggable({
+                revert: "invalid"
+            });
+
+            $( ".building_empty" ).droppable({
+                hoverClass: "over",
+                drop: function( event, ui ) {
+                    $( this ).addClass( $(ui.draggable).attr("id") );
+                    $( ui.draggable).removeClass( $(ui.draggable).attr("id") )
+                            .removeClass( 'building_karusel' )
+                            .removeClass( 'cursor' );
+                    new dragDrop(cityConfig,$(ui.draggable).attr("id"),$(this).attr("id"));
+                },
+            });
+        });
+    </script>
+    #end
 #end
-
-
-<script src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
-<script src="#springUrl('/js/jquery-ui.min.js')"></script>
-<script src="#springUrl('/js/dragdrop.js')"></script>
-<script>
-	var cityConfig = {};
- 	cityConfig.buildUrl = "#springUrl('')";
-	 $(function () {
-	    $( ".building_karusel" ).draggable({
-	    	revert: "invalid"
-	    });
-
-	    $( ".building_empty" ).droppable({
-	    	hoverClass: "over",
-	        drop: function( event, ui ) {
-	          $( this ).addClass( $(ui.draggable).attr("id") );
-	          $( ui.draggable).removeClass( $(ui.draggable).attr("id") )
-	                          .removeClass( 'building_karusel' )
-	                          .removeClass( 'cursor' );
-	          new dragDrop(cityConfig,$(ui.draggable).attr("id"),$(this).attr("id"));
-	        },
-	      });
-	 });
-</script> 
