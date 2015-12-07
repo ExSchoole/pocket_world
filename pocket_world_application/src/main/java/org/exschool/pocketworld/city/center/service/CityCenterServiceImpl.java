@@ -11,11 +11,13 @@ import java.util.Map;
 
 @Service
 public class CityCenterServiceImpl implements CityCenterService {
-	private Map<Integer, Building> buildings;
-    
-	@Override
+    public static final int MIN_POSITION = 1;
+    public static final int MAX_POSITION = 12;
+    private Map<Integer, Building> buildings;
+
+    @Override
     public CityCenterDto cityCenterInfo() {
-        ResourceDto resourceDto = new ResourceDto(1,1,1,1);
+        ResourceDto resourceDto = new ResourceDto(1, 1, 1, 1);
         this.buildings = buildings();
         String nickname = "User login";
         return CityCenterDtoBuilder.builder()
@@ -33,14 +35,15 @@ public class CityCenterServiceImpl implements CityCenterService {
         buildings.put(9, new Building("shop", 4));
         return buildings;
     }
-    
-    public boolean addBuilding(int position, Building newBuilding){
-    	if (position<=12 && position>=1 && newBuilding!=null)
-    		if (buildings.containsKey(position) == false){
-    			this.buildings.put(position, newBuilding);
-    			return true;
-    		}
-    	        
+
+    public boolean addBuilding(int position, Building newBuilding) {
+        if (newBuilding != null && position <= MAX_POSITION && position >= MIN_POSITION) {
+            if (!buildings.containsKey(position)) {
+                this.buildings.put(position, newBuilding);
+                return true;
+            }
+        }
+
         return false;
     }
 }

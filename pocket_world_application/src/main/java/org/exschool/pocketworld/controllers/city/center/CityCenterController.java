@@ -1,7 +1,5 @@
 package org.exschool.pocketworld.controllers.city.center;
 
-import java.util.Map;
-
 import org.exschool.pocketworld.building.Building;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Map;
+
 
 @Controller
 @RequestMapping("/city/center")
@@ -24,32 +24,21 @@ public class CityCenterController {
     private CityCenterService cityCenterService;
     @Autowired
     private PlayerService playerService;
-    private String playerLogin="test-user";
+    private String playerLogin = "test-user";
 
     @RequestMapping(value = "/addBuilding", method = RequestMethod.POST)
     public String addBuilding(@RequestParam String type, @RequestParam int position) {
-    	
-    	if (cityCenterService.addBuilding(position, new Building(type,1)) == true){
-    		LOGGER.info("Added");
-    		LOGGER.info(type);   	
-        	LOGGER.info(Integer.toString(position));
-    	}else LOGGER.info("Not added");
-    	
-    	return "city_center";
-    }
-    
-    
-    @RequestMapping(value = "/populate")
-    public String populateDatabase(Model model) {
-    	LOGGER.info(model.toString());
-        // add initial Users data to Database
-        return "init";
+        if (cityCenterService.addBuilding(position, new Building(type, 1))) {
+            LOGGER.info("new builfind with type - {} has been added to position - {}", type, position);
+        } else LOGGER.info("Not added");
+
+        return "city_center";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showCityCenter(
             @RequestParam Map<String, String> allRequestParams, Model model) {
-    	LOGGER.info("Requested params:" + allRequestParams);
+        LOGGER.info("Requested params:" + allRequestParams);
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
         model.addAttribute("dto", cityCenterDto);
         LOGGER.info("Out:" + model);
