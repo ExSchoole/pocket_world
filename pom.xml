@@ -206,6 +206,13 @@
             <version>1.4</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0-rc3</version>
+        </dependency>
+
     </dependencies>
 
 
