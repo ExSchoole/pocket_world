@@ -22,11 +22,13 @@ public class CityCenterServiceImpl implements CityCenterService {
     public static final int MAX_POSITION = 12;
     private Map<Integer, Building> buildings;
 
+    {
+        buildings = buildings();
+    }
+
     @Override
     public CityCenterDto cityCenterInfo() {
         ResourceDto resourceDto = new ResourceDto(1, 1, 1, 1);
-        Map<Integer, Building> buildings = buildings();
-        this.buildings = buildings();
         String nickname = "User login";
         return CityCenterDtoBuilder.builder()
                 .resource(resourceDto)

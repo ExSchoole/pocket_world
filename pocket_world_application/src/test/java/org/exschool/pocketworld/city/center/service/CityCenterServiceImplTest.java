@@ -11,12 +11,22 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 
 import java.util.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(BlockJUnit4ClassRunner.class)
 public class CityCenterServiceImplTest {
 
     CityCenterServiceImpl cityCenterService = new CityCenterServiceImpl();
+
+    @Test
+    public void testAddBuilding() {
+        Building b = new Building("", 2);
+        cityCenterService.cityCenterInfo();
+        assertTrue(cityCenterService.addBuilding(4, b));
+        assertFalse(cityCenterService.addBuilding(-1, b));
+        assertFalse(cityCenterService.addBuilding(1, b));
+        assertFalse(cityCenterService.addBuilding(5, null));
+    }
 
     @Test
     public void testNoBuildingTypeIfBuildingWithAllBuildingTypesAreBuilt() {
