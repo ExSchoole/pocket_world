@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"org.exschool.pocketworld.dao", "org.exschool.pocketworld.player" })
+@ComponentScan({"org.exschool.pocketworld.dao", "org.exschool.pocketworld.player", "org.exschool.pocketworld.city.center" })
 public class TestSpringConfig {
 
     @Bean

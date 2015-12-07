@@ -1,13 +1,49 @@
-div.building_mall {
-    background-image: url(../images/house34.png); 
+div.building_storage {
+    background-image: url(../images/storage.png);
+}
+
+div.building_gilothome {
+    background-image: url(../images/gilothome.png);
+}
+
+div.building_townhall {
+    background-image: url(../images/townhall.png);
+}
+
+div.building_marketplace {
+    background-image: url(../images/marketplace.png);
+}
+
+div.building_pool {
+    background-image: url(../images/pool.png);
 }
 
 div.building_factory {
-    background-image: url(../images/building78.png);
+    background-image: url(../images/factory.png);
+}
+
+div.building_farm {
+    background-image: url(../images/farm.png);
+}
+
+div.building_barn {
+    background-image: url(../images/barn.png);
+}
+
+div.building_school {
+    background-image: url(../images/school.png);
+}
+
+div.building_mall {
+    background-image: url(../images/mall.png);
+}
+
+div.building_plant{
+    background-image: url(../images/factory.png);
 }
 
 div.building_market {
-    background-image: url(../images/factory6.png);
+    background-image: url(../images/marketplace.png);
 }
 
 div.building_shop {
