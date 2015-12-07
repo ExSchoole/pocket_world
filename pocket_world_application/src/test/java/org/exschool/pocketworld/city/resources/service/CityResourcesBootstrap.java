@@ -31,7 +31,7 @@ public class CityResourcesBootstrap {
     private volatile boolean bootstraped = false;
 
     public void fillDatabase() {
-        if (bootstraped) return;
+     /*   if (bootstraped) return;
         Player player1 = PlayerBuilder.builder().login("login-1").resourceId(1L).build();
         dao.saveAll(Arrays.asList(player1));
         
@@ -51,6 +51,6 @@ public class CityResourcesBootstrap {
         ResourceBuilding resourceBuilding3 = ResourceBuildingBuilder.builder().buildingType(ResourceType.TIMBER).level(1).position(3).cityId(savedCity.getId()).build();
        
         dao.saveAll(Arrays.asList(resourceBuilding1, resourceBuilding2, resourceBuilding3));
-        bootstraped = true;
+        bootstraped = true;*/
     }
 }
