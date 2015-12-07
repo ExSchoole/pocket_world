@@ -61,6 +61,11 @@
             <artifactId>resource_buildings</artifactId>
             <version>${resource_buildings.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.exschool</groupId>
+            <artifactId>build_queue</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 
 

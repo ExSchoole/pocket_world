@@ -20,6 +20,11 @@ public class BuildQueueServiceImpl implements BuildQueueService {
     @Autowired
     private Dao dao;
 
+    @Override
+    public BuildQueue get(Long id) {
+        return dao.get(BuildQueue.class, id);
+    }
+
     /**
      * Saves entity object to DB
      *
@@ -46,7 +51,8 @@ public class BuildQueueServiceImpl implements BuildQueueService {
     }
 
     @Override
-    public BuildQueue delete(BuildQueue entity) {
-        return null;
+    public void delete(BuildQueue entity) {
+
+        dao.delete(entity);
     }
 }
