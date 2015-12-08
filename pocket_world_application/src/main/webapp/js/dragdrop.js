@@ -1,5 +1,5 @@
 function dragDrop(config,type,position) {
-    $.ajax({          
+	$.ajax({          
 		   type: 'POST',
 		   url: config.buildUrl+"/city/center/addBuilding",
 		   data : { type: type, position: position},
