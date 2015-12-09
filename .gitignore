@@ -1,7 +1,6 @@
 *.iml
 *.iws
 /target/
-/*/catalina.base_IS_UNDEFINED/
 /*/target/
 .idea/
 /*/.idea/

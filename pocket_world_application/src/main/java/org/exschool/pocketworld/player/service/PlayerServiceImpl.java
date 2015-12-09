@@ -27,8 +27,9 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Player getPlayerByLogin(String login) {
         DetachedCriteria query = DetachedCriteria.forClass(Player.class);
-        query.add(Restrictions.eq("login", login));
+        query.add(Restrictions.eq("cityId", login));
         return dao.getBy(query);
     }
+  
 
 }
