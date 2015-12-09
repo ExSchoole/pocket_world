@@ -8,9 +8,10 @@ import java.util.List;
  * Created by manoylo on 20.11.15.
  */
 public interface ResourceBuildingService {
-    List<ResourceBuilding> allCityBuildings(Long id);
+    List<ResourceBuilding> allBuildings();
     ResourceBuilding get (long id);
     ResourceBuilding save(ResourceBuilding entity);
+    List<ResourceBuilding> allCityBuildings(Long id);
 
 }
 

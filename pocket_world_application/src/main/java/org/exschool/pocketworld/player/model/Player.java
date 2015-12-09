@@ -11,7 +11,8 @@ public class Player {
     @Column(name = "player_id")
     private Long id;
 
-    private Long resourcesID;
+    @Embedded
+    private PlayerResources playerResources;
 
     @Column(name = "login")
     private String login;
@@ -20,8 +21,8 @@ public class Player {
         this.login = "";
     }
 
-    public Player(Long resourcesID, String login) {
-        this.resourcesID = resourcesID;
+    public Player(PlayerResources playerResources, String login) {
+        this.playerResources = playerResources;
         this.login = login;
     }
 
@@ -42,14 +43,13 @@ public class Player {
         this.login = login;
     }
 
-    public Long getResourcesID() {
-        return resourcesID;
+    public PlayerResources getPlayerResources() {
+        return playerResources;
     }
 
-    public void setResourcesID(Long resourcesID) {
-        this.resourcesID = resourcesID;
+    public void setPlayerResources(PlayerResources playerResources) {
+        this.playerResources = playerResources;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -59,15 +59,17 @@ public class Player {
         Player player = (Player) o;
 
         if (id != null ? !id.equals(player.id) : player.id != null) return false;
-        if (resourcesID != null ? !resourcesID.equals(player.resourcesID) : player.resourcesID != null) return false;
-        return !(login != null ? !login.equals(player.login) : player.login != null);
+        if (login != null ? !login.equals(player.login) : player.login != null) return false;
+        if (playerResources != null ? !playerResources.equals(player.playerResources) : player.playerResources != null)
+            return false;
 
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (resourcesID != null ? resourcesID.hashCode() : 0);
+        result = 31 * result + (playerResources != null ? playerResources.hashCode() : 0);
         result = 31 * result + (login != null ? login.hashCode() : 0);
         return result;
     }
@@ -76,7 +78,7 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "id=" + id +
-                ", resourcesID=" + resourcesID +
+                ", playerResources=" + playerResources +
                 ", login='" + login + '\'' +
                 '}';
     }

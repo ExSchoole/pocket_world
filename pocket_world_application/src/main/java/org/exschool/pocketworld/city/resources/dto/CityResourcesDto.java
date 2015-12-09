@@ -33,8 +33,8 @@ public class CityResourcesDto {
         return resourceBuildings;
     }
 
-    public void setResourceBuildings(Map<Integer, ResourceBuilding> resourceBuildings2) {
-        this.resourceBuildings = resourceBuildings2;
+    public void setResourceBuildings(Map<Integer, ResourceBuilding> resourceBuildings) {
+        this.resourceBuildings = resourceBuildings;
     }
 
     public void setResourceDto(ResourceDto resourceDto) {
@@ -44,4 +44,5 @@ public class CityResourcesDto {
     public ResourceDto getResourceDto() {
         return resourceDto;
     }
+    
 }

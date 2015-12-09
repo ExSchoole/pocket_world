@@ -28,12 +28,15 @@ public class ResourceBuildingServiceImpl  implements ResourceBuildingService {
      * @return list of ResourceBuilding
      */
     @Override
+    public List<ResourceBuilding> allBuildings() {
+        return dao.all(ResourceBuilding.class);
+    }
+    @Override
     public List<ResourceBuilding> allCityBuildings(Long id) {
     	DetachedCriteria query = DetachedCriteria.forClass(ResourceBuilding.class);
         query.add(Restrictions.eq("cityId", id));
-        return dao.getBy(query);
+        return dao.getAllBy(query);
     }
-
     /**
      * Returns ResourceBuilding by id
      *
