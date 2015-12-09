@@ -24,9 +24,12 @@ public class ResourceBuildingBootstrap {
     public void fillDatabase() {
         if (bootstraped) return;
         ResourceBuilding resourceBuilding1 = ResourceBuildingBuilder.builder().buildingType(ResourceType.GOLD).level(1).position(1).cityId(1L).build();
-        ResourceBuilding resourceBuilding2 = ResourceBuildingBuilder.builder().buildingType(ResourceType.TIMBER).level(1).position(2).cityId(1L).build();
-        ResourceBuilding resourceBuilding3 = ResourceBuildingBuilder.builder().buildingType(ResourceType.TIMBER).level(1).position(3).cityId(1L).build();
-        dao.saveAll(Arrays.asList(resourceBuilding1, resourceBuilding2, resourceBuilding3));
+        ResourceBuilding resourceBuilding2 = ResourceBuildingBuilder.builder().buildingType(ResourceType.TIMBER).level(1).position(2).cityId(2L).build();
+        ResourceBuilding resourceBuilding3 = ResourceBuildingBuilder.builder().buildingType(ResourceType.TIMBER).level(1).position(3).cityId(3L).build();
+        ResourceBuilding resourceBuilding4 = ResourceBuildingBuilder.builder().buildingType(ResourceType.CLAY).level(1).position(1).cityId(5L).build();
+        ResourceBuilding resourceBuilding5 = ResourceBuildingBuilder.builder().buildingType(ResourceType.TIMBER).level(3).position(2).cityId(5L).build();
+        ResourceBuilding resourceBuilding6 = ResourceBuildingBuilder.builder().buildingType(ResourceType.CORN).level(4).position(3).cityId(5L).build();
+        dao.saveAll(Arrays.asList(resourceBuilding1, resourceBuilding2, resourceBuilding3,resourceBuilding4,resourceBuilding5,resourceBuilding6));
         bootstraped = true;
     }
 
