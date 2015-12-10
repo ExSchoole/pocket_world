@@ -65,7 +65,10 @@
 <script>
 	var cityConfig = {};
 	var typeOfBuilding;
- 	cityConfig.buildUrl = "#springUrl('')";
+	var selectedBuilding;
+	var selectedPosition;
+	
+ 	cityConfig.buildUrl = "#springUrl('')"+"/city/center/addBuilding";
 	 $(function () {
 	    $( ".building_karusel" ).draggable({
 	        appendTo: 'body',
@@ -76,19 +79,25 @@
 	    $( ".building_empty" ).droppable({
 	    	hoverClass: "over",
 	        drop: function( event, ui ) {
+	          selectedBuilding = $(ui.draggable).attr("id");
+	          selectedPosition = $(this).attr("id");
+	          
 	          $( this ).removeClass( 'building_empty' )
-	                   .addClass("building_" + $(ui.draggable).attr("id") )
-	                   .addClass( 'building');		               
-	          $( ui.draggable).removeClass("building_" + $(ui.draggable).attr("id") )
+	                   .addClass("building_" + selectedBuilding )
+	                   .addClass( 'building');	
+	                   	               
+	          $( ui.draggable).removeClass("building_" + selectedBuilding )
 	                          .removeClass( 'building_karusel' )
 	                          .removeClass( 'cursor' );
-	          $('li').find("#"+$(ui.draggable).attr('id')).remove()
-	          new dragDrop(cityConfig,$(ui.draggable).attr("id"),$(this).attr("id"));
+	                          
+	          $('li').find("#"+selectedBuilding).remove();
+	          
+	          dragDrop(cityConfig,selectedBuilding,selectedPosition);
 	        },
 	      });
 	 });
 	 
-     $(document).ready(function () {
+     $(function () {
 	     $("#carouselId").verticalCarousel({nSlots: 3, speed: 900});
      });
      
