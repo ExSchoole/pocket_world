@@ -32,11 +32,10 @@ public class CityResourcesServiceImpl implements CityResourcesService {
         Player player = playerService.getPlayerByLogin(login);
         PlayerResources playerResources = player.getPlayerResources();
 
-        ResourceDto resourceDto =
-                new ResourceDto(playerResources.getGoldAmount(),
-                        playerResources.getTimberAmount(),
-                        playerResources.getClayAmount(),
-                        playerResources.getCornAmount());
+        ResourceDto resourceDto = new ResourceDto(playerResources.getGoldAmount(),
+                          						  playerResources.getTimberAmount(),
+                          						  playerResources.getClayAmount(),
+                          						  playerResources.getCornAmount());
 
         City city = cityService.getCityByPlayerId(player.getId());
         List<ResourceBuilding> buildings = resourceBuildingService.allCityBuildings(city.getId());
@@ -44,10 +43,10 @@ public class CityResourcesServiceImpl implements CityResourcesService {
         Map<Integer, ResourceBuilding> resourceBuildings = toResourceBuildingsDTOs(buildings);
 
         return CityResourcesDtoBuilder.builder()
-                .resource(resourceDto)
-                .resourceBuildings(resourceBuildings)
-                .nickname(player.getLogin())
-                .build();
+                					  .resource(resourceDto)
+                					  .resourceBuildings(resourceBuildings)
+                					  .nickname(player.getLogin())
+                					  .build();
     }
 
     private static Map<Integer, ResourceBuilding> toResourceBuildingsDTOs(List<ResourceBuilding> resourceBuildings) {

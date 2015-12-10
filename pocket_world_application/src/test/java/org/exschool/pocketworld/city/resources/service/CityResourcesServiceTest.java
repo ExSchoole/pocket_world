@@ -41,7 +41,6 @@ public class CityResourcesServiceTest {
     ResourceBuildingService resourceBuildingService;
     @InjectMocks
     CityResourcesServiceImpl cityResourcesService = new CityResourcesServiceImpl();
-
     List<ResourceBuilding> buildings;
     PlayerResources playerResources;
     
@@ -56,19 +55,18 @@ public class CityResourcesServiceTest {
         when(playerService.getPlayerByLogin(anyString())).thenReturn( palayer);
         when(cityService.getCityByPlayerId(anyLong())).thenReturn(new City());
         when(resourceBuildingService.allCityBuildings(anyLong())).thenReturn(buildings);
-    
     }
 
     @Test
     public void testCityResourcesInfo() {
-    	ResourceDto resourceDto =
-                new ResourceDto(playerResources.getGoldAmount(),
-                        playerResources.getTimberAmount(),
-                        playerResources.getClayAmount(),
-                        playerResources.getCornAmount());
+    	ResourceDto resourceDto = new ResourceDto(playerResources.getGoldAmount(),
+                        						  playerResources.getTimberAmount(),
+                        						  playerResources.getClayAmount(),
+                        						  playerResources.getCornAmount());
     	
     	Map<Integer, ResourceBuilding> resourceBuildings = toResourceBuildingsDTOs(buildings);
         CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo();
+        
         assertEquals(cityResourcesDto.getNickName(), "login");
         assertEquals(cityResourcesDto.getResourceDto(),resourceDto);
         assertEquals(cityResourcesDto.getResourceBuildings(), resourceBuildings);
