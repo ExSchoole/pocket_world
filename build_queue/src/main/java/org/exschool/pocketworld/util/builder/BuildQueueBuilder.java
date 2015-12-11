@@ -1,6 +1,6 @@
 package org.exschool.pocketworld.util.builder;
 
-import org.exschool.pocketworld.build_queue.model.BuildQueue;
+import org.exschool.pocketworld.build_queue.model.BuildQueueRecord;
 import org.exschool.pocketworld.build_queue.model.Status;
 import org.exschool.pocketworld.build_queue.model.Type;
 
@@ -58,17 +58,17 @@ public final class BuildQueueBuilder {
         return this;
     }
 
-   public BuildQueue build(){
-       BuildQueue buildQueue = new BuildQueue();
-       buildQueue.setId(this.id);
-       buildQueue.setName(this.name);
-       buildQueue.setLevel(this.level);
-       buildQueue.setType(this.type);
-       buildQueue.setBuildEnd(this.buildEnd);
-       buildQueue.setUserId(this.userId);
-       buildQueue.setStatus(this.status);
-       buildQueue.setBuildingId(this.buildingId);
-       return  buildQueue;
+   public BuildQueueRecord build(){
+       BuildQueueRecord buildQueueRecord = new BuildQueueRecord();
+       buildQueueRecord.setId(this.id);
+       buildQueueRecord.setName(this.name);
+       buildQueueRecord.setLevel(this.level);
+       buildQueueRecord.setType(this.type);
+       buildQueueRecord.setBuildEnd(this.buildEnd);
+       buildQueueRecord.setUserId(this.userId);
+       buildQueueRecord.setStatus(this.status);
+       buildQueueRecord.setBuildingId(this.buildingId);
+       return buildQueueRecord;
 
     }
 

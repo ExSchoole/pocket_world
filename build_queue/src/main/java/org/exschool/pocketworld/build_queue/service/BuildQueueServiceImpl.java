@@ -1,6 +1,6 @@
 package org.exschool.pocketworld.build_queue.service;
 
-import org.exschool.pocketworld.build_queue.model.BuildQueue;
+import org.exschool.pocketworld.build_queue.model.BuildQueueRecord;
 import org.exschool.pocketworld.build_queue.model.Status;
 import org.exschool.pocketworld.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +23,13 @@ public class BuildQueueServiceImpl implements BuildQueueService {
     private Dao dao;
 
     @Override
-    public BuildQueue get(Long id) {
-        return dao.get(BuildQueue.class, id);
+    public BuildQueueRecord get(Long id) {
+        return dao.get(BuildQueueRecord.class, id);
     }
 
     @Override
-    public List<BuildQueue> getAll() {
-        return dao.all(BuildQueue.class);
+    public List<BuildQueueRecord> getAll() {
+        return dao.all(BuildQueueRecord.class);
     }
 
     /**
@@ -38,7 +38,7 @@ public class BuildQueueServiceImpl implements BuildQueueService {
      * @param entity
      */
     @Override
-    public BuildQueue save(BuildQueue entity) {
+    public BuildQueueRecord save(BuildQueueRecord entity) {
         return dao.save(entity);
     }
 
@@ -49,8 +49,8 @@ public class BuildQueueServiceImpl implements BuildQueueService {
      * @return
      */
     @Override
-    public BuildQueue changeStatus(BuildQueue entity, Status status) {
-        BuildQueue record = dao.get(BuildQueue.class,entity.getId());
+    public BuildQueueRecord changeStatus(BuildQueueRecord entity, Status status) {
+        BuildQueueRecord record = dao.get(BuildQueueRecord.class,entity.getId());
         dao.delete(entity);
         record.setStatus(status);
         dao.save(record);
@@ -58,15 +58,15 @@ public class BuildQueueServiceImpl implements BuildQueueService {
     }
 
     @Override
-    public void delete(BuildQueue entity) {
+    public void delete(BuildQueueRecord entity) {
 
         dao.delete(entity);
     }
 
     @Override
     public void deleteAllDone() {
-        List<BuildQueue> all = dao.all(BuildQueue.class);
-        for (BuildQueue record:all) {
+        List<BuildQueueRecord> all = dao.all(BuildQueueRecord.class);
+        for (BuildQueueRecord record:all) {
             if (record.getStatus().equals(Status.DONE)) {
                 dao.delete(record);
             }

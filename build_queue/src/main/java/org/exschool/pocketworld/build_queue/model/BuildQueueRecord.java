@@ -10,7 +10,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="BUILDQUEUE")
-public class BuildQueue implements Serializable {
+public class BuildQueueRecord implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "record_id")
@@ -103,10 +103,10 @@ public class BuildQueue implements Serializable {
         this.buildingId = buildingId;
     }
 
-    public BuildQueue() {
+    public BuildQueueRecord() {
     }
 
-    public BuildQueue(
+    public BuildQueueRecord(
             Long id, String name, int level, Type type, Date buildEnd, Long userId, Status status, Long buildingId) {
         this.id = id;
         this.name = name;
@@ -123,7 +123,7 @@ public class BuildQueue implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BuildQueue that = (BuildQueue) o;
+        BuildQueueRecord that = (BuildQueueRecord) o;
 
         if (level != that.level) return false;
         if (buildEnd != null ? !buildEnd.equals(that.buildEnd) : that.buildEnd != null) return false;

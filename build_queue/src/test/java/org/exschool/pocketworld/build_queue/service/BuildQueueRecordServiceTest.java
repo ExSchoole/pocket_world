@@ -1,6 +1,6 @@
 package org.exschool.pocketworld.build_queue.service;
 
-import org.exschool.pocketworld.build_queue.model.BuildQueue;
+import org.exschool.pocketworld.build_queue.model.BuildQueueRecord;
 import org.exschool.pocketworld.build_queue.model.Status;
 import org.exschool.pocketworld.config.TestSpringConfig;
 import org.exschool.pocketworld.dao.Dao;
@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
-public class BuildQueueServiceTest {
+public class BuildQueueRecordServiceTest {
     @Autowired
     BuildQueueService buildQueueService;
     @Autowired
@@ -35,20 +35,20 @@ public class BuildQueueServiceTest {
 
     @Test
     public void testCreate() {
-        BuildQueue buildQueue = BuildQueueBuilder.builder().build();
-        BuildQueue savedBuildQueue = buildQueueService.save(buildQueue);
-        assertNotNull(savedBuildQueue);
-        assertNotNull(savedBuildQueue.getId());
-        assertAllFieldsEquals(buildQueue, savedBuildQueue);
+        BuildQueueRecord buildQueueRecord = BuildQueueBuilder.builder().build();
+        BuildQueueRecord savedBuildQueueRecord = buildQueueService.save(buildQueueRecord);
+        assertNotNull(savedBuildQueueRecord);
+        assertNotNull(savedBuildQueueRecord.getId());
+        assertAllFieldsEquals(buildQueueRecord, savedBuildQueueRecord);
     }
     @Test
     public void testChangeStatus() {
         Long existingId =1L;
-        BuildQueue existing = buildQueueService.get(existingId);
+        BuildQueueRecord existing = buildQueueService.get(existingId);
         assertNotNull(existing);
         existing.setStatus(Status.DONE);
         buildQueueService.save(existing);
-        BuildQueue saved = buildQueueService.get(existingId);
+        BuildQueueRecord saved = buildQueueService.get(existingId);
         assertAllFieldsEquals(saved,existing);
 
     }
@@ -56,32 +56,32 @@ public class BuildQueueServiceTest {
     @Test
     public void testDelete() {
         Long existingId=2L;
-        BuildQueue existing = buildQueueService.get(existingId);
+        BuildQueueRecord existing = buildQueueService.get(existingId);
         assertNotNull(existing);
         buildQueueService.delete(existing);
-        BuildQueue deleted = buildQueueService.get(existingId);
+        BuildQueueRecord deleted = buildQueueService.get(existingId);
         assertNull(deleted);
     }
 
     @Test
     public void testDeleteAllDone() {
         buildQueueService.deleteAllDone();
-        List<BuildQueue> all = buildQueueService.getAll();
-        for (BuildQueue record: all) {
+        List<BuildQueueRecord> all = buildQueueService.getAll();
+        for (BuildQueueRecord record: all) {
             assertNotEquals(Status.DONE,record.getStatus());
         }
 
     }
 
-    private void assertAllFieldsEquals(BuildQueue buildQueue1, BuildQueue buildQueue2) {
-        assertEquals(buildQueue1.getId(),buildQueue2.getId());
-        assertEquals(buildQueue1.getName(),buildQueue2.getName());
-        assertEquals(buildQueue1.getLevel(),buildQueue2.getLevel());
-        assertEquals(buildQueue1.getType(),buildQueue2.getType());
-        assertEquals(buildQueue1.getBuildEnd(),buildQueue2.getBuildEnd());
-        assertEquals(buildQueue1.getUserId(),buildQueue2.getUserId());
-        assertEquals(buildQueue1.getStatus(),buildQueue2.getStatus());
-        assertEquals(buildQueue1.getBuildingId(),buildQueue2.getBuildingId());
+    private void assertAllFieldsEquals(BuildQueueRecord buildQueueRecord1, BuildQueueRecord buildQueueRecord2) {
+        assertEquals(buildQueueRecord1.getId(), buildQueueRecord2.getId());
+        assertEquals(buildQueueRecord1.getName(), buildQueueRecord2.getName());
+        assertEquals(buildQueueRecord1.getLevel(), buildQueueRecord2.getLevel());
+        assertEquals(buildQueueRecord1.getType(), buildQueueRecord2.getType());
+        assertEquals(buildQueueRecord1.getBuildEnd(), buildQueueRecord2.getBuildEnd());
+        assertEquals(buildQueueRecord1.getUserId(), buildQueueRecord2.getUserId());
+        assertEquals(buildQueueRecord1.getStatus(), buildQueueRecord2.getStatus());
+        assertEquals(buildQueueRecord1.getBuildingId(), buildQueueRecord2.getBuildingId());
 
 
     }
