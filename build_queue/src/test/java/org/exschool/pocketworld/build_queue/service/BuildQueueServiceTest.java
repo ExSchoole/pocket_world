@@ -13,9 +13,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
@@ -61,6 +61,16 @@ public class BuildQueueServiceTest {
         buildQueueService.delete(existing);
         BuildQueue deleted = buildQueueService.get(existingId);
         assertNull(deleted);
+    }
+
+    @Test
+    public void testDeleteAllDone() {
+        buildQueueService.deleteAllDone();
+        List<BuildQueue> all = buildQueueService.getAll();
+        for (BuildQueue record: all) {
+            assertNotEquals(Status.DONE,record.getStatus());
+        }
+
     }
 
     private void assertAllFieldsEquals(BuildQueue buildQueue1, BuildQueue buildQueue2) {

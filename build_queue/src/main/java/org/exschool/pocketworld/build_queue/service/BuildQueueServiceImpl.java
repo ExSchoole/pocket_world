@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by skandy on 03.12.15.
  */
@@ -23,6 +25,11 @@ public class BuildQueueServiceImpl implements BuildQueueService {
     @Override
     public BuildQueue get(Long id) {
         return dao.get(BuildQueue.class, id);
+    }
+
+    @Override
+    public List<BuildQueue> getAll() {
+        return dao.all(BuildQueue.class);
     }
 
     /**
@@ -54,5 +61,16 @@ public class BuildQueueServiceImpl implements BuildQueueService {
     public void delete(BuildQueue entity) {
 
         dao.delete(entity);
+    }
+
+    @Override
+    public void deleteAllDone() {
+        List<BuildQueue> all = dao.all(BuildQueue.class);
+        for (BuildQueue record:all) {
+            if (record.getStatus().equals(Status.DONE)) {
+                dao.delete(record);
+            }
+
+        }
     }
 }

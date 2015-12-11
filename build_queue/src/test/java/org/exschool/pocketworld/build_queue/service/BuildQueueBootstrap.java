@@ -21,7 +21,7 @@ public class BuildQueueBootstrap {
     private volatile boolean bootstraped = false;
     public void fillDatabase(){
         if(bootstraped) return;
-        BuildQueue buildQueue1 = BuildQueueBuilder.builder().id(1L).name("testname1").level(1).type(Type.BUILDING).buildEnd(new Date()).userId(1L).status(Status.DONE).buildingId(1L).build();
+        BuildQueue buildQueue1 = BuildQueueBuilder.builder().id(1L).name("testname1").level(1).type(Type.BUILDING).buildEnd(new Date()).userId(1L).status(Status.QUEUED).buildingId(1L).build();
         BuildQueue buildQueue2 = BuildQueueBuilder.builder().id(2L).name("testname2").level(1).type(Type.RESOURCE_BUILDING).buildEnd(new Date()).userId(2L).status(Status.QUEUED).buildingId(2L).build();
         BuildQueue buildQueue3 = BuildQueueBuilder.builder().id(3L).name("testname3").level(1).type(Type.BUILDING).buildEnd(new Date()).userId(3L).status(Status.DONE).buildingId(3L).build();
         dao.saveAll(Arrays.asList(buildQueue1,buildQueue2,buildQueue3));
