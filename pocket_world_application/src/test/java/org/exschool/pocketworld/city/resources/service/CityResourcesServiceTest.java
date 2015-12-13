@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
@@ -50,7 +51,7 @@ public class CityResourcesServiceTest {
     	Player palayer = new Player(playerResources, "login");
     	buildings = new ArrayList<>();
         buildings.add(ResourceBuildingBuilder.builder().buildingType(ResourceType.GOLD).level(1).position(1).cityId(1L).build());
-        buildings.add(ResourceBuildingBuilder.builder().buildingType(ResourceType.TIMBER).level(1).position(1).cityId(1L).build());
+        buildings.add(ResourceBuildingBuilder.builder().buildingType(ResourceType.TIMBER).level(1).position(2).cityId(1L).build());
         
         when(playerService.getPlayerByLogin(anyString())).thenReturn( palayer);
         when(cityService.getCityByPlayerId(anyLong())).thenReturn(new City());
@@ -63,21 +64,16 @@ public class CityResourcesServiceTest {
                         						  playerResources.getTimberAmount(),
                         						  playerResources.getClayAmount(),
                         						  playerResources.getCornAmount());
-    	
-    	Map<Integer, ResourceBuilding> resourceBuildings = toResourceBuildingsDTOs(buildings);
+
         CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo();
         
         assertEquals(cityResourcesDto.getNickName(), "login");
         assertEquals(cityResourcesDto.getResourceDto(),resourceDto);
-        assertEquals(cityResourcesDto.getResourceBuildings(), resourceBuildings);
-    }
-    
-    private static Map<Integer, ResourceBuilding> toResourceBuildingsDTOs(List<ResourceBuilding> resourceBuildings) {
-        Map<Integer, ResourceBuilding> result = new HashMap<>();
-        for (ResourceBuilding resourceBuilding : resourceBuildings) {
-            result.put(resourceBuilding.getPosition(), resourceBuilding);
+        assertEquals(buildings.size(), cityResourcesDto.getResourceBuildings().size());
+        for (ResourceBuilding resourceBuilding : buildings) {
+            assertNotNull(cityResourcesDto.getResourceBuildings().get(resourceBuilding.getPosition()));
         }
-        return result;
+
     }
 }
 

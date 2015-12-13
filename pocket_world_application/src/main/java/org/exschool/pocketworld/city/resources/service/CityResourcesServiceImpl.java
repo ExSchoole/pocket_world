@@ -1,5 +1,8 @@
 package org.exschool.pocketworld.city.resources.service;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import org.exschool.pocketworld.building.ResourceBuildingDto;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.resources.builder.CityResourcesDtoBuilder;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
@@ -13,9 +16,9 @@ import org.exschool.pocketworld.resource.building.service.ResourceBuildingServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import static org.apache.commons.lang.Validate.notNull;
 
 @Component("CityResources")
 public class CityResourcesServiceImpl implements CityResourcesService {
@@ -30,30 +33,40 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     public CityResourcesDto cityResourcesInfo() {
         String login = "login-1";
         Player player = playerService.getPlayerByLogin(login);
+        notNull(player);
         PlayerResources playerResources = player.getPlayerResources();
 
         ResourceDto resourceDto = new ResourceDto(playerResources.getGoldAmount(),
-                          						  playerResources.getTimberAmount(),
-                          						  playerResources.getClayAmount(),
-                          						  playerResources.getCornAmount());
+                playerResources.getTimberAmount(),
+                playerResources.getClayAmount(),
+                playerResources.getCornAmount());
 
         City city = cityService.getCityByPlayerId(player.getId());
-        List<ResourceBuilding> buildings = resourceBuildingService.allCityBuildings(city.getId());
+        notNull(city);
 
-        Map<Integer, ResourceBuilding> resourceBuildings = toResourceBuildingsDTOs(buildings);
+        List<ResourceBuilding> buildings = resourceBuildingService.allCityBuildings(city.getId());
+        notNull(buildings);
+
+        List<ResourceBuildingDto> resourceBuildingDtos = Lists.transform(buildings, TO_RESOURCE_BUILDING_DTO);
 
         return CityResourcesDtoBuilder.builder()
-                					  .resource(resourceDto)
-                					  .resourceBuildings(resourceBuildings)
-                					  .nickname(player.getLogin())
-                					  .build();
+                .resource(resourceDto)
+                .resourceBuildings(resourceBuildingDtos)
+                .nickname(player.getLogin())
+                .build();
     }
 
-    private static Map<Integer, ResourceBuilding> toResourceBuildingsDTOs(List<ResourceBuilding> resourceBuildings) {
-        Map<Integer, ResourceBuilding> result = new HashMap<>();
-        for (ResourceBuilding resourceBuilding : resourceBuildings) {
-            result.put(resourceBuilding.getPosition(), resourceBuilding);
-        }
-        return result;
-    }
+    private static final Function<ResourceBuilding, ResourceBuildingDto> TO_RESOURCE_BUILDING_DTO =
+            new Function<ResourceBuilding, ResourceBuildingDto>() {
+                @Override
+                public ResourceBuildingDto apply(ResourceBuilding resourceBuilding) {
+                    notNull(resourceBuilding);
+                    return ResourceBuildingDto.builder().
+                            type(resourceBuilding.getResourceType().name()).
+                            level(resourceBuilding.getLevel()).
+                            position(resourceBuilding.getPosition()).
+                            build();
+
+                }
+            };
 }
