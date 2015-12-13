@@ -1,20 +1,26 @@
 package org.exschool.pocketworld.city.center.service;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import org.exschool.pocketworld.building.Building;
-import org.exschool.pocketworld.building.model.BuildingType;
-import org.exschool.pocketworld.city.center.dto.CityCenterDto;
-import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
-import org.exschool.pocketworld.resource.ResourceDto;
-import org.springframework.stereotype.Service;
+import static org.exschool.pocketworld.building.model.BuildingType.MALL;
+import static org.exschool.pocketworld.building.model.BuildingType.MARKETPLACE;
+import static org.exschool.pocketworld.building.model.BuildingType.PLANT;
+import static org.exschool.pocketworld.building.model.BuildingType.POOL;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import static org.exschool.pocketworld.building.model.BuildingType.*;
+import org.exschool.pocketworld.building.Building;
+import org.exschool.pocketworld.building.model.BuildingType;
+import org.exschool.pocketworld.building.service.BuildingService;
+import org.exschool.pocketworld.building.service.BuildingServiceImpl;
+import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
+import org.exschool.pocketworld.city.center.dto.CityCenterDto;
+import org.exschool.pocketworld.resource.ResourceDto;
+import org.springframework.stereotype.Service;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 
 @Service
 public class CityCenterServiceImpl implements CityCenterService {
@@ -26,6 +32,9 @@ public class CityCenterServiceImpl implements CityCenterService {
         buildings = buildings();
     }
 
+    private BuildingService buildingService = new BuildingServiceImpl();
+    private org.exschool.pocketworld.building.model.Building BuildingEntity;
+    
     @Override
     public CityCenterDto cityCenterInfo() {
         ResourceDto resourceDto = new ResourceDto(1, 1, 1, 1);
@@ -66,10 +75,21 @@ public class CityCenterServiceImpl implements CityCenterService {
         if (newBuilding != null && position <= MAX_POSITION && position >= MIN_POSITION) {
             if (!buildings.containsKey(position)) {
                 this.buildings.put(position, newBuilding);
+                
+                BuildingEntity = new org.exschool.pocketworld.building.model.Building();
+                BuildingEntity.setCityId(1L);
+                BuildingEntity.setLevel(newBuilding.getLevel());
+                BuildingEntity.setPosition(position);                
+                BuildingEntity.setBuildingType(BuildingType.valueOf(newBuilding.getType().toUpperCase()));
+                
+                buildingService.save(BuildingEntity);
+                
+                org.exschool.pocketworld.building.model.Building b = new org.exschool.pocketworld.building.model.Building();
                 return true;
             }
         }
 
         return false;
     }
+    
 }
