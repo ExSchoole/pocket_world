@@ -38,4 +38,29 @@ public class ResourceDto {
 		return corn;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + clay;
+		result = prime * result + corn;
+		result = prime * result + gold;
+		result = prime * result + timber;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)return true;
+		if (obj == null)return false;
+		
+		if (getClass() != obj.getClass())return false;
+		ResourceDto other = (ResourceDto) obj;
+		if (clay != other.clay)return false;
+		if (corn != other.corn)return false;
+		if (gold != other.gold)return false;
+		if (timber != other.timber)return false;
+		return true;
+	}
+
 }
