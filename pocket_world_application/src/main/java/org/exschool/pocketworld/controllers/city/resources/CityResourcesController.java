@@ -1,8 +1,5 @@
 package org.exschool.pocketworld.controllers.city.resources;
 
-import java.util.List;
-import java.util.Map;
-
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.resources.service.CityResourcesService;
 import org.exschool.pocketworld.resource.model.ResourceType;
@@ -11,7 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/city/resources")
@@ -30,15 +31,5 @@ public class CityResourcesController {
         model.addAttribute("dto", cityResourcesDto);
         LOGGER.info("Out:" + model);
         return "city_resources";
-    }
-
-    @RequestMapping(value="/{id}",method=RequestMethod.GET)
-    @ResponseBody
-    public List<String> getResourceBuildingsList(@PathVariable Long id){
-        return ResourceType.asListLowerCase();
-    }
-
-    public void setCityResourcesService(CityResourcesService cityResourcesService) {
-        this.cityResourcesService = cityResourcesService;
     }
 }

@@ -39,18 +39,7 @@
     <div class="row">
         #foreach($position in [9,10,11,12])
             <div class="col-md-3">
-                 <a href="#"
-                        data-toggle="popover"
-                        title="Build"
-                        data-trigger="focus"
-                        data-html="true"
-                        data-content="
-                                #foreach($resourceType in $resourceTypes)
-                                     <a href='#$resourceType'>$resourceType</a><br>
-                                #end
-                                    ">
                         #showbuilding($dto.getResourceBuildings(), $position )
-                 </a>
             </div>
         #end
     </div>
@@ -61,8 +50,93 @@
 <script type="text/javascript" src="#springUrl('/js/bootstrap.min.js')"></script>
 
 <script type="text/javascript">
+
     $(document).ready(function(){
-        $('[data-toggle="popover"]').popover();
+
+        $("div[id*='square']").click(function(){
+            var $div = $(this);
+            var id_name = $(this).attr('id');
+            var $position = id_name.substr('square_'.length,id_name.length);
+            if($div.hasClass('building_empty')){
+                $.ajax({
+                    url: "#springUrl('/v1/city/resources/types/')",
+                    dataType:'json',
+                    type: "GET",
+                    success: function( json ){
+                        showPopover($div, json, $position)
+                    },
+                    error: function( xhr, status, errorThrown){
+                        console.log("Error: "+errorThrown);
+                        console.log("Status:"+ status);
+                        console.dir(xhr);
+                    },
+                    complete: function( xhr, status){
+                    }
+                })
+            }
+        });
+
+        $("div.container").on("click","a#popover_item", function(event){
+            event.preventDefault();
+            var $position = $(this).attr('position');
+            var $element = $(this).attr('element');
+
+            $.ajax({
+                url:"#springUrl('/v1/city/resources/buildings/')",
+                contentType: "application/json",
+                type: "POST",
+                data: JSON.stringify({ position:$position,type:$element}),
+                success: function( json ){
+                    $("div#square_"+$position).removeClass("building_empty");
+                    $("div#square_"+$position).addClass("res_building_"+$element);
+                    destroyPopover($position);
+                },
+                error: function( xhr, status, errorThrown){
+                    alert("Error occured:"+errorThrown);
+                    console.log("Error: "+errorThrown);
+                    console.log("Status:"+ status);
+                    console.dir(xhr);
+                }
+            })
+        })
+
+        $("body").on('click', function(){
+            hideAllPopovers();
+        })
+
     });
+
+    function showPopover(element, json, position){
+        element.popover({
+            title: "Build",
+            content: generateListOfLinks(json, position),
+            placement: top,
+            trigger: "focus",
+            html: true
+        }).popover('show');
+    }
+
+    function destroyPopover(position){
+        $("div#square_"+position).popover('destroy');
+    }
+
+    function hideAllPopovers(){
+        $(".popover").each(function(index){
+            $(this).popover('hide');
+        })
+    }
+
+    function generateListOfLinks(json, position){
+        var result = '';
+        $.each(json, function(index, element){
+            result+="<a href='#' id='popover_item' position="+position+" element="+element+">"+element+"</a><br>" ;
+        })
+        console.log(result);
+        return result;
+    }
+
+
+
+
 </script>
 #end
