@@ -12,6 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import static org.junit.Assert.*;
+
+import java.util.List;
 /**
  * Created by manoylo on 20.11.15.
  *
@@ -63,6 +65,13 @@ public class ResourceBuildingServiceTest {
         ResourceBuilding existingBuilding = buildingService.get(3L);
         assertNotNull(existingBuilding);
     }
+    @Test
+    public void allCityBuildings() {
+        List<ResourceBuilding> existingBuildings = buildingService.allCityBuildings(5L);
+        assertNotNull(existingBuildings);
+        assertNotNull(existingBuildings.get(0));
+    }
+    
 
     private void assertAllFieldsEquals(ResourceBuilding building1, ResourceBuilding building2)
     {
@@ -73,7 +82,7 @@ public class ResourceBuildingServiceTest {
         assertEquals(building2.getCityId(), building1.getCityId());
 
     }
-
+     
 
 
 }
