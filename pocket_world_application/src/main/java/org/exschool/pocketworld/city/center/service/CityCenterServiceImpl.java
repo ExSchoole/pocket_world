@@ -17,6 +17,7 @@ import org.exschool.pocketworld.building.service.BuildingServiceImpl;
 import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.resource.ResourceDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Predicate;
@@ -32,8 +33,9 @@ public class CityCenterServiceImpl implements CityCenterService {
         buildings = buildings();
     }
 
+
     private BuildingService buildingService = new BuildingServiceImpl();
-    private org.exschool.pocketworld.building.model.Building BuildingEntity;
+    private org.exschool.pocketworld.building.model.Building buildingEntity;
     
     @Override
     public CityCenterDto cityCenterInfo() {
@@ -76,15 +78,15 @@ public class CityCenterServiceImpl implements CityCenterService {
             if (!buildings.containsKey(position)) {
                 this.buildings.put(position, newBuilding);
                 
-                BuildingEntity = new org.exschool.pocketworld.building.model.Building();
-                BuildingEntity.setCityId(1L);
-                BuildingEntity.setLevel(newBuilding.getLevel());
-                BuildingEntity.setPosition(position);                
-                BuildingEntity.setBuildingType(BuildingType.valueOf(newBuilding.getType().toUpperCase()));
+                buildingEntity = new org.exschool.pocketworld.building.model.Building();
+                buildingEntity.setCityId(1L);
+                buildingEntity.setLevel(newBuilding.getLevel());
+                buildingEntity.setPosition(position);                
+                //BuildingEntity.setBuildingType(BuildingType.valueOf(newBuilding.getType().toUpperCase()));
+                buildingEntity.setBuildingType(BuildingType.BARN);
+                buildingEntity.setId(1L);
                 
-                buildingService.save(BuildingEntity);
-                
-                org.exschool.pocketworld.building.model.Building b = new org.exschool.pocketworld.building.model.Building();
+                buildingService.save(buildingEntity);
                 return true;
             }
         }

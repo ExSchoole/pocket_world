@@ -1,6 +1,15 @@
 package org.exschool.pocketworld.city.center.service;
 
-import com.google.common.collect.Sets;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Random;
+
 import org.exschool.pocketworld.building.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
@@ -8,19 +17,19 @@ import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.*;
-
-import static org.junit.Assert.*;
+import com.google.common.collect.Sets;
 
 @RunWith(BlockJUnit4ClassRunner.class)
 public class CityCenterServiceImplTest {
 
-    CityCenterServiceImpl cityCenterService = new CityCenterServiceImpl();
+    @Autowired
+	CityCenterServiceImpl cityCenterService = new CityCenterServiceImpl();
 
     @Test
     public void testAddBuilding() {
-        Building b = new Building("", 2);
+        Building b = new Building("mall", 2);
         cityCenterService.cityCenterInfo();
         assertTrue(cityCenterService.addBuilding(4, b));
         assertFalse(cityCenterService.addBuilding(-1, b));
