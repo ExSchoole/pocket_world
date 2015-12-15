@@ -13,7 +13,6 @@ import java.util.Set;
 import org.exschool.pocketworld.building.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.building.service.BuildingService;
-import org.exschool.pocketworld.building.service.BuildingServiceImpl;
 import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.resource.ResourceDto;
@@ -25,17 +24,20 @@ import com.google.common.collect.Collections2;
 
 @Service
 public class CityCenterServiceImpl implements CityCenterService {
-    public static final int MIN_POSITION = 1;
+	
+    @Autowired 
+    private BuildingService buildingService;
+	
+	public static final int MIN_POSITION = 1;
     public static final int MAX_POSITION = 12;
     private Map<Integer, Building> buildings;
+    private org.exschool.pocketworld.building.model.Building buildingEntity;
 
     {
         buildings = buildings();
     }
 
-
-    private BuildingService buildingService = new BuildingServiceImpl();
-    private org.exschool.pocketworld.building.model.Building buildingEntity;
+   
     
     @Override
     public CityCenterDto cityCenterInfo() {
@@ -82,16 +84,19 @@ public class CityCenterServiceImpl implements CityCenterService {
                 buildingEntity.setCityId(1L);
                 buildingEntity.setLevel(newBuilding.getLevel());
                 buildingEntity.setPosition(position);                
-                //BuildingEntity.setBuildingType(BuildingType.valueOf(newBuilding.getType().toUpperCase()));
-                buildingEntity.setBuildingType(BuildingType.BARN);
-                buildingEntity.setId(1L);
-                
+                buildingEntity.setBuildingType(BuildingType.valueOf(newBuilding.getType().toUpperCase()));
+                              
                 buildingService.save(buildingEntity);
                 return true;
+                
             }
         }
 
         return false;
+    }
+    
+    public void setBuildingService(BuildingService buildingService) {
+        this.buildingService = buildingService;
     }
     
 }
