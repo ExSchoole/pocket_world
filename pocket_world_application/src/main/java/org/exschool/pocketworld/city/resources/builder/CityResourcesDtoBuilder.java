@@ -1,15 +1,17 @@
 package org.exschool.pocketworld.city.resources.builder;
 
+import org.exschool.pocketworld.building.ResourceBuildingDto;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.resource.ResourceDto;
-import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 public final class CityResourcesDtoBuilder {
 
     private ResourceDto resourceDto;
-    private Map<Integer, ResourceBuilding> resourceBuildings;
+    private Map<Integer, ResourceBuildingDto> resourceBuildings = new HashMap<>();
     private String nickname;
 
     public static CityResourcesDtoBuilder builder() {
@@ -25,8 +27,15 @@ public final class CityResourcesDtoBuilder {
         return this;
     }
 
-    public CityResourcesDtoBuilder resourceBuildings(Map<Integer, ResourceBuilding> resourceBuildings) {
-        this.resourceBuildings = resourceBuildings;
+    public CityResourcesDtoBuilder resourceBuildings(Map<Integer, ResourceBuildingDto> resourceBuildings) {
+        this.resourceBuildings.putAll(resourceBuildings);
+        return this;
+    }
+
+    public CityResourcesDtoBuilder resourceBuildings(Collection<ResourceBuildingDto> resourceBuildingDtos) {
+        for (ResourceBuildingDto resourceBuilding : resourceBuildingDtos) {
+            resourceBuildings.put(resourceBuilding.getPosition(), resourceBuilding);
+        }
         return this;
     }
 
