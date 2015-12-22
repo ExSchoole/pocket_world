@@ -85,7 +85,6 @@ public class CityResourcesRestControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonInString))
                 .andExpect(status().isCreated());
-
         verify(resourceBuildingService,times(1)).save(Mockito.any(ResourceBuilding.class));
     }
 
