@@ -7,6 +7,7 @@ import org.exschool.pocketworld.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 
@@ -15,8 +16,8 @@ import java.util.List;
  */
 @Service("resourceBuildingService")
 @Transactional
-public class ResourceBuildingServiceImpl  implements ResourceBuildingService {
-	/**
+public class ResourceBuildingServiceImpl implements ResourceBuildingService {
+    /**
      * dao - data access object
      */
     @Autowired
@@ -31,12 +32,29 @@ public class ResourceBuildingServiceImpl  implements ResourceBuildingService {
     public List<ResourceBuilding> allBuildings() {
         return dao.all(ResourceBuilding.class);
     }
+
     @Override
     public List<ResourceBuilding> allCityBuildings(Long id) {
-    	DetachedCriteria query = DetachedCriteria.forClass(ResourceBuilding.class);
+        DetachedCriteria query = DetachedCriteria.forClass(ResourceBuilding.class);
         query.add(Restrictions.eq("cityId", id));
         return dao.getAllBy(query);
     }
+
+    /**
+     * Returns resource building for specific position and city or null if
+     * the position is empty
+     *
+     * @param cityId   cityId
+     * @param position position of resource building
+     */
+    @Override
+    public ResourceBuilding getAtPosition(Long cityId, Integer position) {
+        DetachedCriteria dc = DetachedCriteria.forClass(ResourceBuilding.class);
+        dc.add(Restrictions.eq("cityId", cityId));
+        dc.add(Restrictions.eq("position", position));
+        return (ResourceBuilding) dao.getBy(dc);
+    }
+
     /**
      * Returns ResourceBuilding by id
      *
@@ -66,6 +84,6 @@ public class ResourceBuildingServiceImpl  implements ResourceBuildingService {
     public void setDao(Dao dao) {
         this.dao = dao;
     }
-    
-   
+
+
 }

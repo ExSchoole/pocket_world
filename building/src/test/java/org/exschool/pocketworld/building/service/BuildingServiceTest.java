@@ -14,6 +14,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
@@ -61,6 +62,34 @@ public class BuildingServiceTest {
     public void testGetById() {
         Building existingBuilding = buildingService.get(3L);
         assertNotNull(existingBuilding);
+    }
+
+    @Test
+    public void testGetAtPositionIfBuildingExist() {
+        Integer position = 1;
+        Long cityId = 1L;
+        Long buildingIdAtThePosition = 1L;
+        Building building = buildingService.getAtPosition(cityId, position);
+        assertNotNull(building);
+        assertEquals(buildingIdAtThePosition, building.getId());
+        assertEquals(cityId, building.getCityId());
+    }
+
+    @Test
+    public void testGetAtPositionIfBuildingDoesntExist() {
+        Integer position = 12;
+        Long cityId = 1L;
+        Building building = buildingService.getAtPosition(cityId, position);
+        assertNull(building);
+    }
+
+    @Test
+    public void testGetAtProperPositionButInDifferentCity() {
+        Integer position = 1;
+        Long nonExistingCityId = 2L;
+        Building building = buildingService.getAtPosition(nonExistingCityId,
+                position);
+        assertNull(building);
     }
 
     private void assertAllFieldsEquals(Building building1, Building building2) {

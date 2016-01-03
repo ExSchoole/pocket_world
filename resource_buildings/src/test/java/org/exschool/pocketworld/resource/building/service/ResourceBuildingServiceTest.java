@@ -1,22 +1,23 @@
 package org.exschool.pocketworld.resource.building.service;
 
-import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
-import org.exschool.pocketworld.dao.Dao;
-import org.exschool.pocketworld.util.builder.ResourceBuildingBuilder;
-import org.junit.*;
-import org.junit.runner.RunWith;
 import org.exschool.pocketworld.config.TestSpringConfig;
+import org.exschool.pocketworld.dao.Dao;
+import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
+import org.exschool.pocketworld.util.builder.ResourceBuildingBuilder;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
-import java.util.List;
 /**
  * Created by manoylo on 20.11.15.
- *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
@@ -51,7 +52,7 @@ public class ResourceBuildingServiceTest {
         existingBuilding.setCityId(10L);
         buildingService.save(existingBuilding);
         ResourceBuilding savedBuilding = buildingService.get(existingBuildingId);
-        assertAllFieldsEquals(existingBuilding,savedBuilding);
+        assertAllFieldsEquals(existingBuilding, savedBuilding);
 
     }
 
@@ -65,16 +66,43 @@ public class ResourceBuildingServiceTest {
         ResourceBuilding existingBuilding = buildingService.get(3L);
         assertNotNull(existingBuilding);
     }
+
     @Test
     public void allCityBuildings() {
         List<ResourceBuilding> existingBuildings = buildingService.allCityBuildings(5L);
         assertNotNull(existingBuildings);
         assertNotNull(existingBuildings.get(0));
     }
-    
 
-    private void assertAllFieldsEquals(ResourceBuilding building1, ResourceBuilding building2)
-    {
+    @Test
+    public void testGetAtPositionIfBuildingExist() {
+        Integer position = 1;
+        Long cityId = 1L;
+        Long buildingIdAtThePosition = 1L;
+        ResourceBuilding resourceBuilding = buildingService.getAtPosition(cityId, position);
+        assertNotNull(resourceBuilding);
+        assertEquals(buildingIdAtThePosition, resourceBuilding.getId());
+        assertEquals(cityId, resourceBuilding.getCityId());
+    }
+
+    @Test
+    public void testGetAtPositionIfBuildingDoesntExist() {
+        Integer position = 12;
+        Long cityId = 1L;
+        ResourceBuilding resourceBuilding = buildingService.getAtPosition(cityId, position);
+        assertNull(resourceBuilding);
+    }
+
+    @Test
+    public void testGetAtProperPositionButInDifferentCity() {
+        Integer position = 1;
+        Long notPropperCityId = 2L;
+        ResourceBuilding resourceBuilding = buildingService.getAtPosition(notPropperCityId,
+                position);
+        assertNull(resourceBuilding);
+    }
+
+    private void assertAllFieldsEquals(ResourceBuilding building1, ResourceBuilding building2) {
         assertEquals(building2.getId(), building1.getId());
         assertEquals(building2.getResourceType(), building1.getResourceType());
         assertEquals(building2.getLevel(), building1.getLevel());
@@ -82,7 +110,6 @@ public class ResourceBuildingServiceTest {
         assertEquals(building2.getCityId(), building1.getCityId());
 
     }
-     
 
 
 }

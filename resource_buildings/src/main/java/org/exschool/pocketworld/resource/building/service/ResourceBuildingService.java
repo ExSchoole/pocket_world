@@ -12,6 +12,6 @@ public interface ResourceBuildingService {
     ResourceBuilding get (long id);
     ResourceBuilding save(ResourceBuilding entity);
     List<ResourceBuilding> allCityBuildings(Long id);
-
+    ResourceBuilding getAtPosition(Long cityId,Integer position);
 }
 

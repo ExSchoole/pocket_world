@@ -3,6 +3,8 @@ package org.exschool.pocketworld.building.service;
 
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.dao.Dao;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +55,19 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public Building save(Building entity) {
         return dao.save(entity);
+    }
+
+    /**
+     * Returns building for specific position and city or null if
+     * the position is empty
+     * @param cityId cityId
+     * @param position position of building
+     */
+    public Building getAtPosition(Long cityId,Integer position) {
+        DetachedCriteria dc = DetachedCriteria.forClass(Building.class);
+        dc.add(Restrictions.eq("cityId", cityId));
+        dc.add(Restrictions.eq("position", position));
+        return (Building) dao.getBy(dc);
     }
 
     /**
