@@ -51,14 +51,14 @@ public class Populator {
                 getPlayerId(player3Login) :
                 createPlayer(player3Login, new PlayerResources(33, 33, 33, 33));
 
-        Long city1Id = isCityExist(player1Id) ?
-                getCityId(player1Id) :
+        Long city1Id = cityService.isCityExist(player1Id) ?
+                cityService.getCityId(player1Id) :
                 createCity(player1Id, "First City");
-        Long city2Id = isCityExist(player2Id) ?
-                getCityId(player2Id) :
+        Long city2Id = cityService.isCityExist(player2Id) ?
+                cityService.getCityId(player2Id) :
                 createCity(player2Id, "Second City");
-        Long city3Id = isCityExist(player3Id) ?
-                getCityId(player3Id) :
+        Long city3Id = cityService.isCityExist(player3Id) ?
+                cityService.getCityId(player3Id) :
                 createCity(player3Id, "Third City");
 
         if (!isBuildingExist(city1Id, 1)) {

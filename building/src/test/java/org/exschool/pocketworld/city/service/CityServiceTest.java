@@ -13,8 +13,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
@@ -66,6 +67,32 @@ public class CityServiceTest {
         Long id = CityBootstrap.savedCitiesIds.get(0);
         City existingBuilding = cityService.get(id);
         assertNotNull(existingBuilding);
+    }
+
+    @Test
+      public void givenCityExistForPlayer_GetCityIdReturnsCityId() {
+        Long playerId = 1L;
+        Long expectedCityId = CityBootstrap.savedCitiesIds.get(0);
+        Long actualCityId = cityService.getCityId(playerId);
+        assertEquals(expectedCityId, actualCityId);
+    }
+
+    @Test
+    public void givenCityDoesntExistForPlayer_GetCityIdReturnsNull() {
+        Long playerId = 100L;
+        assertNull(cityService.getCityId(playerId));
+    }
+
+    @Test
+    public void givenCityExistForPlayer_IsCityExistReturnsTrue() {
+        Long playerId = 1L;
+        assertTrue(cityService.isCityExist(playerId));
+    }
+
+    @Test
+    public void givenCityDoesntExistForPlayer_IsCityExistReturnsFalse() {
+        Long playerId = 100L;
+        assertFalse(cityService.isCityExist(playerId));
     }
 
     private void assertAllFieldsEquals(City city1, City city2) {

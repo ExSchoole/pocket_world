@@ -12,6 +12,7 @@ public interface CityService {
     City get (long id);
     City save(City entity);
     City getCityByPlayerId(Long playerId);
-
+    Long getCityId(Long playerId);
+    Boolean isCityExist(Long playerId);
 }
 
