@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 
-import org.exschool.pocketworld.building.Building;
+import org.exschool.pocketworld.building.BuildingInterim;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.building.service.BuildingService;
 import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
@@ -40,11 +40,11 @@ public class CityCenterServiceImplTest {
     @Test
     public void testAddBuilding() {
     	cityCenterService.cityCenterInfo();
-        Building b = new Building(MALL.name().toLowerCase(), 2);
-        assertTrue(cityCenterService.addBuilding(4, b));
-        assertFalse(cityCenterService.addBuilding(-1, b));
-        assertFalse(cityCenterService.addBuilding(1, b));
-        assertFalse(cityCenterService.addBuilding(5, null));
+        BuildingInterim b = new BuildingInterim(MALL.name().toLowerCase(), 2);
+        assertTrue(cityCenterService.addBuilding(1l,4, b));
+        assertFalse(cityCenterService.addBuilding(1l,-1, b));
+        assertFalse(cityCenterService.addBuilding(1l,1, b));
+        assertFalse(cityCenterService.addBuilding(1l,5, null));
     }
 
     @Test
@@ -65,20 +65,20 @@ public class CityCenterServiceImplTest {
         return CityCenterDtoBuilder.builder().buildings(buildings(buildingTypesAsStrings)).build();
     }
 
-    private static Map<Integer, Building> buildings(Collection<String> buildingTypesAsStrings) {
-        Map<Integer, Building> map = new HashMap<>();
+    private static Map<Integer, BuildingInterim> buildings(Collection<String> buildingTypesAsStrings) {
+        Map<Integer, BuildingInterim> map = new HashMap<>();
         Random random = new Random();
         for (String buildingTypesAsString : buildingTypesAsStrings) {
             int key = random.nextInt();
 
             if (!map.containsKey(key)) {
-                map.put(key, new Building(buildingTypesAsString, 1));
+                map.put(key, new BuildingInterim(buildingTypesAsString, 1));
                 continue;
             }
 
             while (map.get(key) != null) {
                 key = random.nextInt();
-                map.put(key, new Building(buildingTypesAsString, 1));
+                map.put(key, new BuildingInterim(buildingTypesAsString, 1));
             }
         }
         return map;

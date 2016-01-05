@@ -10,7 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.exschool.pocketworld.building.Building;
+import org.exschool.pocketworld.building.BuildingInterim;
+import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.building.service.BuildingService;
 import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
@@ -30,8 +31,7 @@ public class CityCenterServiceImpl implements CityCenterService {
 	
 	public static final int MIN_POSITION = 1;
     public static final int MAX_POSITION = 12;
-    private Map<Integer, Building> buildings;
-    private org.exschool.pocketworld.building.model.Building buildingEntity;
+    private Map<Integer, BuildingInterim> buildings;
 
     {
         buildings = buildings();
@@ -66,22 +66,22 @@ public class CityCenterServiceImpl implements CityCenterService {
         });
     }
 
-    private Map<Integer, Building> buildings() {
-        Map<Integer, Building> buildings = new HashMap<>();
-        buildings.put(1, new Building(MALL.name().toLowerCase(), 1));
-        buildings.put(3, new Building(PLANT.name().toLowerCase(), 2));
-        buildings.put(6, new Building(MARKETPLACE.name().toLowerCase(), 3));
-        buildings.put(9, new Building(POOL.name().toLowerCase(), 4));
+    private Map<Integer, BuildingInterim> buildings() {
+        Map<Integer, BuildingInterim> buildings = new HashMap<>();
+        buildings.put(1, new BuildingInterim(MALL.name().toLowerCase(), 1));
+        buildings.put(3, new BuildingInterim(PLANT.name().toLowerCase(), 2));
+        buildings.put(6, new BuildingInterim(MARKETPLACE.name().toLowerCase(), 3));
+        buildings.put(9, new BuildingInterim(POOL.name().toLowerCase(), 4));
         return buildings;
     }
 
-    public boolean addBuilding(int position, Building newBuilding) {
+    public boolean addBuilding(Long cityId,int position, BuildingInterim newBuilding) {
         if (newBuilding != null && position <= MAX_POSITION && position >= MIN_POSITION) {
             if (!buildings.containsKey(position)) {
                 this.buildings.put(position, newBuilding);
                 
-                buildingEntity = new org.exschool.pocketworld.building.model.Building();
-                buildingEntity.setCityId(1L);
+                Building buildingEntity = new Building();
+                buildingEntity.setCityId(cityId);
                 buildingEntity.setLevel(newBuilding.getLevel());
                 buildingEntity.setPosition(position);                
                 buildingEntity.setBuildingType(BuildingType.valueOf(newBuilding.getType().toUpperCase()));

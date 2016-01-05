@@ -1,11 +1,11 @@
 package org.exschool.pocketworld.building;
 
-public class Building {
+public class BuildingInterim {
 
     private String type;
     private int level;
 
-    public Building(String type, int level) {
+    public BuildingInterim(String type, int level) {
         this.type = type;
         this.level = level;
     }

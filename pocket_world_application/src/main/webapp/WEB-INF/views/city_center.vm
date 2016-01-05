@@ -60,42 +60,15 @@
 
 <script src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
 <script src="#springUrl('/js/jquery-ui.min.js')"></script>
-<script src="#springUrl('/js/dragdrop.js')"></script>
+<script src="#springUrl('/js/dragAndDrop.js')"></script>
+<script src="#springUrl('/js/ajaxCallAddBuilding.js')"></script>
 <script src="#springUrl('/js/jquery.verticalCarousel.js')"></script>
-<script>
-	var cityConfig = {};
-	var typeOfBuilding;
-	var selectedBuilding;
-	var selectedPosition;
-	
- 	cityConfig.buildUrl = "#springUrl('')"+"/city/center/addBuilding";
-	 $(function () {
-	    $( ".building_karusel" ).draggable({
-	        appendTo: 'body',
-	        helper: 'clone',
-	    	revert: "invalid"
-	    });
 
-	    $( ".building_empty" ).droppable({
-	    	hoverClass: "over",
-	        drop: function( event, ui ) {
-	          selectedBuilding = $(ui.draggable).attr("id");
-	          selectedPosition = $(this).attr("id");
-	          
-	          $( this ).removeClass( 'building_empty' )
-	                   .addClass("building_" + selectedBuilding )
-	                   .addClass( 'building');	
-	                   	               
-	          $( ui.draggable).removeClass("building_" + selectedBuilding )
-	                          .removeClass( 'building_karusel' )
-	                          .removeClass( 'cursor' );
-	                          
-	          $('li').find("#"+selectedBuilding).remove();
-	          
-	          dragDrop(cityConfig,selectedBuilding,selectedPosition);
-	        },
-	      });
-	 });
+
+<script>
+	dragDrop(".building_karusel",".building_empty", "#springUrl('')","/city/center/addBuilding");
+</script>
+<script>
 	 
      $(function () {
 	     $("#carouselId").verticalCarousel({nSlots: 3, speed: 900});

@@ -12,6 +12,15 @@ public class City {
     private Long playerId;
     private String name;
 
+    public City(){
+    	this.name = "";
+    }
+    
+    public City(Long playerId,String name){
+    	this.playerId = playerId;
+    	this.name = name;
+    }
+    
     public String getName() {
         return name;
     }
