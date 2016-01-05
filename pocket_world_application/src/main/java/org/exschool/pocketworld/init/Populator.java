@@ -41,14 +41,14 @@ public class Populator {
         String player2Login = "login-2";
         String player3Login = "login-3";
 
-        Long player1Id = isPlayerExist(player1Login) ?
-                getPlayerId(player1Login) :
+        Long player1Id = playerService.isPlayerExist(player1Login) ?
+                playerService.getPlayerId(player1Login) :
                 createPlayer(player1Login, new PlayerResources(10, 15, 18, 20));
-        Long player2Id = isPlayerExist(player2Login) ?
-                getPlayerId(player2Login) :
+        Long player2Id = playerService.isPlayerExist(player2Login) ?
+                playerService.getPlayerId(player2Login) :
                 createPlayer(player2Login, new PlayerResources(22, 22, 22, 22));
-        Long player3Id = isPlayerExist(player3Login) ?
-                getPlayerId(player3Login) :
+        Long player3Id = playerService.isPlayerExist(player3Login) ?
+                playerService.getPlayerId(player3Login) :
                 createPlayer(player3Login, new PlayerResources(33, 33, 33, 33));
 
         Long city1Id = cityService.isCityExist(player1Id) ?
@@ -61,67 +61,47 @@ public class Populator {
                 cityService.getCityId(player3Id) :
                 createCity(player3Id, "Third City");
 
-        if (!isBuildingExist(city1Id, 1)) {
+        if (!buildingService.isBuildingExist(city1Id, 1)) {
             createBuilding(city1Id, BuildingType.BARN, 1, 0);
         }
-        if (!isBuildingExist(city1Id, 2)) {
+        if (!buildingService.isBuildingExist(city1Id, 2)) {
             createBuilding(city1Id, BuildingType.FARM, 2, 1);
         }
-        if (!isBuildingExist(city1Id, 12)) {
+        if (!buildingService.isBuildingExist(city1Id, 12)) {
             createBuilding(city1Id, BuildingType.GILOTHOME, 12, 0);
         }
 
-        if (!isBuildingExist(city2Id, 1)) {
+        if (!buildingService.isBuildingExist(city2Id, 1)) {
             createBuilding(city2Id, BuildingType.BARN, 1, 0);
         }
-        if (!isBuildingExist(city2Id, 3)) {
+        if (!buildingService.isBuildingExist(city2Id, 3)) {
             createBuilding(city2Id, BuildingType.MARKETPLACE, 3, 1);
         }
 
-        if (!isBuildingExist(city3Id, 5)) {
+        if (!buildingService.isBuildingExist(city3Id, 5)) {
             createBuilding(city3Id, BuildingType.BARN, 5, 0);
         }
-        if (!isBuildingExist(city3Id, 6)) {
+        if (!buildingService.isBuildingExist(city3Id, 6)) {
             createBuilding(city3Id, BuildingType.MARKETPLACE, 6, 0);
         }
 
-        if (!isResBuildingExist(city1Id, 1)) {
+        if (!resourceBuildingService.isResBuildingExist(city1Id, 1)) {
             createResourceBuilding(city1Id, ResourceType.CLAY, 1, 0);
         }
-        if (!isResBuildingExist(city1Id, 2)) {
+        if (!resourceBuildingService.isResBuildingExist(city1Id, 2)) {
             createResourceBuilding(city1Id, ResourceType.CLAY, 2, 0);
         }
-        if (!isResBuildingExist(city1Id, 3)) {
+        if (!resourceBuildingService.isResBuildingExist(city1Id, 3)) {
             createResourceBuilding(city1Id, ResourceType.CORN, 3, 1);
         }
 
-        if (!isResBuildingExist(city2Id, 3)) {
+        if (!resourceBuildingService.isResBuildingExist(city2Id, 3)) {
             createResourceBuilding(city2Id, ResourceType.TIMBER, 3, 0);
         }
     }
 
     private boolean isResBuildingExist(Long cityId, int position) {
         return resourceBuildingService.getAtPosition(cityId, position) != null;
-    }
-
-    private boolean isBuildingExist(Long cityId, Integer position) {
-        return buildingService.getAtPosition(cityId, position) != null;
-    }
-
-    private Long getCityId(Long playerId) {
-        return cityService.getCityByPlayerId(playerId).getId();
-    }
-
-    private boolean isCityExist(Long playerId) {
-        return cityService.getCityByPlayerId(playerId) != null;
-    }
-
-    private Long getPlayerId(String playerLogin) {
-        return playerService.getPlayerByLogin(playerLogin).getId();
-    }
-
-    private boolean isPlayerExist(String playerLogin) {
-        return playerService.getPlayerByLogin(playerLogin) != null;
     }
 
     private Long createResourceBuilding(Long cityId, ResourceType resourceType, int position, int level) {

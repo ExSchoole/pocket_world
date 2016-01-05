@@ -13,5 +13,6 @@ public interface ResourceBuildingService {
     ResourceBuilding save(ResourceBuilding entity);
     List<ResourceBuilding> allCityBuildings(Long id);
     ResourceBuilding getAtPosition(Long cityId,Integer position);
+    boolean isResBuildingExist(Long cityId, int position);
 }
 

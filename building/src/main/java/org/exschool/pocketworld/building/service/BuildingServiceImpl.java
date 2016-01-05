@@ -60,14 +60,20 @@ public class BuildingServiceImpl implements BuildingService {
     /**
      * Returns building for specific position and city or null if
      * the position is empty
-     * @param cityId cityId
+     *
+     * @param cityId   cityId
      * @param position position of building
      */
-    public Building getAtPosition(Long cityId,Integer position) {
+    public Building getAtPosition(Long cityId, Integer position) {
         DetachedCriteria dc = DetachedCriteria.forClass(Building.class);
         dc.add(Restrictions.eq("cityId", cityId));
         dc.add(Restrictions.eq("position", position));
         return (Building) dao.getBy(dc);
+    }
+
+    @Override
+    public Boolean isBuildingExist(Long cityId, Integer position) {
+        return getAtPosition(cityId, position) != null;
     }
 
     /**

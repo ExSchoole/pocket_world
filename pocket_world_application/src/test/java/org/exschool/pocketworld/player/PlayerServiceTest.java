@@ -2,11 +2,12 @@ package org.exschool.pocketworld.player;
 
 import org.exschool.pocketworld.config.TestSpringConfig;
 import org.exschool.pocketworld.dao.Dao;
+import org.exschool.pocketworld.player.builder.PlayerBuilder;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
-import org.exschool.pocketworld.player.builder.PlayerBuilder;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -52,6 +53,36 @@ public class PlayerServiceTest {
         Player savedPlayer = playerService.getPlayerByLogin(existingPlayerLogin);
         assertTrue(savedPlayer.equals(existingPlayer));
     }
+
+    @Test
+    public void givenPlayerExist_getPlayerIdReturnPlayerId() {
+        String existingPlayerLogin = "login-1";
+        Player existingPlayer = playerService.getPlayerByLogin(existingPlayerLogin);
+        Long id = playerService.getPlayerId(existingPlayerLogin);
+        assertEquals(existingPlayer.getId(),id);
+    }
+
+    @Test
+    public void givenPlayerDoesntExist_getPlayerIdReturnNull() {
+        String nonExistingPlayerLogin = "login-10000";
+        Long id = playerService.getPlayerId(nonExistingPlayerLogin);
+        assertNull(id);
+    }
+
+    @Test
+    public void givenPlayerDoesntExist_isPlayerExistReturnFalse() {
+        String nonExistingPlayerLogin = "login-10000";
+        boolean result = playerService.isPlayerExist(nonExistingPlayerLogin);
+        assertFalse(result);
+    }
+
+    @Test
+    public void givenPlayerExist_isPlayerExistReturnTrue() {
+        String existingPlayerLogin = "login-1";
+        boolean result = playerService.isPlayerExist(existingPlayerLogin);
+        assertTrue(result);
+    }
+
 
     @Test(expected = Exception.class)
     public void testSaveNull() {

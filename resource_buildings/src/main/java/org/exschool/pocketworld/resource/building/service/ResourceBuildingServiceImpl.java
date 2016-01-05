@@ -55,6 +55,11 @@ public class ResourceBuildingServiceImpl implements ResourceBuildingService {
         return (ResourceBuilding) dao.getBy(dc);
     }
 
+    @Override
+    public boolean isResBuildingExist(Long cityId, int position) {
+        return getAtPosition(cityId, position) != null;
+    }
+
     /**
      * Returns ResourceBuilding by id
      *
@@ -84,6 +89,5 @@ public class ResourceBuildingServiceImpl implements ResourceBuildingService {
     public void setDao(Dao dao) {
         this.dao = dao;
     }
-
 
 }

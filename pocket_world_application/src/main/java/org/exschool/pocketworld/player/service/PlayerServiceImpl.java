@@ -31,4 +31,16 @@ public class PlayerServiceImpl implements PlayerService {
         return dao.getBy(query);
     }
 
+    @Override
+    public boolean isPlayerExist(String login) {
+        return getPlayerByLogin(login) != null;
+    }
+
+    @Override
+    public Long getPlayerId(String login) {
+        return getPlayerByLogin(login) != null?
+                getPlayerByLogin(login).getId():
+                null;
+    }
+
 }

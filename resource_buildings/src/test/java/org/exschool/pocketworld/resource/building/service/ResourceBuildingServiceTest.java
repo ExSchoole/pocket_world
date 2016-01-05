@@ -86,6 +86,22 @@ public class ResourceBuildingServiceTest {
     }
 
     @Test
+    public void givenResBuildingExistAtPosition_isResBuildingExistReturnsTrue() {
+        Integer position = 1;
+        Long cityId = 1L;
+        Boolean result = buildingService.isResBuildingExist(cityId, position);
+        assertTrue(result);
+    }
+
+    @Test
+    public void givenResBuildingDoesntExistAtPosition_isResBuildingExistReturnsFalse() {
+        Integer position = 12;
+        Long cityId = 1L;
+        Boolean result = buildingService.isResBuildingExist(cityId, position);
+        assertFalse(result);
+    }
+
+    @Test
     public void testGetAtPositionIfBuildingDoesntExist() {
         Integer position = 12;
         Long cityId = 1L;

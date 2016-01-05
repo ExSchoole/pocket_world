@@ -12,9 +12,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
@@ -90,6 +90,22 @@ public class BuildingServiceTest {
         Building building = buildingService.getAtPosition(nonExistingCityId,
                 position);
         assertNull(building);
+    }
+
+    @Test
+    public void givenBuildingExistInCityAtPosition_isBuildingExistReturnsTrue() {
+        Integer position = 1;
+        Long cityId = 1L;
+        Boolean result = buildingService.isBuildingExist(cityId, position);
+        assertTrue(result);
+    }
+
+    @Test
+    public void givenBuildingDoesntExistInCityAtPosition_isBuildingExistReturnsFalse() {
+        Integer position = 12;
+        Long cityId = 1L;
+        Boolean result = buildingService.isBuildingExist(cityId, position);
+        assertFalse(result);
     }
 
     private void assertAllFieldsEquals(Building building1, Building building2) {

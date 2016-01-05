@@ -1,8 +1,8 @@
 package org.exschool.pocketworld.building.service;
 
-        import org.exschool.pocketworld.building.model.Building;
+import org.exschool.pocketworld.building.model.Building;
 
-        import java.util.List;
+import java.util.List;
 
 /**
  * Created by skandy on 12.11.15.
@@ -15,5 +15,7 @@ public interface BuildingService {
     Building save(Building entity);
 
     Building getAtPosition(Long cityId, Integer position);
+
+    Boolean isBuildingExist(Long cityId, Integer position);
 }
 
