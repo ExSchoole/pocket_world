@@ -7,15 +7,21 @@ import static org.exschool.pocketworld.building.model.BuildingType.POOL;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.exschool.pocketworld.building.BuildingInterim;
+import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.building.service.BuildingService;
 import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
+import org.exschool.pocketworld.city.model.City;
+import org.exschool.pocketworld.city.service.CityService;
+import org.exschool.pocketworld.player.model.Player;
+import org.exschool.pocketworld.player.model.PlayerResources;
+import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,25 +34,55 @@ public class CityCenterServiceImpl implements CityCenterService {
 	
     @Autowired 
     private BuildingService buildingService;
+    @Autowired
+    private CityService cityService;
+    @Autowired
+    private PlayerService playerService;
 	
 	public static final int MIN_POSITION = 1;
     public static final int MAX_POSITION = 12;
-    private Map<Integer, BuildingInterim> buildings;
+    
+    String nickName;
+    Map<Integer,BuildingDto> buildings;
 
-    {
-        buildings = buildings();
-    }
 
-   
+   private void initialization(){
+	   buildings = new HashMap<>();
+	   
+	   nickName = "User-login";
+       String cityName = "City name";
+       PlayerResources playerResources = new PlayerResources(1,1,1,1);
+       Player player = new Player(playerResources,nickName);
+       playerService.savePlayer(player);
+       
+       City city = new City(player.getId(),cityName);
+       cityService.save(city);
+       
+       buildingService.save(new Building(MALL,1,1,city.getId()));
+       buildingService.save(new Building(PLANT,1,3,city.getId()));
+       buildingService.save(new Building(MARKETPLACE,1,6,city.getId()));
+       buildingService.save(new Building(POOL,1,9,city.getId()));
+   }
     
     @Override
     public CityCenterDto cityCenterInfo() {
-        ResourceDto resourceDto = new ResourceDto(1, 1, 1, 1);
-        String nickname = "User login";
+    	initialization();
+    	
+    	Player player = playerService.getPlayerByLogin(nickName);
+    	PlayerResources playerResources = player.getPlayerResources();
+    
+    	ResourceDto resourcesDto = new ResourceDto(playerResources);
+    	
+    	List<Building> buildingsFromDataBase =  buildingService.allBuildings();
+    	
+    	for (Building b : buildingsFromDataBase){
+    		buildings.put(b.getPosition(), new BuildingDto(b));
+    	}
+    	
         return CityCenterDtoBuilder.builder()
-                .resource(resourceDto)
+                .resource(resourcesDto)
                 .buildings(buildings)
-                .nickname(nickname)
+                .nickname(nickName)
                 .build();
     }
 
@@ -56,6 +92,7 @@ public class CityCenterServiceImpl implements CityCenterService {
      * @param buildingTypesOfBuiltBuildings - BuildingTypes of building which are already built in the city
      * @return list of building types which we allowed to build
      */
+    
     @Override
     public Collection<String> availableForBuildBuildingTypes(final Set<String> buildingTypesOfBuiltBuildings) {
         return Collections2.filter(BuildingType.asListLowerCase(), new Predicate<String>() {
@@ -66,24 +103,17 @@ public class CityCenterServiceImpl implements CityCenterService {
         });
     }
 
-    private Map<Integer, BuildingInterim> buildings() {
-        Map<Integer, BuildingInterim> buildings = new HashMap<>();
-        buildings.put(1, new BuildingInterim(MALL.name().toLowerCase(), 1));
-        buildings.put(3, new BuildingInterim(PLANT.name().toLowerCase(), 2));
-        buildings.put(6, new BuildingInterim(MARKETPLACE.name().toLowerCase(), 3));
-        buildings.put(9, new BuildingInterim(POOL.name().toLowerCase(), 4));
-        return buildings;
-    }
 
-    public boolean addBuilding(Long cityId,int position, BuildingInterim newBuilding) {
-        if (newBuilding != null && position <= MAX_POSITION && position >= MIN_POSITION) {
-            if (!buildings.containsKey(position)) {
-                this.buildings.put(position, newBuilding);
+    
+    public boolean addBuilding(BuildingDto newBuilding) {
+        if (newBuilding != null && newBuilding.getPosition() <= MAX_POSITION && newBuilding.getPosition() >= MIN_POSITION) {
+            if (!buildings.containsKey(newBuilding.getPosition())) {
+                this.buildings.put(newBuilding.getPosition(), newBuilding);
                 
                 Building buildingEntity = new Building();
-                buildingEntity.setCityId(cityId);
+                buildingEntity.setCityId(cityService.getCityByPlayerId(playerService.getPlayerByLogin(nickName).getId()).getId());
                 buildingEntity.setLevel(newBuilding.getLevel());
-                buildingEntity.setPosition(position);                
+                buildingEntity.setPosition(newBuilding.getPosition());                
                 buildingEntity.setBuildingType(BuildingType.valueOf(newBuilding.getType().toUpperCase()));
                               
                 buildingService.save(buildingEntity);

@@ -60,13 +60,13 @@
 
 <script src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
 <script src="#springUrl('/js/jquery-ui.min.js')"></script>
-<script src="#springUrl('/js/dragAndDrop.js')"></script>
+<script src="#springUrl('/js/addBuilding.js')"></script>
 <script src="#springUrl('/js/ajaxCallAddBuilding.js')"></script>
 <script src="#springUrl('/js/jquery.verticalCarousel.js')"></script>
 
 
 <script>
-	dragDrop(".building_karusel",".building_empty", "#springUrl('')","/city/center/addBuilding");
+	addBuilding(".building_karusel",".building_empty", "#springUrl('/city/center/')","/addBuilding");
 </script>
 <script>
 	 

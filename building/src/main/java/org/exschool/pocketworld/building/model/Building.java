@@ -14,13 +14,22 @@ public class Building {
 	@Column(name = "building_type")
 	private BuildingType buildingType;
 	
-	
 	private int level;
 
 	private int position;
 
 	private Long cityId;
 
+	public Building(){
+		
+	}
+	
+	public Building(BuildingType buildingType,int level, int position, Long cityId){
+		this.buildingType = buildingType;
+		this.level = level;
+		this.position = position;
+		this.cityId = cityId;
+	}
 
 	public Long getId() {
 		return id;

@@ -11,12 +11,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 
-import org.exschool.pocketworld.building.BuildingInterim;
+import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.building.service.BuildingService;
 import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
+import org.exschool.pocketworld.city.service.CityService;
 import org.exschool.pocketworld.config.TestSpringConfig;
+import org.exschool.pocketworld.player.service.PlayerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -35,16 +37,20 @@ public class CityCenterServiceImplTest {
   	CityCenterService cityCenterService = new CityCenterServiceImpl();
 	
 	@Mock
+	CityService cityService;
+	@Mock
+  	PlayerService playerService;
+	@Mock
 	BuildingService buildingService;
 	
     @Test
     public void testAddBuilding() {
     	cityCenterService.cityCenterInfo();
-        BuildingInterim b = new BuildingInterim(MALL.name().toLowerCase(), 2);
-        assertTrue(cityCenterService.addBuilding(1l,4, b));
-        assertFalse(cityCenterService.addBuilding(1l,-1, b));
-        assertFalse(cityCenterService.addBuilding(1l,1, b));
-        assertFalse(cityCenterService.addBuilding(1l,5, null));
+        BuildingDto b = new BuildingDto(MALL.name().toLowerCase(), 1, 1);
+        assertTrue(cityCenterService.addBuilding(new BuildingDto(MALL.name().toLowerCase(), 1, 1)));
+        assertFalse(cityCenterService.addBuilding(new BuildingDto(MALL.name().toLowerCase(), 1, -1)));
+        assertFalse(cityCenterService.addBuilding(new BuildingDto(MALL.name().toLowerCase(), 1, 1)));
+        assertFalse(cityCenterService.addBuilding(null));
     }
 
     @Test
@@ -65,20 +71,20 @@ public class CityCenterServiceImplTest {
         return CityCenterDtoBuilder.builder().buildings(buildings(buildingTypesAsStrings)).build();
     }
 
-    private static Map<Integer, BuildingInterim> buildings(Collection<String> buildingTypesAsStrings) {
-        Map<Integer, BuildingInterim> map = new HashMap<>();
+    private static Map<Integer, BuildingDto> buildings(Collection<String> buildingTypesAsStrings) {
+        Map<Integer, BuildingDto> map = new HashMap<>();
         Random random = new Random();
         for (String buildingTypesAsString : buildingTypesAsStrings) {
             int key = random.nextInt();
 
             if (!map.containsKey(key)) {
-                map.put(key, new BuildingInterim(buildingTypesAsString, 1));
+                map.put(key, new BuildingDto(buildingTypesAsString, 1, 1));
                 continue;
             }
 
             while (map.get(key) != null) {
                 key = random.nextInt();
-                map.put(key, new BuildingInterim(buildingTypesAsString, 1));
+                map.put(key, new BuildingDto(buildingTypesAsString, 1, 1));
             }
         }
         return map;

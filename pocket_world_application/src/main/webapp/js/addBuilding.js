@@ -1,7 +1,4 @@
-function dragDrop(draggableElement,droppableElement,springUrl,methodUrl){
-	var selectedBuilding;
-	var selectedPosition;
-	
+function addBuilding(draggableElement,droppableElement,springUrl,methodUrl){
 	 $(function () {
 	    $( draggableElement ).draggable({
 	        appendTo: 'body',
@@ -12,8 +9,8 @@ function dragDrop(draggableElement,droppableElement,springUrl,methodUrl){
 	    $( droppableElement ).droppable({
 	    	hoverClass: "over",
 	        drop: function( event, ui ) {
-	          selectedBuilding = $(ui.draggable).attr("id");
-	          selectedPosition = $(this).attr("id");
+	          var selectedBuilding = $(ui.draggable).attr("id");
+	          var selectedPosition = $(this).attr("id");
 	          
 	          $( this ).removeClass( droppableElement )
 	                   .addClass("building_" + selectedBuilding )
