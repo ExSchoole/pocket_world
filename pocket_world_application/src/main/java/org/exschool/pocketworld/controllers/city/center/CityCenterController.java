@@ -22,22 +22,26 @@ public class CityCenterController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CityCenterController.class);
     @Autowired
     private CityCenterService cityCenterService;
-
+    String playerName = "player-login";
+    
     @RequestMapping(value = "/addBuilding", method = RequestMethod.POST)
-    public String addBuilding(@RequestParam String type, @RequestParam int position) {
-        if (cityCenterService.addBuilding(new BuildingDto(type,1,position))) {
-            LOGGER.info("new building with type - {} has been added to position - {}", type, position);
-        } else LOGGER.info("Not added");
-
-        return "city_center";
+    public String addBuilding(@RequestParam String playerName,@RequestParam String type, @RequestParam int position) {
+        if (cityCenterService.addBuilding(playerName,type,1,position)) {
+            LOGGER.info("player - {} has built new building with type - {} in position - {}",playerName, type, position);
+            return "successMessage";
+        } else {
+        	LOGGER.info("Not added");
+        	return "errorMessage";
+        }
     }
 
+    
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showCityCenter(
             @RequestParam Map<String, String> allRequestParams, Model model) {
     	
         LOGGER.info("Requested params:" + allRequestParams);
-        CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
+        CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo(playerName);
         model.addAttribute("dto", cityCenterDto);
         Set<String> builtBuildingTypes = cityCenterDto.getBuildingTypes();
         model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(builtBuildingTypes));

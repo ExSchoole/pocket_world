@@ -42,17 +42,11 @@ public class CityCenterServiceImpl implements CityCenterService {
 	public static final int MIN_POSITION = 1;
     public static final int MAX_POSITION = 12;
     
-    String nickName;
-    Map<Integer,BuildingDto> buildings;
 
-
-   private void initialization(){
-	   buildings = new HashMap<>();
-	   
-	   nickName = "User-login";
+   private void initialization(String playerName){
        String cityName = "City name";
        PlayerResources playerResources = new PlayerResources(1,1,1,1);
-       Player player = new Player(playerResources,nickName);
+       Player player = new Player(playerResources,playerName);
        playerService.savePlayer(player);
        
        City city = new City(player.getId(),cityName);
@@ -65,24 +59,19 @@ public class CityCenterServiceImpl implements CityCenterService {
    }
     
     @Override
-    public CityCenterDto cityCenterInfo() {
-    	initialization();
+    public CityCenterDto cityCenterInfo(String playerName) {
+    	initialization(playerName);
     	
-    	Player player = playerService.getPlayerByLogin(nickName);
+    	Player player = playerService.getPlayerByLogin(playerName);
+    	City city = cityService.getCityByPlayerId(player.getId());
     	PlayerResources playerResources = player.getPlayerResources();
     
     	ResourceDto resourcesDto = new ResourceDto(playerResources);
     	
-    	List<Building> buildingsFromDataBase =  buildingService.allBuildings();
-    	
-    	for (Building b : buildingsFromDataBase){
-    		buildings.put(b.getPosition(), new BuildingDto(b));
-    	}
-    	
         return CityCenterDtoBuilder.builder()
                 .resource(resourcesDto)
-                .buildings(buildings)
-                .nickname(nickName)
+                .buildings(convertFromBuildingToBuildingDto(buildingService.getAllBuildingsByCityId(city.getId())))
+                .nickname(playerName)
                 .build();
     }
 
@@ -103,18 +92,26 @@ public class CityCenterServiceImpl implements CityCenterService {
         });
     }
 
-
+    private Map<Integer, BuildingDto> convertFromBuildingToBuildingDto(List<Building> buildingsFromDataBase){
+    	Map<Integer, BuildingDto> buildingsDto = new HashMap<>();
+    	for (Building b : buildingsFromDataBase){
+    		buildingsDto.put(b.getPosition(), new BuildingDto(b));
+    	}
+    	
+    	return buildingsDto;
+    }
     
-    public boolean addBuilding(BuildingDto newBuilding) {
-        if (newBuilding != null && newBuilding.getPosition() <= MAX_POSITION && newBuilding.getPosition() >= MIN_POSITION) {
-            if (!buildings.containsKey(newBuilding.getPosition())) {
-                this.buildings.put(newBuilding.getPosition(), newBuilding);
+    
+    public boolean addBuilding(String playerName,String type, int level, int position) {
+        if (position <= MAX_POSITION && position >= MIN_POSITION) {
+        	City city = cityService.getCityByPlayerId(playerService.getPlayerByLogin(playerName).getId());
+            if (convertFromBuildingToBuildingDto(buildingService.getAllBuildingsByCityId(city.getId())).containsKey(position)==false) {
                 
                 Building buildingEntity = new Building();
-                buildingEntity.setCityId(cityService.getCityByPlayerId(playerService.getPlayerByLogin(nickName).getId()).getId());
-                buildingEntity.setLevel(newBuilding.getLevel());
-                buildingEntity.setPosition(newBuilding.getPosition());                
-                buildingEntity.setBuildingType(BuildingType.valueOf(newBuilding.getType().toUpperCase()));
+                buildingEntity.setCityId(city.getId());
+                buildingEntity.setLevel(level);
+                buildingEntity.setPosition(position);                
+                buildingEntity.setBuildingType(BuildingType.valueOf(type.toUpperCase()));
                               
                 buildingService.save(buildingEntity);
                 return true;

@@ -3,6 +3,8 @@ package org.exschool.pocketworld.building.service;
 
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.dao.Dao;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +47,14 @@ public class BuildingServiceImpl implements BuildingService {
         return dao.get(Building.class, id);
     }
 
+
+    @Override
+    public List<Building> getAllBuildingsByCityId(Long cityId) {
+        DetachedCriteria query = DetachedCriteria.forClass(Building.class);
+        query.add(Restrictions.eq("cityId", cityId));
+        return dao.getAllBy(query);
+    }
+    
     /**
      * Saves entity object to DB
      *

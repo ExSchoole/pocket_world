@@ -1,18 +1,18 @@
-function addBuilding(draggableElement,droppableElement,springUrl,methodUrl){
+function DragDropInitializationAjaxCall(draggableElement,emptyElement,springUrl,methodUrl,playerName){
 	 $(function () {
-	    $( draggableElement ).draggable({
+	    $("." + draggableElement ).draggable({
 	        appendTo: 'body',
 	        helper: 'clone',
-	    	revert: "invalid"
+	       	revert: "invalid"
 	    });
 
-	    $( droppableElement ).droppable({
+	    $("." + emptyElement ).droppable({
 	    	hoverClass: "over",
 	        drop: function( event, ui ) {
 	          var selectedBuilding = $(ui.draggable).attr("id");
 	          var selectedPosition = $(this).attr("id");
 	          
-	          $( this ).removeClass( droppableElement )
+	          $( this ).removeClass( emptyElement )
 	                   .addClass("building_" + selectedBuilding )
 	                   .addClass( 'building');	
 	                   	               
@@ -20,9 +20,9 @@ function addBuilding(draggableElement,droppableElement,springUrl,methodUrl){
 	                          .removeClass( draggableElement )
 	                          .removeClass( 'cursor' );
 	                          
-	          $('li').find("#"+selectedBuilding).remove();
+	          $("#"+selectedBuilding).remove();
 	          
-	          ajaxCallAddBuilding(springUrl+methodUrl,selectedBuilding,selectedPosition);
+	          ajaxCallAddBuilding(springUrl+methodUrl,selectedBuilding,selectedPosition,playerName);
 	        },
 	      });
 	 });

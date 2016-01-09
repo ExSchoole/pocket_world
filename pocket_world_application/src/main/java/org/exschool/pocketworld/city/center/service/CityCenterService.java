@@ -8,9 +8,9 @@ import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 
 public interface CityCenterService {
-    CityCenterDto cityCenterInfo();
+    CityCenterDto cityCenterInfo(String playerName);
 
-    boolean addBuilding(BuildingDto newBuilding);
+    boolean addBuilding(String playerName,String type, int level, int position);
 
     Collection<String> availableForBuildBuildingTypes(Set<String> builtBuildingTypes);
 }

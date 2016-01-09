@@ -13,7 +13,7 @@ public class City {
     private String name;
 
     public City(){
-    	this.name = "";
+    	
     }
     
     public City(Long playerId,String name){

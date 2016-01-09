@@ -5,9 +5,9 @@
 <div class="row">
     <a href="#springUrl('/city/resources/')" class="btn btn-primary">#springMessage('city.resources')</a>
 </div>
-
+<div id="message">
+</div>
 <div class="col-md-7">
-    <h1>${dto.NickName}'s city center</h1>
     #showResources(${dto.getResourceDto().getGold()},${dto.getResourceDto().getTimber()},${dto.getResourceDto().getClay()},${dto.getResourceDto().getCorn()})
     <div class="row">
         #foreach($position in [1,2,3,4])
@@ -60,16 +60,14 @@
 
 <script src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
 <script src="#springUrl('/js/jquery-ui.min.js')"></script>
-<script src="#springUrl('/js/addBuilding.js')"></script>
+<script src="#springUrl('/js/bootstrap.min.js')"></script>
+<script src="#springUrl('/js/DragDrop.js')"></script>
 <script src="#springUrl('/js/ajaxCallAddBuilding.js')"></script>
 <script src="#springUrl('/js/jquery.verticalCarousel.js')"></script>
 
+<script>
+	DragDropInitializationAjaxCall("building_karusel","building_empty", "#springUrl('/city/center/')","/addBuilding","$dto.getNickName()");
 
-<script>
-	addBuilding(".building_karusel",".building_empty", "#springUrl('/city/center/')","/addBuilding");
-</script>
-<script>
-	 
      $(function () {
 	     $("#carouselId").verticalCarousel({nSlots: 3, speed: 900});
      });
