@@ -60,7 +60,7 @@ public class CityCenterServiceImpl implements CityCenterService {
         City city = cityService.getCityByPlayerId(player.getId());
         notNull(city);
         PlayerResources playerResources = player.getPlayerResources();
-        //notNull(playerResources);
+        notNull(playerResources);
 
         return CityCenterDtoBuilder.builder()
                 .resource(new ResourceDto(playerResources))
