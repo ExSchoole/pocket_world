@@ -82,7 +82,6 @@ public class CityCenterServiceImplTest {
 
     @Test
     public void testAddBuilding() {
-        cityCenterService.cityCenterInfo(playerName);
         assertTrue(cityCenterService.addBuilding(playerName,MALL.name().toLowerCase(),1,4));
         assertFalse(cityCenterService.addBuilding(playerName,MALL.name().toLowerCase(),1,1));
         assertFalse(cityCenterService.addBuilding(playerName,MALL.name().toLowerCase(),1,-1));
