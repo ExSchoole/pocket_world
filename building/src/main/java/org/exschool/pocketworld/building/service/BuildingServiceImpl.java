@@ -49,7 +49,7 @@ public class BuildingServiceImpl implements BuildingService {
 
 
     @Override
-    public List<Building> getAllBuildingsByCityId(Long cityId) {
+    public List<Building> getBuildingsByCityId(Long cityId) {
         DetachedCriteria query = DetachedCriteria.forClass(Building.class);
         query.add(Restrictions.eq("cityId", cityId));
         return dao.getAllBy(query);
