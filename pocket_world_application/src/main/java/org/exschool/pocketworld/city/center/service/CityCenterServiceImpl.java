@@ -40,9 +40,11 @@ public class CityCenterServiceImpl implements CityCenterService {
         String cityName = "City name";
         PlayerResources playerResources = new PlayerResources(1, 1, 1, 1);
         Player player = new Player(playerResources, playerName);
+        player.setId(1l);
         playerService.savePlayer(player);
 
         City city = new City(player.getId(), cityName);
+        city.setId(1l);
         cityService.save(city);
 
         buildingService.save(new Building(MALL, 1, 1, city.getId()));
@@ -94,27 +96,26 @@ public class CityCenterServiceImpl implements CityCenterService {
         notNull(city);
         Long cityId = city.getId();
         List<Building> buildings = buildingService.getBuildingsByCityId(cityId);
-        Building buildingAtPosition = Iterables.find(buildings, new Predicate<Building>() {
-            @Override
-            public boolean apply(Building building) {
-                return building.getPosition() == position;
-            }
-        });
+        try {
+            Building buildingAtPosition = Iterables.find(buildings, new Predicate<Building>() {
+                @Override
+                public boolean apply(Building building) {
+                    return building.getPosition() == position;
+                }
+            });
+        }catch(NoSuchElementException e){
+            Building buildingEntity = new Building();
+            buildingEntity.setCityId(cityId);
+            buildingEntity.setLevel(level);
+            buildingEntity.setPosition(position);
+            buildingEntity.setBuildingType(BuildingType.valueOf(type.toUpperCase()));
 
-        if (buildingAtPosition != null) return false;
+            buildingService.save(buildingEntity);
+            return true;
+        }
 
-        Building buildingEntity = new Building();
-        buildingEntity.setCityId(cityId);
-        buildingEntity.setLevel(level);
-        buildingEntity.setPosition(position);
-        buildingEntity.setBuildingType(BuildingType.valueOf(type.toUpperCase()));
+        return false;
 
-        buildingService.save(buildingEntity);
-        return true;
-    }
-
-    public void setBuildingService(BuildingService buildingService) {
-        this.buildingService = buildingService;
     }
 
     private static Map<Integer, BuildingDto> buildingDtosByPosition(List<Building> buildingsFromDataBase) {
@@ -126,4 +127,15 @@ public class CityCenterServiceImpl implements CityCenterService {
         return buildingsDto;
     }
 
+    public void setBuildingService(BuildingService buildingService) {
+        this.buildingService = buildingService;
+    }
+
+    public void setCityService(CityService cityService) {
+        this.cityService = cityService;
+    }
+
+    public void setPlayerService(PlayerService playerService) {
+        this.playerService = playerService;
+    }
 }
