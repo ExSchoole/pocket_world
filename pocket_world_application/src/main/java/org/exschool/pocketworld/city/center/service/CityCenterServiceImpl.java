@@ -40,11 +40,9 @@ public class CityCenterServiceImpl implements CityCenterService {
         String cityName = "City name";
         PlayerResources playerResources = new PlayerResources(1, 1, 1, 1);
         Player player = new Player(playerResources, playerName);
-        player.setId(1l);
         playerService.savePlayer(player);
 
         City city = new City(player.getId(), cityName);
-        city.setId(1l);
         cityService.save(city);
 
         buildingService.save(new Building(MALL, 1, 1, city.getId()));
@@ -62,7 +60,7 @@ public class CityCenterServiceImpl implements CityCenterService {
         City city = cityService.getCityByPlayerId(player.getId());
         notNull(city);
         PlayerResources playerResources = player.getPlayerResources();
-        notNull(playerResources);
+        //notNull(playerResources);
 
         return CityCenterDtoBuilder.builder()
                 .resource(new ResourceDto(playerResources))

@@ -1,6 +1,6 @@
 package org.exschool.pocketworld.city.center.service;
 
-import static org.exschool.pocketworld.building.model.BuildingType.MALL;
+import static org.exschool.pocketworld.building.model.BuildingType.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,7 +9,9 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.util.*;
+import java.util.List;
 
+import com.sun.tools.javac.util.*;
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
@@ -57,24 +59,31 @@ public class CityCenterServiceImplTest {
     List<Building> buildings;
     PlayerResources playerResources;
 
+    String playerName = "player-test";
     @Before
     public void before() {
         playerResources= new PlayerResources(100, 100, 100, 100);
-        Player palayer = new Player(playerResources, "login");
-        buildings = new ArrayList<>();
-        buildings.add(BuildingBuilder.builder().buildingType(BuildingType.BARN).level(1).position(1).cityId(1L).build());
-        buildings.add(BuildingBuilder.builder().buildingType(BuildingType.FARM).level(1).position(2).cityId(1L).build());
+        Player player = new Player(playerResources, playerName);
+        player.setId(1l);
+        City city = new City(player.getId(),"test-city");
+        city.setId(1l);
 
-        when(playerService.getPlayerByLogin(anyString())).thenReturn(palayer);
-        when(cityService.getCityByPlayerId(anyLong())).thenReturn(new City());
+        buildings = new ArrayList<>();
+        buildings.add(new Building(MALL, 1, 1, city.getId()));
+        buildings.add(new Building(PLANT, 1, 3, city.getId()));
+        buildings.add(new Building(MARKETPLACE, 1, 6, city.getId()));
+        buildings.add(new Building(POOL, 1, 9, city.getId()));
+
+        when(playerService.getPlayerByLogin(anyString())).thenReturn(player);
+        when(cityService.getCityByPlayerId(anyLong())).thenReturn(city);
         when(buildingService.getBuildingsByCityId(anyLong())).thenReturn(buildings);
     }
 
 
     @Test
     public void testAddBuilding() {
-        String playerName = "player-test";
-        assertTrue(cityCenterService.addBuilding(playerName,MALL.name().toLowerCase(),1,3));
+        cityCenterService.cityCenterInfo(playerName);
+        assertTrue(cityCenterService.addBuilding(playerName,MALL.name().toLowerCase(),1,4));
         assertFalse(cityCenterService.addBuilding(playerName,MALL.name().toLowerCase(),1,1));
         assertFalse(cityCenterService.addBuilding(playerName,MALL.name().toLowerCase(),1,-1));
     }
