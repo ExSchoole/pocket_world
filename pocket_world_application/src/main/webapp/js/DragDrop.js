@@ -19,7 +19,9 @@ function DragDropInitializationAjaxCall(draggableElement,emptyElement,springUrl,
 	          $( ui.draggable).removeClass("building_" + selectedBuilding )
 	                          .removeClass( draggableElement )
 	                          .removeClass( 'cursor' );
-	                          
+
+	          $( this ).droppable( "disable" );
+
 	          $("#"+selectedBuilding).remove();
 	          
 	          ajaxCallAddBuilding(springUrl+methodUrl,selectedBuilding,selectedPosition,playerName);
