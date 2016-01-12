@@ -25,7 +25,7 @@ public class CityCenterController {
 
     @RequestMapping(value = "/addBuilding", method = RequestMethod.POST)
     public String addBuilding(@RequestParam String playerName, @RequestParam String type, @RequestParam int position) {
-        if (cityCenterService.addBuilding(playerName, type, 1, position)) {
+        if (cityCenterService.addBuilding(playerName, type, position)) {
             LOGGER.info("player - {} has built new building with type - {} in position - {}",
                     playerName, type, position);
             return "successMessage";

@@ -1,16 +1,6 @@
 package org.exschool.pocketworld.city.center.service;
 
-import static org.exschool.pocketworld.building.model.BuildingType.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.when;
-
-import java.util.*;
-import java.util.List;
-
+import com.google.common.collect.Sets;
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
@@ -19,7 +9,6 @@ import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.service.CityService;
-import org.exschool.pocketworld.config.TestSpringConfig;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
@@ -29,36 +18,40 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import com.google.common.collect.Sets;
+import java.util.*;
+
+import static org.exschool.pocketworld.building.model.BuildingType.*;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
 public class CityCenterServiceImplTest {
 
-	@InjectMocks
-  	CityCenterService cityCenterService = new CityCenterServiceImpl();
+    @InjectMocks
+    CityCenterService cityCenterService = new CityCenterServiceImpl();
 
     @Mock
-	CityService cityService;
+    CityService cityService;
     @Mock
-  	PlayerService playerService;
+    PlayerService playerService;
     @Mock
-	BuildingService buildingService;
+    BuildingService buildingService;
 
     List<Building> buildings;
     PlayerResources playerResources;
 
     String playerName = "player-test";
+
     @Before
     public void before() {
-        playerResources= new PlayerResources(100, 100, 100, 100);
+        playerResources = new PlayerResources(100, 100, 100, 100);
         Player player = new Player(playerResources, playerName);
-        player.setId(1l);
-        City city = new City(player.getId(),"test-city");
-        city.setId(1l);
+        player.setId(1L);
+        City city = new City(player.getId(), "test-city");
+        city.setId(1L);
 
         buildings = new ArrayList<>();
         buildings.add(new Building(MALL, 1, 1, city.getId()));
@@ -74,9 +67,17 @@ public class CityCenterServiceImplTest {
 
     @Test
     public void testAddBuilding() {
-        assertTrue(cityCenterService.addBuilding(playerName,MALL.name().toLowerCase(),1,4));
-        assertFalse(cityCenterService.addBuilding(playerName,MALL.name().toLowerCase(),1,1));
-        assertFalse(cityCenterService.addBuilding(playerName,MALL.name().toLowerCase(),1,-1));
+        assertTrue(cityCenterService.addBuilding(playerName, MALL.name().toLowerCase(), 4));
+        assertFalse(cityCenterService.addBuilding(playerName, MALL.name().toLowerCase(), 1));
+        assertFalse(cityCenterService.addBuilding(playerName, MALL.name().toLowerCase(), -1));
+    }
+
+    @Test
+    public void testAddBuildingOnExistingPosition() {
+        int buildingPosition = 5;
+        when(buildingService.getBuildingsByCityId(1L)).thenReturn(Arrays.asList(new Building(MALL, 3, buildingPosition, 1L)));
+
+        assertFalse(cityCenterService.addBuilding(playerName, MALL.name().toLowerCase(), buildingPosition));
     }
 
     @Test

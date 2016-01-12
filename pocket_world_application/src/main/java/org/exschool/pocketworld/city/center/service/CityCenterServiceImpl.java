@@ -17,6 +17,7 @@ import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.google.common.base.Optional;
 
 import java.util.*;
 
@@ -87,33 +88,33 @@ public class CityCenterServiceImpl implements CityCenterService {
     }
 
     @Override
-    public boolean addBuilding(String playerName, String type, int level, final int position) {
+    public boolean addBuilding(String playerName, String type, final int position) {
         if (position > MAX_POSITION || position < MIN_POSITION) return false;
 
         City city = cityService.getCityByPlayerId(playerService.getPlayerByLogin(playerName).getId());
         notNull(city);
         Long cityId = city.getId();
         List<Building> buildings = buildingService.getBuildingsByCityId(cityId);
-        try {
-            Building buildingAtPosition = Iterables.find(buildings, new Predicate<Building>() {
-                @Override
-                public boolean apply(Building building) {
-                    return building.getPosition() == position;
-                }
-            });
-        }catch(NoSuchElementException e){
-            Building buildingEntity = new Building();
-            buildingEntity.setCityId(cityId);
-            buildingEntity.setLevel(level);
-            buildingEntity.setPosition(position);
-            buildingEntity.setBuildingType(BuildingType.valueOf(type.toUpperCase()));
 
-            buildingService.save(buildingEntity);
-            return true;
+        Optional<Building> buildingAtPosition = Iterables.tryFind(buildings, new Predicate<Building>() {
+            @Override
+            public boolean apply(Building building) {
+                return building.getPosition() == position;
+            }
+        });
+
+        if (buildingAtPosition.isPresent()) {
+            return false;
         }
 
-        return false;
+        Building buildingEntity = new Building();
+        buildingEntity.setCityId(cityId);
+        buildingEntity.setLevel(1);
+        buildingEntity.setPosition(position);
+        buildingEntity.setBuildingType(BuildingType.valueOf(type.toUpperCase()));
 
+        buildingService.save(buildingEntity);
+        return true;
     }
 
     private static Map<Integer, BuildingDto> buildingDtosByPosition(List<Building> buildingsFromDataBase) {
