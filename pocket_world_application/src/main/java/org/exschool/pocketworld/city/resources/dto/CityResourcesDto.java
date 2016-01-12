@@ -1,20 +1,21 @@
 package org.exschool.pocketworld.city.resources.dto;
 
-import org.exschool.pocketworld.building.ResourceBuilding;
+
+import org.exschool.pocketworld.building.ResourceBuildingDto;
 import org.exschool.pocketworld.resource.ResourceDto;
 
 import java.util.Map;
 
 public class CityResourcesDto {
 
-    private Map<Integer, ResourceBuilding> resourceBuildings;
+    private Map<Integer, ResourceBuildingDto> resourceBuildings;
     private ResourceDto resourceDto;
     private String nickName;
 
     public CityResourcesDto() {
     }
 
-    public CityResourcesDto(Map<Integer, ResourceBuilding> buildings, ResourceDto resourceDto, String nickName) {
+    public CityResourcesDto(Map<Integer, ResourceBuildingDto> buildings, ResourceDto resourceDto, String nickName) {
         this.resourceDto = resourceDto;
         this.nickName = nickName;
         this.resourceBuildings = buildings;
@@ -28,11 +29,11 @@ public class CityResourcesDto {
         this.nickName = nickName;
     }
 
-    public Map<Integer, ResourceBuilding> getResourceBuildings() {
+    public Map<Integer, ResourceBuildingDto> getResourceBuildings() {
         return resourceBuildings;
     }
 
-    public void setResourceBuildings(Map<Integer, ResourceBuilding> resourceBuildings) {
+    public void setResourceBuildings(Map<Integer, ResourceBuildingDto> resourceBuildings) {
         this.resourceBuildings = resourceBuildings;
     }
 
@@ -43,4 +44,5 @@ public class CityResourcesDto {
     public ResourceDto getResourceDto() {
         return resourceDto;
     }
+    
 }

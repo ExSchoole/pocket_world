@@ -19,7 +19,12 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"org.exschool.pocketworld.dao", "org.exschool.pocketworld.player" })
+@ComponentScan({"org.exschool.pocketworld.dao", 
+	"org.exschool.pocketworld.player",
+	"org.exschool.pocketworld.city.resources.service",
+	"org.exschool.pocketworld.resource.building.service",
+	"org.exschool.pocketworld.resource.service",
+	"org.exschool.pocketworld.city.service"})
 public class TestSpringConfig {
 
     @Bean
@@ -34,7 +39,11 @@ public class TestSpringConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("org.exschool.pocketworld.player.model");
+        sessionFactory.setPackagesToScan(new String[]{"org.exschool.pocketworld.city.resources.dto",
+        											  "org.exschool.pocketworld.player.model",
+        											  "org.exschool.pocketworld.city.model",
+        											  "org.exschool.pocketworld.resource.model",
+        											  "org.exschool.pocketworld.resource.building.model"});
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }

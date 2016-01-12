@@ -1,5 +1,5 @@
 package org.exschool.pocketworld.city.service;
-//import org.exschool.pocketworld.building.model.building.Building;
+
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.dao.Dao;
 import org.hibernate.criterion.DetachedCriteria;

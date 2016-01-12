@@ -1,7 +1,5 @@
 package org.exschool.pocketworld.controllers.city.center;
 
-import java.util.Map;
-
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
 import org.exschool.pocketworld.player.service.PlayerService;
@@ -13,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
+import java.util.Set;
 
 
 @Controller
@@ -38,6 +39,8 @@ public class CityCenterController {
     	LOGGER.info("Requested params:" + allRequestParams);
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo();
         model.addAttribute("dto", cityCenterDto);
+        Set<String> builtBuildingTypes = cityCenterDto.getBuildingTypes();
+        model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(builtBuildingTypes));
         LOGGER.info("Out:" + model);
         return "city_center";
     }
