@@ -31,8 +31,4 @@ public class PlayerServiceImpl implements PlayerService {
         this.dao = dao;
     }
 
-    public Dao getDao(){
-        return dao;
-    }
-
 }

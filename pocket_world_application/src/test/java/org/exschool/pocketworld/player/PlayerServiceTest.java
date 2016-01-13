@@ -65,13 +65,6 @@ public class PlayerServiceTest {
         Player existingPlayer = playerService.getPlayerByLogin("login-3");
         assertNotNull(existingPlayer);
     }
-
-    @Test
-    public void testSetterGetterDao(){
-        PlayerServiceImpl p = new PlayerServiceImpl();
-        p.setDao(dao);
-        assertNotNull(p.getDao());
-    }
 }
 
 

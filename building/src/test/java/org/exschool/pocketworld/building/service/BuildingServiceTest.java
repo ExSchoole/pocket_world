@@ -76,13 +76,6 @@ public class BuildingServiceTest {
     }
 
     @Test
-    public void testSetterGetterDao(){
-        BuildingServiceImpl b = new BuildingServiceImpl();
-        b.setDao(dao);
-        assertNotNull(b.getDao());
-    }
-
-    @Test
     public void testGetById() {
         Building existingBuilding = buildingService.get(3L);
         assertNotNull(existingBuilding);

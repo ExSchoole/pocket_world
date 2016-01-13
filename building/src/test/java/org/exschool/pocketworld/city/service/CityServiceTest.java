@@ -85,11 +85,4 @@ public class CityServiceTest {
         Long playerId = 1L;
         assertNotNull(cityService.getCityByPlayerId(playerId));
     }
-
-    @Test
-    public void testSetterGetterDao(){
-        CityServiceImpl c = new CityServiceImpl();
-        c.setDao(dao);
-        assertNotNull(c.getDao());
-    }
 }

@@ -73,8 +73,4 @@ public class BuildingServiceImpl implements BuildingService {
     public void setDao(Dao dao) {
         this.dao = dao;
     }
-
-    public Dao getDao() {
-        return dao;
-    }
 }
