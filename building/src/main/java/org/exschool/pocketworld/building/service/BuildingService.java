@@ -11,6 +11,6 @@ public interface BuildingService {
     List<Building> allBuildings();
     Building get (long id);
     Building save(Building entity);
-
+    List<Building> getBuildingsByCityId(Long cityId);
 }
 

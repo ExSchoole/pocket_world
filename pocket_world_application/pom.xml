@@ -41,7 +41,7 @@
     </build>
 
     <properties>
-        <building.version>1.0.1</building.version>
+        <building.version>1.0.2</building.version>
         <resource_buildings.version>1.0.2</resource_buildings.version>
     </properties>
 
