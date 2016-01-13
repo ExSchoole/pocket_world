@@ -68,4 +68,9 @@ public class CityServiceImpl implements CityService {
     public void setDao(Dao dao) {
         this.dao = dao;
     }
+
+    public Dao getDao(){
+        return dao;
+    }
+
 }

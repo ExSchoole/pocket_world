@@ -1,4 +1,4 @@
-function DragDropBuild(draggableElement,emptyElement,springUrl,methodUrl,playerName){
+function DragDropBuild(draggableElement,emptyElement,url,playerName){
 	 $(function () {
 	    $("." + draggableElement ).draggable({
 	        appendTo: 'body',
@@ -9,10 +9,7 @@ function DragDropBuild(draggableElement,emptyElement,springUrl,methodUrl,playerN
 	    $("." + emptyElement ).droppable({
 	    	hoverClass: "over",
 	        drop: function( event, ui ) {
-	          var selectedBuilding = ui.draggable;
-	          var selectedPosition = this;
-
-	          build(springUrl+methodUrl,selectedBuilding,selectedPosition,playerName);
+	                    build(emptyElement,url,ui.draggable,this,playerName);
 	        },
 	      });
 	 });

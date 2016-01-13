@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.NotNull;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.*;
@@ -68,8 +69,14 @@ public class CityCenterServiceImplTest {
     @Test
     public void testAddBuilding() {
         assertTrue(cityCenterService.addBuilding(playerName, MALL.name().toLowerCase(), 4));
+        assertFalse(cityCenterService.addBuilding(playerName, MALL.name().toLowerCase(), 25));
         assertFalse(cityCenterService.addBuilding(playerName, MALL.name().toLowerCase(), 1));
         assertFalse(cityCenterService.addBuilding(playerName, MALL.name().toLowerCase(), -1));
+    }
+
+    @Test
+    public  void testCityCenterInfo() {
+        assertNotNull(cityCenterService.cityCenterInfo(playerName));
     }
 
     @Test

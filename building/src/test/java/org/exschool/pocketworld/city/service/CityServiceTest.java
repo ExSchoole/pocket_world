@@ -1,5 +1,6 @@
 package org.exschool.pocketworld.city.service;
 
+import org.exschool.pocketworld.building.service.BuildingServiceImpl;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.config.TestSpringConfig;
 import org.exschool.pocketworld.dao.Dao;
@@ -72,5 +73,23 @@ public class CityServiceTest {
         assertEquals(city2.getId(), city1.getId());
         assertEquals(city2.getName(), city1.getName());
         assertEquals(city2.getPlayerId(), city1.getPlayerId());
+    }
+
+    @Test
+    public void testAllCities() {
+        assertEquals(bootstrap.getAllCities(),cityService.allCities());
+    }
+
+    @Test
+    public void testGetPlayerByCityId(){
+        Long playerId = 1L;
+        assertNotNull(cityService.getCityByPlayerId(playerId));
+    }
+
+    @Test
+    public void testSetterGetterDao(){
+        CityServiceImpl c = new CityServiceImpl();
+        c.setDao(dao);
+        assertNotNull(c.getDao());
     }
 }
