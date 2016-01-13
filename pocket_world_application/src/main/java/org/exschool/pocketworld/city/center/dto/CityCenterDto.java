@@ -1,22 +1,22 @@
 package org.exschool.pocketworld.city.center.dto;
 
-import org.exschool.pocketworld.building.Building;
-import org.exschool.pocketworld.resource.ResourceDto;
-
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.exschool.pocketworld.building.BuildingDto;
+import org.exschool.pocketworld.resource.ResourceDto;
+
 public class CityCenterDto {
 
-    private Map<Integer, Building> buildings;
+    private Map<Integer, BuildingDto> buildings;
     private ResourceDto resourceDto;
     private String nickName;
 
     public CityCenterDto() {
     }
 
-    public CityCenterDto(Map<Integer, Building> buildings, ResourceDto resourceDto, String nickName) {
+    public CityCenterDto(Map<Integer, BuildingDto> buildings, ResourceDto resourceDto, String nickName) {
         this.resourceDto = resourceDto;
         this.nickName = nickName;
         this.buildings = buildings;
@@ -30,11 +30,11 @@ public class CityCenterDto {
         this.nickName = nickName;
     }
 
-    public Map<Integer, Building> getBuildings() {
+    public Map<Integer, BuildingDto> getBuildings() {
         return buildings;
     }
 
-    public void setBuildings(Map<Integer, Building> buildings) {
+    public void setBuildings(Map<Integer, BuildingDto> buildings) {
         this.buildings = buildings;
     }
 
@@ -48,8 +48,8 @@ public class CityCenterDto {
 
     public Set<String> getBuildingTypes() {
         Set<String> result = new HashSet<>();
-        for(Building building: getBuildings().values()) {
-            result.add(building.getType().toLowerCase());
+        for(Map.Entry<Integer, BuildingDto> building: buildings.entrySet()) {
+            result.add(building.getValue().getType());
         }
         return result;
     }

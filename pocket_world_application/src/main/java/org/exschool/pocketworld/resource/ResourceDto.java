@@ -1,5 +1,7 @@
 package org.exschool.pocketworld.resource;
 
+import org.exschool.pocketworld.player.model.PlayerResources;
+
 public class ResourceDto {
 	  private int gold;
       private int timber;
@@ -11,6 +13,13 @@ public class ResourceDto {
     	this.timber = timber;
     	this.clay = clay;
     	this.corn = corn;  	
+    }
+    
+    public ResourceDto(PlayerResources playerResources){
+    	this.gold = playerResources.getGoldAmount();
+    	this.timber = playerResources.getTimberAmount();
+    	this.clay = playerResources.getClayAmount();
+    	this.corn = playerResources.getCornAmount();
     }
       
 	public int getGold() {
