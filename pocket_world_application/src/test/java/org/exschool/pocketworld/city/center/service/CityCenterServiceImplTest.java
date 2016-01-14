@@ -64,7 +64,6 @@ public class CityCenterServiceImplTest {
         buildings.add(new Building(POOL, 1, 9, city.getId()));
 
         when(playerService.getPlayerByLogin(anyString())).thenReturn(player);
-        when(cityService.getCityByPlayerId(anyLong())).thenReturn(city);
         when(buildingService.getBuildingsByCityId(anyLong())).thenReturn(buildings);
     }
 
