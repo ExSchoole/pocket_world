@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"org.exschool.pocketworld.dao", "org.exschool.pocketworld.build.queue.service" })
+@ComponentScan({"org.exschool.pocketworld.dao", "org.exschool.pocketworld.buildQueue.service" })
 public class TestSpringConfig {
 
     @Bean
@@ -34,7 +34,7 @@ public class TestSpringConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("org.exschool.pocketworld.build.queue.model");
+        sessionFactory.setPackagesToScan("org.exschool.pocketworld.buildQueue.model");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }

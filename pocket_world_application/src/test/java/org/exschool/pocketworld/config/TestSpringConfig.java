@@ -25,7 +25,7 @@ import java.util.Properties;
 	"org.exschool.pocketworld.resource.building.service",
 	"org.exschool.pocketworld.resource.service",
 	"org.exschool.pocketworld.city.service",
-    "org.exschool.pocketworld.build.queue"})
+    "org.exschool.pocketworld.buildQueue"})
 public class TestSpringConfig {
 
     @Bean
