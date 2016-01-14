@@ -1,6 +1,7 @@
 package org.exschool.pocketworld.city.center.service;
 
 import com.google.common.collect.Sets;
+import org.exschool.pocketworld.build_queue.service.BuildQueueService;
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
@@ -40,6 +41,8 @@ public class CityCenterServiceImplTest {
     PlayerService playerService;
     @Mock
     BuildingService buildingService;
+    @Mock
+    BuildQueueService buildQueueService;
 
     List<Building> buildings;
     PlayerResources playerResources;
