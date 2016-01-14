@@ -25,6 +25,7 @@ import java.util.*;
 
 import static org.exschool.pocketworld.building.model.BuildingType.*;
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
@@ -63,8 +64,13 @@ public class CityCenterServiceImplTest {
         buildings.add(new Building(MARKETPLACE, 1, 6, city.getId()));
         buildings.add(new Building(POOL, 1, 9, city.getId()));
 
+        Building building = new Building(BARN,1,7,city.getId());
+        building.setId(1L);
+
         when(playerService.getPlayerByLogin(anyString())).thenReturn(player);
+        when(cityService.getCityByPlayerId(anyLong())).thenReturn(city);
         when(buildingService.getBuildingsByCityId(anyLong())).thenReturn(buildings);
+        when(buildingService.save(any(Building.class))).thenReturn(building);
     }
 
 

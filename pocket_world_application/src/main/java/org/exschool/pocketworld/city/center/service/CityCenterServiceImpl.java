@@ -120,17 +120,16 @@ public class CityCenterServiceImpl implements CityCenterService {
         buildingEntity.setLevel(1);
         buildingEntity.setPosition(position);
         buildingEntity.setBuildingType(BuildingType.valueOf(type.toUpperCase()));
+        Building savedBuilding =buildingService.save(buildingEntity);
 
-        buildingService.save(buildingEntity);
         BuildQueueRecord newRecord = new BuildQueueRecord();
         newRecord.setName(playerName);
-        newRecord.setLevel(buildingEntity.getLevel());
+        newRecord.setLevel(savedBuilding.getLevel());
         newRecord.setType(Type.BUILDING);
         newRecord.setBuildEnd(new Date(System.currentTimeMillis()));
         newRecord.setUserId(userId);
         newRecord.setStatus(Status.DONE);
-        newRecord.setBuildingId(buildingEntity.getId());
-
+        newRecord.setBuildingId(savedBuilding.getId());
         buildQueueService.save(newRecord);
         return true;
     }
