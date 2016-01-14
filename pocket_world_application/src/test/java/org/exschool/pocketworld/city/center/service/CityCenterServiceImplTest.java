@@ -1,7 +1,7 @@
 package org.exschool.pocketworld.city.center.service;
 
 import com.google.common.collect.Sets;
-import org.exschool.pocketworld.build_queue.service.BuildQueueService;
+import org.exschool.pocketworld.build.queue.service.BuildQueueService;
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.internal.matchers.NotNull;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.*;

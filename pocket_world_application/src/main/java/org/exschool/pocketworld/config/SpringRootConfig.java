@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Import;
         "org.exschool.pocketworld.player",
         "org.exschool.pocketworld.city.center",
         "org.exschool.pocketworld.city.resources",
-        "org.exschool.pocketworld.build_queue"  })
+        "org.exschool.pocketworld.build.queue"  })
 @Import({HibernateConfiguration.class, BuildingSpringConfiguration.class,
         ResourceBuildingSpringConfiguration.class, BuildQueueSpringConfiguration.class})
 public class SpringRootConfig {

@@ -1,8 +1,8 @@
 package org.exschool.pocketworld.util.builder;
 
-import org.exschool.pocketworld.build_queue.model.BuildQueueRecord;
-import org.exschool.pocketworld.build_queue.model.Status;
-import org.exschool.pocketworld.build_queue.model.Type;
+import org.exschool.pocketworld.build.queue.model.BuildQueueRecord;
+import org.exschool.pocketworld.build.queue.model.Status;
+import org.exschool.pocketworld.build.queue.model.Type;
 
 import java.util.Date;
 

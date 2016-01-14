@@ -25,7 +25,7 @@ import java.util.Properties;
 	"org.exschool.pocketworld.resource.building.service",
 	"org.exschool.pocketworld.resource.service",
 	"org.exschool.pocketworld.city.service",
-    "org.exschool.pocketworld.build_queue"})
+    "org.exschool.pocketworld.build.queue"})
 public class TestSpringConfig {
 
     @Bean
@@ -45,7 +45,7 @@ public class TestSpringConfig {
         											  "org.exschool.pocketworld.city.model",
         											  "org.exschool.pocketworld.resource.model",
         											  "org.exschool.pocketworld.resource.building.model",
-                                                      "org.exschool.pocketworld.build_queue.model"  });
+                                                      "org.exschool.pocketworld.build.queue.model"  });
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
