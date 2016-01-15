@@ -2,6 +2,7 @@ package org.exschool.pocketworld.city.resources.service;
 
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.service.CityService;
+import org.exschool.pocketworld.info.resourcebuilding.ResourceBuildingInfoService;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.city.model.City;
@@ -17,7 +18,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.anyString;
@@ -25,13 +25,13 @@ import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @RunWith(MockitoJUnitRunner.class)
 public class CityResourcesServiceTest {
+	@Mock 
+    ResourceBuildingInfoService resourceBuildingInfoService;
     @Mock
     PlayerService playerService;
     @Mock

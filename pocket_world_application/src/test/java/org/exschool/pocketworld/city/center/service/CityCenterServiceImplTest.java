@@ -1,6 +1,26 @@
 package org.exschool.pocketworld.city.center.service;
 
-import com.google.common.collect.Sets;
+import static org.exschool.pocketworld.building.model.BuildingType.MALL;
+import static org.exschool.pocketworld.building.model.BuildingType.MARKETPLACE;
+import static org.exschool.pocketworld.building.model.BuildingType.PLANT;
+import static org.exschool.pocketworld.building.model.BuildingType.POOL;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
@@ -9,6 +29,7 @@ import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.service.CityService;
+import org.exschool.pocketworld.info.building.BuildingInfoService;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
@@ -17,16 +38,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.internal.matchers.NotNull;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.*;
-
-import static org.exschool.pocketworld.building.model.BuildingType.*;
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.when;
+import com.google.common.collect.Sets;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CityCenterServiceImplTest {
@@ -34,6 +48,8 @@ public class CityCenterServiceImplTest {
     @InjectMocks
     CityCenterService cityCenterService = new CityCenterServiceImpl();
 
+    @Mock 
+    BuildingInfoService buildingInfoService;
     @Mock
     CityService cityService;
     @Mock

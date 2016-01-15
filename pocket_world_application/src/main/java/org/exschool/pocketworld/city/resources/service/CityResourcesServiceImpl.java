@@ -1,12 +1,19 @@
 package org.exschool.pocketworld.city.resources.service;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+import static org.apache.commons.lang.Validate.notNull;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.exschool.pocketworld.building.ResourceBuildingDto;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.resources.builder.CityResourcesDtoBuilder;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.service.CityService;
+import org.exschool.pocketworld.info.resourcebuilding.ResourceBuildingInfo;
+import org.exschool.pocketworld.info.resourcebuilding.ResourceBuildingInfoDto;
+import org.exschool.pocketworld.info.resourcebuilding.ResourceBuildingInfoService;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
@@ -16,9 +23,8 @@ import org.exschool.pocketworld.resource.building.service.ResourceBuildingServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
-import static org.apache.commons.lang.Validate.notNull;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 
 @Component("CityResources")
 public class CityResourcesServiceImpl implements CityResourcesService {
@@ -28,7 +34,14 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     private ResourceBuildingService resourceBuildingService;
     @Autowired
     private CityService cityService;
-
+    @Autowired 
+    private ResourceBuildingInfoService resourceBuildingInfoService;
+    
+    @Autowired
+    private void fillDataBase(){
+    	resourceBuildingInfoService.saveAll();
+    }
+    
     @Override
     public CityResourcesDto cityResourcesInfo() {
         String login = "login-1";
@@ -53,10 +66,25 @@ public class CityResourcesServiceImpl implements CityResourcesService {
                 .resource(resourceDto)
                 .resourceBuildings(resourceBuildingDtos)
                 .nickname(player.getLogin())
+                .resourceBuildingsInfo(resourceInfoToResourceInfoDto(resourceBuildingInfoService.allBuildings()))
                 .build();
     }
+    
+	public void setResourceBuildingInfo(ResourceBuildingInfoService resourceBuildingInfoService) {
+		this.resourceBuildingInfoService = resourceBuildingInfoService;
+	}
 
-    private static final Function<ResourceBuilding, ResourceBuildingDto> TO_RESOURCE_BUILDING_DTO =
+	private static Map<String, ResourceBuildingInfoDto> 
+					resourceInfoToResourceInfoDto(List<ResourceBuildingInfo> resourceBuildingInfo){
+    	Map<String, ResourceBuildingInfoDto> resourceBuildingInfoDto = new HashMap<>();
+    	for (ResourceBuildingInfo b : resourceBuildingInfo){
+    		resourceBuildingInfoDto.put(b.getResourceType().name().toLowerCase(), new ResourceBuildingInfoDto(b));
+    	}
+    	
+    	return resourceBuildingInfoDto;
+    }
+	
+	private static final Function<ResourceBuilding, ResourceBuildingDto> TO_RESOURCE_BUILDING_DTO =
             new Function<ResourceBuilding, ResourceBuildingDto>() {
                 @Override
                 public ResourceBuildingDto apply(ResourceBuilding resourceBuilding) {

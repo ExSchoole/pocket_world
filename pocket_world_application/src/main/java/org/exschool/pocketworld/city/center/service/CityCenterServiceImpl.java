@@ -1,8 +1,17 @@
 package org.exschool.pocketworld.city.center.service;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Iterables;
+import static org.apache.commons.lang.Validate.notNull;
+import static org.exschool.pocketworld.building.model.BuildingType.MALL;
+import static org.exschool.pocketworld.building.model.BuildingType.MARKETPLACE;
+import static org.exschool.pocketworld.building.model.BuildingType.PLANT;
+import static org.exschool.pocketworld.building.model.BuildingType.POOL;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
@@ -11,18 +20,20 @@ import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.service.CityService;
+import org.exschool.pocketworld.info.building.BuildingInfo;
+import org.exschool.pocketworld.info.building.BuildingInfoDto;
+import org.exschool.pocketworld.info.building.BuildingInfoService;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.google.common.base.Optional;
-
-import java.util.*;
-
-import static org.apache.commons.lang.Validate.notNull;
-import static org.exschool.pocketworld.building.model.BuildingType.*;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 
 @Service
 public class CityCenterServiceImpl implements CityCenterService {
@@ -33,10 +44,17 @@ public class CityCenterServiceImpl implements CityCenterService {
     private CityService cityService;
     @Autowired
     private PlayerService playerService;
+    @Autowired
+    private BuildingInfoService buildingInfoService;
 
     public static final int MIN_POSITION = 1;
     public static final int MAX_POSITION = 12;
 
+    @Autowired
+    private void fillDataBase(){
+    	buildingInfoService.saveAll();
+    }
+    
     private void initialization(String playerName) {
         String cityName = "City name";
         PlayerResources playerResources = new PlayerResources(1, 1, 1, 1);
@@ -67,6 +85,7 @@ public class CityCenterServiceImpl implements CityCenterService {
                 .resource(new ResourceDto(playerResources))
                 .buildings(buildingDtosByPosition(buildingService.getBuildingsByCityId(city.getId())))
                 .nickname(playerName)
+                .buildingsInfo(buildingInfoToBuildingInfoDto(buildingInfoService.allBuildings()))
                 .build();
     }
 
@@ -125,6 +144,15 @@ public class CityCenterServiceImpl implements CityCenterService {
 
         return buildingsDto;
     }
+    
+    private static Map<String, BuildingInfoDto> buildingInfoToBuildingInfoDto(List<BuildingInfo> buildingInfo){
+    	Map<String, BuildingInfoDto> buildingInfoDto = new HashMap<>();
+    	for (BuildingInfo b : buildingInfo){
+    		buildingInfoDto.put(b.getBuildingType().name().toLowerCase(), new BuildingInfoDto(b));
+    	}
+    	
+    	return buildingInfoDto;
+    }
 
     public void setBuildingService(BuildingService buildingService) {
         this.buildingService = buildingService;
@@ -137,4 +165,8 @@ public class CityCenterServiceImpl implements CityCenterService {
     public void setPlayerService(PlayerService playerService) {
         this.playerService = playerService;
     }
+
+	public void setBuildingInfoService(BuildingInfoService buildingInfoService) {
+		this.buildingInfoService = buildingInfoService;
+	}
 }
