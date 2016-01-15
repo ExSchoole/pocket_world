@@ -14,6 +14,6 @@ public interface BuildQueueService {
     BuildQueueRecord save (BuildQueueRecord entity);
     BuildQueueRecord changeStatus(Long id, Status status);
     void delete(BuildQueueRecord entity);
-    void deleteAllDone();
+    void deleteAllByStatus(Status status);
 
 }

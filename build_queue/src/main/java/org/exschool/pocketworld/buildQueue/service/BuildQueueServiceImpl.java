@@ -64,13 +64,13 @@ public class BuildQueueServiceImpl implements BuildQueueService {
     }
 
     @Override
-    public void deleteAllDone() {
+    public void deleteAllByStatus(Status status) {
         List<BuildQueueRecord> all = dao.all(BuildQueueRecord.class);
-        for (BuildQueueRecord record:all) {
-            if (record.getStatus().equals(Status.DONE)) {
+        for (BuildQueueRecord record :all) {
+            if (record.getStatus().equals(status)) {
                 dao.delete(record);
             }
-
         }
     }
+
 }

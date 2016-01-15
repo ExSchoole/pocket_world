@@ -64,8 +64,8 @@ public class BuildQueueRecordServiceTest {
     }
 
     @Test
-    public void testDeleteAllDone() {
-        buildQueueService.deleteAllDone();
+    public void testDeleteAllByStatus() {
+        buildQueueService.deleteAllByStatus(Status.DONE);
         List<BuildQueueRecord> all = buildQueueService.getAll();
         for (BuildQueueRecord record: all) {
             assertNotEquals(Status.DONE,record.getStatus());

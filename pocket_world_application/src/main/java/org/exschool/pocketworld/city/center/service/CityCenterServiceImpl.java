@@ -3,10 +3,6 @@ package org.exschool.pocketworld.city.center.service;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
-import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
-import org.exschool.pocketworld.buildQueue.model.Status;
-import org.exschool.pocketworld.buildQueue.model.Type;
-import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
@@ -37,10 +33,6 @@ public class CityCenterServiceImpl implements CityCenterService {
     private CityService cityService;
     @Autowired
     private PlayerService playerService;
-    @Autowired
-    private BuildQueueService buildQueueService;
-
-
 
     public static final int MIN_POSITION = 1;
     public static final int MAX_POSITION = 12;
@@ -98,8 +90,8 @@ public class CityCenterServiceImpl implements CityCenterService {
     @Override
     public boolean addBuilding(String playerName, String type, final int position) {
         if (position > MAX_POSITION || position < MIN_POSITION) return false;
-        Long userId = playerService.getPlayerByLogin(playerName).getId();
-        City city = cityService.getCityByPlayerId(userId);
+
+        City city = cityService.getCityByPlayerId(playerService.getPlayerByLogin(playerName).getId());
         notNull(city);
         Long cityId = city.getId();
         List<Building> buildings = buildingService.getBuildingsByCityId(cityId);
@@ -120,17 +112,8 @@ public class CityCenterServiceImpl implements CityCenterService {
         buildingEntity.setLevel(1);
         buildingEntity.setPosition(position);
         buildingEntity.setBuildingType(BuildingType.valueOf(type.toUpperCase()));
-        Building savedBuilding =buildingService.save(buildingEntity);
 
-        BuildQueueRecord newRecord = new BuildQueueRecord();
-        newRecord.setName(playerName);
-        newRecord.setLevel(savedBuilding.getLevel());
-        newRecord.setType(Type.BUILDING);
-        newRecord.setBuildEnd(new Date(System.currentTimeMillis()));
-        newRecord.setUserId(userId);
-        newRecord.setStatus(Status.DONE);
-        newRecord.setBuildingId(savedBuilding.getId());
-        buildQueueService.save(newRecord);
+        buildingService.save(buildingEntity);
         return true;
     }
 
