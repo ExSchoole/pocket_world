@@ -1,8 +1,9 @@
 package org.exschool.pocketworld.controllers.city.resources;
 
 import org.exschool.pocketworld.city.model.City;
+import org.exschool.pocketworld.city.resources.service.CityResourcesService;
 import org.exschool.pocketworld.city.service.CityService;
-import org.exschool.pocketworld.dto.PositionOfBulding;
+import org.exschool.pocketworld.dto.PositionOfBuilding;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
@@ -31,6 +32,9 @@ public class CityResourcesRestController {
     @Autowired
     private PlayerService playerService;
 
+    @Autowired
+    private CityResourcesService cityResourcesService;
+
     @RequestMapping(value="/types",method=RequestMethod.GET)
     public List<String> getResourceBuildingsTypesList(){
         LOGGER.info("getResourceBuildingsList is invoked");
@@ -39,26 +43,10 @@ public class CityResourcesRestController {
 
     @RequestMapping(value="/buildings", method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createResourceBuilding(@RequestBody PositionOfBulding positionOfBulding){
-        LOGGER.info("RequestBody:" + positionOfBulding);
-        final Integer INITIAL_BUILDING_LEVEL = 0;
+    public void createResourceBuilding(@RequestBody PositionOfBuilding positionOfBuilding){
+        LOGGER.info("RequestBody:" + positionOfBuilding);
+//        new HttpStatus()
 
-        // -- temporary
-        String playerLogin = "login-1";
-        Player player = playerService.getPlayerByLogin(playerLogin);
-        City city = cityService.getCityByPlayerId(player.getId());
-        // -- end temporary
-
-        ResourceType resourceType = ResourceType.valueOf(positionOfBulding.getType().toUpperCase());
-
-
-        ResourceBuilding resourceBuilding = ResourceBuildingBuilder.builder()
-                               .buildingType(resourceType)
-                               .cityId(city.getId())
-                               .level(INITIAL_BUILDING_LEVEL)
-                               .position(positionOfBulding.getPosition())
-                               .build();
-
-        resourceBuildingService.save(resourceBuilding);
+        cityResourcesService.createResourceBuilding(positionOfBuilding);
     }
 }

@@ -11,7 +11,7 @@ public interface ResourceBuildingService {
     List<ResourceBuilding> allBuildings();
     ResourceBuilding get (long id);
     ResourceBuilding save(ResourceBuilding entity);
-    List<ResourceBuilding> allCityBuildings(Long id);
+    List<ResourceBuilding> allCityResources(Long id);
 
 }
 

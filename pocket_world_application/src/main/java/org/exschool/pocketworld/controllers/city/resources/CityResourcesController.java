@@ -27,37 +27,10 @@ public class CityResourcesController {
     @Autowired
     private CityResourcesService cityResourcesService;
 
-    @Autowired
-    private PlayerService playerService;
-
-    @Autowired
-    private CityService cityService;;
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showCityResources(
             @RequestParam Map<String, String> allRequestParams, Model model) {
         LOGGER.info("Requested params:" + allRequestParams);
-
-        // -- temporary
-        String playerLogin = "login-1";
-        if(playerService.getPlayerByLogin(playerLogin) == null) {
-            Player player = PlayerBuilder.builder()
-                    .login("login-1")
-                    .playerResources(new PlayerResources(1, 1, 1, 1))
-                    .build();
-            playerService.savePlayer(player);
-
-            if (cityService.getCityByPlayerId(player.getId()) == null){
-                City city = UserCityBuilder.builder()
-                        .name("First City")
-                        .playerId(player.getId())
-                        .build();
-
-                cityService.save(city);
-              }
-        }
-        // -- end temporary
-
         CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo();
         model.addAttribute("dto", cityResourcesDto);
         LOGGER.info("Out:" + model);

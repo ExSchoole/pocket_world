@@ -25,9 +25,7 @@ import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -55,7 +53,7 @@ public class CityResourcesServiceTest {
         
         when(playerService.getPlayerByLogin(anyString())).thenReturn( palayer);
         when(cityService.getCityByPlayerId(anyLong())).thenReturn(new City());
-        when(resourceBuildingService.allCityBuildings(anyLong())).thenReturn(buildings);
+        when(resourceBuildingService.allCityResources(anyLong())).thenReturn(buildings);
     }
 
     @Test

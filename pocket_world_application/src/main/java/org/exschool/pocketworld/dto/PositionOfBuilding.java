@@ -1,12 +1,12 @@
 package org.exschool.pocketworld.dto;
 
-public class PositionOfBulding {
+public class PositionOfBuilding {
     private Integer position;
     private String type;
 
-    public PositionOfBulding() {}
+    public PositionOfBuilding() {}
 
-    public PositionOfBulding(Integer position, String type) {
+    public PositionOfBuilding(Integer position, String type) {
         this.position = position;
         this.type = type;
     }
@@ -29,7 +29,7 @@ public class PositionOfBulding {
 
     @Override
     public String toString() {
-        return "PositionOfBulding{" +
+        return "PositionOfBuilding{" +
                 "position=" + position +
                 ", type='" + type + '\'' +
                 '}';

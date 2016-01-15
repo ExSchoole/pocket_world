@@ -13,7 +13,7 @@ public enum ResourceType {
 		List<String> list = new ArrayList<>();
 		for(ResourceType resourceType : ResourceType.values()){
 			list.add(resourceType.toString().toLowerCase());
-		};
+		}
 		return list;
 	}
 }

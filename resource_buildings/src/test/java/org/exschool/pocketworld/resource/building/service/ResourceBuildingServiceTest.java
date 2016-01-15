@@ -67,7 +67,7 @@ public class ResourceBuildingServiceTest {
     }
     @Test
     public void allCityBuildings() {
-        List<ResourceBuilding> existingBuildings = buildingService.allCityBuildings(5L);
+        List<ResourceBuilding> existingBuildings = buildingService.allCityResources(5L);
         assertNotNull(existingBuildings);
         assertNotNull(existingBuildings.get(0));
     }

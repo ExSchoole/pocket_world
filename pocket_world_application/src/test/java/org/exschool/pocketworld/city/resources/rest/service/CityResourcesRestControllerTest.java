@@ -6,7 +6,7 @@ import org.exschool.pocketworld.city.service.CityService;
 import org.exschool.pocketworld.config.SpringWebConfig;
 import org.exschool.pocketworld.config.TestSpringRootConfig;
 import org.exschool.pocketworld.controllers.city.resources.CityResourcesRestController;
-import org.exschool.pocketworld.dto.PositionOfBulding;
+import org.exschool.pocketworld.dto.PositionOfBuilding;
 import org.exschool.pocketworld.player.builder.PlayerBuilder;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
@@ -77,8 +77,8 @@ public class CityResourcesRestControllerTest {
     @Test
     public void test_build_resource_building() throws Exception {
         configureMocks();
-        PositionOfBulding positionOfBulding = new PositionOfBulding(10, "gold");
-        String jsonInString = positionOfBuildingToJson(positionOfBulding);
+        PositionOfBuilding positionOfBuilding = new PositionOfBuilding(10, "gold");
+        String jsonInString = positionOfBuildingToJson(positionOfBuilding);
 
         mockMvc.perform(
                         post(ROOT + "/buildings")
@@ -88,9 +88,9 @@ public class CityResourcesRestControllerTest {
         verify(resourceBuildingService,times(1)).save(Mockito.any(ResourceBuilding.class));
     }
 
-    private String positionOfBuildingToJson(PositionOfBulding positionOfBulding) throws JsonProcessingException {
+    private String positionOfBuildingToJson(PositionOfBuilding positionOfBuilding) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(positionOfBulding);
+        return mapper.writeValueAsString(positionOfBuilding);
     }
 
     private void configureMocks(){
