@@ -44,17 +44,17 @@ public class BuildQueueServiceImpl implements BuildQueueService {
 
     /**
      * Updates status of entity object
-     * @param entity
+     * @param id
      * @param status
      * @return
      */
     @Override
-    public BuildQueueRecord changeStatus(BuildQueueRecord entity, Status status) {
-        BuildQueueRecord record = dao.get(BuildQueueRecord.class,entity.getId());
-        dao.delete(entity);
+    public BuildQueueRecord changeStatus(Long id, Status status) {
+        BuildQueueRecord record = dao.get(BuildQueueRecord.class, id);
         record.setStatus(status);
-        dao.save(record);
-        return record;
+        return dao.save(record);
+
+
     }
 
     @Override

@@ -44,12 +44,12 @@ public class BuildQueueRecordServiceTest {
     @Test
     public void testChangeStatus() {
         Long existingId =1L;
-        BuildQueueRecord existing = buildQueueService.get(existingId);
-        assertNotNull(existing);
-        existing.setStatus(Status.DONE);
-        buildQueueService.save(existing);
-        BuildQueueRecord saved = buildQueueService.get(existingId);
-        assertAllFieldsEquals(saved,existing);
+        BuildQueueRecord existingRecord = buildQueueService.get(existingId);
+        BuildQueueRecord updatedRecord =buildQueueService.changeStatus(existingId, Status.DONE);
+        assertNotEquals(existingRecord.getStatus(),updatedRecord.getStatus());
+
+
+
 
     }
 

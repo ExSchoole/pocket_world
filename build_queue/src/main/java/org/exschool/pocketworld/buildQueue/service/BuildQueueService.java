@@ -12,7 +12,7 @@ public interface BuildQueueService {
     BuildQueueRecord get(Long id);
     List<BuildQueueRecord> getAll();
     BuildQueueRecord save (BuildQueueRecord entity);
-    BuildQueueRecord changeStatus(BuildQueueRecord entity, Status status);
+    BuildQueueRecord changeStatus(Long id, Status status);
     void delete(BuildQueueRecord entity);
     void deleteAllDone();
 
