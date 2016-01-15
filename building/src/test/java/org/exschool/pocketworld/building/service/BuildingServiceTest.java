@@ -12,6 +12,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -49,12 +52,27 @@ public class BuildingServiceTest {
         buildingService.save(existingBuilding);
         Building savedBuilding = buildingService.get(existingBuildingId);
         assertAllFieldsEquals(existingBuilding, savedBuilding);
-
     }
 
     @Test(expected = Exception.class)
     public void testSaveNull() {
         buildingService.save(null);
+    }
+
+    @Test
+    public void testAllBuildings() {
+        assertEquals(bootstrap.getBuildings(),buildingService.allBuildings());
+    }
+
+    @Test
+    public void testGetBuildingsByCityId(){
+        Long cityId = 2L;
+        List<Building> buildings = new ArrayList<>();
+        for (Building b : bootstrap.getBuildings()){
+            if (b.getCityId()==cityId) buildings.add(b);
+        }
+
+        assertEquals(buildings,buildingService.getBuildingsByCityId(cityId));
     }
 
     @Test

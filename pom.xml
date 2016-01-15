@@ -72,20 +72,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.7</version>
-                <configuration>
-                    <target name="copy cobertura reports">
-                        <copy todir="${project.basedir}/src/main/webapp/resources/pages/cobertura">
-                            <fileset dir="${project.build.directory}/site/cobertura">
-                                <include name="*.html" />
-                            </fileset>
-                        </copy>
-                        <copy todir="${project.basedir}/src/main/webapp/resources/pages/cobertura/css">
-                            <fileset dir="${project.build.directory}/site/cobertura/css">
-                                <include name="*.css" />
-                            </fileset>
-                        </copy>
-                    </target>
-                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -141,6 +127,7 @@
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
+        
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -236,7 +223,6 @@
             <artifactId>guava</artifactId>
             <version>19.0-rc3</version>
         </dependency>
-
     </dependencies>
 
 

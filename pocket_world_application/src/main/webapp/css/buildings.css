@@ -119,3 +119,22 @@ div.res_building_position {
     border-style: outset;
     border-color: orange;
 }
+
+div.building_karusel {
+    border-style: dotted;
+    height: 154px;
+    width: 157px;
+}
+
+div.cursor{
+    cursor: move;
+}
+
+div.over {
+	border-style: outset;
+ 	border-color: red;
+}
+
+div.notover {
+    border-style: groove;
+}
