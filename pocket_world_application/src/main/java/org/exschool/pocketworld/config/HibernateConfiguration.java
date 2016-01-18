@@ -31,7 +31,8 @@ public class HibernateConfiguration {
         sessionFactory.setPackagesToScan(
         		new String[]{"org.exschool.pocketworld.player.model",
         					"org.exschool.pocketworld.city.model",
-        					"org.exschool.pocketworld.building.model"});
+        					"org.exschool.pocketworld.building.model",
+                            "org.exschool.pocketworld.buildQueue.model"});
         sessionFactory.setHibernateProperties(additionalProperties());
         return sessionFactory;
     }
