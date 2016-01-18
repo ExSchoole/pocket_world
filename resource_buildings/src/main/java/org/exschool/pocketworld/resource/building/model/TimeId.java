@@ -3,6 +3,9 @@ package org.exschool.pocketworld.resource.building.model;
 import org.exschool.pocketworld.resource.model.ResourceType;
 
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 import java.io.Serializable;
 
 /**
@@ -10,6 +13,7 @@ import java.io.Serializable;
  */
 @Embeddable
 public class TimeId implements Serializable {
+	@Enumerated(EnumType.STRING)
     private ResourceType buildingType;
 
     private Integer level;

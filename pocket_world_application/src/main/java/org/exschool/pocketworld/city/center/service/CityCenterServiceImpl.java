@@ -20,9 +20,6 @@ import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.service.CityService;
-import org.exschool.pocketworld.info.building.BuildingInfo;
-import org.exschool.pocketworld.info.building.BuildingInfoDto;
-import org.exschool.pocketworld.info.building.BuildingInfoService;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
@@ -44,15 +41,13 @@ public class CityCenterServiceImpl implements CityCenterService {
     private CityService cityService;
     @Autowired
     private PlayerService playerService;
-    @Autowired
-    private BuildingInfoService buildingInfoService;
 
     public static final int MIN_POSITION = 1;
     public static final int MAX_POSITION = 12;
 
     @Autowired
     private void fillDataBase(){
-    	buildingInfoService.saveAll();
+    	buildingService.saveAllInformation();
     }
     
     private void initialization(String playerName) {
@@ -85,7 +80,6 @@ public class CityCenterServiceImpl implements CityCenterService {
                 .resource(new ResourceDto(playerResources))
                 .buildings(buildingDtosByPosition(buildingService.getBuildingsByCityId(city.getId())))
                 .nickname(playerName)
-                .buildingsInfo(buildingInfoToBuildingInfoDto(buildingInfoService.allBuildings()))
                 .build();
     }
 
@@ -145,15 +139,6 @@ public class CityCenterServiceImpl implements CityCenterService {
         return buildingsDto;
     }
     
-    private static Map<String, BuildingInfoDto> buildingInfoToBuildingInfoDto(List<BuildingInfo> buildingInfo){
-    	Map<String, BuildingInfoDto> buildingInfoDto = new HashMap<>();
-    	for (BuildingInfo b : buildingInfo){
-    		buildingInfoDto.put(b.getBuildingType().name().toLowerCase(), new BuildingInfoDto(b));
-    	}
-    	
-    	return buildingInfoDto;
-    }
-
     public void setBuildingService(BuildingService buildingService) {
         this.buildingService = buildingService;
     }
@@ -165,8 +150,5 @@ public class CityCenterServiceImpl implements CityCenterService {
     public void setPlayerService(PlayerService playerService) {
         this.playerService = playerService;
     }
-
-	public void setBuildingInfoService(BuildingInfoService buildingInfoService) {
-		this.buildingInfoService = buildingInfoService;
-	}
+    
 }

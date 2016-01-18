@@ -10,9 +10,7 @@ import org.springframework.context.annotation.Import;
 @ComponentScan({"org.exschool.pocketworld.dao",
         "org.exschool.pocketworld.player",
         "org.exschool.pocketworld.city.center",
-        "org.exschool.pocketworld.city.resources",
-        "org.exschool.pocketworld.info.building",
-        "org.exschool.pocketworld.info.resourcebuilding"})
+        "org.exschool.pocketworld.city.resources"})
 @Import({HibernateConfiguration.class, BuildingSpringConfiguration.class, ResourceBuildingSpringConfiguration.class})
 public class SpringRootConfig {
 

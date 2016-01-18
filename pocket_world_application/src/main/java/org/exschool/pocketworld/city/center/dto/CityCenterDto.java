@@ -5,12 +5,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.exschool.pocketworld.building.BuildingDto;
-import org.exschool.pocketworld.info.building.BuildingInfoDto;
 import org.exschool.pocketworld.resource.ResourceDto;
 
 public class CityCenterDto {
 
-	private Map<String, BuildingInfoDto> buildingsInfo;
     private Map<Integer, BuildingDto> buildings;
     private ResourceDto resourceDto;
     private String nickName;
@@ -18,9 +16,7 @@ public class CityCenterDto {
     public CityCenterDto() {
     }
 
-    public CityCenterDto(Map<String, BuildingInfoDto> buildingsInfo, Map<Integer, BuildingDto> buildings, 
-    					 ResourceDto resourceDto, String nickName) {
-        this.buildingsInfo = buildingsInfo;
+    public CityCenterDto(Map<Integer, BuildingDto> buildings, ResourceDto resourceDto, String nickName) {
     	this.resourceDto = resourceDto;
         this.nickName = nickName;
         this.buildings = buildings;
@@ -45,14 +41,6 @@ public class CityCenterDto {
     public void setResourceDto(ResourceDto resourceDto) {
         this.resourceDto = resourceDto;
     }
-
-    public void setBuildingsInfo(Map<String, BuildingInfoDto> buildingsInfo){
-    	this.buildingsInfo = buildingsInfo;
-    }
-    
-    public Map<String, BuildingInfoDto> getBuildingsInfo(){
-    	return buildingsInfo;
-    }
     
     public ResourceDto getResourceDto() {
         return resourceDto;
@@ -66,20 +54,5 @@ public class CityCenterDto {
         }
         return result;
     }
-    
-	public ResourceDto getResourcesInfoByTypeLevel(String typeOfBuilding, int level){
-		if (buildingsInfo.containsKey(typeOfBuilding))
-			return buildingsInfo.get(typeOfBuilding).getResourceDto();
-		else
-			return null;
-	}
-	
-	public long getTimeByTypeLevel(String typeOfBuilding, int level){
-		if (buildingsInfo.containsKey(typeOfBuilding))
-			return buildingsInfo.get(typeOfBuilding).getTime();
-		else
-			return -1;
-	}
-
 
 }

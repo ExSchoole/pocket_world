@@ -4,13 +4,11 @@ import java.util.Map;
 
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
-import org.exschool.pocketworld.info.building.BuildingInfoDto;
 import org.exschool.pocketworld.resource.ResourceDto;
 
 public final class CityCenterDtoBuilder {
 
     private ResourceDto resourceDto;
-    private Map<String, BuildingInfoDto> buildingsInfo;
     private Map<Integer, BuildingDto> buildings;
     private String nickname;
 
@@ -36,18 +34,12 @@ public final class CityCenterDtoBuilder {
         this.nickname = nickname;
         return this;
     }
-    
-    public CityCenterDtoBuilder buildingsInfo(Map<String, BuildingInfoDto> buildingsInfo){
-    	this.buildingsInfo = buildingsInfo;
-    	return this;
-    }
-
+   
     public CityCenterDto build() {
         CityCenterDto cityCenterDto = new CityCenterDto();
         cityCenterDto.setNickName(nickname);
         cityCenterDto.setResourceDto(resourceDto);
         cityCenterDto.setBuildings(buildings);
-        cityCenterDto.setBuildingsInfo(buildingsInfo);
         return cityCenterDto;
     }
 }

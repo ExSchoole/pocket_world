@@ -29,7 +29,6 @@ import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.service.CityService;
-import org.exschool.pocketworld.info.building.BuildingInfoService;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
@@ -48,8 +47,6 @@ public class CityCenterServiceImplTest {
     @InjectMocks
     CityCenterService cityCenterService = new CityCenterServiceImpl();
 
-    @Mock 
-    BuildingInfoService buildingInfoService;
     @Mock
     CityService cityService;
     @Mock

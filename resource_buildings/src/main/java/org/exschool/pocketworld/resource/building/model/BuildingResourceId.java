@@ -1,4 +1,4 @@
-package org.exschool.pocketworld.building.model;
+package org.exschool.pocketworld.resource.building.model;
 
 import org.exschool.pocketworld.resource.model.ResourceType;
 
@@ -9,18 +9,15 @@ import javax.persistence.Enumerated;
 import java.io.Serializable;
 
 
-/**
- * Created by skandy on 12.11.15.
- */
 @Embeddable
 public class BuildingResourceId implements Serializable {
 	@Enumerated(EnumType.STRING)
-	private BuildingType buildingType;
+	private ResourceType buildingType;
 	@Enumerated(EnumType.STRING)
     private ResourceType resourceType;
     private Integer level;
 
-    public BuildingType getBuildingType() {
+    public ResourceType getBuildingType() {
 		return buildingType;
 	}
     
@@ -33,7 +30,7 @@ public class BuildingResourceId implements Serializable {
     }
 
     public BuildingResourceId(){}
-    public BuildingResourceId(BuildingType buildingType, ResourceType resourceType, Integer level) {
+    public BuildingResourceId(ResourceType buildingType, ResourceType resourceType, Integer level) {
     	this.buildingType = buildingType;
         this.resourceType = resourceType;
         this.level = level;

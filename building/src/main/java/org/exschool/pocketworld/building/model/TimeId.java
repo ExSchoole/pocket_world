@@ -1,6 +1,9 @@
 package org.exschool.pocketworld.building.model;
 
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 import java.io.Serializable;
 
 /**
@@ -8,10 +11,11 @@ import java.io.Serializable;
  */
 @Embeddable
 public class TimeId implements Serializable {
+	@Enumerated(EnumType.STRING)
     private BuildingType buildingType;
 
     private Integer level;
-
+     
     public BuildingType getBuildingType() {
         return buildingType;
     }

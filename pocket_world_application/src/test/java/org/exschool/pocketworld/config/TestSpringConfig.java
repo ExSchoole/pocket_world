@@ -24,9 +24,7 @@ import java.util.Properties;
 	"org.exschool.pocketworld.city.resources.service",
 	"org.exschool.pocketworld.resource.building.service",
 	"org.exschool.pocketworld.resource.service",
-	"org.exschool.pocketworld.city.service",
-	"org.exschool.pocketworld.info.building",
-	"org.exschool.pocketworld.info.resourcebuilding",})
+	"org.exschool.pocketworld.city.service"})
 public class TestSpringConfig {
 
     @Bean
@@ -45,9 +43,7 @@ public class TestSpringConfig {
         											  "org.exschool.pocketworld.player.model",
         											  "org.exschool.pocketworld.city.model",
         											  "org.exschool.pocketworld.resource.model",
-        											  "org.exschool.pocketworld.resource.building.model",
-        											  "org.exschool.pocketworld.info.building",
-        											  "org.exschool.pocketworld.info.resourcebuilding"});
+        											  "org.exschool.pocketworld.resource.building.model"});
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }

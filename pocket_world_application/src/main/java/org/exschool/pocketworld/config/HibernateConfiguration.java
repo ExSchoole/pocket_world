@@ -32,8 +32,7 @@ public class HibernateConfiguration {
         		new String[]{"org.exschool.pocketworld.player.model",
         					"org.exschool.pocketworld.city.model",
         					"org.exschool.pocketworld.building.model",
-        					"org.exschool.pocketworld.info.building",
-        					"org.exschool.pocketworld.info.resourcebuilding"});
+        					"org.exschool.pocketworld.resource.building.model"});
         sessionFactory.setHibernateProperties(additionalProperties());
         return sessionFactory;
     }

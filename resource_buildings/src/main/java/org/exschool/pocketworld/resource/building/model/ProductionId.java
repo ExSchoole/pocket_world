@@ -18,8 +18,17 @@ public class ProductionId implements Serializable {
     @Column(name = "resource_type")
     private ResourceType resourceType;
 
-    private int level;
+    private Integer level;
 
+    public ProductionId(){
+    	
+    }
+    
+    public ProductionId(ResourceType resourceType, int level){
+    	this.resourceType = resourceType;
+    	this.level = level;
+    }
+    
     public ResourceType getResourceType() {
         return resourceType;
     }

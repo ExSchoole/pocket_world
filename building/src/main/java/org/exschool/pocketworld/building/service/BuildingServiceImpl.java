@@ -1,15 +1,21 @@
 package org.exschool.pocketworld.building.service;
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.exschool.pocketworld.building.model.Building;
+import org.exschool.pocketworld.building.model.BuildingResource;
+import org.exschool.pocketworld.building.model.BuildingType;
+import org.exschool.pocketworld.building.model.Time;
 import org.exschool.pocketworld.dao.Dao;
+import org.exschool.pocketworld.resource.model.ResourceType;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 
 /**
@@ -64,6 +70,32 @@ public class BuildingServiceImpl implements BuildingService {
     public Building save(Building entity) {
         return dao.save(entity);
     }
+    
+	@Override
+	public int getTimeByBuildingTypeLevel(BuildingType buildingType, int level) {
+		for (Time t : TIME_BUILDINGS_INFO)
+		  if (t.getTimeId().getBuildingType().equals(buildingType)==true && t.getTimeId().getLevel()==level)
+			  return t.getTime();
+		
+		return -1;
+	}
+
+	@Override
+	public Map<ResourceType, Integer> getResourcesByBuildingTypeLevel(BuildingType buildingType, int level) {
+		Map<ResourceType, Integer> resources = new HashMap<>();
+		for (BuildingResource b : RESOURCE_BUILDINGS_INFO)
+			if (b.getBuildingResourceId().getBuildingType().equals(buildingType)==true && 
+				b.getBuildingResourceId().getLevel()==level)
+				resources.put(b.getBuildingResourceId().getResourceType(), b.getAmount());
+		
+		return resources;
+	}
+    
+    @Override
+	public void saveAllInformation() {
+		dao.saveAll(RESOURCE_BUILDINGS_INFO);
+		dao.saveAll(TIME_BUILDINGS_INFO);
+	}
 
     /**
      * Setter for dao

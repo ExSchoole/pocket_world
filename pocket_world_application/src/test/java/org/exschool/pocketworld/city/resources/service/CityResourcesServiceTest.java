@@ -2,7 +2,6 @@ package org.exschool.pocketworld.city.resources.service;
 
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.service.CityService;
-import org.exschool.pocketworld.info.resourcebuilding.ResourceBuildingInfoService;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.city.model.City;
@@ -30,8 +29,6 @@ import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CityResourcesServiceTest {
-	@Mock 
-    ResourceBuildingInfoService resourceBuildingInfoService;
     @Mock
     PlayerService playerService;
     @Mock
