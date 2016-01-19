@@ -1,14 +1,16 @@
 package org.exschool.pocketworld.resource.building.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
 
 import org.exschool.pocketworld.dao.Dao;
 import org.exschool.pocketworld.resource.building.model.BuildingResource;
+import org.exschool.pocketworld.resource.building.model.BuildingResourceId;
 import org.exschool.pocketworld.resource.building.model.Production;
+import org.exschool.pocketworld.resource.building.model.ProductionId;
 import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
 import org.exschool.pocketworld.resource.building.model.ResourceBuildingTime;
+import org.exschool.pocketworld.resource.building.model.TimeId;
 import org.exschool.pocketworld.resource.model.ResourceType;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -73,42 +75,32 @@ public class ResourceBuildingServiceImpl  implements ResourceBuildingService {
     public void setDao(Dao dao) {
         this.dao = dao;
     }
+    
 	@Override
 	public void saveAllInformation() {
-		dao.saveAll(RESOURCE_BUILDINGS_INFO);
-		dao.saveAll(TIME_RESOURCE_BUILDINGS_INFO);
-		dao.saveAll(PRODUCTION_RESOURCE_BUILDINGS_INFO);
+		for (Entry<BuildingResourceId, Integer> b : RESOURCE_BUILDINGS_INFO.entrySet())
+    		dao.save(new BuildingResource(b.getKey(),b.getValue()));
+    	
+    	for (Entry<TimeId, Integer> t : TIME_RESOURCE_BUILDINGS_INFO.entrySet())
+    		dao.save(new ResourceBuildingTime(t.getKey(),t.getValue()));
+    	
+    	for (Entry<ProductionId, Integer> p : PRODUCTION_RESOURCE_BUILDINGS_INFO.entrySet())
+    		dao.save(new Production(p.getKey(),p.getValue()));
 	}
 	
 	@Override
 	public int getProductionByBuildingTypeLevel(ResourceType buildingType, int level) {
-		for (Production p : PRODUCTION_RESOURCE_BUILDINGS_INFO )
-			if (p.getProductionId().getResourceType().equals(buildingType)==true && 
-				p.getProductionId().getLevel()==level)
-				return p.getAmount();
-		
-		return -1;
+		return PRODUCTION_RESOURCE_BUILDINGS_INFO.get(new ProductionId(buildingType,level));
 	}
 	
 	@Override
 	public int getTimeByBuildingTypeLevel(ResourceType buildingType, int level) {
-		for (ResourceBuildingTime t : TIME_RESOURCE_BUILDINGS_INFO)
-			if (t.getTimeId().getBuildingType().equals(buildingType)==true && 
-				t.getTimeId().getLevel()==level)
-				return t.getTime();
-		
-		return -1;
+		return TIME_RESOURCE_BUILDINGS_INFO.get(new TimeId(buildingType,level));
 	}
 
 	@Override
-	public Map<ResourceType, Integer> getResourcesByBuildingTypeLevel(ResourceType buildingType, int level) {
-		Map<ResourceType, Integer> resources = new HashMap<>();
-		for (BuildingResource b : RESOURCE_BUILDINGS_INFO)
-			if (b.getBuildingResourceId().getBuildingType().equals(buildingType)==true && 
-				b.getBuildingResourceId().getLevel()==level)
-				resources.put(b.getBuildingResourceId().getResourceType(), b.getAmount());
-		
-		return resources;
+	public int getResourcesByBuildingTypeLevel(ResourceType buildingType, ResourceType resourceType, int level) {
+		return RESOURCE_BUILDINGS_INFO.get(new BuildingResourceId(buildingType,resourceType,level));
 	}
     
    

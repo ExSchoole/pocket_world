@@ -4,6 +4,8 @@ import static org.apache.commons.lang.Validate.notNull;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.exschool.pocketworld.building.ResourceBuildingDto;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.resources.builder.CityResourcesDtoBuilder;
@@ -30,8 +32,8 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     @Autowired
     private CityService cityService;
     
-    @Autowired
-    private void fillDataBase(){
+    @PostConstruct
+    private void fillDataBaseInfo(){
     	resourceBuildingService.saveAllInformation();
     }
     

@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
@@ -42,13 +44,13 @@ public class CityCenterServiceImpl implements CityCenterService {
     @Autowired
     private PlayerService playerService;
 
-    public static final int MIN_POSITION = 1;
-    public static final int MAX_POSITION = 12;
-
-    @Autowired
-    private void fillDataBase(){
+    @PostConstruct
+    private void fillDataBaseInfo(){
     	buildingService.saveAllInformation();
     }
+    
+    public static final int MIN_POSITION = 1;
+    public static final int MAX_POSITION = 12;
     
     private void initialization(String playerName) {
         String cityName = "City name";
