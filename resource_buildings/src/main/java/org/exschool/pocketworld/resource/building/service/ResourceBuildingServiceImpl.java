@@ -1,6 +1,8 @@
 package org.exschool.pocketworld.resource.building.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.exschool.pocketworld.dao.Dao;
@@ -31,6 +33,10 @@ public class ResourceBuildingServiceImpl  implements ResourceBuildingService {
     @Autowired
     private Dao dao;
 
+    private final Map<BuildingResourceId, Integer> RESOURCE_BUILDINGS_INFO;
+    private final Map<TimeId, Integer> TIME_RESOURCE_BUILDINGS_INFO;
+    private final Map<ProductionId, Integer> PRODUCTION_RESOURCE_BUILDINGS_INFO;
+    
     /**
      * Gets all ResourceBuilding from DB
      *
@@ -103,5 +109,111 @@ public class ResourceBuildingServiceImpl  implements ResourceBuildingService {
 		return RESOURCE_BUILDINGS_INFO.get(new BuildingResourceId(buildingType,resourceType,level));
 	}
     
-   
+	{
+	    
+        RESOURCE_BUILDINGS_INFO = new HashMap<BuildingResourceId, Integer>(){
+        	{	  
+        		put(new BuildingResourceId(ResourceType.CLAY,ResourceType.CLAY,1),10);
+        		put(new BuildingResourceId(ResourceType.CLAY,ResourceType.CORN,1),15);
+        		put(new BuildingResourceId(ResourceType.CLAY,ResourceType.GOLD,1),20);
+        		put(new BuildingResourceId(ResourceType.CLAY,ResourceType.TIMBER,1),25);
+        		
+        		put(new BuildingResourceId(ResourceType.CLAY,ResourceType.CLAY,2),30);
+        		put(new BuildingResourceId(ResourceType.CLAY,ResourceType.CORN,2),35);
+        		put(new BuildingResourceId(ResourceType.CLAY,ResourceType.GOLD,2),40);
+        		put(new BuildingResourceId(ResourceType.CLAY,ResourceType.TIMBER,2),45);
+        		
+        		put(new BuildingResourceId(ResourceType.CLAY,ResourceType.CLAY,3),50);
+        		put(new BuildingResourceId(ResourceType.CLAY,ResourceType.CORN,3),55);
+        		put(new BuildingResourceId(ResourceType.CLAY,ResourceType.GOLD,3),60);
+        		put(new BuildingResourceId(ResourceType.CLAY,ResourceType.TIMBER,3),65);
+        		
+        		put(new BuildingResourceId(ResourceType.CORN,ResourceType.CLAY,1),25);
+        		put(new BuildingResourceId(ResourceType.CORN,ResourceType.CORN,1),20);
+        		put(new BuildingResourceId(ResourceType.CORN,ResourceType.GOLD,1),15);
+        		put(new BuildingResourceId(ResourceType.CORN,ResourceType.TIMBER,1),10);
+        		
+        		put(new BuildingResourceId(ResourceType.CORN,ResourceType.CLAY,2),45);
+        		put(new BuildingResourceId(ResourceType.CORN,ResourceType.CORN,2),40);
+        		put(new BuildingResourceId(ResourceType.CORN,ResourceType.GOLD,2),35);
+        		put(new BuildingResourceId(ResourceType.CORN,ResourceType.TIMBER,2),30);
+        		
+        		put(new BuildingResourceId(ResourceType.CORN,ResourceType.CLAY,3),65);
+        		put(new BuildingResourceId(ResourceType.CORN,ResourceType.CORN,3),60);
+        		put(new BuildingResourceId(ResourceType.CORN,ResourceType.GOLD,3),55);
+        		put(new BuildingResourceId(ResourceType.CORN,ResourceType.TIMBER,3),50);
+        		
+        		put(new BuildingResourceId(ResourceType.GOLD,ResourceType.CLAY,1),10);
+        		put(new BuildingResourceId(ResourceType.GOLD,ResourceType.CORN,1),20);
+        		put(new BuildingResourceId(ResourceType.GOLD,ResourceType.GOLD,1),30);
+        		put(new BuildingResourceId(ResourceType.GOLD,ResourceType.TIMBER,1),40);
+        		
+        		put(new BuildingResourceId(ResourceType.GOLD,ResourceType.CLAY,2),20);
+        		put(new BuildingResourceId(ResourceType.GOLD,ResourceType.CORN,2),40);
+        		put(new BuildingResourceId(ResourceType.GOLD,ResourceType.GOLD,2),60);
+        		put(new BuildingResourceId(ResourceType.GOLD,ResourceType.TIMBER,2),80);
+        		
+        		put(new BuildingResourceId(ResourceType.GOLD,ResourceType.CLAY,3),40);
+        		put(new BuildingResourceId(ResourceType.GOLD,ResourceType.CORN,3),80);
+        		put(new BuildingResourceId(ResourceType.GOLD,ResourceType.GOLD,3),120);
+        		put(new BuildingResourceId(ResourceType.GOLD,ResourceType.TIMBER,3),160);
+        		
+        		put(new BuildingResourceId(ResourceType.TIMBER,ResourceType.CLAY,1),10);
+        		put(new BuildingResourceId(ResourceType.TIMBER,ResourceType.CORN,1),10);
+        		put(new BuildingResourceId(ResourceType.TIMBER,ResourceType.GOLD,1),10);
+        		put(new BuildingResourceId(ResourceType.TIMBER,ResourceType.TIMBER,1),10);
+        		
+        		put(new BuildingResourceId(ResourceType.TIMBER,ResourceType.CLAY,2),30);
+        		put(new BuildingResourceId(ResourceType.TIMBER,ResourceType.CORN,2),30);
+        		put(new BuildingResourceId(ResourceType.TIMBER,ResourceType.GOLD,2),30);
+        		put(new BuildingResourceId(ResourceType.TIMBER,ResourceType.TIMBER,2),30);
+        		
+        		put(new BuildingResourceId(ResourceType.TIMBER,ResourceType.CLAY,3),50);
+        		put(new BuildingResourceId(ResourceType.TIMBER,ResourceType.CORN,3),50);
+        		put(new BuildingResourceId(ResourceType.TIMBER,ResourceType.GOLD,3),50);
+        		put(new BuildingResourceId(ResourceType.TIMBER,ResourceType.TIMBER,3),50);
+        	};	  
+        };
+      
+        TIME_RESOURCE_BUILDINGS_INFO = new HashMap<TimeId, Integer>(){
+        	{	  
+        		put(new TimeId(ResourceType.CLAY,1),5);
+        		put(new TimeId(ResourceType.CLAY,2),10);
+        		put(new TimeId(ResourceType.CLAY,3),15);
+        		
+        		put(new TimeId(ResourceType.TIMBER,1),5);
+        		put(new TimeId(ResourceType.TIMBER,2),10);
+        		put(new TimeId(ResourceType.TIMBER,3),15);
+        		
+        		put(new TimeId(ResourceType.GOLD,1),5);
+        		put(new TimeId(ResourceType.GOLD,2),10);
+        		put(new TimeId(ResourceType.GOLD,3),15);
+        		
+        		put(new TimeId(ResourceType.CORN,1),5);
+        		put(new TimeId(ResourceType.CORN,2),10);
+        		put(new TimeId(ResourceType.CORN,3),15);
+        	};
+        };
+      
+        PRODUCTION_RESOURCE_BUILDINGS_INFO = new HashMap<ProductionId, Integer>(){
+        	{	  
+        		put(new ProductionId(ResourceType.CLAY,1),5);
+        		put(new ProductionId(ResourceType.CLAY,2),10);
+        		put(new ProductionId(ResourceType.CLAY,3),20);
+        		
+        		put(new ProductionId(ResourceType.CORN,1),5);
+        		put(new ProductionId(ResourceType.CORN,2),10);
+        		put(new ProductionId(ResourceType.CORN,3),20);
+        		
+        		put(new ProductionId(ResourceType.TIMBER,1),5);
+        		put(new ProductionId(ResourceType.TIMBER,2),10);
+        		put(new ProductionId(ResourceType.TIMBER,3),20);
+        		
+        		put(new ProductionId(ResourceType.GOLD,1),5);
+        		put(new ProductionId(ResourceType.GOLD,2),10);
+        		put(new ProductionId(ResourceType.GOLD,3),20);
+        	};	  
+        };
+    	
+    };
 }
