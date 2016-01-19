@@ -1,5 +1,6 @@
 package org.exschool.pocketworld.city.center.service;
 
+<<<<<<< HEAD
 import static org.exschool.pocketworld.building.model.BuildingType.MALL;
 import static org.exschool.pocketworld.building.model.BuildingType.MARKETPLACE;
 import static org.exschool.pocketworld.building.model.BuildingType.PLANT;
@@ -21,6 +22,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+=======
+import com.google.common.collect.Sets;
+import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
+>>>>>>> origin
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
@@ -39,7 +44,18 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+<<<<<<< HEAD
 import com.google.common.collect.Sets;
+=======
+import java.util.*;
+
+import static org.exschool.pocketworld.building.model.BuildingType.*;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+>>>>>>> origin
 
 @RunWith(MockitoJUnitRunner.class)
 public class CityCenterServiceImplTest {
@@ -53,6 +69,8 @@ public class CityCenterServiceImplTest {
     PlayerService playerService;
     @Mock
     BuildingService buildingService;
+    @Mock
+    BuildQueueService buildQueueService;
 
     List<Building> buildings;
     PlayerResources playerResources;
@@ -73,9 +91,13 @@ public class CityCenterServiceImplTest {
         buildings.add(new Building(MARKETPLACE, 1, 6, city.getId()));
         buildings.add(new Building(POOL, 1, 9, city.getId()));
 
+        Building building = new Building(BARN,1,7,city.getId());
+        building.setId(1L);
+
         when(playerService.getPlayerByLogin(anyString())).thenReturn(player);
         when(cityService.getCityByPlayerId(anyLong())).thenReturn(city);
         when(buildingService.getBuildingsByCityId(anyLong())).thenReturn(buildings);
+        when(buildingService.save(any(Building.class))).thenReturn(building);
     }
 
 

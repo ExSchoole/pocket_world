@@ -152,5 +152,4 @@ public class CityCenterServiceImpl implements CityCenterService {
     public void setPlayerService(PlayerService playerService) {
         this.playerService = playerService;
     }
-    
 }
