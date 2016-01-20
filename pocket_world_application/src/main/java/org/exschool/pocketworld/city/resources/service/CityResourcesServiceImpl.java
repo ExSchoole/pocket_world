@@ -31,6 +31,8 @@ import static org.apache.commons.lang.Validate.notNull;
 
 @Component("CityResources")
 public class CityResourcesServiceImpl implements CityResourcesService {
+    private static final Integer INITIAL_BUILDING_LEVEL = 0;
+
     @Autowired
     private PlayerService playerService;
     @Autowired
@@ -66,9 +68,7 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     }
 
     @Override
-    public void createResourceBuilding(final PositionOfBuilding positionOfBuilding) {
-        final Integer INITIAL_BUILDING_LEVEL = 0;
-
+    public boolean createResourceBuilding(final PositionOfBuilding positionOfBuilding) {
         String playerLogin = "login-1";
         Player player = playerService.getPlayerByLogin(playerLogin);
         notNull(player);
@@ -84,7 +84,7 @@ public class CityResourcesServiceImpl implements CityResourcesService {
                     }
                 });
 
-        if (resourceBuildingAtPosition.isPresent()) throw new RuntimeException();
+        if (resourceBuildingAtPosition.isPresent()) return false;
 
         ResourceType resourceType = ResourceType.valueOf(positionOfBuilding.getType().toUpperCase());
 
@@ -96,6 +96,7 @@ public class CityResourcesServiceImpl implements CityResourcesService {
                 .build();
 
         resourceBuildingService.save(resourceBuilding);
+        return true;
     }
 
     @PostConstruct

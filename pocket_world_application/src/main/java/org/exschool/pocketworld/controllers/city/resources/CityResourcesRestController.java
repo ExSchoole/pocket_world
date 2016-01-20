@@ -22,16 +22,6 @@ import java.util.List;
 @RequestMapping("/v1/city/resources")
 public class CityResourcesRestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CityResourcesRestController.class);
-
-    @Autowired
-    private ResourceBuildingService resourceBuildingService;
-
-    @Autowired
-    private CityService cityService;;
-
-    @Autowired
-    private PlayerService playerService;
-
     @Autowired
     private CityResourcesService cityResourcesService;
 
