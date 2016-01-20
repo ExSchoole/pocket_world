@@ -42,12 +42,12 @@ public class CityResourcesController {
 
     @RequestMapping(value = "/buildings", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity createResourceBuilding(@RequestBody PositionOfBuilding positionOfBuilding) {
+    public ResponseEntity<Void> createResourceBuilding(@RequestBody PositionOfBuilding positionOfBuilding) {
         LOGGER.info("RequestBody:" + positionOfBuilding);
         if (cityResourcesService.createResourceBuilding(positionOfBuilding)) {
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

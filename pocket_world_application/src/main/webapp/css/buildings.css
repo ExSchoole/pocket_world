@@ -79,13 +79,13 @@ div.building_gold {
     width: 171px;
 }
 
-div.res_building_timber {
+div.building_timber {
     background-image: url(../images/timber_factory.png);
     height: 154px;
     width: 171px;
 }
 
-div.res_building_clay {
+div.building_clay {
     background-image: url(../images/clay_factory.png);
     height: 154px;
     width: 171px;

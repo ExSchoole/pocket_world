@@ -1,10 +1,10 @@
-function CityResources(emptyResourcesSelector, resourcesSelector, addResourcesUrl, loadTypesUrl) {
+function CityResources(emptyResourcesClassName, resourcesClassName, addResourcesUrl, loadTypesUrl) {
 
     var availableTypes = [];
     fillAvailableTypes();
 
     $(function () {
-        $(emptyResourcesSelector).click(function (event) {
+        $("."+emptyResourcesClassName).click(function (event) {
             event.preventDefault();
             var div = $(this);
             var position = $(this).attr('id');
@@ -12,18 +12,19 @@ function CityResources(emptyResourcesSelector, resourcesSelector, addResourcesUr
             showPopover(div, "Build", generateListOfLinks(availableTypes, position))
         });
 
-        $("div.container .popover_item").on("click", function (event) {
+        $("div.container").on("click", "a.popover_item", function (event) {
             event.preventDefault();
             var position = $(this).attr('position');
             var type = $(this).attr('type');
 
             $.ajax({
                 url: addResourcesUrl,
+                data: JSON.stringify({position: position, type: type}),
                 contentType: "application/json",
                 type: "POST",
                 success: function (json) {
-                    var resourceBuilding = $(emptyResourcesSelector + "#" +position);
-                    resourceBuilding.removeClass(emptyResourcesSelector).addClass("res_building_" +type).addClass(resourcesSelector);
+                    var resourceBuilding = $("."+emptyResourcesClassName + "#" +position);
+                    resourceBuilding.removeClass(emptyResourcesClassName).addClass("building_" +type).addClass(resourcesClassName);
                     destroyPopover(resourceBuilding);
                 },
                 error: function (xhr, status, errorThrown) {
@@ -34,13 +35,7 @@ function CityResources(emptyResourcesSelector, resourcesSelector, addResourcesUr
                 }
             })
         });
-
-        $("body").on('click', function () {
-
-        })
     });
-
-
     function generateListOfLinks(elements, position){
         var result = '';
         $.each(elements, function(index, element){
@@ -55,7 +50,7 @@ function CityResources(emptyResourcesSelector, resourcesSelector, addResourcesUr
             dataType: 'json',
             type: "GET",
             success: function (types) {
-                availableTypes = types.concat(types)
+                availableTypes = availableTypes.concat(types)
             },
             error: function (xhr, status, errorThrown) {
                 console.log("Error: " + errorThrown);
