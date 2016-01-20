@@ -73,7 +73,7 @@ div.building_position {
     border-color: orange;
 }
 
-div.res_building_gold {
+div.building_gold {
     background-image: url(../images/gold_mine.png);
     height: 154px;
     width: 171px;
@@ -91,20 +91,8 @@ div.res_building_clay {
     width: 171px;
 }
 
-div.res_building_corn {
+div.building_corn {
     background-image: url(../images/corn_field.png);
-    height: 154px;
-    width: 171px;
-}
-
-div.res_building_null {
-    background-image: url(../images/farm_land.png);
-    height: 154px;
-    width: 171px;
-}
-
-div.res_building, div.res_building_empty {
-    background-repeat: no-repeat;
     height: 154px;
     width: 171px;
 }
@@ -113,11 +101,6 @@ div.res_central_image {
     background-image: url(../images/central_image.jpg);
     height: 308px;
     width:  335px;
-}
-
-div.res_building_position {
-    border-style: outset;
-    border-color: orange;
 }
 
 div.building_karusel {
