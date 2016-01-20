@@ -46,6 +46,7 @@
         <jackson.version>2.6.3</jackson.version>
         <json-path.version>2.1.0</json-path.version>
         <guava.version>18.0</guava.version>
+        <build_queue.version>0.0.1</build_queue.version>
     </properties>
 
     <dependencies>
@@ -63,6 +64,11 @@
             <groupId>org.exschool</groupId>
             <artifactId>resource_buildings</artifactId>
             <version>${resource_buildings.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.exschool</groupId>
+            <artifactId>build_queue</artifactId>
+            <version>${build_queue.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
