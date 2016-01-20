@@ -1,6 +1,5 @@
 package org.exschool.pocketworld.city.center.service;
 
-<<<<<<< HEAD
 import static org.exschool.pocketworld.building.model.BuildingType.MALL;
 import static org.exschool.pocketworld.building.model.BuildingType.MARKETPLACE;
 import static org.exschool.pocketworld.building.model.BuildingType.PLANT;
@@ -22,10 +21,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-=======
+
 import com.google.common.collect.Sets;
 import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
->>>>>>> origin
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
@@ -44,9 +42,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-<<<<<<< HEAD
 import com.google.common.collect.Sets;
-=======
 import java.util.*;
 
 import static org.exschool.pocketworld.building.model.BuildingType.*;
@@ -55,7 +51,6 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
->>>>>>> origin
 
 @RunWith(MockitoJUnitRunner.class)
 public class CityCenterServiceImplTest {
