@@ -34,13 +34,14 @@ public class CityResourcesController {
     }
 
     @RequestMapping(value = "/types", method = RequestMethod.GET)
+    @ResponseBody
     public List<String> getResourceBuildingsTypesList() {
         LOGGER.info("getResourceBuildingsList is invoked");
         return ResourceType.asListLowerCase();
     }
 
     @RequestMapping(value = "/buildings", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
     public ResponseEntity createResourceBuilding(@RequestBody PositionOfBuilding positionOfBuilding) {
         LOGGER.info("RequestBody:" + positionOfBuilding);
         if (cityResourcesService.createResourceBuilding(positionOfBuilding)) {
