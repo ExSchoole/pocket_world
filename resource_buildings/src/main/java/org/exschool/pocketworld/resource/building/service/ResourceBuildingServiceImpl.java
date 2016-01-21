@@ -34,7 +34,7 @@ public class ResourceBuildingServiceImpl  implements ResourceBuildingService {
     private Dao dao;
 
     private final Map<BuildingResourceId, Integer> RESOURCE_BUILDINGS_INFO;
-    private final Map<TimeId, Integer> TIME_RESOURCE_BUILDINGS_INFO;
+	private final Map<TimeId, Integer> TIME_RESOURCE_BUILDINGS_INFO;
     private final Map<ProductionId, Integer> PRODUCTION_RESOURCE_BUILDINGS_INFO;
     
     /**
@@ -109,6 +109,21 @@ public class ResourceBuildingServiceImpl  implements ResourceBuildingService {
 		return RESOURCE_BUILDINGS_INFO.get(new BuildingResourceId(buildingType,resourceType,level));
 	}
     
+	@Override
+    public Map<BuildingResourceId, Integer> getRESOURCE_BUILDINGS_INFO() {
+		return RESOURCE_BUILDINGS_INFO;
+	}
+	
+	@Override
+	public Map<TimeId, Integer> getTIME_RESOURCE_BUILDINGS_INFO() {
+		return TIME_RESOURCE_BUILDINGS_INFO;
+	}
+	
+	@Override
+	public Map<ProductionId, Integer> getPRODUCTION_RESOURCE_BUILDINGS_INFO() {
+		return PRODUCTION_RESOURCE_BUILDINGS_INFO;
+	}
+	
 	{
 	    
         RESOURCE_BUILDINGS_INFO = new HashMap<BuildingResourceId, Integer>(){

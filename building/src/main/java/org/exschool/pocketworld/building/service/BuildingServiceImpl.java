@@ -67,7 +67,7 @@ public class BuildingServiceImpl implements BuildingService {
         return dao.getAllBy(query);
     }
     
-    /**
+	/**
      * Saves entity object to DB
      *
      * @param entity
@@ -104,6 +104,16 @@ public class BuildingServiceImpl implements BuildingService {
 	public int getResourceByBuildingTypeResourceTypeLevel(BuildingType buildingType,
 			ResourceType resourceType, int level) {
 		return RESOURCE_BUILDINGS_INFO.get(new BuildingResourceId(buildingType, resourceType, level));
+	}
+	
+	@Override
+    public Map<BuildingResourceId, Integer> getResourceBuildingInfo() {
+		return RESOURCE_BUILDINGS_INFO;
+	}
+
+	@Override
+	public Map<TimeId, Integer> getTimeInfo() {
+		return TIME_BUILDINGS_INFO;
 	}
 	
 	{
