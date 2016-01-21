@@ -1,19 +1,22 @@
 package org.exschool.pocketworld.resource.building.service;
 
-import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
-import org.exschool.pocketworld.dao.Dao;
-import org.exschool.pocketworld.util.builder.ResourceBuildingBuilder;
-import org.junit.*;
-import org.junit.runner.RunWith;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
 import org.exschool.pocketworld.config.TestSpringConfig;
+import org.exschool.pocketworld.dao.Dao;
+import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
+import org.exschool.pocketworld.resource.model.ResourceType;
+import org.exschool.pocketworld.util.builder.ResourceBuildingBuilder;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-
-import static org.junit.Assert.*;
-
-import java.util.List;
 /**
  * Created by manoylo on 20.11.15.
  *
@@ -31,7 +34,7 @@ public class ResourceBuildingServiceTest {
     @Before
     public void before() {
         bootstrap.fillDatabase();
-
+        buildingService.saveAllInformation();
     }
 
     @Test
@@ -43,6 +46,11 @@ public class ResourceBuildingServiceTest {
         assertAllFieldsEquals(building, savedBuilding);
     }
 
+    @Test
+    public void testAllBuildings() {
+        assertEquals(bootstrap.getBuildings(),buildingService.allBuildings());
+    }
+    
     @Test
     public void testUpdate() {
         Long existingBuildingId = 1L;
@@ -72,6 +80,20 @@ public class ResourceBuildingServiceTest {
         assertNotNull(existingBuildings.get(0));
     }
     
+    @Test
+    public void testGetResourcesByBuildingTypeLevel(){
+    	assertNotNull(buildingService.getResourcesByBuildingTypeLevel(ResourceType.CLAY, ResourceType.CORN, 1));
+    }
+    
+    @Test
+    public void testGetTimeByBuildingTypeLevel(){
+    	assertNotNull(buildingService.getTimeByBuildingTypeLevel(ResourceType.GOLD, 2));
+    }
+    
+    @Test
+    public void testGetProductionByBuildingTypeLevel(){
+    	assertNotNull(buildingService.getProductionByBuildingTypeLevel(ResourceType.TIMBER, 3));
+    }
 
     private void assertAllFieldsEquals(ResourceBuilding building1, ResourceBuilding building2)
     {
