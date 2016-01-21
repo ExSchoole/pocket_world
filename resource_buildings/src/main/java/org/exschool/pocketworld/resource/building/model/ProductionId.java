@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Embeddable
 public class ProductionId implements Serializable {
 
-    @Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
     @Column(name = "resource_type")
     private ResourceType resourceType;
 
@@ -44,4 +44,32 @@ public class ProductionId implements Serializable {
     public void setLevel(int level) {
         this.level = level;
     }
+    
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((level == null) ? 0 : level.hashCode());
+		result = prime * result + ((resourceType == null) ? 0 : resourceType.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductionId other = (ProductionId) obj;
+		if (level == null) {
+			if (other.level != null)
+				return false;
+		} else if (!level.equals(other.level))
+			return false;
+		if (resourceType != other.resourceType)
+			return false;
+		return true;
+	}
 }
