@@ -3,6 +3,10 @@ package org.exschool.pocketworld.city.center.service;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
+import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
+import org.exschool.pocketworld.buildQueue.model.Status;
+import org.exschool.pocketworld.buildQueue.model.Type;
+import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
@@ -15,41 +19,45 @@ import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
+import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.google.common.base.Optional;
-
 import java.util.*;
-
 import static org.apache.commons.lang.Validate.notNull;
 import static org.exschool.pocketworld.building.model.BuildingType.*;
 
 @Service
 public class CityCenterServiceImpl implements CityCenterService {
-
     @Autowired
     private BuildingService buildingService;
     @Autowired
     private CityService cityService;
     @Autowired
     private PlayerService playerService;
+    @Autowired
+    private BuildQueueService buildQueueService;
 
     public static final int MIN_POSITION = 1;
     public static final int MAX_POSITION = 12;
+    private static final Integer INITIAL_BUILDING_LEVEL = 0;
+    private static final Long DEFAULT_BUILDING_DURATION=30000L;
 
-    private void initialization(String playerName) {
-        String cityName = "City name";
-        PlayerResources playerResources = new PlayerResources(1, 1, 1, 1);
-        Player player = new Player(playerResources, playerName);
-        playerService.savePlayer(player);
+    public void initialization(String playerName) {
+        if (playerService.getPlayerByLogin(playerName)==null) {
+            String cityName = "City name";
+            PlayerResources playerResources = new PlayerResources(1, 1, 1, 1);
+            Player player = new Player(playerResources, playerName);
+            playerService.savePlayer(player);
 
-        City city = new City(player.getId(), cityName);
-        cityService.save(city);
+            City city = new City(player.getId(), cityName);
+            cityService.save(city);
 
-        buildingService.save(new Building(MALL, 1, 1, city.getId()));
-        buildingService.save(new Building(PLANT, 1, 3, city.getId()));
-        buildingService.save(new Building(MARKETPLACE, 1, 6, city.getId()));
-        buildingService.save(new Building(POOL, 1, 9, city.getId()));
+            buildingService.save(new Building(MALL, 1, 1, city.getId()));
+            buildingService.save(new Building(PLANT, 1, 3, city.getId()));
+            buildingService.save(new Building(MARKETPLACE, 1, 6, city.getId()));
+            buildingService.save(new Building(POOL, 1, 9, city.getId()));
+        }
     }
 
     @Override
@@ -90,8 +98,8 @@ public class CityCenterServiceImpl implements CityCenterService {
     @Override
     public boolean addBuilding(String playerName, String type, final int position) {
         if (position > MAX_POSITION || position < MIN_POSITION) return false;
-
-        City city = cityService.getCityByPlayerId(playerService.getPlayerByLogin(playerName).getId());
+        Long userId = playerService.getPlayerByLogin(playerName).getId();
+        City city = cityService.getCityByPlayerId(userId);
         notNull(city);
         Long cityId = city.getId();
         List<Building> buildings = buildingService.getBuildingsByCityId(cityId);
@@ -109,11 +117,34 @@ public class CityCenterServiceImpl implements CityCenterService {
 
         Building buildingEntity = new Building();
         buildingEntity.setCityId(cityId);
-        buildingEntity.setLevel(1);
+        buildingEntity.setLevel(INITIAL_BUILDING_LEVEL);
         buildingEntity.setPosition(position);
         buildingEntity.setBuildingType(BuildingType.valueOf(type.toUpperCase()));
 
-        buildingService.save(buildingEntity);
+        Building savedBuilding = buildingService.save(buildingEntity);
+
+        BuildQueueRecord record = BuildQueueBuilder.builder().name(type)
+                .level(savedBuilding.getLevel())
+                .type(Type.BUILDING)
+                .buildEnd(new Date(System.currentTimeMillis()+DEFAULT_BUILDING_DURATION))
+                .userId(userId)
+                .status(Status.QUEUED)
+                .buildingId(savedBuilding.getId()).build();
+        buildQueueService.save(record);
+        return true;
+    }
+
+    @Override
+    public boolean checkQueue() {
+        List<BuildQueueRecord> allRecords = buildQueueService.getAll();
+        if (allRecords.size()==0) return false;
+        for (BuildQueueRecord record:allRecords) {
+            if (record.getBuildEnd().before(new Date(System.currentTimeMillis()))) {
+                buildQueueService.changeStatus(record.getId(),Status.DONE);
+            }
+        }
+
+
         return true;
     }
 

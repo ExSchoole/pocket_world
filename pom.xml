@@ -92,6 +92,7 @@
         <junit.version>4.12</junit.version>
         <servlet.api>2.5</servlet.api>
         <common.version>1.0.2</common.version>
+        <quartz.version>2.2.1</quartz.version>
     </properties>
 
     <dependencies>
@@ -224,6 +225,21 @@
             <artifactId>guava</artifactId>
             <version>19.0-rc3</version>
         </dependency>
+
+        <!-- Quartz scheduler -->
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.version}</version>
+        </dependency>
+
     </dependencies>
 
 
