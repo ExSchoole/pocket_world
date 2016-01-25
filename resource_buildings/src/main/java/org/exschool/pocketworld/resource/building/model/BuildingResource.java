@@ -1,4 +1,4 @@
-package org.exschool.pocketworld.building.model;
+package org.exschool.pocketworld.resource.building.model;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "BuildingInformation")
+@Table(name = "ResourceBuildingInformation")
 public class BuildingResource {
 
 	@EmbeddedId

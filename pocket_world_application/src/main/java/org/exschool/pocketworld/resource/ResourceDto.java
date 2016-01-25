@@ -8,6 +8,10 @@ public class ResourceDto {
       private int clay;
       private int corn;
       
+    public ResourceDto(){
+    	
+    }
+      
     public ResourceDto(int gold, int timber, int clay, int corn){
     	this.gold = gold;
     	this.timber = timber;

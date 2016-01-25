@@ -11,8 +11,17 @@ public class ResourceBuildingTime {
     @EmbeddedId
     private TimeId timeId;
 
-    private int time;
+    private Integer time;
 
+    public ResourceBuildingTime(){
+    	
+    }
+    
+    public ResourceBuildingTime(TimeId timeId, int time){
+    	this.timeId = timeId;
+    	this.time = time;
+    }
+    
     public int getTime() {
         return time;
     }
