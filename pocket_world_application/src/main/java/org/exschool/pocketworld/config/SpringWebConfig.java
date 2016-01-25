@@ -107,7 +107,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         stFactory.setStartDelay(60000);
         stFactory.setName("cronTrigger");
         stFactory.setGroup("schedule");
-        stFactory.setCronExpression("0 0/1 * 1/1 * ? *");
+        stFactory.setCronExpression("0 0 12 * * ?");
         return stFactory;
     }
 
