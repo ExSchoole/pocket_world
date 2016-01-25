@@ -13,12 +13,8 @@ import static org.exschool.pocketworld.building.model.BuildingType.MARKETPLACE;
 import static org.exschool.pocketworld.building.model.BuildingType.PLANT;
 import static org.exschool.pocketworld.building.model.BuildingType.POOL;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -39,11 +35,8 @@ import org.exschool.pocketworld.resource.ResourceDto;
 import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Iterables;
+
 
 @Service
 public class CityCenterServiceImpl implements CityCenterService {
@@ -64,20 +57,25 @@ public class CityCenterServiceImpl implements CityCenterService {
     
     public static final int MIN_POSITION = 1;
     public static final int MAX_POSITION = 12;
+    private static final int INITIAL_BUILDING_LEVEL=0;
+    private static final int DEFAULT_BUILDING_DURATION=60000;
+
     
     private void initialization(String playerName) {
-        String cityName = "City name";
-        PlayerResources playerResources = new PlayerResources(1, 1, 1, 1);
-        Player player = new Player(playerResources, playerName);
-        playerService.savePlayer(player);
+        if(playerService.getPlayerByLogin(playerName)==null) {
+            String cityName = "City name";
+            PlayerResources playerResources = new PlayerResources(1, 1, 1, 1);
+            Player player = new Player(playerResources, playerName);
+            playerService.savePlayer(player);
 
-        City city = new City(player.getId(), cityName);
-        cityService.save(city);
+            City city = new City(player.getId(), cityName);
+            cityService.save(city);
 
-        buildingService.save(new Building(MALL, 1, 1, city.getId()));
-        buildingService.save(new Building(PLANT, 1, 3, city.getId()));
-        buildingService.save(new Building(MARKETPLACE, 1, 6, city.getId()));
-        buildingService.save(new Building(POOL, 1, 9, city.getId()));
+            buildingService.save(new Building(MALL, 1, 1, city.getId()));
+            buildingService.save(new Building(PLANT, 1, 3, city.getId()));
+            buildingService.save(new Building(MARKETPLACE, 1, 6, city.getId()));
+            buildingService.save(new Building(POOL, 1, 9, city.getId()));
+        }
     }
 
     @Override
@@ -144,11 +142,13 @@ public class CityCenterServiceImpl implements CityCenterService {
         buildingEntity.setBuildingType(BuildingType.valueOf(type.toUpperCase()));
 
         Building savedBuilding = buildingService.save(buildingEntity);
-
+        Long buildingTimeMillis = (long) buildingService.getTimeByBuildingTypeLevel(
+                                                savedBuilding.getBuildingType(),
+                                                savedBuilding.getLevel()+1) *1000;
         BuildQueueRecord record = BuildQueueBuilder.builder().name(type)
                 .level(savedBuilding.getLevel())
                 .type(Type.BUILDING)
-                .buildEnd(new Date(System.currentTimeMillis()+DEFAULT_BUILDING_DURATION))
+                .buildEnd(new Date(System.currentTimeMillis() + buildingTimeMillis ))
                 .userId(userId)
                 .status(Status.QUEUED)
                 .buildingId(savedBuilding.getId()).build();
