@@ -15,6 +15,7 @@ build/
 .classpath
 .springBeans
 *~
+catalina.base_IS_UNDEFINED/
 
 
 
