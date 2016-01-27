@@ -1,24 +1,18 @@
 package org.exschool.pocketworld.resource.building.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.exschool.pocketworld.dao.Dao;
-import org.exschool.pocketworld.resource.building.model.BuildingResource;
-import org.exschool.pocketworld.resource.building.model.BuildingResourceId;
-import org.exschool.pocketworld.resource.building.model.Production;
-import org.exschool.pocketworld.resource.building.model.ProductionId;
-import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
-import org.exschool.pocketworld.resource.building.model.ResourceBuildingTime;
-import org.exschool.pocketworld.resource.building.model.TimeId;
+import org.exschool.pocketworld.resource.building.model.*;
 import org.exschool.pocketworld.resource.model.ResourceType;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 
 /**

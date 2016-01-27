@@ -1,14 +1,5 @@
 package org.exschool.pocketworld.city.resources.service;
 
-import static org.apache.commons.lang.Validate.notNull;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.annotation.PostConstruct;
-
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
@@ -37,11 +28,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import static org.apache.commons.lang.Validate.notNull;
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 
 @Component("CityResources")
 public class CityResourcesServiceImpl implements CityResourcesService {
@@ -55,8 +47,8 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     private CityService cityService;
 
     @PostConstruct
-    private void fillDataBaseInfo(){
-    	resourceBuildingService.saveAllInformation();
+    private void fillDataBaseInfo() {
+        resourceBuildingService.saveAllInformation();
     }
 
     @Override
@@ -144,33 +136,31 @@ public class CityResourcesServiceImpl implements CityResourcesService {
         // -- end temporary
     }
 
+    private static Map<BuildingResourceId, Integer> getResourceInfo(Map<BuildingResourceId, Integer> resourcesInfo) {
+        Map<BuildingResourceId, Integer> result = new HashMap<>();
+        for (Entry<BuildingResourceId, Integer> b : resourcesInfo.entrySet())
+            result.put(b.getKey(), b.getValue());
+
+        return result;
+    }
+
+    private static Map<TimeId, Integer> getTimeInfo(Map<TimeId, Integer> timeInfoFromDB) {
+        Map<TimeId, Integer> timeInfo = new HashMap<>();
+        for (Entry<TimeId, Integer> b : timeInfoFromDB.entrySet())
+            timeInfo.put(b.getKey(), b.getValue());
+
+        return timeInfo;
+    }
+
+    private static Map<ProductionId, Integer> getProductionInfo(Map<ProductionId, Integer> productionInfoFromDB) {
+        Map<ProductionId, Integer> productionInfo = new HashMap<>();
+        for (Entry<ProductionId, Integer> b : productionInfoFromDB.entrySet())
+            productionInfo.put(b.getKey(), b.getValue());
+
+        return productionInfo;
+    }
+
     private static final Function<ResourceBuilding, ResourceBuildingDto> TO_RESOURCE_BUILDING_DTO =
-
-   private static Map<BuildingResourceId, Integer> getResourceInfo(Map<BuildingResourceId, Integer> resourceInfoFromDB){
-   	 Map<BuildingResourceId, Integer> resourceInfo = new HashMap<>();
-   	 for (Entry<BuildingResourceId, Integer> b : resourceInfoFromDB.entrySet())
-   		 resourceInfo.put(b.getKey(), b.getValue());
-
-   	 return resourceInfo;
-   }
-
-   private static Map<TimeId, Integer> getTimeInfo(Map<TimeId, Integer> timeInfoFromDB){
-  	 Map<TimeId, Integer> timeInfo = new HashMap<>();
-  	 for (Entry<TimeId, Integer> b : timeInfoFromDB.entrySet())
-  		 timeInfo.put(b.getKey(), b.getValue());
-
-  	 return timeInfo;
-   }
-
-   private static Map<ProductionId, Integer> getProductionInfo(Map<ProductionId, Integer> productionInfoFromDB){
-  	 Map<ProductionId, Integer> productionInfo = new HashMap<>();
-  	 for (Entry<ProductionId, Integer> b : productionInfoFromDB.entrySet())
-  		 productionInfo.put(b.getKey(), b.getValue());
-
-  	 return productionInfo;
-   }
-
-	private static final Function<ResourceBuilding, ResourceBuildingDto> TO_RESOURCE_BUILDING_DTO =
             new Function<ResourceBuilding, ResourceBuildingDto>() {
                 @Override
                 public ResourceBuildingDto apply(ResourceBuilding resourceBuilding) {
