@@ -19,7 +19,7 @@ public interface ResourceBuildingService {
 	Map<TimeId, Integer> getTIME_RESOURCE_BUILDINGS_INFO();
 	Map<ProductionId, Integer> getPRODUCTION_RESOURCE_BUILDINGS_INFO();
     ResourceBuilding save(ResourceBuilding entity);
-    List<ResourceBuilding> allCityBuildings(Long id);
+    List<ResourceBuilding> allCityResources(Long id);
     int getTimeByBuildingTypeLevel(ResourceType buildingType, int level);
     int getProductionByBuildingTypeLevel(ResourceType buildingType, int level);
     int getResourcesByBuildingTypeLevel(ResourceType buildingType,ResourceType resourceType, int level);
