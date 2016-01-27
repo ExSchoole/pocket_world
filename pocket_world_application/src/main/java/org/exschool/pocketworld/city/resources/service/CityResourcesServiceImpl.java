@@ -1,5 +1,14 @@
 package org.exschool.pocketworld.city.resources.service;
 
+import static org.apache.commons.lang.Validate.notNull;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.annotation.PostConstruct;
+
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
@@ -16,7 +25,10 @@ import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
+import org.exschool.pocketworld.resource.building.model.BuildingResourceId;
+import org.exschool.pocketworld.resource.building.model.ProductionId;
 import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
+import org.exschool.pocketworld.resource.building.model.TimeId;
 import org.exschool.pocketworld.resource.building.service.ResourceBuildingService;
 import org.exschool.pocketworld.resource.model.ResourceType;
 import org.exschool.pocketworld.util.builder.ResourceBuildingBuilder;
@@ -28,6 +40,8 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static org.apache.commons.lang.Validate.notNull;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 
 @Component("CityResources")
 public class CityResourcesServiceImpl implements CityResourcesService {
@@ -39,6 +53,11 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     private ResourceBuildingService resourceBuildingService;
     @Autowired
     private CityService cityService;
+
+    @PostConstruct
+    private void fillDataBaseInfo(){
+    	resourceBuildingService.saveAllInformation();
+    }
 
     @Override
     public CityResourcesDto cityResourcesInfo() {
@@ -64,6 +83,9 @@ public class CityResourcesServiceImpl implements CityResourcesService {
                 .resource(resourceDto)
                 .resourceBuildings(resourceBuildingDtos)
                 .nickname(player.getLogin())
+                .productionInfo(getProductionInfo(resourceBuildingService.getPRODUCTION_RESOURCE_BUILDINGS_INFO()))
+                .resourceInfo(getResourceInfo(resourceBuildingService.getRESOURCE_BUILDINGS_INFO()))
+                .timeInfo(getTimeInfo(resourceBuildingService.getTIME_RESOURCE_BUILDINGS_INFO()))
                 .build();
     }
 
@@ -123,6 +145,32 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     }
 
     private static final Function<ResourceBuilding, ResourceBuildingDto> TO_RESOURCE_BUILDING_DTO =
+
+   private static Map<BuildingResourceId, Integer> getResourceInfo(Map<BuildingResourceId, Integer> resourceInfoFromDB){
+   	 Map<BuildingResourceId, Integer> resourceInfo = new HashMap<>();
+   	 for (Entry<BuildingResourceId, Integer> b : resourceInfoFromDB.entrySet())
+   		 resourceInfo.put(b.getKey(), b.getValue());
+
+   	 return resourceInfo;
+   }
+
+   private static Map<TimeId, Integer> getTimeInfo(Map<TimeId, Integer> timeInfoFromDB){
+  	 Map<TimeId, Integer> timeInfo = new HashMap<>();
+  	 for (Entry<TimeId, Integer> b : timeInfoFromDB.entrySet())
+  		 timeInfo.put(b.getKey(), b.getValue());
+
+  	 return timeInfo;
+   }
+
+   private static Map<ProductionId, Integer> getProductionInfo(Map<ProductionId, Integer> productionInfoFromDB){
+  	 Map<ProductionId, Integer> productionInfo = new HashMap<>();
+  	 for (Entry<ProductionId, Integer> b : productionInfoFromDB.entrySet())
+  		 productionInfo.put(b.getKey(), b.getValue());
+
+  	 return productionInfo;
+   }
+
+	private static final Function<ResourceBuilding, ResourceBuildingDto> TO_RESOURCE_BUILDING_DTO =
             new Function<ResourceBuilding, ResourceBuildingDto>() {
                 @Override
                 public ResourceBuildingDto apply(ResourceBuilding resourceBuilding) {

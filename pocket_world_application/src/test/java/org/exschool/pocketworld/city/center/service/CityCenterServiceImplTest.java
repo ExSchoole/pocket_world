@@ -1,5 +1,27 @@
 package org.exschool.pocketworld.city.center.service;
 
+import static org.exschool.pocketworld.building.model.BuildingType.MALL;
+import static org.exschool.pocketworld.building.model.BuildingType.MARKETPLACE;
+import static org.exschool.pocketworld.building.model.BuildingType.PLANT;
+import static org.exschool.pocketworld.building.model.BuildingType.POOL;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+
 import com.google.common.collect.Sets;
 import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.building.BuildingDto;
@@ -20,6 +42,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.google.common.collect.Sets;
 import java.util.*;
 
 import static org.exschool.pocketworld.building.model.BuildingType.*;
