@@ -64,6 +64,17 @@ public class BuildQueueRecordServiceTest {
     }
 
     @Test
+    public void testGetAllByStatus() {
+        List<BuildQueueRecord> existingRecords = buildQueueService.getAllByStatus(Status.QUEUED);
+        assertEquals(existingRecords.size(),2);
+        for (BuildQueueRecord record:existingRecords) {
+            assertEquals(record.getStatus(),Status.QUEUED);
+        }
+
+
+    }
+
+    @Test
     public void testDeleteAllByStatus() {
         buildQueueService.deleteAllByStatus(Status.DONE);
         List<BuildQueueRecord> all = buildQueueService.getAll();

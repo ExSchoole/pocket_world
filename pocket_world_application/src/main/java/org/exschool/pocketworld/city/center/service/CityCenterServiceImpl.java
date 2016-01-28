@@ -57,8 +57,8 @@ public class CityCenterServiceImpl implements CityCenterService {
     
     public static final int MIN_POSITION = 1;
     public static final int MAX_POSITION = 12;
-    private static final int INITIAL_BUILDING_LEVEL=0;
-    private static final int DEFAULT_BUILDING_DURATION=60000;
+    private static final int INITIAL_BUILDING_LEVEL=1;
+
 
     
     private void initialization(String playerName) {
@@ -144,7 +144,7 @@ public class CityCenterServiceImpl implements CityCenterService {
         Building savedBuilding = buildingService.save(buildingEntity);
         Long buildingTimeMillis = (long) buildingService.getTimeByBuildingTypeLevel(
                                                 savedBuilding.getBuildingType(),
-                                                savedBuilding.getLevel()+1) *1000;
+                                                savedBuilding.getLevel()) *1000;
         BuildQueueRecord record = BuildQueueBuilder.builder().name(type)
                 .level(savedBuilding.getLevel())
                 .type(Type.BUILDING)
@@ -156,18 +156,14 @@ public class CityCenterServiceImpl implements CityCenterService {
         return true;
     }
 
+
     @Override
-    public boolean checkQueue() {
-        List<BuildQueueRecord> allRecords = buildQueueService.getAll();
-        if (allRecords.size()==0) return false;
-        for (BuildQueueRecord record:allRecords) {
-            if (record.getBuildEnd().before(new Date(System.currentTimeMillis()))) {
-                buildQueueService.changeStatus(record.getId(),Status.DONE);
-            }
+    public void changeBuildingStatuses() {
+        List<BuildQueueRecord> queuedBuildings = buildQueueService.getAllByStatus(Status.QUEUED);
+        for (BuildQueueRecord record:queuedBuildings) {
+            buildQueueService.changeStatus(record.getId(),Status.DONE);
         }
 
-
-        return true;
     }
 
     private static Map<Integer, BuildingDto> buildingDtosByPosition(List<Building> buildingsFromDataBase) {

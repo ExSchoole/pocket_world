@@ -1,7 +1,6 @@
 package org.exschool.pocketworld.controllers.city.center;
 
 
-import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
 import org.slf4j.Logger;
@@ -23,8 +22,6 @@ public class CityCenterController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CityCenterController.class);
     @Autowired
     private CityCenterService cityCenterService;
-    @Autowired
-    private BuildQueueService buildQueueService;
 
     private static final String PLAYER_NAME = "player-login"; //temporary
 
@@ -52,7 +49,7 @@ public class CityCenterController {
         Set<String> builtBuildingTypes = cityCenterDto.getBuildingTypes();
         model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(builtBuildingTypes));
         LOGGER.info("Out:" + model);
-        cityCenterService.checkQueue();
+        cityCenterService.changeBuildingStatuses();
         return "city_center";
     }
 

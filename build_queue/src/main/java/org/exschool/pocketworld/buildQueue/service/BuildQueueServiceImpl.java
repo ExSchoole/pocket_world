@@ -3,6 +3,8 @@ package org.exschool.pocketworld.buildQueue.service;
 import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
 import org.exschool.pocketworld.buildQueue.model.Status;
 import org.exschool.pocketworld.dao.Dao;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +32,13 @@ public class BuildQueueServiceImpl implements BuildQueueService {
     @Override
     public List<BuildQueueRecord> getAll() {
         return dao.all(BuildQueueRecord.class);
+    }
+
+    @Override
+    public List<BuildQueueRecord> getAllByStatus(Status status) {
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(BuildQueueRecord.class)
+                .add(Property.forName("status").eq(status));
+        return dao.getAllBy(detachedCriteria);
     }
 
     /**
