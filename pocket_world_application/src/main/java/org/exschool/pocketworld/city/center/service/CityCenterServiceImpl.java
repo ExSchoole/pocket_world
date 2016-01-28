@@ -33,6 +33,7 @@ import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
 import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.google.common.base.Optional;
@@ -148,7 +149,7 @@ public class CityCenterServiceImpl implements CityCenterService {
         BuildQueueRecord record = BuildQueueBuilder.builder().name(type)
                 .level(savedBuilding.getLevel())
                 .type(Type.BUILDING)
-                .buildEnd(new Date(System.currentTimeMillis() + buildingTimeMillis ))
+                .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis ))
                 .userId(userId)
                 .status(Status.QUEUED)
                 .buildingId(savedBuilding.getId()).build();
@@ -162,8 +163,7 @@ public class CityCenterServiceImpl implements CityCenterService {
         Long userId = playerService.getPlayerByLogin(playerName).getId();
         List<BuildQueueRecord> queuedBuildings = buildQueueService.getAllByUser(userId);
         for (BuildQueueRecord record:queuedBuildings) {
-            if(record.getStatus().equals(Status.QUEUED) &&
-                    record.getBuildEnd().before(new Date(System.currentTimeMillis()))){
+            if(record.getStatus().equals(Status.QUEUED) && record.getBuildEnd().isBeforeNow()){
                 buildQueueService.changeStatus(record.getId(),Status.DONE);
             }
             buildQueueService.changeStatus(record.getId(),Status.DONE);

@@ -93,6 +93,9 @@
         <servlet.api>2.5</servlet.api>
         <common.version>1.0.2</common.version>
         <quartz.version>2.2.1</quartz.version>
+        <joda.time.version>2.9.2</joda.time.version>
+        <joda.time.hibernate.version>1.4</joda.time.hibernate.version>
+        <jadira.usertype.version>2.0.1</jadira.usertype.version>
     </properties>
 
     <dependencies>
@@ -238,6 +241,26 @@
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
             <version>${quartz.version}</version>
+        </dependency>
+
+        <!--joda time-->
+        
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda.time.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time-hibernate</artifactId>
+            <version>${joda.time.hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jadira.usertype</groupId>
+            <artifactId>usertype.jodatime</artifactId>
+            <version>${jadira.usertype.version}</version>
         </dependency>
 
     </dependencies>
