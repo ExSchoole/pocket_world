@@ -35,9 +35,9 @@ public class BuildQueueServiceImpl implements BuildQueueService {
     }
 
     @Override
-    public List<BuildQueueRecord> getAllByStatus(Status status) {
+    public List<BuildQueueRecord> getAllByUser(Long userId) {
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(BuildQueueRecord.class)
-                .add(Property.forName("status").eq(status));
+                .add(Property.forName("userId").eq(userId));
         return dao.getAllBy(detachedCriteria);
     }
 

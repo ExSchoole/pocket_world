@@ -158,9 +158,14 @@ public class CityCenterServiceImpl implements CityCenterService {
 
 
     @Override
-    public void changeBuildingStatuses() {
-        List<BuildQueueRecord> queuedBuildings = buildQueueService.getAllByStatus(Status.QUEUED);
+    public void changeBuildingStatus(String playerName) {
+        Long userId = playerService.getPlayerByLogin(playerName).getId();
+        List<BuildQueueRecord> queuedBuildings = buildQueueService.getAllByUser(userId);
         for (BuildQueueRecord record:queuedBuildings) {
+            if(record.getStatus().equals(Status.QUEUED) &&
+                    record.getBuildEnd().before(new Date(System.currentTimeMillis()))){
+                buildQueueService.changeStatus(record.getId(),Status.DONE);
+            }
             buildQueueService.changeStatus(record.getId(),Status.DONE);
         }
 

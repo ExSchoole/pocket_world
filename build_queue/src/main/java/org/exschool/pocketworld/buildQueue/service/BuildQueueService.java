@@ -11,7 +11,7 @@ import java.util.List;
 public interface BuildQueueService {
     BuildQueueRecord get(Long id);
     List<BuildQueueRecord> getAll();
-    List<BuildQueueRecord> getAllByStatus(Status status);
+    List<BuildQueueRecord> getAllByUser(Long userId);
     BuildQueueRecord save (BuildQueueRecord entity);
     BuildQueueRecord changeStatus(Long id, Status status);
     void delete(BuildQueueRecord entity);

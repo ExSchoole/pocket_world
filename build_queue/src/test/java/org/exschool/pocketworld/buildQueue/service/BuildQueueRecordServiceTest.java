@@ -64,11 +64,11 @@ public class BuildQueueRecordServiceTest {
     }
 
     @Test
-    public void testGetAllByStatus() {
-        List<BuildQueueRecord> existingRecords = buildQueueService.getAllByStatus(Status.QUEUED);
-        assertEquals(existingRecords.size(),2);
+    public void testGetAllByUser() {
+        Long userId=1L;
+        List<BuildQueueRecord> existingRecords = buildQueueService.getAllByUser(userId);
         for (BuildQueueRecord record:existingRecords) {
-            assertEquals(record.getStatus(),Status.QUEUED);
+            assertEquals(record.getUserId(),userId);
         }
 
 

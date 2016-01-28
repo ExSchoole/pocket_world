@@ -49,7 +49,7 @@ public class CityCenterController {
         Set<String> builtBuildingTypes = cityCenterDto.getBuildingTypes();
         model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(builtBuildingTypes));
         LOGGER.info("Out:" + model);
-        cityCenterService.changeBuildingStatuses();
+        cityCenterService.changeBuildingStatus(PLAYER_NAME);
         return "city_center";
     }
 

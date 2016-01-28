@@ -10,6 +10,6 @@ import java.util.Set;
 public interface CityCenterService {
     CityCenterDto cityCenterInfo(String playerName);
     boolean addBuilding(String playerName, String type, int position);
-    void changeBuildingStatuses();
+    void changeBuildingStatus(String playerName);
     Collection<String> availableForBuildBuildingTypes(Set<String> builtBuildingTypes);
 }
