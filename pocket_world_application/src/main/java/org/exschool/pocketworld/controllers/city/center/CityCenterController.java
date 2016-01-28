@@ -3,6 +3,7 @@ package org.exschool.pocketworld.controllers.city.center;
 
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
+import org.exschool.pocketworld.city.common.service.CommonCityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class CityCenterController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CityCenterController.class);
     @Autowired
     private CityCenterService cityCenterService;
+    @Autowired
+    private CommonCityService commonCityService;
 
     private static final String PLAYER_NAME = "player-login"; //temporary
 
@@ -49,7 +52,7 @@ public class CityCenterController {
         Set<String> builtBuildingTypes = cityCenterDto.getBuildingTypes();
         model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(builtBuildingTypes));
         LOGGER.info("Out:" + model);
-        cityCenterService.changeBuildingStatus(PLAYER_NAME);
+        commonCityService.changeBuildingStatus(PLAYER_NAME);
         return "city_center";
     }
 

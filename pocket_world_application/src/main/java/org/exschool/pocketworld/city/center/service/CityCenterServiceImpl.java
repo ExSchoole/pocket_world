@@ -58,7 +58,7 @@ public class CityCenterServiceImpl implements CityCenterService {
     
     public static final int MIN_POSITION = 1;
     public static final int MAX_POSITION = 12;
-    private static final int INITIAL_BUILDING_LEVEL=1;
+    private static final int INITIAL_BUILDING_LEVEL=0;
 
 
     
@@ -143,11 +143,12 @@ public class CityCenterServiceImpl implements CityCenterService {
         buildingEntity.setBuildingType(BuildingType.valueOf(type.toUpperCase()));
 
         Building savedBuilding = buildingService.save(buildingEntity);
+        int nextLevel = savedBuilding.getLevel()+1;
         Long buildingTimeMillis = (long) buildingService.getTimeByBuildingTypeLevel(
                                                 savedBuilding.getBuildingType(),
-                                                savedBuilding.getLevel()) *1000;
+                                                nextLevel) *1000;
         BuildQueueRecord record = BuildQueueBuilder.builder().name(type)
-                .level(savedBuilding.getLevel())
+                .level(nextLevel)
                 .type(Type.BUILDING)
                 .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis ))
                 .userId(userId)
@@ -157,19 +158,6 @@ public class CityCenterServiceImpl implements CityCenterService {
         return true;
     }
 
-
-    @Override
-    public void changeBuildingStatus(String playerName) {
-        Long userId = playerService.getPlayerByLogin(playerName).getId();
-        List<BuildQueueRecord> queuedBuildings = buildQueueService.getAllByUser(userId);
-        for (BuildQueueRecord record:queuedBuildings) {
-            if(record.getStatus().equals(Status.QUEUED) && record.getBuildEnd().isBeforeNow()){
-                buildQueueService.changeStatus(record.getId(),Status.DONE);
-            }
-            buildQueueService.changeStatus(record.getId(),Status.DONE);
-        }
-
-    }
 
     private static Map<Integer, BuildingDto> buildingDtosByPosition(List<Building> buildingsFromDataBase) {
         Map<Integer, BuildingDto> buildingsDto = new HashMap<>();
