@@ -2,7 +2,9 @@ package org.exschool.pocketworld.building.service;
 
 
 import org.exschool.pocketworld.building.model.Building;
+import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.dao.Dao;
+import org.exschool.pocketworld.util.builder.BuildingBuilder;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,18 @@ public class BuildingServiceImpl implements BuildingService {
      */
     @Autowired
     private Dao dao;
+
+    //@Override
+    public Long createBuilding(Long cityId, BuildingType buildingType, int position, int level) {
+        Building building = BuildingBuilder.builder()
+                .buildingType(buildingType)
+                .cityId(cityId)
+                .level(level)
+                .position(position)
+                .build();
+        save(building);
+        return building.getId();
+    }
 
     /**
      * Gets all buildings from DB
@@ -84,4 +98,5 @@ public class BuildingServiceImpl implements BuildingService {
     public void setDao(Dao dao) {
         this.dao = dao;
     }
+
 }

@@ -2,7 +2,6 @@ package org.exschool.pocketworld.controllers.city.center;
 
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
-import org.exschool.pocketworld.player.service.PlayerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,8 @@ public class CityCenterController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CityCenterController.class);
     @Autowired
     private CityCenterService cityCenterService;
-    @Autowired
-    private PlayerService playerService;
+/*    @Autowired
+    private PlayerService playerService;*/
     private String playerLogin="test-user";
 
     @RequestMapping(value = "/populate")

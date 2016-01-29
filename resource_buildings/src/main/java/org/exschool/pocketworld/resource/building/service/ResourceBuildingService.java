@@ -1,6 +1,7 @@
 package org.exschool.pocketworld.resource.building.service;
 
 import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
+import org.exschool.pocketworld.resource.model.ResourceType;
 
 import java.util.List;
 
@@ -14,5 +15,6 @@ public interface ResourceBuildingService {
     List<ResourceBuilding> allCityBuildings(Long id);
     ResourceBuilding getAtPosition(Long cityId,Integer position);
     boolean isResBuildingExist(Long cityId, int position);
+    Long createResourceBuilding(Long cityId, ResourceType resourceType, int position, int level);
 }
 

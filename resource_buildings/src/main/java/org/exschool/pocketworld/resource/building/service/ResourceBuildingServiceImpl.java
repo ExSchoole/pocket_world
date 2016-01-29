@@ -1,6 +1,8 @@
 package org.exschool.pocketworld.resource.building.service;
 
 import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
+import org.exschool.pocketworld.resource.model.ResourceType;
+import org.exschool.pocketworld.util.builder.ResourceBuildingBuilder;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.exschool.pocketworld.dao.Dao;
@@ -22,6 +24,19 @@ public class ResourceBuildingServiceImpl implements ResourceBuildingService {
      */
     @Autowired
     private Dao dao;
+
+    @Override
+    public Long createResourceBuilding(Long cityId, ResourceType resourceType, int position, int level) {
+        ResourceBuilding resourceBuilding = ResourceBuildingBuilder.builder()
+                .buildingType(resourceType)
+                .cityId(cityId)
+                .level(level)
+                .position(position)
+                .build();
+
+        save(resourceBuilding);
+        return resourceBuilding.getId();
+    }
 
     /**
      * Gets all ResourceBuilding from DB

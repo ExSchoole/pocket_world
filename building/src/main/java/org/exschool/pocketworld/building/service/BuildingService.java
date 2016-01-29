@@ -1,6 +1,7 @@
 package org.exschool.pocketworld.building.service;
 
 import org.exschool.pocketworld.building.model.Building;
+import org.exschool.pocketworld.building.model.BuildingType;
 
 import java.util.List;
 
@@ -17,5 +18,7 @@ public interface BuildingService {
     Building getAtPosition(Long cityId, Integer position);
 
     Boolean isBuildingExist(Long cityId, Integer position);
+
+    public Long createBuilding(Long cityId, BuildingType buildingType, int position, int level);
 }
 

@@ -14,5 +14,6 @@ public interface CityService {
     City getCityByPlayerId(Long playerId);
     Long getCityId(Long playerId);
     Boolean isCityExist(Long playerId);
+    Long createCity(Long playerId, String cityName);
 }
 

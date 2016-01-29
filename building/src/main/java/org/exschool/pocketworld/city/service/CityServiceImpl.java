@@ -2,6 +2,7 @@ package org.exschool.pocketworld.city.service;
 
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.dao.Dao;
+import org.exschool.pocketworld.util.builder.UserCityBuilder;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,17 @@ public class CityServiceImpl implements CityService {
      *
      * @return list of buildings
      */
+
+    @Override
+    public Long createCity(Long playerId, String cityName) {
+        City city = UserCityBuilder.builder()
+                .name(cityName)
+                .playerId(playerId)
+                .build();
+        save(city);
+        return city.getId();
+    }
+
     @Override
     public List<City> allCities() {
         return dao.all(City.class);
@@ -102,4 +114,5 @@ public class CityServiceImpl implements CityService {
     public void setDao(Dao dao) {
         this.dao = dao;
     }
+
 }
