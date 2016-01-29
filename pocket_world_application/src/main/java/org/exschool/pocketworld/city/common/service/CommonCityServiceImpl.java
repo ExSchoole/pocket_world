@@ -9,6 +9,7 @@ import org.exschool.pocketworld.player.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -26,20 +27,30 @@ public class CommonCityServiceImpl implements CommonCityService {
     private BuildingService buildingService;
 
 
-
     @Override
-    public void changeBuildingStatus(String playerName) {
+    public void buildQueuedBuildings(String playerName) {
         Long userId = playerService.getPlayerByLogin(playerName).getId();
-        List<BuildQueueRecord> queuedBuildings = buildQueueService.getAllByUser(userId);
-        for (BuildQueueRecord record:queuedBuildings) {
-            if(record.getStatus().equals(Status.QUEUED) && record.getBuildEnd().isBeforeNow()){
+        List<BuildQueueRecord> records = getQueuedBuildings(userId);
+        for (BuildQueueRecord record:records) {
+            if (record.getBuildEnd().isBeforeNow()) {
                 Building building = buildingService.get(record.getBuildingId());
                 building.setLevel(building.getLevel()+1);
                 buildingService.save(building);
                 buildQueueService.changeStatus(record.getId(),Status.DONE);
             }
-
         }
 
+    }
+
+    @Override
+    public List<BuildQueueRecord> getQueuedBuildings(Long userId) {
+        List<BuildQueueRecord> allRecords = buildQueueService.getAllByUser(userId);
+        List<BuildQueueRecord> queuedRecords = new LinkedList<>();
+        for (BuildQueueRecord record: allRecords) {
+            if (record.getStatus().equals(Status.QUEUED)) {
+                queuedRecords.add(record);
+            }
+        }
+        return queuedRecords;
     }
 }

@@ -52,7 +52,7 @@ public class CityCenterController {
         Set<String> builtBuildingTypes = cityCenterDto.getBuildingTypes();
         model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(builtBuildingTypes));
         LOGGER.info("Out:" + model);
-        commonCityService.changeBuildingStatus(PLAYER_NAME);
+        commonCityService.buildQueuedBuildings(PLAYER_NAME);
         return "city_center";
     }
 
