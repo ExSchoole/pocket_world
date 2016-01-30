@@ -1,4 +1,4 @@
-function build(classOfEmptyElement, url, building, position, playerName) {
+function build(classOfEmptyElement,url, building, position, playerName, newArr){
     var typeOfSelectedBuilding = $(building).attr("id");
     var selectedPosition = $(position).attr("id");
 
@@ -8,16 +8,21 @@ function build(classOfEmptyElement, url, building, position, playerName) {
         data: {playerName: playerName, type: typeOfSelectedBuilding, position: selectedPosition},
         success: function (data, textStatus) {
             $("#message").html(data);
+                                $( position ).removeClass( classOfEmptyElement )
+	                                         .addClass( "building_" + typeOfSelectedBuilding )
+	                                         .addClass( 'building' )
+	                                         .addClass( 'clock' );
 
-            $(position).removeClass(classOfEmptyElement)
-                .addClass("building_" + typeOfSelectedBuilding)
-                .addClass('building');
-
-            $(position).droppable("disable");
-
-            $("#" + typeOfSelectedBuilding).remove();
-
-            console.log(textStatus);
-        }
-    });
-}
+	                            $( position ).droppable( "disable" );
+	                            	                         
+	                            var k = 0;
+	                            while (typeOfSelectedBuilding.localeCompare(newArr[k].type) != 0 || newArr[k].level != 1){
+	                            	k++;
+	                            }
+	                            
+	                            $("#"+typeOfSelectedBuilding).remove();
+    			   				
+    			   				//timer(position,newArr[k].time*1000);
+    		   			 }
+    	   });
+};

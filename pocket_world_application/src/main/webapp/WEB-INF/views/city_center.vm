@@ -61,13 +61,27 @@
 <script src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
 <script src="#springUrl('/js/jquery-ui.min.js')"></script>
 <script src="#springUrl('/js/bootstrap.min.js')"></script>
+<script src="#springUrl('/js/timer.js')"></script>
 <script src="#springUrl('/js/DragDrop.js')"></script>
 <script src="#springUrl('/js/ajaxCallAddBuilding.js')"></script>
 <script src="#springUrl('/js/jquery.verticalCarousel.js')"></script>
+<script src="#springUrl('/js/ajaxCallGetBuildingQueue.js')"></script>
+
 
 <script>
-	DragDropBuild("building_karusel","building_empty", "#springUrl('/city/center/addBuilding')","$dto.getNickName()");
-
+	ajaxCallGetBuildingQueue("$dto.getNickName()", "#springUrl('/city/center/getBuildingQueue')");
+	var newArr = new Array();
+	var k = 0;
+		#foreach( $key in $dto.getTimeInfo().entrySet() )
+			newArr[k++] = {
+				type : "$key.getKey().getBuildingType().name().toLowerCase()",
+				level : "$key.getKey().getLevel()",
+				time : "$key.getValue()",
+			}
+		#end
+						
+	DragDropBuild("building_karusel","building_empty", "#springUrl('/city/center/addBuilding')","$dto.getNickName()",newArr);
+	
      $(function () {
 	     $("#carouselId").verticalCarousel({nSlots: 3, speed: 900});
      });

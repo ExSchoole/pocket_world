@@ -1,23 +1,24 @@
 package org.exschool.pocketworld.city.center.service;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Iterables;
-import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
-import org.exschool.pocketworld.buildQueue.model.Status;
-import org.exschool.pocketworld.buildQueue.model.Type;
-import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import static org.apache.commons.lang.Validate.notNull;
 import static org.exschool.pocketworld.building.model.BuildingType.MALL;
 import static org.exschool.pocketworld.building.model.BuildingType.MARKETPLACE;
 import static org.exschool.pocketworld.building.model.BuildingType.PLANT;
 import static org.exschool.pocketworld.building.model.BuildingType.POOL;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
+import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
+import org.exschool.pocketworld.buildQueue.model.Status;
+import org.exschool.pocketworld.buildQueue.model.Type;
+import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.building.BuildingDto;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingResourceId;
@@ -34,9 +35,14 @@ import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
 import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
 import org.joda.time.DateTime;
+import org.joda.time.Seconds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 
 
 @Service
@@ -156,6 +162,17 @@ public class CityCenterServiceImpl implements CityCenterService {
                 .buildingId(savedBuilding.getId()).build();
         buildQueueService.save(record);
         return true;
+    }
+
+    public Map<String, Integer> getBuildingQueue(String playerName){
+    	Map<String, Integer> currentQueue = new HashMap<>(); 	
+    	List<BuildQueueRecord> buildingQueue = buildQueueService.getAllByUser(playerService.getPlayerByLogin(playerName).getId());
+    	for (BuildQueueRecord b : buildingQueue){
+    		if (b.getStatus() == Status.QUEUED)
+    			currentQueue.put(buildingService.get(b.getBuildingId()).getBuildingType().name().toLowerCase(), Seconds.secondsBetween(new DateTime(System.currentTimeMillis()), b.getBuildEnd()).getSeconds());
+    	}
+
+    	return currentQueue;
     }
 
 
