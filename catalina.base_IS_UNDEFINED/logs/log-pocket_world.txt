@@ -1,2 +1,0 @@
-15:34:26.834 [main]         INFO  n.s.c.c.CoverageDataFileHandler - Cobertura: Saved information on 28 classes.
-15:34:26.879 [main]         INFO  n.s.c.c.CoverageDataFileHandler - Cobertura: Saved information on 28 classes.

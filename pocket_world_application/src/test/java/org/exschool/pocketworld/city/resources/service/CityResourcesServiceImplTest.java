@@ -1,10 +1,11 @@
 package org.exschool.pocketworld.city.resources.service;
 
+import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.service.CityService;
+import org.exschool.pocketworld.dto.PositionOfBuilding;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
-import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
 import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
@@ -23,12 +24,18 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+
 
 @RunWith(MockitoJUnitRunner.class)
-public class CityResourcesServiceTest {
+public class CityResourcesServiceImplTest {
     @Mock
     PlayerService playerService;
     @Mock
@@ -41,36 +48,59 @@ public class CityResourcesServiceTest {
     CityResourcesServiceImpl cityResourcesService = new CityResourcesServiceImpl();
     List<ResourceBuilding> buildings;
     PlayerResources playerResources;
-    
+
     @Before
     public void before() {
-    	playerResources= new PlayerResources(100, 100, 100, 100);
-    	Player palayer = new Player(playerResources, "login");
-    	buildings = new ArrayList<>();
+        playerResources = new PlayerResources(100, 100, 100, 100);
+        Player player = new Player(playerResources, "login");
+        buildings = new ArrayList<>();
         buildings.add(ResourceBuildingBuilder.builder().buildingType(ResourceType.GOLD).level(1).position(1).cityId(1L).build());
         buildings.add(ResourceBuildingBuilder.builder().buildingType(ResourceType.TIMBER).level(1).position(2).cityId(1L).build());
-        
-        when(playerService.getPlayerByLogin(anyString())).thenReturn( palayer);
+
+        when(playerService.getPlayerByLogin(anyString())).thenReturn(player);
         when(cityService.getCityByPlayerId(anyLong())).thenReturn(new City());
-        when(resourceBuildingService.allCityBuildings(anyLong())).thenReturn(buildings);
+        when(resourceBuildingService.allCityResources(anyLong())).thenReturn(buildings);
     }
 
     @Test
     public void testCityResourcesInfo() {
-    	ResourceDto resourceDto = new ResourceDto(playerResources.getGoldAmount(),
-                        						  playerResources.getTimberAmount(),
-                        						  playerResources.getClayAmount(),
-                        						  playerResources.getCornAmount());
+        ResourceDto resourceDto = new ResourceDto(playerResources.getGoldAmount(),
+                playerResources.getTimberAmount(),
+                playerResources.getClayAmount(),
+                playerResources.getCornAmount());
 
         CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo();
-        
+
         assertEquals(cityResourcesDto.getNickName(), "login");
-        assertEquals(cityResourcesDto.getResourceDto(),resourceDto);
+        assertEquals(cityResourcesDto.getResourceDto(), resourceDto);
         assertEquals(buildings.size(), cityResourcesDto.getResourceBuildings().size());
         for (ResourceBuilding resourceBuilding : buildings) {
             assertNotNull(cityResourcesDto.getResourceBuildings().get(resourceBuilding.getPosition()));
         }
+    }
 
+    @Test
+    public void testCreateResourceBuilding() {
+        int notExistingPosition = 3;
+        assertTrue(cityResourcesService.createResourceBuilding(new PositionOfBuilding(notExistingPosition, ResourceType.GOLD.name())));
+    }
+
+    @Test
+    public void testCreateResourceBuilding_cityContainsBuildingAtPosition() {
+        int existingPosition = 2;
+        assertFalse(cityResourcesService.createResourceBuilding(new PositionOfBuilding(existingPosition, ResourceType.GOLD.name())));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateResourceBuildingNullPlayer() {
+        when(playerService.getPlayerByLogin(anyString())).thenReturn(null);
+        cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name()));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateResourceBuildingNullCity() {
+        when(cityService.getCityByPlayerId(anyLong())).thenReturn(null);
+        cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name()));
     }
 }
 

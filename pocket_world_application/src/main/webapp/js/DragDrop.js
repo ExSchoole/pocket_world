@@ -10,7 +10,7 @@ function DragDropBuild(draggableElement,emptyElement,url,playerName){
 	    	hoverClass: "over",
 	        drop: function( event, ui ) {
 	                    build(emptyElement,url,ui.draggable,this,playerName);
-	        },
+	        }
 	      });
 	 });
 	 
