@@ -1,11 +1,13 @@
-function timer(position, timeLeft){
+function timer(position, timeLeft, playerName, urls, type){
 	if (timeLeft<=0){
 		console.log('end');
-		$( position ).removeClass( 'clock' );
+		$( "#"+'clock'+position ).removeClass( 'clock' );
+		ajaxCallFinishBuild(playerName, position, urls, type);
+		
 	}
 	else{
-		console.clear();
+		//console.clear();
 		console.log(timeLeft/1000);
-		setTimeout(function(){timer(position, timeLeft-1000);}, 1000);
+		setTimeout(function(){timer(position, timeLeft-1000, playerName, urls, type);}, 1000);
 	}
 }

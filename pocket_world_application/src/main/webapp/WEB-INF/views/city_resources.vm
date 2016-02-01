@@ -50,8 +50,29 @@
 <script type="text/javascript" src="#springUrl('/js/bootstrap.min.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/cityResources.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/timer.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/ajaxCalls.js')"></script>
 
 <script type="text/javascript">
-    CityResources("building_empty", "building", "#springUrl('/city/resources/buildings/')", "#springUrl('/city/resources/types')");
+	var urls = {
+		'buildings' : "#springUrl('/city/resources/buildings/')",
+		'types' : "#springUrl('/city/resources/types')",
+		'getBuildingQueue' : "#springUrl('/getBuildingQueue')",
+		'changeStatus' : "#springUrl('/changeStatus')",
+		'types' : "#springUrl('/city/resources/types')"
+	};
+
+	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'resource_building', 'building');
+	
+	var info = new Array();
+	#foreach( $key in $dto.getTimeInfo().entrySet() )
+		info[info.length] = {
+			type : "$key.getKey().getBuildingType().name().toLowerCase()",
+			level : "$key.getKey().getLevel()",
+			time : "$key.getValue()",
+		}
+	#end
+	
+    CityResources("building_empty", "building", urls, "$dto.getNickName()", info, 'resource_building');
 </script>
 #end

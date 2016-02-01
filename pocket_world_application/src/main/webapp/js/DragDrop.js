@@ -1,4 +1,4 @@
-function DragDropBuild(draggableElement,emptyElement,url,playerName,newArr){
+function DragDropBuild(draggableElement,emptyElement,urls,playerName,info,type){
 	 $(function () {
 	    $("." + draggableElement ).draggable({
 	        appendTo: 'body',
@@ -9,7 +9,7 @@ function DragDropBuild(draggableElement,emptyElement,url,playerName,newArr){
 	    $("." + emptyElement ).droppable({
 	    	hoverClass: "over",
 	        drop: function( event, ui ) {
-	                    build(emptyElement,url,ui.draggable,this,playerName, newArr);
+	                    build(emptyElement,urls,ui.draggable,this,playerName, info, type);
 	        },
 	      });
 	 });

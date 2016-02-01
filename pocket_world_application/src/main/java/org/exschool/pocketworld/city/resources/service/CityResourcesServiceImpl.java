@@ -1,10 +1,18 @@
 package org.exschool.pocketworld.city.resources.service;
 
-import com.google.common.base.Function;
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import static org.apache.commons.lang.Validate.notNull;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.annotation.PostConstruct;
+
+import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
+import org.exschool.pocketworld.buildQueue.model.Status;
+import org.exschool.pocketworld.buildQueue.model.Type;
+import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.building.ResourceBuildingDto;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.resources.builder.CityResourcesDtoBuilder;
@@ -22,18 +30,18 @@ import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
 import org.exschool.pocketworld.resource.building.model.TimeId;
 import org.exschool.pocketworld.resource.building.service.ResourceBuildingService;
 import org.exschool.pocketworld.resource.model.ResourceType;
+import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
 import org.exschool.pocketworld.util.builder.ResourceBuildingBuilder;
 import org.exschool.pocketworld.util.builder.UserCityBuilder;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import static org.apache.commons.lang.Validate.notNull;
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 @Component("CityResources")
 public class CityResourcesServiceImpl implements CityResourcesService {
@@ -45,16 +53,17 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     private ResourceBuildingService resourceBuildingService;
     @Autowired
     private CityService cityService;
+    @Autowired
+    private BuildQueueService buildQueueService;
 
     @PostConstruct
     private void fillDataBaseInfo() {
         resourceBuildingService.saveAllInformation();
     }
-
+    
     @Override
-    public CityResourcesDto cityResourcesInfo() {
-        String login = "login-1";
-        Player player = playerService.getPlayerByLogin(login);
+    public CityResourcesDto cityResourcesInfo(String playerName) {    	
+        Player player = playerService.getPlayerByLogin(playerName);
         notNull(player);
         PlayerResources playerResources = player.getPlayerResources();
 
@@ -83,8 +92,8 @@ public class CityResourcesServiceImpl implements CityResourcesService {
 
     @Override
     public boolean createResourceBuilding(final PositionOfBuilding positionOfBuilding) {
-        String playerLogin = "login-1";
-        Player player = playerService.getPlayerByLogin(playerLogin);
+        Player player = playerService.getPlayerByLogin(positionOfBuilding.getPlayerName());
+        Long userId = player.getId();
         notNull(player);
         City city = cityService.getCityByPlayerId(player.getId());
         notNull(city);
@@ -110,6 +119,21 @@ public class CityResourcesServiceImpl implements CityResourcesService {
                 .build();
 
         resourceBuildingService.save(resourceBuilding);
+        
+        int nextLevel = resourceBuilding.getLevel()+1;
+        Long buildingTimeMillis = (long) resourceBuildingService.getTimeByBuildingTypeLevel(
+        								 resourceBuilding.getResourceType(),
+                                         nextLevel) *1000;
+        
+        BuildQueueRecord record = BuildQueueBuilder.builder().name(positionOfBuilding.getType())
+                .level(nextLevel)
+                .type(Type.RESOURCE_BUILDING)
+                .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis ))
+                .userId(userId)
+                .status(Status.QUEUED)
+                .buildingId(resourceBuilding.getId()).build();
+        buildQueueService.save(record);
+        
         return true;
     }
 

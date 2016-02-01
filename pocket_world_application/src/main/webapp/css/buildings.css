@@ -79,26 +79,18 @@ div.building_position {
 
 div.building_gold {
     background-image: url(../images/gold_mine.png);
-    height: 154px;
-    width: 171px;
 }
 
 div.building_timber {
     background-image: url(../images/timber_factory.png);
-    height: 154px;
-    width: 171px;
 }
 
 div.building_clay {
     background-image: url(../images/clay_factory.png);
-    height: 154px;
-    width: 171px;
 }
 
 div.building_corn {
     background-image: url(../images/corn_field.png);
-    height: 154px;
-    width: 171px;
 }
 
 div.res_central_image {

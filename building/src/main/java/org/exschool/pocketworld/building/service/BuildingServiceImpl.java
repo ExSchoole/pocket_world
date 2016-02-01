@@ -274,43 +274,43 @@ public class BuildingServiceImpl implements BuildingService {
     	
     	TIME_BUILDINGS_INFO = new HashMap<TimeId, Integer>(){
         	{
-    	    	put(new TimeId(BuildingType.BARN,1),5);
+    	    	put(new TimeId(BuildingType.BARN,1),20);
     	    	put(new TimeId(BuildingType.BARN,2),10);
     	    	put(new TimeId(BuildingType.BARN,3),15);
     	    	
-    	    	put(new TimeId(BuildingType.FARM,1),5);
+    	    	put(new TimeId(BuildingType.FARM,1),20);
     	    	put(new TimeId(BuildingType.FARM,2),10);
     	    	put(new TimeId(BuildingType.FARM,3),15);
     	    	
-    	    	put(new TimeId(BuildingType.GILOTHOME,1),5);
+    	    	put(new TimeId(BuildingType.GILOTHOME,1),20);
     	    	put(new TimeId(BuildingType.GILOTHOME,2),10);
     	    	put(new TimeId(BuildingType.GILOTHOME,3),15);
     	    	
-    	    	put(new TimeId(BuildingType.MARKETPLACE,1),5);
+    	    	put(new TimeId(BuildingType.MARKETPLACE,1),20);
     	    	put(new TimeId(BuildingType.MARKETPLACE,2),10);
     	    	put(new TimeId(BuildingType.MARKETPLACE,3),15);
     	    	
-    	    	put(new TimeId(BuildingType.MALL,1),5);
+    	    	put(new TimeId(BuildingType.MALL,1),20);
     	    	put(new TimeId(BuildingType.MALL,2),10);
     	    	put(new TimeId(BuildingType.MALL,3),15);
     	    	
-    	    	put(new TimeId(BuildingType.PLANT,1),5);
+    	    	put(new TimeId(BuildingType.PLANT,1),20);
     	    	put(new TimeId(BuildingType.PLANT,2),10);
     	    	put(new TimeId(BuildingType.PLANT,3),15);
     	    	
-    	    	put(new TimeId(BuildingType.POOL,1),5);
+    	    	put(new TimeId(BuildingType.POOL,1),20);
     	    	put(new TimeId(BuildingType.POOL,2),10);
     	    	put(new TimeId(BuildingType.POOL,3),15);
     	    	
-    	    	put(new TimeId(BuildingType.SCHOOL,1),5);
+    	    	put(new TimeId(BuildingType.SCHOOL,1),20);
     	    	put(new TimeId(BuildingType.SCHOOL,2),10);
     	    	put(new TimeId(BuildingType.SCHOOL,3),15);
     	    	
-    	    	put(new TimeId(BuildingType.STORAGE,1),5);
+    	    	put(new TimeId(BuildingType.STORAGE,1),20);
     	    	put(new TimeId(BuildingType.STORAGE,2),10);
     	    	put(new TimeId(BuildingType.STORAGE,3),15);
     	    	
-    	    	put(new TimeId(BuildingType.TOWNHALL,1),5);
+    	    	put(new TimeId(BuildingType.TOWNHALL,1),20);
     	    	put(new TimeId(BuildingType.TOWNHALL,2),10);
     	    	put(new TimeId(BuildingType.TOWNHALL,3),15);
         	};

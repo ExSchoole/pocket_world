@@ -1,13 +1,14 @@
-function CityResources(emptyResourcesClassName, resourcesClassName, addResourcesUrl, loadTypesUrl) {
-
+function CityResources(emptyResourcesClassName, resourcesClassName, urls, playerName, info, typeOfBuilding) {
     var availableTypes = [];
     fillAvailableTypes();
+    var variable;
 
     $(function () {
         $("."+emptyResourcesClassName).click(function (event) {
             event.preventDefault();
             var div = $(this);
             var position = $(this).attr('id');
+            variable = $(this);
             hideAllPopovers();
             showPopover(div, "Build", generateListOfLinks(availableTypes, position))
         });
@@ -18,14 +19,26 @@ function CityResources(emptyResourcesClassName, resourcesClassName, addResources
             var type = $(this).attr('type');
 
             $.ajax({
-                url: addResourcesUrl,
-                data: JSON.stringify({position: position, type: type}),
+                url: urls['buildings'],
+                data: JSON.stringify({position: position, type: type, playerName: playerName}),
                 contentType: "application/json",
                 type: "POST",
                 success: function (json) {
                     var resourceBuilding = $("."+emptyResourcesClassName + "#" +position);
-                    resourceBuilding.removeClass(emptyResourcesClassName).addClass("building_" +type).addClass(resourcesClassName);
+                    $( "#"+position ).removeClass(emptyResourcesClassName)
+                    				 .addClass("building_" +type)
+                    			     .addClass(resourcesClassName);
+                    
+                    $( "#"+'clock'+position ).addClass( 'clock' );
+                    
                     destroyPopover(resourceBuilding);
+                    console.log($( "#"+position ).attr('class'));
+                    var k = 0;
+                    while (type.localeCompare(info[k].type) != 0 || info[k].level != 1){
+                    	k++;
+                    }
+                    console.log(info[k].type,info[k].level,info[k].time);
+                    timer(position,info[k].time*1000, playerName, urls, typeOfBuilding);
                 },
                 error: function (xhr, status, errorThrown) {
                     alert("Error occured:" + errorThrown);
@@ -41,12 +54,12 @@ function CityResources(emptyResourcesClassName, resourcesClassName, addResources
         $.each(elements, function(index, element){
             result+="<a href='#' class='popover_item' position="+position+" type="+element+">"+element+"</a><br>" ;
         });
-        console.log(result);
+        //console.log(result);
         return result;
     }
     function fillAvailableTypes() {
         $.ajax({
-            url: loadTypesUrl,
+            url: urls['types'],
             dataType: 'json',
             type: "GET",
             success: function (types) {

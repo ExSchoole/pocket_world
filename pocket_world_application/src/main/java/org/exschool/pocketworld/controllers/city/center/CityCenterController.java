@@ -1,9 +1,7 @@
 package org.exschool.pocketworld.controllers.city.center;
 
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
@@ -17,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -57,16 +54,6 @@ public class CityCenterController {
         LOGGER.info("Out:" + model);
         commonCityService.buildQueuedBuildings(PLAYER_NAME);
         return "city_center";
-    }
-
-    @RequestMapping(value = "/getBuildingQueue", method = RequestMethod.GET)
-    @ResponseBody	
-    public Map<String, Integer> getBuildingQueue(@RequestParam String playerName) {    	
-    	/*Map<String, Integer> currentQueue = new HashMap<>(); 
-    	currentQueue.put("first", 1);
-    	currentQueue.put("second", 2);
-    	return currentQueue;*/
-    	return cityCenterService.getBuildingQueue(PLAYER_NAME);
     }
 
      public void setCityCenterService(CityCenterService cityCenterService) {

@@ -35,7 +35,6 @@ import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
 import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
 import org.joda.time.DateTime;
-import org.joda.time.Seconds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +67,7 @@ public class CityCenterServiceImpl implements CityCenterService {
 
 
     
-    private void initialization(String playerName) {
+    private void initialization(String playerName) { //temporary
         if(playerService.getPlayerByLogin(playerName)==null) {
             String cityName = "City name";
             PlayerResources playerResources = new PlayerResources(1, 1, 1, 1);
@@ -81,7 +80,22 @@ public class CityCenterServiceImpl implements CityCenterService {
             buildingService.save(new Building(MALL, 1, 1, city.getId()));
             buildingService.save(new Building(PLANT, 1, 3, city.getId()));
             buildingService.save(new Building(MARKETPLACE, 1, 6, city.getId()));
-            buildingService.save(new Building(POOL, 1, 9, city.getId()));
+            
+            Building testBuilding = new Building(POOL, 1, 9, city.getId()); 
+            buildingService.save(testBuilding);
+            
+            Long buildingTimeMillis = (long) buildingService.getTimeByBuildingTypeLevel(
+            		testBuilding.getBuildingType(),
+                    1) *1000;
+            
+            BuildQueueRecord record = BuildQueueBuilder.builder().name(testBuilding.getBuildingType().name().toLowerCase())
+                    .level(1)
+                    .type(Type.BUILDING)
+                    .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis ))
+                    .userId(player.getId())
+                    .status(Status.QUEUED)
+                    .buildingId(testBuilding.getId()).build();
+            buildQueueService.save(record);
         }
     }
 
@@ -163,18 +177,6 @@ public class CityCenterServiceImpl implements CityCenterService {
         buildQueueService.save(record);
         return true;
     }
-
-    public Map<String, Integer> getBuildingQueue(String playerName){
-    	Map<String, Integer> currentQueue = new HashMap<>(); 	
-    	List<BuildQueueRecord> buildingQueue = buildQueueService.getAllByUser(playerService.getPlayerByLogin(playerName).getId());
-    	for (BuildQueueRecord b : buildingQueue){
-    		if (b.getStatus() == Status.QUEUED)
-    			currentQueue.put(buildingService.get(b.getBuildingId()).getBuildingType().name().toLowerCase(), Seconds.secondsBetween(new DateTime(System.currentTimeMillis()), b.getBuildEnd()).getSeconds());
-    	}
-
-    	return currentQueue;
-    }
-
 
     private static Map<Integer, BuildingDto> buildingDtosByPosition(List<Building> buildingsFromDataBase) {
         Map<Integer, BuildingDto> buildingsDto = new HashMap<>();

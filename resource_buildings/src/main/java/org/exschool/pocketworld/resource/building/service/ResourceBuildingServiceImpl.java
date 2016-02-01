@@ -186,19 +186,19 @@ public class ResourceBuildingServiceImpl  implements ResourceBuildingService {
       
         TIME_RESOURCE_BUILDINGS_INFO = new HashMap<TimeId, Integer>(){
         	{	  
-        		put(new TimeId(ResourceType.CLAY,1),5);
+        		put(new TimeId(ResourceType.CLAY,1),20);
         		put(new TimeId(ResourceType.CLAY,2),10);
         		put(new TimeId(ResourceType.CLAY,3),15);
         		
-        		put(new TimeId(ResourceType.TIMBER,1),5);
+        		put(new TimeId(ResourceType.TIMBER,1),20);
         		put(new TimeId(ResourceType.TIMBER,2),10);
         		put(new TimeId(ResourceType.TIMBER,3),15);
         		
-        		put(new TimeId(ResourceType.GOLD,1),5);
+        		put(new TimeId(ResourceType.GOLD,1),20);
         		put(new TimeId(ResourceType.GOLD,2),10);
         		put(new TimeId(ResourceType.GOLD,3),15);
         		
-        		put(new TimeId(ResourceType.CORN,1),5);
+        		put(new TimeId(ResourceType.CORN,1),20);
         		put(new TimeId(ResourceType.CORN,2),10);
         		put(new TimeId(ResourceType.CORN,3),15);
         	};
