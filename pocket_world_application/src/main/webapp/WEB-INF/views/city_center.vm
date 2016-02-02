@@ -76,17 +76,19 @@
 		'changeStatus' : "#springUrl('/changeStatus')"
 	};
 
-    var buildingTypeToShow;
+    var buildingTypeToShow = 'building';
 
-	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'building', 'resource_building');
+##	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'building', 'resource_building');
 
     $.when($.get("#springUrl('/build/timers')")).then(function (timers) {
-        var timersByType = _.chain(timers).groupBy(function(timer) {return timer.buildingType}).value();
-        _.each(timers[buildingTypeToShow], function(timer) {
-            $( "#"+position ).addClass('clock');
+
+
+        var timersByType = _.chain(timers).groupBy(function(timer) {return timer.type}).value();
+        _.each(timersByType[buildingTypeToShow], function(timer) {
+            $( "#"+timer.position ).addClass('clock');
         } )
 
-        _.each(_.flatten(_.values(timersByType)), function(timer) {
+        _.each(timers), function(timer) {
             //set timer
         })
     })

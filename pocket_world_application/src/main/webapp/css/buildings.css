@@ -42,8 +42,12 @@ div.building_plant{
     background-image: url(../images/factory.png);
 }
 
-div.clock{
+.clock:after{
     background-image: url(../images/clock.png);
+    height: 50px;
+    width: 50px;
+    display: block;
+    content: '';
 }
 
 div.building_market {
