@@ -53,10 +53,11 @@
             <div class="col-md-3">
             	#addcarousel($buildingTypes)
             </div>
-        </div> 
-</div> 
+        </div>
+</div>
 #end
 
+<script src="#springUrl('/js/underscore-min.js')"></script>
 
 <script src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
 <script src="#springUrl('/js/jquery-ui.min.js')"></script>
@@ -74,9 +75,24 @@
 		'getBuildingQueue' : "#springUrl('/getBuildingQueue')",
 		'changeStatus' : "#springUrl('/changeStatus')"
 	};
-	
+
+    var buildingTypeToShow;
+
 	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'building', 'resource_building');
-	
+
+    $.when($.get("#springUrl('/build/timers')")).then(function (timers) {
+        var timersByType = _.chain(timers).groupBy(function(timer) {return timer.buildingType}).value();
+        _.each(timers[buildingTypeToShow], function(timer) {
+            $( "#"+position ).addClass('clock');
+        } )
+
+        _.each(_.flatten(_.values(timersByType)), function(timer) {
+            //set timer
+        })
+    })
+
+
+
 	var info = new Array();
 		#foreach( $key in $dto.getTimeInfo().entrySet() )
 			info[info.length] = {
@@ -85,11 +101,11 @@
 				time : "$key.getValue()",
 			}
 		#end
-	
+
 	DragDropBuild("building_karusel","building_empty", urls, "$dto.getNickName()", info, 'building');
-	
+
      $(function () {
 	     $("#carouselId").verticalCarousel({nSlots: 3, speed: 900});
      });
-     
+
 </script> 
