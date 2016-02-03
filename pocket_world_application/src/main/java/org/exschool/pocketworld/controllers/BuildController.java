@@ -8,8 +8,10 @@ import org.exschool.pocketworld.buildQueue.model.Status;
 import org.exschool.pocketworld.buildQueue.model.Type;
 import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.building.model.BuildingType;
+import org.exschool.pocketworld.city.common.service.BuildService;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,17 +33,20 @@ public class BuildController {
     @Autowired
     PlayerService playerService;
 
+    @Autowired
+    BuildService buildService;
+
     @RequestMapping(value = "timers", method = RequestMethod.GET)
     @ResponseBody
-    public Collection<Timer> timers() {
-        List<BuildQueueRecord> allByUser = buildQueueService.getAllByUser(playerService.getPlayerByLogin("login-1").getId());
+    public Collection timers() {
+        /*List<BuildQueueRecord> allByUser = buildQueueService.getAllByUser(playerService.getPlayerByLogin("login-1").getId());
         Collection<BuildQueueRecord> activeRecords = Collections2.filter(allByUser, new Predicate<BuildQueueRecord>() {
             @Override
             public boolean apply(BuildQueueRecord input) {
                 return input.getStatus() == Status.QUEUED && input.getBuildEnd().isAfterNow();
             }
         });
-        /*return*/ Collections2.transform(activeRecords, new Function<BuildQueueRecord, Timer>() {
+        *//*return*//* Collections2.transform(activeRecords, new Function<BuildQueueRecord, Timer>() {
             @Override
             public Timer apply(BuildQueueRecord input) {
                 return Timer.create().type(input.getType().name().toLowerCase()).buildEndInSeconds(1000L).position(3).get();
@@ -49,63 +54,13 @@ public class BuildController {
         });
         return Arrays.asList(Timer.create().type(Type.BUILDING.name().toLowerCase()).buildEndInSeconds(1000L).position(3).get(),
                 Timer.create().type(Type.BUILDING.name().toLowerCase()).buildEndInSeconds(1000L).position(3).get(),
-        Timer.create().type(Type.RESOURCE_BUILDING.name().toLowerCase()).buildEndInSeconds(1000L).position(3).get());
+        Timer.create().type(Type.RESOURCE_BUILDING.name().toLowerCase()).buildEndInSeconds(1000L).position(3).get());*/
+        return buildService.activeTimers(playerService.getPlayerByLogin("login-1").getId());
     }
 
-    private static class Timer {
-
-        private final String type;
-        private final long buildEndInSeconds;
-        private final int position;
-
-        private Timer(String type, long buildEndInSeconds, int position) {
-            this.type = type;
-            this.buildEndInSeconds = buildEndInSeconds;
-            this.position = position;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public long getBuildEndInSeconds() {
-            return buildEndInSeconds;
-        }
-
-        public int getPosition() {
-            return position;
-        }
-
-        public static Builder create() {
-            return new Builder();
-        }
-
-        private static class Builder {
-
-            private String type;
-            private long buildEndInSeconds;
-            private int position;
-
-            public Builder type(String type) {
-                this.type = type;
-                return this;
-            }
-
-            public Builder buildEndInSeconds(long seconds) {
-                this.buildEndInSeconds = seconds;
-                return this;
-            }
-
-            public Builder position(int position) {
-                this.position = position;
-                return this;
-            }
-
-
-            public Timer get() {
-                return new Timer(type, buildEndInSeconds, position);
-            }
-        }
-
+    @RequestMapping(method = RequestMethod.POST)
+    public HttpEntity build() {
+        buildService.build(1L);
+        return HttpEntity.EMPTY;
     }
 }

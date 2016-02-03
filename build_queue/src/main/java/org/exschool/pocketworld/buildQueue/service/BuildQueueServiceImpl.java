@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by skandy on 03.12.15.
@@ -39,6 +41,14 @@ public class BuildQueueServiceImpl implements BuildQueueService {
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(BuildQueueRecord.class)
                 .add(Property.forName("userId").eq(userId));
         return dao.getAllBy(detachedCriteria);
+    }
+
+    @Override
+    public List<BuildQueueRecord> getAllActiveByUser(Long userId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", userId);
+        params.put("status", Status.QUEUED);
+        return dao.getAllBy("from BuildQueueRecord r where r.userId = :userId and status = :status", params);
     }
 
     /**

@@ -12,6 +12,7 @@ public interface BuildQueueService {
     BuildQueueRecord get(Long id);
     List<BuildQueueRecord> getAll();
     List<BuildQueueRecord> getAllByUser(Long userId);
+    List<BuildQueueRecord> getAllActiveByUser(Long userId);
     BuildQueueRecord save (BuildQueueRecord entity);
     BuildQueueRecord changeStatus(Long id, Status status);
     void delete(BuildQueueRecord entity);

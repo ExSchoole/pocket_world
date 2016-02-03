@@ -1,10 +1,9 @@
 package org.exschool.pocketworld.city.common.service;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
 import org.exschool.pocketworld.buildQueue.model.Status;
 import org.exschool.pocketworld.buildQueue.model.Type;
@@ -17,14 +16,15 @@ import org.exschool.pocketworld.resource.building.service.ResourceBuildingServic
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
  * Created by skandy on 28.01.16.
  */
 
-@Service
-public class CommonCityServiceImpl implements CommonCityService {
+@Component
+public class BuildServiceImpl implements BuildService {
 
     @Autowired
     private BuildQueueService buildQueueService;
@@ -108,4 +108,86 @@ public class CommonCityServiceImpl implements CommonCityService {
     	
     	return false;
     }
+
+	@Override
+	public Collection activeTimers(Long playerId) {
+		List<BuildQueueRecord> activeRecords = buildQueueService.getAllActiveByUser(playerId);
+		Collection<BuildQueueRecord> notBuilt = Collections2.filter(activeRecords, new Predicate<BuildQueueRecord>() {
+			@Override
+			public boolean apply(BuildQueueRecord input) {
+				return input.getBuildEnd().isAfterNow();
+			}
+		});
+		//transform to timers
+		return Arrays.asList(Timer.create().type(Type.BUILDING.name().toLowerCase()).buildEndInSeconds(1000L).position(3).get(),
+				Timer.create().type(Type.BUILDING.name().toLowerCase()).buildEndInSeconds(1000L).position(3).get(),
+				Timer.create().type(Type.RESOURCE_BUILDING.name().toLowerCase()).buildEndInSeconds(1000L).position(3).get());
+	}
+
+	@Override
+	public void buildCompleted(Long playerId) {
+
+	}
+
+	@Override
+	public void build(Long playerId) {
+
+	}
+
+	private static class Timer {
+
+		private final String type;
+		private final long buildEndInSeconds;
+		private final int position;
+
+		private Timer(String type, long buildEndInSeconds, int position) {
+			this.type = type;
+			this.buildEndInSeconds = buildEndInSeconds;
+			this.position = position;
+		}
+
+		public String getType() {
+			return type;
+		}
+
+		public long getBuildEndInSeconds() {
+			return buildEndInSeconds;
+		}
+
+		public int getPosition() {
+			return position;
+		}
+
+		public static Builder create() {
+			return new Builder();
+		}
+
+		private static class Builder {
+
+			private String type;
+			private long buildEndInSeconds;
+			private int position;
+
+			public Builder type(String type) {
+				this.type = type;
+				return this;
+			}
+
+			public Builder buildEndInSeconds(long seconds) {
+				this.buildEndInSeconds = seconds;
+				return this;
+			}
+
+			public Builder position(int position) {
+				this.position = position;
+				return this;
+			}
+
+
+			public Timer get() {
+				return new Timer(type, buildEndInSeconds, position);
+			}
+		}
+
+	}
 }

@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
-public class BuildQueueRecordServiceTest {
+public class BuildQueueRecordServiceImplTest {
     @Autowired
     BuildQueueService buildQueueService;
     @Autowired
@@ -41,21 +41,18 @@ public class BuildQueueRecordServiceTest {
         assertNotNull(savedBuildQueueRecord.getId());
         assertAllFieldsEquals(buildQueueRecord, savedBuildQueueRecord);
     }
+
     @Test
     public void testChangeStatus() {
-        Long existingId =1L;
+        Long existingId = 1L;
         BuildQueueRecord existingRecord = buildQueueService.get(existingId);
-        BuildQueueRecord updatedRecord =buildQueueService.changeStatus(existingId, Status.DONE);
-        assertNotEquals(existingRecord.getStatus(),updatedRecord.getStatus());
-
-
-
-
+        BuildQueueRecord updatedRecord = buildQueueService.changeStatus(existingId, Status.DONE);
+        assertNotEquals(existingRecord.getStatus(), updatedRecord.getStatus());
     }
 
     @Test
     public void testDelete() {
-        Long existingId=2L;
+        Long existingId = 2L;
         BuildQueueRecord existing = buildQueueService.get(existingId);
         assertNotNull(existing);
         buildQueueService.delete(existing);
@@ -65,12 +62,22 @@ public class BuildQueueRecordServiceTest {
 
     @Test
     public void testGetAllByUser() {
-        Long userId=1L;
+        Long userId = 1L;
         List<BuildQueueRecord> existingRecords = buildQueueService.getAllByUser(userId);
-        for (BuildQueueRecord record:existingRecords) {
-            assertEquals(record.getUserId(),userId);
+        for (BuildQueueRecord record : existingRecords) {
+            assertEquals(record.getUserId(), userId);
         }
+    }
 
+    @Test
+    public void testGetActiveByUser() {
+        Long userId = 1L;
+        List<BuildQueueRecord> records = buildQueueService.getAllActiveByUser(userId);
+        assertEquals(records.size(), 2);
+        for (BuildQueueRecord record : records) {
+            assertEquals(record.getStatus(), Status.QUEUED);
+            assertEquals(record.getUserId(), userId);
+        }
 
     }
 
@@ -78,8 +85,8 @@ public class BuildQueueRecordServiceTest {
     public void testDeleteAllByStatus() {
         buildQueueService.deleteAllByStatus(Status.DONE);
         List<BuildQueueRecord> all = buildQueueService.getAll();
-        for (BuildQueueRecord record: all) {
-            assertNotEquals(Status.DONE,record.getStatus());
+        for (BuildQueueRecord record : all) {
+            assertNotEquals(Status.DONE, record.getStatus());
         }
 
     }
@@ -93,7 +100,5 @@ public class BuildQueueRecordServiceTest {
         assertEquals(buildQueueRecord1.getUserId(), buildQueueRecord2.getUserId());
         assertEquals(buildQueueRecord1.getStatus(), buildQueueRecord2.getStatus());
         assertEquals(buildQueueRecord1.getBuildingId(), buildQueueRecord2.getBuildingId());
-
-
     }
 }
