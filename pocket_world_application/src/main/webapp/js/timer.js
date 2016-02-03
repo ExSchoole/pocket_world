@@ -13,3 +13,23 @@ function timer(position, timeLeft, playerName, type) {
         }, 1000);
     }
 }
+//temporary, rename
+function newTimer() {
+
+    this.loadTimers = function () {}
+
+}
+
+function timers(buildingTypeToShow) {
+
+    var self = this;
+
+    self.loadTimers = function() {
+        return $.get("#springUrl('/build/timers')");
+    };
+
+    self.
+    $.when(self.loadTimers()).then(function (timers) {
+
+    })
+}

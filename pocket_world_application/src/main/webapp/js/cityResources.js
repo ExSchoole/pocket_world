@@ -57,18 +57,12 @@ function CityResources(emptyResourcesClassName, resourcesClassName, playerName, 
         //console.log(result);
         return result;
     }
+
+
     function fillAvailableTypes() {
-        $.ajax({
-            url: DICTIONARY.urls.types,
-            dataType: 'json',
-            type: "GET",
-            success: function (types) {
-                availableTypes = availableTypes.concat(types)
-            },
-            error: function (xhr, status, errorThrown) {
-                console.log("Error: " + errorThrown);
-            }
-        })
+        $.when($.get(DICTIONARY.urls.types)).then(function (types) {
+            availableTypes = availableTypes.concat(types);
+        });
     }
 
 }

@@ -1,17 +1,17 @@
-function DragDropBuild(draggableElement,emptyElement,urls,playerName,info,type){
-	 $(function () {
-	    $("." + draggableElement ).draggable({
-	        appendTo: 'body',
-	        helper: 'clone',
-	       	revert: "invalid"
-	    });
+function initBuildingsDragDrop(draggableElement, emptyElement, playerName, info, type) {
+    $(function () {
+        $("." + draggableElement).draggable({
+            appendTo: 'body',
+            helper: 'clone',
+            revert: "invalid"
+        });
 
-	    $("." + emptyElement ).droppable({
-	    	hoverClass: "over",
-	        drop: function( event, ui ) {
-	                    build(emptyElement,urls,ui.draggable,this,playerName, info, type);
-	        },
-	      });
-	 });
-	 
+        $("." + emptyElement).droppable({
+            hoverClass: "over",
+            drop: function (event, ui) {
+                build(emptyElement, ui.draggable, this, playerName, info, type);
+            }
+        });
+    });
+
 }

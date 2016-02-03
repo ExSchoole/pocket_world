@@ -48,12 +48,12 @@
 
 
 <div class="col-md-5">
-         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-3">
-            	#addcarousel($buildingTypes)
-            </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-3">
+            #addcarousel($buildingTypes)
         </div>
+    </div>
 </div>
 #end
 
@@ -70,38 +70,43 @@
 
 
 <script>
-    _.extend(DICTIONARY.urls,{
-		addBuilding : "#springUrl('/city/center/addBuilding')",
-		getBuildingQueue : "#springUrl('/getBuildingQueue')",
-		changeStatus : "#springUrl('/changeStatus')"
-	});
+    _.extend(DICTIONARY.urls, {
+        addBuilding: "#springUrl('/city/center/addBuilding')",
+        getBuildingQueue: "#springUrl('/getBuildingQueue')",
+        changeStatus: "#springUrl('/changeStatus')"
+    });
 
     var buildingTypeToShow = 'building';
 
-    $.when($.get("#springUrl('/build/timers')")).then(function (timers) {
-        var timersByType = _.chain(timers).groupBy(function(timer) {return timer.type}).value();
-        _.each(timersByType[buildingTypeToShow], function(timer) {
-            $( "#"+timer.position ).addClass('clock');
-        } )
+    newTimer().loadTimers().then()
 
-        _.each(timers), function(timer) {
-            //set timer
+    $.when($.get("#springUrl('/build/timers')")).then(function (timers) {
+        var timersByType = _.chain(timers).groupBy(function (timer) {
+            return timer.type
+        }).value();
+        _.each(timersByType[buildingTypeToShow], function (timer) {
+            $("#" + timer.position).addClass('clock');
         })
+
+        _.each(timers), function (timer) {
+            //set timer
+        }
+        )
     })
 
-	var info = new Array();
-		#foreach( $key in $dto.getTimeInfo().entrySet() )
-			info[info.length] = {
-				type : "$key.getKey().getBuildingType().name().toLowerCase()",
-				level : "$key.getKey().getLevel()",
-				time : "$key.getValue()",
-			}
-		#end
+    var info = new Array();
+        #foreach( $key in $dto.getTimeInfo().entrySet() )
+        info[info.length] = {
+            type: "$key.getKey().getBuildingType().name().toLowerCase()",
+            level: "$key.getKey().getLevel()",
+            time: "$key.getValue()",
+        }
+        #end
 
-	initBuildingsDragDrop("building_karusel","building_empty", "$dto.getNickName()", info, 'building');
+    initBuildingsDragDrop("building_karusel", "building_empty", "$dto.getNickName()", info, 'building');
 
-     $(function () {
-	     $("#carouselId").verticalCarousel({nSlots: 3, speed: 900});
-     });
+    $(function () {
+        $("#carouselId").verticalCarousel({nSlots: 3, speed: 900});
+    });
 
 </script> 
