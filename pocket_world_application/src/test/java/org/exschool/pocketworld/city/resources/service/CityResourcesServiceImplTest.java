@@ -1,5 +1,17 @@
 package org.exschool.pocketworld.city.resources.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.service.CityService;
@@ -18,20 +30,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.when;
-
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -44,6 +42,9 @@ public class CityResourcesServiceImplTest {
     Player player;
     @Mock
     ResourceBuildingService resourceBuildingService;
+    @Mock
+    BuildQueueService buildQueueService;
+    
     @InjectMocks
     CityResourcesServiceImpl cityResourcesService = new CityResourcesServiceImpl();
     List<ResourceBuilding> buildings;
@@ -69,7 +70,7 @@ public class CityResourcesServiceImplTest {
                 playerResources.getClayAmount(),
                 playerResources.getCornAmount());
 
-        CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo();
+        CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo(player.getLogin());
 
         assertEquals(cityResourcesDto.getNickName(), "login");
         assertEquals(cityResourcesDto.getResourceDto(), resourceDto);
@@ -82,25 +83,25 @@ public class CityResourcesServiceImplTest {
     @Test
     public void testCreateResourceBuilding() {
         int notExistingPosition = 3;
-        assertTrue(cityResourcesService.createResourceBuilding(new PositionOfBuilding(notExistingPosition, ResourceType.GOLD.name())));
+        assertTrue(cityResourcesService.createResourceBuilding(new PositionOfBuilding(notExistingPosition, ResourceType.GOLD.name(), player.getLogin())));
     }
 
     @Test
     public void testCreateResourceBuilding_cityContainsBuildingAtPosition() {
         int existingPosition = 2;
-        assertFalse(cityResourcesService.createResourceBuilding(new PositionOfBuilding(existingPosition, ResourceType.GOLD.name())));
+        assertFalse(cityResourcesService.createResourceBuilding(new PositionOfBuilding(existingPosition, ResourceType.GOLD.name(), player.getLogin())));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateResourceBuildingNullPlayer() {
         when(playerService.getPlayerByLogin(anyString())).thenReturn(null);
-        cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name()));
+        cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name(), player.getLogin()));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateResourceBuildingNullCity() {
         when(cityService.getCityByPlayerId(anyLong())).thenReturn(null);
-        cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name()));
+        cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name(), player.getLogin()));
     }
 }
 

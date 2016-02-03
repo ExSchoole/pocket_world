@@ -5,17 +5,15 @@ function ajaxCallGetBuildingQueue(playerName, urls, currentType, otherType){
 		   dataType: "json",
 		   data : { playerName: playerName },
 		   success : function(data) {
-			   			var position;
 			   			console.log(data);
-			   			$.each(data[currentType], function(position, time){
-			   				console.log(time);
-			   				$( "#"+'clock'+position ).addClass('clock');
-			   				timer(position, time*1000, playerName, currentType);
+			   			$.each(data[currentType], function(index, object){
+			   				console.log(object['position']);
+			   				console.log(object['time']);
+			   				timer(object['position'], object['time']*1000, playerName,  urls, otherType);
 			   			});
 			   			
-			   			$.each(data[otherType], function(position, time){
-		   					console.log(time);
-		   					timer(position, time*1000, playerName, otherType);
+			   			$.each(data[otherType], function(index, object){		
+		   					timer(object['position'], object['time']*1000, playerName,  urls, otherType);
 		   			});
 		   			 }
 	   });

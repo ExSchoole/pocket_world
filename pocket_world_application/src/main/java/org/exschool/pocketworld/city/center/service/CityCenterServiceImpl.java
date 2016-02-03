@@ -81,20 +81,23 @@ public class CityCenterServiceImpl implements CityCenterService {
             buildingService.save(new Building(PLANT, 1, 3, city.getId()));
             buildingService.save(new Building(MARKETPLACE, 1, 6, city.getId()));
             
-            Building testBuilding = new Building(POOL, 1, 9, city.getId()); 
+            Building testBuilding = new Building(POOL, INITIAL_BUILDING_LEVEL, 9, city.getId()); 
             buildingService.save(testBuilding);
             
             Long buildingTimeMillis = (long) buildingService.getTimeByBuildingTypeLevel(
             		testBuilding.getBuildingType(),
                     1) *1000;
             
-            BuildQueueRecord record = BuildQueueBuilder.builder().name(testBuilding.getBuildingType().name().toLowerCase())
+            BuildQueueRecord record = BuildQueueBuilder.builder()
+            		.position(9)
+            		.name(testBuilding.getBuildingType().name().toLowerCase())
                     .level(1)
                     .type(Type.BUILDING)
                     .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis ))
                     .userId(player.getId())
                     .status(Status.QUEUED)
                     .buildingId(testBuilding.getId()).build();
+                    
             buildQueueService.save(record);
         }
     }
@@ -168,6 +171,7 @@ public class CityCenterServiceImpl implements CityCenterService {
                                                 savedBuilding.getBuildingType(),
                                                 nextLevel) *1000;
         BuildQueueRecord record = BuildQueueBuilder.builder().name(type)
+        		.position(position)
                 .level(nextLevel)
                 .type(Type.BUILDING)
                 .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis ))

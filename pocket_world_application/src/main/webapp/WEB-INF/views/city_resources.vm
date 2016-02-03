@@ -67,9 +67,11 @@
 	var info = new Array();
 	#foreach( $key in $dto.getTimeInfo().entrySet() )
 		info[info.length] = {
-			type : "$key.getKey().getBuildingType().name().toLowerCase()",
-			level : "$key.getKey().getLevel()",
-			time : "$key.getValue()",
+			key : "$key.getValue()",
+			value : {
+					type : "$key.getKey().getBuildingType().name().toLowerCase()",
+					level : "$key.getKey().getLevel()",
+					},
 		}
 	#end
 	

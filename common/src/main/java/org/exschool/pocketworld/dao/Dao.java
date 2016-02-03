@@ -1,5 +1,11 @@
 package org.exschool.pocketworld.dao;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,12 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by kgavrylchenko on 10/23/2015.
@@ -116,6 +116,55 @@ public class Dao {
         LOG.info("Found entity - {}", entity);
         return entity;
     }
+        
+    public void update(String sql0, String sql1, Serializable status, Serializable position, Serializable type, Serializable userId){
+    	/*Transaction transaction = null;
+    	
+    	try{
+    		transaction = currentSession().beginTransaction();
+    		transaction.setTimeout(5);*/
+    		
+    		Query query = currentSession().createSQLQuery(sql0);
+	    	query.setParameter(0, status)
+	    		 .setParameter(1, position)
+	    		 .setParameter(2, type)
+	    		 .setParameter(3, userId)
+	    		 .executeUpdate();
+	    	
+	    	query = currentSession().createSQLQuery(sql1);
+	    	query.setParameter(0, position)
+			 	 .setParameter(1, type)
+			     .setParameter(2, userId)
+			     .executeUpdate();
+	    	
+	    /*	transaction.commit();
+    	}catch(Exception e){
+    		transaction.rollback();
+    	}*/
+    }
+    
+    public void updateAll(String sql0, String sql1, Serializable status, Serializable id, Serializable time){
+    	/*Transaction transaction = null;
+    	
+    	try{
+    		transaction = currentSession().beginTransaction();*/
+    		
+	    	Query query = currentSession().createSQLQuery(sql0);
+	    	query.setParameter(0, status)
+	    		 .setParameter(1, id)
+	    		 .setParameter(2, time)
+	    		 .executeUpdate();
+	    	
+	    	query = currentSession().createSQLQuery(sql1);
+	    	query.setParameter(0, id)
+	    		 .setParameter(1, time)
+	    		 .executeUpdate();
+
+	    /*	transaction.commit();
+    	}catch(Exception e){
+    		transaction.rollback();
+    	}*/
+    }
 
 
     /**
@@ -170,7 +219,6 @@ public class Dao {
         LOG.info("Found entities - {}", entities);
         return entities;
     }
-
 
     protected Session currentSession() {
         return sessionFactory.getCurrentSession();

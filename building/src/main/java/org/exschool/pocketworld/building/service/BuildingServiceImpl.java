@@ -298,7 +298,7 @@ public class BuildingServiceImpl implements BuildingService {
     	    	put(new TimeId(BuildingType.PLANT,2),10);
     	    	put(new TimeId(BuildingType.PLANT,3),15);
     	    	
-    	    	put(new TimeId(BuildingType.POOL,1),20);
+    	    	put(new TimeId(BuildingType.POOL,1),10);
     	    	put(new TimeId(BuildingType.POOL,2),10);
     	    	put(new TimeId(BuildingType.POOL,3),15);
     	    	

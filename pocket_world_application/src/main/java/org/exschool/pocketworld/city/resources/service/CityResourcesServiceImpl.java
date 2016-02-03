@@ -93,10 +93,11 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     @Override
     public boolean createResourceBuilding(final PositionOfBuilding positionOfBuilding) {
         Player player = playerService.getPlayerByLogin(positionOfBuilding.getPlayerName());
-        Long userId = player.getId();
         notNull(player);
         City city = cityService.getCityByPlayerId(player.getId());
         notNull(city);
+        
+        Long userId = player.getId();
         //check position is free
         List<ResourceBuilding> resourceBuildings = resourceBuildingService.allCityResources(city.getId());
         Optional<ResourceBuilding> resourceBuildingAtPosition = Iterables.tryFind(resourceBuildings,
@@ -126,6 +127,7 @@ public class CityResourcesServiceImpl implements CityResourcesService {
                                          nextLevel) *1000;
         
         BuildQueueRecord record = BuildQueueBuilder.builder().name(positionOfBuilding.getType())
+        		.position(positionOfBuilding.getPosition())
                 .level(nextLevel)
                 .type(Type.RESOURCE_BUILDING)
                 .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis ))

@@ -1,6 +1,7 @@
 function timer(position, timeLeft, playerName, urls, type){
 	if (timeLeft<=0){
 		console.log('end');
+		console.log(urls['changeStatus']);
 		$( "#"+'clock'+position ).removeClass( 'clock' );
 		ajaxCallFinishBuild(playerName, position, urls, type);
 		

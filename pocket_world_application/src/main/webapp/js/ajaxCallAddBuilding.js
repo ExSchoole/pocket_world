@@ -17,14 +17,14 @@ function build(classOfEmptyElement, urls, building, position, playerName, info, 
 	                            
 	                            
 	                            console.log($( "#"+selectedPosition ).attr('class'));
-	                            var k = 0;
-	                            while (typeOfSelectedBuilding.localeCompare(info[k].type) != 0 || info[k].level != 1){
-	                            	k++;
-	                            }
+	                            
+	                            $.each(info, function(index, object){
+	                            	if (typeOfSelectedBuilding.localeCompare(object['value']['type']) == 0 &&
+	                            		object['value']['level'] == 1)
+	                            		timer(selectedPosition,object['key']*1000, playerName, urls, type);
+	    			   			});
 	                            
 	                            $("#"+typeOfSelectedBuilding).remove();
-
-    			   				timer(selectedPosition,info[k].time*1000, playerName, urls, type);
     		   			 }
     	   });
 };

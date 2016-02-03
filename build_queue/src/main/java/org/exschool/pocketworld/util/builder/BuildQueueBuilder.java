@@ -19,6 +19,7 @@ public final class BuildQueueBuilder {
     private Long userId;
     private Status status;
     private Long buildingId;
+    private int position;
 
     public static BuildQueueBuilder builder() {
         return new BuildQueueBuilder();
@@ -58,6 +59,10 @@ public final class BuildQueueBuilder {
         this.buildingId=buildingId;
         return this;
     }
+    public BuildQueueBuilder position(int position) {
+        this.position = position;
+        return this;
+    }
 
    public BuildQueueRecord build(){
        BuildQueueRecord buildQueueRecord = new BuildQueueRecord();
@@ -69,6 +74,7 @@ public final class BuildQueueBuilder {
        buildQueueRecord.setUserId(this.userId);
        buildQueueRecord.setStatus(this.status);
        buildQueueRecord.setBuildingId(this.buildingId);
+       buildQueueRecord.setPosition(this.position);
        return buildQueueRecord;
 
     }

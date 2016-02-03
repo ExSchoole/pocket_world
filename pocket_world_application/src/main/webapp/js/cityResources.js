@@ -32,13 +32,13 @@ function CityResources(emptyResourcesClassName, resourcesClassName, urls, player
                     $( "#"+'clock'+position ).addClass( 'clock' );
                     
                     destroyPopover(resourceBuilding);
-                    console.log($( "#"+position ).attr('class'));
-                    var k = 0;
-                    while (type.localeCompare(info[k].type) != 0 || info[k].level != 1){
-                    	k++;
-                    }
-                    console.log(info[k].type,info[k].level,info[k].time);
-                    timer(position,info[k].time*1000, playerName, urls, typeOfBuilding);
+                    
+                    $.each(info, function(index, object){
+                    	if (typeOfSelectedBuilding.localeCompare(object['value']['type']) == 0 &&
+                    		object['value']['level'] == 1)
+                    		timer(position,object['key']*1000, playerName, urls, typeOfBuilding);
+		   			});
+    
                 },
                 error: function (xhr, status, errorThrown) {
                     alert("Error occured:" + errorThrown);

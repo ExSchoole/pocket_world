@@ -1,10 +1,18 @@
 package org.exschool.pocketworld.buildQueue.model;
 
 
-import org.joda.time.DateTime;
-
-import javax.persistence.*;
 import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.joda.time.DateTime;
 
 
 /**
@@ -41,6 +49,8 @@ public class BuildQueueRecord implements Serializable {
 
     @Column(name="building_id")
     private Long buildingId;
+    
+    private int position;
 
     public Long getId() {
         return id;
@@ -152,6 +162,14 @@ public class BuildQueueRecord implements Serializable {
         result = 31 * result + (buildingId != null ? buildingId.hashCode() : 0);
         return result;
     }
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
 
 
 }
