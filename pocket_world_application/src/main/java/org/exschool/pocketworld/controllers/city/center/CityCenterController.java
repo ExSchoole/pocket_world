@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
-import org.exschool.pocketworld.city.common.service.BuildService;
+import org.exschool.pocketworld.city.common.service.build.BuildService;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

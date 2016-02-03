@@ -2,7 +2,7 @@ package org.exschool.pocketworld.controllers;
 
 import java.util.Map;
 
-import org.exschool.pocketworld.city.common.service.BuildService;
+import org.exschool.pocketworld.city.common.service.build.BuildService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

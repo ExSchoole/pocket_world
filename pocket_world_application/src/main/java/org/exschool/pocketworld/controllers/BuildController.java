@@ -1,7 +1,7 @@
 package org.exschool.pocketworld.controllers;
 
 import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
-import org.exschool.pocketworld.city.common.service.BuildService;
+import org.exschool.pocketworld.city.common.service.build.BuildService;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;

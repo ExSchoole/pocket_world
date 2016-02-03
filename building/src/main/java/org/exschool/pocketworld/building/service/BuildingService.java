@@ -21,6 +21,7 @@ public interface BuildingService {
     Building save(Building entity);
     List<Building> getBuildingsByCityId(Long cityId);
     int getTimeByBuildingTypeLevel(BuildingType buildingType, int level);
-    int getResourceByBuildingTypeResourceTypeLevel(BuildingType buildingType, ResourceType resourceType, int level);   
+    int getResourceByBuildingTypeResourceTypeLevel(BuildingType buildingType, ResourceType resourceType, int level);
+    void updateBuildingLevel(long buildingId, int level);
 }
 

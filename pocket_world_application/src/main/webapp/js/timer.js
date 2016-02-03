@@ -35,7 +35,7 @@ function timers(buildingTypeToShow) {
         self.startTimers(timers);
         var timersWithCurrentBuildings = _.filter(timers, new function(timer) {
             return timer.type == buildingTypeToShow;
-        })
+        });
         self.addClocks(timersWithCurrentBuildings)
     })
 }

@@ -3,7 +3,7 @@ package org.exschool.pocketworld.controllers.city.resources;
 import java.util.List;
 import java.util.Map;
 
-import org.exschool.pocketworld.city.common.service.BuildService;
+import org.exschool.pocketworld.city.common.service.build.BuildService;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.resources.service.CityResourcesService;
 import org.exschool.pocketworld.dto.PositionOfBuilding;

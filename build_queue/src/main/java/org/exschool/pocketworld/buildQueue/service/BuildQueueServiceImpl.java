@@ -2,6 +2,7 @@ package org.exschool.pocketworld.buildQueue.service;
 
 import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
 import org.exschool.pocketworld.buildQueue.model.Status;
+import org.exschool.pocketworld.buildQueue.model.Type;
 import org.exschool.pocketworld.dao.Dao;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Property;
@@ -92,4 +93,8 @@ public class BuildQueueServiceImpl implements BuildQueueService {
         }
     }
 
+    @Override
+    public BuildQueueRecord getByPositionAndType(Long playerId, Integer position, Type type) {
+        return null;
+    }
 }

@@ -86,7 +86,12 @@ public class BuildingServiceImpl implements BuildingService {
     		dao.save(new Time(t.getKey(),t.getValue()));
 	}
 
-    /**
+	@Override
+	public void updateBuildingLevel(long buildingId, int level) {
+
+	}
+
+	/**
      * Setter for dao
      *
      * @param dao
