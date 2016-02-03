@@ -1,4 +1,4 @@
-function CityResources(emptyResourcesClassName, resourcesClassName, urls, playerName, info, typeOfBuilding) {
+function CityResources(emptyResourcesClassName, resourcesClassName, playerName, info, typeOfBuilding) {
     var availableTypes = [];
     fillAvailableTypes();
     var variable;
@@ -19,7 +19,7 @@ function CityResources(emptyResourcesClassName, resourcesClassName, urls, player
             var type = $(this).attr('type');
 
             $.ajax({
-                url: urls['buildings'],
+                url: DICTIONARY.urls.buildings,
                 data: JSON.stringify({position: position, type: type, playerName: playerName}),
                 contentType: "application/json",
                 type: "POST",
@@ -38,7 +38,7 @@ function CityResources(emptyResourcesClassName, resourcesClassName, urls, player
                     	k++;
                     }
                     console.log(info[k].type,info[k].level,info[k].time);
-                    timer(position,info[k].time*1000, playerName, urls, typeOfBuilding);
+                    timer(position,info[k].time*1000, playerName, typeOfBuilding);
                 },
                 error: function (xhr, status, errorThrown) {
                     alert("Error occured:" + errorThrown);
@@ -59,7 +59,7 @@ function CityResources(emptyResourcesClassName, resourcesClassName, urls, player
     }
     function fillAvailableTypes() {
         $.ajax({
-            url: urls['types'],
+            url: DICTIONARY.urls.types,
             dataType: 'json',
             type: "GET",
             success: function (types) {
