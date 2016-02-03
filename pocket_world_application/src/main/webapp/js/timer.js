@@ -13,12 +13,6 @@ function timer(position, timeLeft, playerName, type) {
         }, 1000);
     }
 }
-//temporary, rename
-function newTimer() {
-
-    this.loadTimers = function () {}
-
-}
 
 function timers(buildingTypeToShow) {
 
@@ -28,8 +22,20 @@ function timers(buildingTypeToShow) {
         return $.get("#springUrl('/build/timers')");
     };
 
-    self.
-    $.when(self.loadTimers()).then(function (timers) {
+    self.addClocks = function(timers) {
+        _.each(timers, function (timer) {
+            $("#" + timer.position).addClass('clock');
+        })
+    };
 
+    self.startTimers = function(timers) {
+
+    };
+    $.when(self.loadTimers()).then(function (timers) {
+        self.startTimers(timers);
+        var timersWithCurrentBuildings = _.filter(timers, new function(timer) {
+            return timer.type == buildingTypeToShow;
+        })
+        self.addClocks(timersWithCurrentBuildings)
     })
 }

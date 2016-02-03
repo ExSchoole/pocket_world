@@ -78,21 +78,7 @@
 
     var buildingTypeToShow = 'building';
 
-    newTimer().loadTimers().then()
-
-    $.when($.get("#springUrl('/build/timers')")).then(function (timers) {
-        var timersByType = _.chain(timers).groupBy(function (timer) {
-            return timer.type
-        }).value();
-        _.each(timersByType[buildingTypeToShow], function (timer) {
-            $("#" + timer.position).addClass('clock');
-        })
-
-        _.each(timers), function (timer) {
-            //set timer
-        }
-        )
-    })
+    timers(buildingTypeToShow);
 
     var info = new Array();
         #foreach( $key in $dto.getTimeInfo().entrySet() )
