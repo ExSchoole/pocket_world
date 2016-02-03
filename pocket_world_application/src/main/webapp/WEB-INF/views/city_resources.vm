@@ -1,4 +1,5 @@
 #parse("layout/macros.vm")
+#@html()
 #head("City Resources")
 
 #@body()
@@ -45,25 +46,25 @@
     </div>
 
 </div>
-
-<script type="text/javascript" src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
-<script type="text/javascript" src="#springUrl('/js/bootstrap.min.js')"></script>
+<script src="#springUrl('/js/lib/underscore-min.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/lib/jquery-2.1.4.min.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/lib/bootstrap.min.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/cityResources.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/timer.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/dictionary.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/ajaxCalls.js')"></script>
 
 <script type="text/javascript">
-	var urls = {
-		'buildings' : "#springUrl('/city/resources/buildings/')",
-		'types' : "#springUrl('/city/resources/types')",
-		'getBuildingQueue' : "#springUrl('/getBuildingQueue')",
-		'changeStatus' : "#springUrl('/changeStatus')",
-		'types' : "#springUrl('/city/resources/types')"
-	};
+    _.extend(DICTIONARY.urls, {
+		buildings : "#springUrl('/city/resources/buildings/')",
+		getBuildingQueue : "#springUrl('/getBuildingQueue')",
+		changeStatus : "#springUrl('/changeStatus')",
+		types : "#springUrl('/city/resources/types')"
+	});
 
 	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'resource_building', 'building');
-	
+
 	var info = new Array();
 	#foreach( $key in $dto.getTimeInfo().entrySet() )
 		info[info.length] = {
@@ -72,7 +73,8 @@
 			time : "$key.getValue()",
 		}
 	#end
-	
+
     CityResources("building_empty", "building", urls, "$dto.getNickName()", info, 'resource_building');
 </script>
+#end
 #end

@@ -42,6 +42,8 @@ public class BuildQueueRecord implements Serializable {
     @Column(name="building_id")
     private Long buildingId;
 
+    //todo: add position
+
     public Long getId() {
         return id;
     }

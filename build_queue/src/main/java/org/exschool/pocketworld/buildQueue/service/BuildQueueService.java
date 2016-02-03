@@ -2,6 +2,7 @@ package org.exschool.pocketworld.buildQueue.service;
 
 import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
 import org.exschool.pocketworld.buildQueue.model.Status;
+import org.exschool.pocketworld.buildQueue.model.Type;
 
 import java.util.List;
 
@@ -12,9 +13,10 @@ public interface BuildQueueService {
     BuildQueueRecord get(Long id);
     List<BuildQueueRecord> getAll();
     List<BuildQueueRecord> getAllByUser(Long userId);
+    List<BuildQueueRecord> getAllActiveByUser(Long userId);
     BuildQueueRecord save (BuildQueueRecord entity);
     BuildQueueRecord changeStatus(Long id, Status status);
     void delete(BuildQueueRecord entity);
     void deleteAllByStatus(Status status);
-
+    BuildQueueRecord getByPositionAndType(Long playerId, Integer position, Type type);
 }

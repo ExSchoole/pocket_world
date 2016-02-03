@@ -1,11 +1,10 @@
-function ajaxCallGetBuildingQueue(playerName, urls, currentType, otherType){	
+function ajaxCallGetBuildingQueue(playerName, currentType, otherType){
 	$.ajax({
 		   type: 'GET',
-		   url: urls['getBuildingQueue'],
+		   url: DICTIONARY.urls.getBuildingQueue,
 		   dataType: "json",
 		   data : { playerName: playerName },
 		   success : function(data) {
-			   			var position;
 			   			console.log(data);
 			   			$.each(data[currentType], function(position, time){
 			   				console.log(time);
@@ -21,10 +20,10 @@ function ajaxCallGetBuildingQueue(playerName, urls, currentType, otherType){
 	   });
 }
 
-function ajaxCallFinishBuild(playerName, position, urls, type){	
+function ajaxCallFinishBuild(playerName, position, type){
 	$.ajax({
 		   type: 'GET',
-		   url: urls['changeStatus'],
+		   url: DICTIONARY.urls.changeStatus,
 		   dataType: "json",
 		   data : { playerName: playerName, position: position, type: type},
 		   success : function(data) {

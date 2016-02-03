@@ -7,7 +7,7 @@ public class PositionOfBuilding {
 
     public PositionOfBuilding() {}
 
-    public PositionOfBuilding(Integer position, String type, String playerName) {
+    public PositionOfBuilding(Integer position, String type) {
         this.position = position;
         this.type = type;
         this.setPlayerName(playerName);

@@ -3,10 +3,11 @@ package org.exschool.pocketworld.controllers.city.resources;
 import java.util.List;
 import java.util.Map;
 
-import org.exschool.pocketworld.city.common.service.CommonCityService;
+import org.exschool.pocketworld.city.common.service.build.BuildService;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.resources.service.CityResourcesService;
 import org.exschool.pocketworld.dto.PositionOfBuilding;
+import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.model.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,9 @@ public class CityResourcesController {
     @Autowired
     private CityResourcesService cityResourcesService;
     @Autowired
-    private CommonCityService commonCityService;
+    private BuildService buildService;
+    @Autowired
+    private PlayerService playerService;
     
     private static final String PLAYER_NAME = "player-login"; //temporary
 
@@ -36,10 +39,11 @@ public class CityResourcesController {
     public String showCityResources(
             @RequestParam Map<String, String> allRequestParams, Model model) {
         LOGGER.info("Requested params:" + allRequestParams);
+        buildService.buildCompleted(playerService.getPlayerByLogin(PLAYER_NAME).getId());
         CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo(PLAYER_NAME);
         model.addAttribute("dto", cityResourcesDto);
         LOGGER.info("Out:" + model);
-        commonCityService.buildQueuedBuildings(PLAYER_NAME);
+
         return "city_resources";
     }
 

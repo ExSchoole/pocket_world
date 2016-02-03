@@ -69,7 +69,7 @@ public class CityResourcesServiceImplTest {
                 playerResources.getClayAmount(),
                 playerResources.getCornAmount());
 
-        CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo();
+        CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo("");
 
         assertEquals(cityResourcesDto.getNickName(), "login");
         assertEquals(cityResourcesDto.getResourceDto(), resourceDto);

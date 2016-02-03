@@ -6,7 +6,8 @@ import java.util.Set;
 
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
-import org.exschool.pocketworld.city.common.service.CommonCityService;
+import org.exschool.pocketworld.city.common.service.build.BuildService;
+import org.exschool.pocketworld.player.service.PlayerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,9 @@ public class CityCenterController {
     @Autowired
     private CityCenterService cityCenterService;
     @Autowired
-    private CommonCityService commonCityService;
+    private BuildService buildService;
+    @Autowired
+    private PlayerService playerService;
 
     private static final String PLAYER_NAME = "player-login"; //temporary
 
@@ -45,14 +48,13 @@ public class CityCenterController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showCityCenter(
             @RequestParam Map<String, String> allRequestParams, Model model) {
-
         LOGGER.info("Requested params:" + allRequestParams);
+        buildService.buildCompleted(playerService.getPlayerByLogin(PLAYER_NAME).getId());
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo(PLAYER_NAME);
         model.addAttribute("dto", cityCenterDto);
         Set<String> builtBuildingTypes = cityCenterDto.getBuildingTypes();
         model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(builtBuildingTypes));
         LOGGER.info("Out:" + model);
-        commonCityService.buildQueuedBuildings(PLAYER_NAME);
         return "city_center";
     }
 

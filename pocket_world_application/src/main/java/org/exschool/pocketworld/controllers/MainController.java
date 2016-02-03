@@ -2,7 +2,7 @@ package org.exschool.pocketworld.controllers;
 
 import java.util.Map;
 
-import org.exschool.pocketworld.city.common.service.CommonCityService;
+import org.exschool.pocketworld.city.common.service.build.BuildService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MainController {
 
 	@Autowired
-    private CommonCityService commonCityService;
+    private BuildService buildService;
 	
 	private static final String PLAYER_NAME = "player-login"; //temporary
 	
@@ -27,13 +27,13 @@ public class MainController {
     @RequestMapping(value = "/getBuildingQueue", method = RequestMethod.GET)	
     @ResponseBody
     public Map<String, Map<Integer,Integer>> getBuildingQueue(@RequestParam String playerName) { 
-    	return commonCityService.getQueuedBuildings(PLAYER_NAME);
+    	return buildService.getQueuedBuildings(PLAYER_NAME);
     }
     
     @RequestMapping(value = "/changeStatus", method = RequestMethod.GET)	
     @ResponseBody
     public void getBuildingQueue(@RequestParam String playerName, int position, String type){ 
     	System.out.println(playerName+" "+position+" "+type);
-    	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+commonCityService.changeStatus(playerName, position, type));
+    	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+ buildService.changeStatus(playerName, position, type));
     }
 }
