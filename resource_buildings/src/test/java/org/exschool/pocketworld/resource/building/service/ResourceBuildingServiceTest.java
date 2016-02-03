@@ -3,6 +3,7 @@ package org.exschool.pocketworld.resource.building.service;
 import org.exschool.pocketworld.config.TestSpringConfig;
 import org.exschool.pocketworld.dao.Dao;
 import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
+import org.exschool.pocketworld.resource.model.ResourceType;
 import org.exschool.pocketworld.util.builder.ResourceBuildingBuilder;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by manoylo on 20.11.15.
@@ -33,6 +35,14 @@ public class ResourceBuildingServiceTest {
     public void before() {
         bootstrap.fillDatabase();
 
+    }
+    @Test
+    public void testCreateResourceBuilding() {
+        Long cityId = 11L;
+        int position = 55;
+        int level = 49;
+        Long createdResourceBuilding = buildingService.createResourceBuilding(cityId, ResourceType.CLAY,position,level);
+        assertNotNull(createdResourceBuilding);
     }
 
     @Test

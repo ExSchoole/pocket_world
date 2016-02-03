@@ -1,6 +1,7 @@
 package org.exschool.pocketworld.building.service;
 
 import org.exschool.pocketworld.building.model.Building;
+import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.config.TestSpringConfig;
 import org.exschool.pocketworld.dao.Dao;
 import org.exschool.pocketworld.util.builder.BuildingBuilder;
@@ -30,6 +31,15 @@ public class BuildingServiceTest {
     public void before() {
         bootstrap.fillDatabase();
 
+    }
+
+    @Test
+    public void testCreateBuildingForPopulator() {
+        Long cityId= 111L;
+        int position = 22;
+        int level = 33;
+        Long createBuilding = buildingService.createBuilding(cityId,BuildingType.FARM,position,level);
+        assertNotNull(createBuilding);
     }
 
     @Test

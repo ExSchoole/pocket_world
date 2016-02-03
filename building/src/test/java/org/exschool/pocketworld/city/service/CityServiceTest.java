@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.*;
@@ -35,6 +36,15 @@ public class CityServiceTest {
     @AfterClass
     public static void afterClass() {
         CityBootstrap.savedCitiesIds.clear();
+    }
+
+    @Test
+    public void testCreateCityForPopulator() {
+        String cityName = "City111";
+        Long cityId = 111L;
+        Long createdCityId = cityService.createCity(cityId,cityName);
+        assertNotNull(createdCityId);
+        assertEquals(cityId,createdCityId);
     }
 
     @Test

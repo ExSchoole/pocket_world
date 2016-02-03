@@ -34,6 +34,16 @@ public class PlayerServiceTest {
     }
 
     @Test
+    public void testCreatePlayerForPopulator() {
+        String playerlogin = "testLogin";
+        PlayerResources playerresources = new PlayerResources(1, 1, 1, 1);
+        playerService.createPlayer(playerlogin,playerresources);
+        Player createdPlayer = playerService.getPlayerByLogin(playerlogin);
+        assertNotNull(createdPlayer);
+        assertNotNull(createdPlayer.getId());
+    }
+
+    @Test
     public void testCreate() {
         String login = "test-login";
         Player player = PlayerBuilder.builder().login(login).build();

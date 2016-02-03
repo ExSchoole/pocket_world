@@ -73,7 +73,6 @@ public class Populator {
         }
 
         if (!buildingService.isBuildingExist(city3Id, 5)) {
-            //createBuilding(city3Id, BuildingType.BARN, 5, 0);
             buildingService.createBuilding(city3Id, BuildingType.BARN, 5, 0);
         }
         if (!buildingService.isBuildingExist(city3Id, 6)) {
