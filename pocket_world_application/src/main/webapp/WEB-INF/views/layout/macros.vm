@@ -29,7 +29,7 @@
              <div class="vertical-carousel-container">
                       <ul class="vertical-carousel-list" id ="vertical-carousel-list_id">
                           #foreach($building in $buildings)
-                                  <li id="$building"><div class="building_$building building"/></li>
+                                  <li id="building_$building"><div id="$building" class="building_$building building building_karusel cursor"/></li>
                           #end
                        </ul>
                     </div>
@@ -41,9 +41,9 @@
     #set($building = false)
     #set($building = ${buildings.get($position)})
     #if(  $building  )
-        <div class="building_$building.getType() building_position building"></div>
+        <div class="building_$building.getType() building_position building" id=$position></div>
     #else
-        <div class="building_position building_empty"></div>
+        <div class="building_position building_empty" id=$position></div>
     #end
 #end
 

@@ -1,26 +1,80 @@
 package org.exschool.pocketworld.city.resources.dto;
 
 
-import org.exschool.pocketworld.resource.ResourceDto;
-import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
-
 import java.util.Map;
+
+import org.exschool.pocketworld.building.ResourceBuildingDto;
+import org.exschool.pocketworld.resource.ResourceDto;
+import org.exschool.pocketworld.resource.building.model.BuildingResourceId;
+import org.exschool.pocketworld.resource.building.model.ProductionId;
+import org.exschool.pocketworld.resource.building.model.TimeId;
+import org.exschool.pocketworld.resource.model.ResourceType;
 
 public class CityResourcesDto {
 
-    private Map<Integer, ResourceBuilding> resourceBuildings;
-    private ResourceDto resourceDto;
+	private Map<Integer, ResourceBuildingDto> resourceBuildings;
+	private Map<BuildingResourceId, Integer> resourceInfo;
+    private Map<TimeId, Integer> timeInfo;
+    private Map<ProductionId, Integer> productionInfo;
+    public Map<BuildingResourceId, Integer> getResourceInfo() {
+		return resourceInfo;
+	}
+
+	private ResourceDto resourceDto;
     private String nickName;
 
     public CityResourcesDto() {
     }
 
-    public CityResourcesDto(Map<Integer, ResourceBuilding> buildings, ResourceDto resourceDto, String nickName) {
-        this.resourceDto = resourceDto;
+    public CityResourcesDto(Map<Integer, ResourceBuildingDto> buildings, Map<BuildingResourceId, Integer> resourceInfo,
+    						Map<TimeId, Integer> timeInfo, 
+    						Map<ProductionId, Integer> productionInfo, 
+    						ResourceDto resourceDto, String nickName) {
+    	this.resourceDto = resourceDto;
         this.nickName = nickName;
         this.resourceBuildings = buildings;
     }
 
+	public int getProductionByBuildingTypeLevel(ResourceType buildingType, int level) {
+		return productionInfo.get(new ProductionId(buildingType,level));
+	}
+	
+	public int getTimeByBuildingTypeLevel(String buildingType, int level) {
+		return timeInfo.get(new TimeId(ResourceType.valueOf(buildingType.toUpperCase()),level));
+	}
+
+	public ResourceDto getResourcesByBuildingTypeLevel(String stringBuildingType, 
+													   int level) {
+	  ResourceDto resourceDto = new ResourceDto();
+	  ResourceType buildingType=ResourceType.valueOf(stringBuildingType.toUpperCase());
+	  resourceDto.setClay(resourceInfo.get(new BuildingResourceId(buildingType, ResourceType.CLAY, level)));
+	  resourceDto.setGold(resourceInfo.get(new BuildingResourceId(buildingType, ResourceType.GOLD, level)));
+	  resourceDto.setCorn(resourceInfo.get(new BuildingResourceId(buildingType, ResourceType.CORN, level)));
+	  resourceDto.setTimber(resourceInfo.get(new BuildingResourceId(buildingType, ResourceType.TIMBER, level)));
+		
+	  return resourceDto;
+	}
+	
+	public void setResourceInfo(Map<BuildingResourceId, Integer> resourceInfo) {
+		this.resourceInfo = resourceInfo;
+	}
+
+	public Map<TimeId, Integer> getTimeInfo() {
+		return timeInfo;
+	}
+
+	public void setTimeInfo(Map<TimeId, Integer> timeInfo) {
+		this.timeInfo = timeInfo;
+	}
+
+	public Map<ProductionId, Integer> getProductionInfo() {
+		return productionInfo;
+	}
+
+	public void setProductionInfo(Map<ProductionId, Integer> productionInfo) {
+		this.productionInfo = productionInfo;
+	}
+    
     public String getNickName() {
         return nickName;
     }
@@ -29,11 +83,11 @@ public class CityResourcesDto {
         this.nickName = nickName;
     }
 
-    public Map<Integer, ResourceBuilding> getResourceBuildings() {
+    public Map<Integer, ResourceBuildingDto> getResourceBuildings() {
         return resourceBuildings;
     }
 
-    public void setResourceBuildings(Map<Integer, ResourceBuilding> resourceBuildings) {
+    public void setResourceBuildings(Map<Integer, ResourceBuildingDto> resourceBuildings) {
         this.resourceBuildings = resourceBuildings;
     }
 
@@ -44,4 +98,5 @@ public class CityResourcesDto {
     public ResourceDto getResourceDto() {
         return resourceDto;
     }
+    
 }

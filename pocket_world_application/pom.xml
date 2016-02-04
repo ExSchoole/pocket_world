@@ -41,8 +41,9 @@
     </build>
 
     <properties>
-        <building.version>1.0.0</building.version>
-        <resource_buildings.version>1.0.1</resource_buildings.version>
+        <building.version>1.0.2</building.version>
+        <resource_buildings.version>1.0.2</resource_buildings.version>
+        <build_queue.version>0.0.1</build_queue.version>
     </properties>
 
     <dependencies>
@@ -60,6 +61,11 @@
             <groupId>org.exschool</groupId>
             <artifactId>resource_buildings</artifactId>
             <version>${resource_buildings.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.exschool</groupId>
+            <artifactId>build_queue</artifactId>
+            <version>${build_queue.version}</version>
         </dependency>
     </dependencies>
 

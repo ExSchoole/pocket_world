@@ -1,14 +1,14 @@
 
 div#carouselId{
     position: relative;
-    top:50px;
+    top:120px;
     left:30px;
 }
 
 .vertical-carousel {
 background-color: #EEE;
 padding: 10px;
-width:200px;
+width: 190px;
 }
 
 .vertical-carousel a {

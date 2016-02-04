@@ -11,8 +11,17 @@ public class Time {
     @EmbeddedId
     private TimeId timeId;
 
-    private int time;
+    private Integer time;
 
+    public Time(){
+    	
+    }
+    
+    public Time(TimeId timeId, int time){
+    	this.timeId = timeId;
+    	this.time = time;
+    }
+    
     public int getTime() {
         return time;
     }

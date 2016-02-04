@@ -15,10 +15,6 @@ public class PlayerServiceImpl implements PlayerService {
     @Autowired
     private Dao dao;
 
-    public void setDao(Dao dao) {
-        this.dao = dao;
-    }
-
     @Override
     public void savePlayer(Player player) {
         dao.save(player);
@@ -29,6 +25,10 @@ public class PlayerServiceImpl implements PlayerService {
         DetachedCriteria query = DetachedCriteria.forClass(Player.class);
         query.add(Restrictions.eq("login", login));
         return dao.getBy(query);
+    }
+
+    public void setDao(Dao dao){
+        this.dao = dao;
     }
 
 }
