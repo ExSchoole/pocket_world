@@ -2,11 +2,7 @@ function CityResources(emptyResourcesClassName, resourcesClassName, addResources
 
     var availableTypes = [];
     fillAvailableTypes();
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
-    $(document).ajaxSend(function(e, xhr, options) {
-        xhr.setRequestHeader(header, token);
-    });
+    includeCSRFToken();
     $(function () {
         $("."+emptyResourcesClassName).click(function (event) {
             event.preventDefault();

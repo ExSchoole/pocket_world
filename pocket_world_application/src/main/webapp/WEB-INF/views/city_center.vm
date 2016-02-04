@@ -64,6 +64,7 @@
 <script src="#springUrl('/js/DragDrop.js')"></script>
 <script src="#springUrl('/js/ajaxCallAddBuilding.js')"></script>
 <script src="#springUrl('/js/jquery.verticalCarousel.js')"></script>
+<script src="#springUrl('/js/csrfTokens.js')"></script>
 
 <script>
 	DragDropBuild("building_karusel","building_empty", "#springUrl('/city/center/addBuilding')","$dto.getNickName()");
