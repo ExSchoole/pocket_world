@@ -72,8 +72,6 @@
      $(function () {
 	     $("#carouselId").verticalCarousel({nSlots: 3, speed: 900});
      });
-    
-    levelUpBuilding("#springUrl('/city/center/')","$dto.getNickName()");
-   
-       
+     levelUpBuilding("#springUrl('/city/center/')","$dto.getNickName()");
+     
 </script> 

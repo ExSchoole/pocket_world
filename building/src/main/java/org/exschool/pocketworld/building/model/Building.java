@@ -98,7 +98,7 @@ public class Building {
     }
 
 	public void levelUp() {
-		level++;
+		this.level++;
 		
 	}
 }

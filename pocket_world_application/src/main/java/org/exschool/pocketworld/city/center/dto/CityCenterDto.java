@@ -40,13 +40,12 @@ public class CityCenterDto {
     }
 
     
-    public int getTimeByBuildingTypeLevel(String buildingType, int level) {
-    	  return  timeInfo.get(new TimeId(BuildingType.valueOf(buildingType.toUpperCase()),level));
-    	 }
+	public int getTimeByBuildingTypeLevel(BuildingType buildingType, int level) {
+		return  timeInfo.get(new TimeId(buildingType,level));
+	}
 	
-	public ResourceDto getResourceByBuildingTypeResourceTypeLevel(String strBuildingType, int level) {
+	public ResourceDto getResourceByBuildingTypeResourceTypeLevel(BuildingType buildingType, int level) {
 	  ResourceDto resourceDto = new ResourceDto();
-	  BuildingType buildingType=BuildingType.valueOf(strBuildingType.toUpperCase());
 	  resourceDto.setClay(resourceInfo.get(new BuildingResourceId(buildingType, ResourceType.CLAY, level)));
 	  resourceDto.setGold(resourceInfo.get(new BuildingResourceId(buildingType, ResourceType.GOLD, level)));
 	  resourceDto.setCorn(resourceInfo.get(new BuildingResourceId(buildingType, ResourceType.CORN, level)));

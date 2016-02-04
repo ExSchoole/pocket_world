@@ -1,10 +1,12 @@
 package org.exschool.pocketworld.controllers.city.center;
 
+
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.building.service.BuildingService;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
+import org.exschool.pocketworld.city.common.service.CommonCityService;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.service.CityService;
 import org.exschool.pocketworld.player.model.Player;
@@ -31,13 +33,14 @@ public class CityCenterController {
     @Autowired
     private CityCenterService cityCenterService;
     @Autowired
+    private CommonCityService commonCityService;
+    @Autowired
     private BuildingService buildingService;
     @Autowired
     private PlayerService playerService;
     @Autowired
     private CityService cityService;
-    
-    
+
     private static final String PLAYER_NAME = "player-login"; //temporary
 
     @RequestMapping(value = "/addBuilding", method = RequestMethod.POST)
@@ -107,10 +110,11 @@ public class CityCenterController {
         Set<String> builtBuildingTypes = cityCenterDto.getBuildingTypes();
         model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(builtBuildingTypes));
         LOGGER.info("Out:" + model);
+        commonCityService.buildQueuedBuildings(PLAYER_NAME);
         return "city_center";
     }
 
-    public void setCityCenterService(CityCenterService cityCenterService) {
+     public void setCityCenterService(CityCenterService cityCenterService) {
         this.cityCenterService = cityCenterService;
     }
 

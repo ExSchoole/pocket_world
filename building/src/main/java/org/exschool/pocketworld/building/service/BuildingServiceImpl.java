@@ -58,19 +58,7 @@ public class BuildingServiceImpl implements BuildingService {
     public Building get(long id) {
         return dao.get(Building.class, id);
     }
-    /**
-     * Returns building by position and city id
-     *
-     * @param cityId,position
-     * @return Building object
-     */
-    @Override
-    public Building getByCityIdPosition(Long cityId,int position) {
-    	DetachedCriteria query = DetachedCriteria.forClass(Building.class);
-    	query.add(Restrictions.eq("cityId", cityId));
-    	query.add(Restrictions.eq("position", position));
-        return dao.getBy(query);
-    }
+
 
     @Override
     public List<Building> getBuildingsByCityId(Long cityId) {
@@ -327,5 +315,19 @@ public class BuildingServiceImpl implements BuildingService {
     	    	put(new TimeId(BuildingType.TOWNHALL,3),15);
         	};
     	};
-    };
+    }
+
+	/**
+     * Returns building by position and city id
+     *
+     * @param cityId,position
+     * @return Building object
+     */
+    @Override
+    public Building getByCityIdPosition(Long cityId,int position) {
+    	DetachedCriteria query = DetachedCriteria.forClass(Building.class);
+    	query.add(Restrictions.eq("cityId", cityId));
+    	query.add(Restrictions.eq("position", position));
+        return dao.getBy(query);
+    }
 }

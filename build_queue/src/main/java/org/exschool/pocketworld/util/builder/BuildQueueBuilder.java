@@ -3,8 +3,9 @@ package org.exschool.pocketworld.util.builder;
 import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
 import org.exschool.pocketworld.buildQueue.model.Status;
 import org.exschool.pocketworld.buildQueue.model.Type;
+import org.joda.time.DateTime;
 
-import java.util.Date;
+
 
 /**
  * Created by skandy on 07.12.15.
@@ -14,7 +15,7 @@ public final class BuildQueueBuilder {
     private String name;
     private int level;
     private Type type;
-    private Date buildEnd;
+    private DateTime buildEnd;
     private Long userId;
     private Status status;
     private Long buildingId;
@@ -41,7 +42,7 @@ public final class BuildQueueBuilder {
         this.type = type;
         return this;
     }
-    public BuildQueueBuilder buildEnd(Date buildEnd) {
+    public BuildQueueBuilder buildEnd(DateTime buildEnd) {
         this.buildEnd=buildEnd;
         return this;
     }
