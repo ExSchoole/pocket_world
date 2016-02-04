@@ -17,14 +17,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
-
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.authorizeRequests()
-                .antMatchers("/city/**").access("hasRole('ROLE_USER')")
+                .antMatchers("/city/**").authenticated()
                 .and().formLogin().defaultSuccessUrl("/city/center/", true);
 
     }
