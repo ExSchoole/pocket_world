@@ -41,10 +41,10 @@ public class CityServiceTest {
     @Test
     public void testCreateCityForPopulator() {
         String cityName = "City111";
-        Long cityId = 111L;
-        Long createdCityId = cityService.createCity(cityId,cityName);
+        Long playerId = 111L;
+        cityService.createCity(playerId,cityName);
+        Long createdCityId = cityService.getCityId(playerId);
         assertNotNull(createdCityId);
-        assertEquals(cityId,createdCityId);
     }
 
     @Test
