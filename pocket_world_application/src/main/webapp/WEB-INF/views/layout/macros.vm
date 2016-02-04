@@ -9,6 +9,7 @@
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<!-- default header name is X-CSRF-TOKEN -->
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
+	<script type="text/javascript" src="#springUrl('/js/csrfTokens.js')"></script>
     </head>
 #end
 

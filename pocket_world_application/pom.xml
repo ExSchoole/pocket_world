@@ -47,6 +47,7 @@
         <json-path.version>2.1.0</json-path.version>
         <guava.version>18.0</guava.version>
         <build_queue.version>0.0.1</build_queue.version>
+        <spring.security.version>4.0.3.RELEASE</spring.security.version>
     </properties>
 
     <dependencies>
@@ -91,6 +92,23 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
         </dependency>
     </dependencies>
 
