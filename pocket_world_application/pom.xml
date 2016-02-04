@@ -32,7 +32,7 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/pocket-world</path>
-                    <port>8080</port>
+                    <port>8081</port>
                     <contextReloadable>true</contextReloadable>
                 </configuration>
                 <executions></executions>

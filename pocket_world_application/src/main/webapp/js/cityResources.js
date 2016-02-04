@@ -2,7 +2,7 @@ function CityResources(emptyResourcesClassName, resourcesClassName, addResources
 
     var availableTypes = [];
     fillAvailableTypes();
-    includeCSRFToken();
+
     $(function () {
         $("."+emptyResourcesClassName).click(function (event) {
             event.preventDefault();

@@ -1,7 +1,7 @@
 function build(classOfEmptyElement, url, building, position, playerName) {
     var typeOfSelectedBuilding = $(building).attr("id");
     var selectedPosition = $(position).attr("id");
-    includeCSRFToken();
+
     $.ajax({
         type: 'POST',
         url: url,

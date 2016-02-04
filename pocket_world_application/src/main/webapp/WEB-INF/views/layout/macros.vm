@@ -9,19 +9,24 @@
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<!-- default header name is X-CSRF-TOKEN -->
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
-	<script type="text/javascript" src="#springUrl('/js/csrfTokens.js')"></script>
+    <script type="text/javascript" src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
+    <script type="text/javascript" src="#springUrl('/js/bootstrap.min.js')"></script>
+    <script type="text/javascript" src="#springUrl('/js/csrfTokens.js')"></script>
+    <script type="text/javascript">
+        includeCSRFToken()
+    </script>
     </head>
 #end
 
 #macro(html)
-   <!DOCTYPE html>
-   <html>
-        $!bodyContent
+<!DOCTYPE html>
+<html>
+       $!bodyContent
    </html>
 #end
 
 #macro(body)
-    <body>
+<body>
     <div class="container">
         $!bodyContent
     </div>
