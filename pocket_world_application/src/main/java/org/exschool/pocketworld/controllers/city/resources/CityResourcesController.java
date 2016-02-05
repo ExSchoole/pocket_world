@@ -54,13 +54,19 @@ public class CityResourcesController {
     @ResponseBody
     public ResponseEntity<Void> createResourceBuilding(@RequestBody PositionOfBuilding positionOfBuilding) {
         LOGGER.info("RequestBody:" + positionOfBuilding);
-        if (cityResourcesService.createResourceBuilding(positionOfBuilding)) {
+        if (cityResourcesService.createResourceBuilding(positionOfBuilding, PLAYER_NAME)) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
+    @RequestMapping(value = "/timeInfo", method = RequestMethod.GET)	
+    @ResponseBody
+    public int getTimeInfo(@RequestParam String type, @RequestParam int level){ 
+     	return cityResourcesService.getTimeInfo(type.toUpperCase(), level);
+    }
+    
     public void setCityResourcesService(CityResourcesService cityResourcesService) {
         this.cityResourcesService = cityResourcesService;
     }

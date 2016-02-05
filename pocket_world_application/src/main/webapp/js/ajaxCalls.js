@@ -1,4 +1,4 @@
-function ajaxCallGetBuildingQueue(playerName, urls, currentType, otherType){	
+function ajaxCallGetBuildingQueue(playerName, urls, currentType){	
 	$.ajax({
 		   type: 'GET',
 		   url: urls['getBuildingQueue'],
@@ -6,15 +6,12 @@ function ajaxCallGetBuildingQueue(playerName, urls, currentType, otherType){
 		   data : { playerName: playerName },
 		   success : function(data) {
 			   			console.log(data);
-			   			$.each(data[currentType], function(index, object){
-			   				console.log(object['position']);
-			   				console.log(object['time']);
-			   				timer(object['position'], object['time']*1000, playerName,  urls, otherType);
+			   			$.each(data, function(index, object){
+			   				timer(object['position'], object['time']*1000, playerName,  urls, object['type']);
+			   				
+			   				if (currentType.localeCompare(object['type']) == 0)
+			   					$( "#"+'clock'+object['position'] ).addClass('clock');
 			   			});
-			   			
-			   			$.each(data[otherType], function(index, object){		
-		   					timer(object['position'], object['time']*1000, playerName,  urls, otherType);
-		   			});
 		   			 }
 	   });
 }
@@ -29,4 +26,18 @@ function ajaxCallFinishBuild(playerName, position, urls, type){
 			   			console.log('success');
 		   			 }
 	   });
+}
+
+function ajaxCallGetTimeInfo(type, level, selectedPosition, playerName, urls, globalType){
+	$.ajax({
+		   type: 'GET',
+		   url: urls['timeInfo'],
+		   data : {type: type, level: level},
+		   success : function(data) {
+			   			console.log('success');
+			   			console.log(data);
+			   			timer(selectedPosition,data*1000, playerName, urls,globalType);
+		   			 }
+	   });
+	
 }

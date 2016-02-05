@@ -1,4 +1,4 @@
-function CityResources(emptyResourcesClassName, resourcesClassName, urls, playerName, info, typeOfBuilding) {
+function CityResources(emptyResourcesClassName, resourcesClassName, urls, playerName, typeOfBuilding) {
     var availableTypes = [];
     fillAvailableTypes();
     var variable;
@@ -20,7 +20,7 @@ function CityResources(emptyResourcesClassName, resourcesClassName, urls, player
 
             $.ajax({
                 url: urls['buildings'],
-                data: JSON.stringify({position: position, type: type, playerName: playerName}),
+                data: JSON.stringify({position: position, type: type}),
                 contentType: "application/json",
                 type: "POST",
                 success: function (json) {
@@ -33,11 +33,7 @@ function CityResources(emptyResourcesClassName, resourcesClassName, urls, player
                     
                     destroyPopover(resourceBuilding);
                     
-                    $.each(info, function(index, object){
-                    	if (typeOfSelectedBuilding.localeCompare(object['value']['type']) == 0 &&
-                    		object['value']['level'] == 1)
-                    		timer(position,object['key']*1000, playerName, urls, typeOfBuilding);
-		   			});
+                    ajaxCallGetTimeInfo(type, 1, position, playerName, urls,  typeOfBuilding);
     
                 },
                 error: function (xhr, status, errorThrown) {

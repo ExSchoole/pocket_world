@@ -35,6 +35,7 @@ import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
 import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -93,11 +94,14 @@ public class CityCenterServiceImpl implements CityCenterService {
             		.name(testBuilding.getBuildingType().name().toLowerCase())
                     .level(1)
                     .type(Type.BUILDING)
-                    .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis ))
+                    .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis )
+                    					.withZone(DateTimeZone.UTC).toDate())
                     .userId(player.getId())
                     .status(Status.QUEUED)
                     .buildingId(testBuilding.getId()).build();
                     
+            System.out.println("TIME: ");
+            
             buildQueueService.save(record);
         }
     }
@@ -174,7 +178,8 @@ public class CityCenterServiceImpl implements CityCenterService {
         		.position(position)
                 .level(nextLevel)
                 .type(Type.BUILDING)
-                .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis ))
+                .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis )
+                					.withZone(DateTimeZone.UTC).toDate())
                 .userId(userId)
                 .status(Status.QUEUED)
                 .buildingId(savedBuilding.getId()).build();
@@ -182,6 +187,10 @@ public class CityCenterServiceImpl implements CityCenterService {
         return true;
     }
 
+    public int getTimeInfo(String type, int level){
+    	return buildingService.getTimeByBuildingTypeLevel(BuildingType.valueOf(type), level);
+    }
+    
     private static Map<Integer, BuildingDto> buildingDtosByPosition(List<Building> buildingsFromDataBase) {
         Map<Integer, BuildingDto> buildingsDto = new HashMap<>();
         for (Building b : buildingsFromDataBase) {

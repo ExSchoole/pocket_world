@@ -2,6 +2,7 @@ package org.exschool.pocketworld.buildQueue.model;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.joda.time.DateTime;
 
 
 /**
@@ -37,8 +36,7 @@ public class BuildQueueRecord implements Serializable {
     private Type type;
 
     @Column(name="build_end")
-    @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime buildEnd;
+    private Date buildEnd;
 
     @Column(name="user_id")
     private Long userId;
@@ -84,11 +82,11 @@ public class BuildQueueRecord implements Serializable {
         this.type = type;
     }
 
-    public DateTime getBuildEnd() {
+    public Date getBuildEnd() {
         return buildEnd;
     }
 
-    public void setBuildEnd(DateTime buildEnd) {
+    public void setBuildEnd(Date buildEnd) {
         this.buildEnd = buildEnd;
     }
 
@@ -120,7 +118,7 @@ public class BuildQueueRecord implements Serializable {
     }
 
     public BuildQueueRecord(
-           Long id, String name, int level, Type type, DateTime buildEnd, Long userId, Status status, Long buildingId){
+           Long id, String name, int level, Type type, Date buildEnd, Long userId, Status status, Long buildingId){
         this.id = id;
         this.name = name;
         this.level = level;

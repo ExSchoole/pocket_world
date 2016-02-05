@@ -15,7 +15,7 @@ public interface BuildQueueService {
     List<BuildQueueRecord> getAllByUser(Long userId);
     void updateStatus(Status status, int buildingPosition, String type, Long userId);
     void updateAll(Status newStatus, Long userId, Type type);
-    List<BuildQueueRecord> getAllByUserStatusType(Long id, Status status, Type type);
+    List<BuildQueueRecord> getAllByUserStatus(Long id, Status status);
     BuildQueueRecord save (BuildQueueRecord entity);
     BuildQueueRecord changeStatus(Long id, Status status);
     void delete(BuildQueueRecord entity);

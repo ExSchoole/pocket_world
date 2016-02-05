@@ -14,6 +14,7 @@ import org.exschool.pocketworld.buildQueue.model.Status;
 import org.exschool.pocketworld.buildQueue.model.Type;
 import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.building.ResourceBuildingDto;
+import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.resources.builder.CityResourcesDtoBuilder;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
@@ -34,6 +35,7 @@ import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
 import org.exschool.pocketworld.util.builder.ResourceBuildingBuilder;
 import org.exschool.pocketworld.util.builder.UserCityBuilder;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -91,8 +93,8 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     }
 
     @Override
-    public boolean createResourceBuilding(final PositionOfBuilding positionOfBuilding) {
-        Player player = playerService.getPlayerByLogin(positionOfBuilding.getPlayerName());
+    public boolean createResourceBuilding(final PositionOfBuilding positionOfBuilding, String playerName) {
+        Player player = playerService.getPlayerByLogin(playerName);
         notNull(player);
         City city = cityService.getCityByPlayerId(player.getId());
         notNull(city);
@@ -130,7 +132,8 @@ public class CityResourcesServiceImpl implements CityResourcesService {
         		.position(positionOfBuilding.getPosition())
                 .level(nextLevel)
                 .type(Type.RESOURCE_BUILDING)
-                .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis ))
+                .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis )
+                					.withZone(DateTimeZone.UTC).toDate())
                 .userId(userId)
                 .status(Status.QUEUED)
                 .buildingId(resourceBuilding.getId()).build();
@@ -160,6 +163,10 @@ public class CityResourcesServiceImpl implements CityResourcesService {
             }
         }
         // -- end temporary
+    }
+    
+    public int getTimeInfo(String type, int level){
+    	return resourceBuildingService.getTimeByBuildingTypeLevel(ResourceType.valueOf(type), level);
     }
 
     private static Map<BuildingResourceId, Integer> getResourceInfo(Map<BuildingResourceId, Integer> resourcesInfo) {

@@ -6,5 +6,6 @@ import org.exschool.pocketworld.dto.PositionOfBuilding;
 public interface CityResourcesService {
     CityResourcesDto cityResourcesInfo(String playerName);
 
-    boolean createResourceBuilding(PositionOfBuilding positionOfBuilding);
+    boolean createResourceBuilding(PositionOfBuilding positionOfBuilding, String playerName);
+    int getTimeInfo(String type, int level);
 }

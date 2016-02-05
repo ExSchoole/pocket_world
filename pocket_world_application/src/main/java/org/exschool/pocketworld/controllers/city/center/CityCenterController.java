@@ -4,6 +4,8 @@ package org.exschool.pocketworld.controllers.city.center;
 import java.util.Map;
 import java.util.Set;
 
+import org.exschool.pocketworld.building.model.BuildingType;
+import org.exschool.pocketworld.building.service.BuildingService;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
 import org.exschool.pocketworld.city.common.service.CommonCityService;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -58,6 +61,12 @@ public class CityCenterController {
 
      public void setCityCenterService(CityCenterService cityCenterService) {
         this.cityCenterService = cityCenterService;
+    }
+     
+    @RequestMapping(value = "/timeInfo", method = RequestMethod.GET)	
+    @ResponseBody
+    public int getTimeInfo(@RequestParam String type, @RequestParam int level){ 
+     	return cityCenterService.getTimeInfo(type.toUpperCase(), level);
     }
 
 }

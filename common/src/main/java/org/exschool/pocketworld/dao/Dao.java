@@ -117,55 +117,13 @@ public class Dao {
         return entity;
     }
         
-    public void update(String sql0, String sql1, Serializable status, Serializable position, Serializable type, Serializable userId){
-    	/*Transaction transaction = null;
-    	
-    	try{
-    		transaction = currentSession().beginTransaction();
-    		transaction.setTimeout(5);*/
+    public void update(String sql, List<Serializable> parametrs){    		
+    	Query query = currentSession().createSQLQuery(sql);
+    	for (int i=0; i<parametrs.size(); i++)
+    		query.setParameter(i, parametrs.get(i));
     		
-    		Query query = currentSession().createSQLQuery(sql0);
-	    	query.setParameter(0, status)
-	    		 .setParameter(1, position)
-	    		 .setParameter(2, type)
-	    		 .setParameter(3, userId)
-	    		 .executeUpdate();
-	    	
-	    	query = currentSession().createSQLQuery(sql1);
-	    	query.setParameter(0, position)
-			 	 .setParameter(1, type)
-			     .setParameter(2, userId)
-			     .executeUpdate();
-	    	
-	    /*	transaction.commit();
-    	}catch(Exception e){
-    		transaction.rollback();
-    	}*/
+    	query.executeUpdate();
     }
-    
-    public void updateAll(String sql0, String sql1, Serializable status, Serializable id, Serializable time){
-    	/*Transaction transaction = null;
-    	
-    	try{
-    		transaction = currentSession().beginTransaction();*/
-    		
-	    	Query query = currentSession().createSQLQuery(sql0);
-	    	query.setParameter(0, status)
-	    		 .setParameter(1, id)
-	    		 .setParameter(2, time)
-	    		 .executeUpdate();
-	    	
-	    	query = currentSession().createSQLQuery(sql1);
-	    	query.setParameter(0, id)
-	    		 .setParameter(1, time)
-	    		 .executeUpdate();
-
-	    /*	transaction.commit();
-    	}catch(Exception e){
-    		transaction.rollback();
-    	}*/
-    }
-
 
     /**
      * Return the persistent instances of the given entity class which meet given parameters,

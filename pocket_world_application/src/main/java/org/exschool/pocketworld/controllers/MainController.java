@@ -3,6 +3,8 @@ package org.exschool.pocketworld.controllers;
 import java.util.List;
 import java.util.Map;
 
+import org.exschool.pocketworld.building.model.BuildingType;
+import org.exschool.pocketworld.building.service.BuildingService;
 import org.exschool.pocketworld.city.common.service.CommonCityService;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +30,13 @@ public class MainController {
 
     @RequestMapping(value = "/getBuildingQueue", method = RequestMethod.GET)	
     @ResponseBody
-    public Map<String, List<TimeOfBuilding>> getBuildingQueue(@RequestParam String playerName) { 
+    public List<TimeOfBuilding> getBuildingQueue(@RequestParam String playerName) { 
     	return commonCityService.getQueuedBuildings(PLAYER_NAME);
     }
     
     @RequestMapping(value = "/changeStatus", method = RequestMethod.GET)	
     @ResponseBody
-    public void getBuildingQueue(@RequestParam String playerName, int position, String type){ 
+    public void changeStatus(@RequestParam String playerName, int position, String type){ 
     	commonCityService.changeStatus(playerName, position, type);
     }
 }

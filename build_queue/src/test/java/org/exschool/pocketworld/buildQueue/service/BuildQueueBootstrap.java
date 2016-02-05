@@ -22,9 +22,9 @@ public class BuildQueueBootstrap {
     private volatile boolean bootstraped = false;
     public void fillDatabase(){
         if(bootstraped) return;
-        BuildQueueRecord buildQueueRecord1 = BuildQueueBuilder.builder().id(1L).name("testname1").level(1).type(Type.BUILDING).buildEnd(new DateTime(System.currentTimeMillis())).userId(1L).status(Status.QUEUED).buildingId(1L).build();
-        BuildQueueRecord buildQueueRecord2 = BuildQueueBuilder.builder().id(2L).name("testname2").level(1).type(Type.RESOURCE_BUILDING).buildEnd(new DateTime(System.currentTimeMillis())).userId(2L).status(Status.QUEUED).buildingId(2L).build();
-        BuildQueueRecord buildQueueRecord3 = BuildQueueBuilder.builder().id(3L).name("testname3").level(1).type(Type.BUILDING).buildEnd(new DateTime(System.currentTimeMillis())).userId(3L).status(Status.DONE).buildingId(3L).build();
+        BuildQueueRecord buildQueueRecord1 = BuildQueueBuilder.builder().id(1L).name("testname1").level(1).type(Type.BUILDING).buildEnd(new DateTime(System.currentTimeMillis()).toDate()).userId(1L).status(Status.QUEUED).buildingId(1L).build();
+        BuildQueueRecord buildQueueRecord2 = BuildQueueBuilder.builder().id(2L).name("testname2").level(1).type(Type.RESOURCE_BUILDING).buildEnd(new DateTime(System.currentTimeMillis()).toDate()).userId(2L).status(Status.QUEUED).buildingId(2L).build();
+        BuildQueueRecord buildQueueRecord3 = BuildQueueBuilder.builder().id(3L).name("testname3").level(1).type(Type.BUILDING).buildEnd(new DateTime(System.currentTimeMillis()).toDate()).userId(3L).status(Status.DONE).buildingId(3L).build();
         dao.saveAll(Arrays.asList(buildQueueRecord1, buildQueueRecord2, buildQueueRecord3));
         bootstraped=true;
     }

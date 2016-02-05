@@ -1,5 +1,8 @@
 package org.exschool.pocketworld.buildQueue.service;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -73,33 +76,45 @@ public class BuildQueueServiceImpl implements BuildQueueService {
 
     
     @Override
-    public List<BuildQueueRecord> getAllByUserStatusType(Long userId, Status status, Type type) {
+    public List<BuildQueueRecord> getAllByUserStatus(Long userId, Status status) {
     	DetachedCriteria detachedCriteria = DetachedCriteria.forClass(BuildQueueRecord.class)
                 .add(Property.forName("userId").eq(userId))
-    			.add(Property.forName("status").eq(status))
-    			.add(Property.forName("type").eq(type));
+    			.add(Property.forName("status").eq(status));
     	    	
     	 return dao.getAllBy(detachedCriteria);
     }
 
     @Override
     public void updateAll(Status status, Long userId, Type type){
-    	String sqlUpdateStatus = String.format("UPDATE buildqueue SET status=? FROM %s "
-				+ "WHERE buildqueue.building_id = id AND buildqueue.user_id=? AND buildqueue.build_end<?", type.name());
-    	String sqlUpdateLevel = String.format("UPDATE %s SET level=buildqueue.level FROM buildqueue "
+    	String sqlUpdateStatus = String.format("UPDATE buildqueue SET status=? "
+    			+ "FROM %s "
+				+ "WHERE buildqueue.building_id = id AND buildqueue.user_id=? "
+				+ "AND buildqueue.build_end<?", type.name());
+    	String sqlUpdateLevel = String.format("UPDATE %s SET level=buildqueue.level "
+    			+ "FROM buildqueue "
     			+"WHERE buildqueue.building_id = id AND user_id=? AND buildqueue.build_end<?", type.name());
     	
-    	dao.updateAll(sqlUpdateStatus, sqlUpdateLevel, status.name(), userId, new Date());
+    	List<Serializable> parametrs = new ArrayList<Serializable>(Arrays.asList(status.name(), userId, 
+    										new Date()));
+    	System.out.println("TIME: "+parametrs.get(2));
+    	dao.update(sqlUpdateStatus, parametrs);
+    	parametrs.remove(0);
+    	dao.update(sqlUpdateLevel, parametrs);
     }
     
     @Override
     public void updateStatus(Status status, int buildingPosition, String type, Long userId){
     	String sqlUpdateStatus = String.format("UPDATE buildqueue SET status=? FROM %s "
-				+ "WHERE buildqueue.building_id = id AND position=?  AND buildqueue.build_type=? AND buildqueue.user_id=?", type);
+				+ "WHERE buildqueue.building_id = id AND buildqueue.position=?  "
+				+ "AND buildqueue.build_type=? AND buildqueue.user_id=?", type);
     	String sqlUpdateLevel = String.format("UPDATE %s SET level=buildqueue.level FROM buildqueue "
-    			+"WHERE buildqueue.building_id = id AND position=? AND buildqueue.build_type=? AND user_id=?", type);
-    	
-    	dao.update(sqlUpdateStatus, sqlUpdateLevel, status.name(), buildingPosition, type.toUpperCase(), userId);
+    			+"WHERE buildqueue.building_id = id AND buildqueue.position=? "
+    			+ "AND buildqueue.build_type=? AND buildqueue.user_id=?", type);
+    	List<Serializable> parametrs = new ArrayList<Serializable>(Arrays.asList(status.name(), 
+    								   buildingPosition, type.toUpperCase(), userId));
+    	dao.update(sqlUpdateStatus, parametrs);
+    	parametrs.remove(0);
+    	dao.update(sqlUpdateLevel,parametrs);
     }
     
     @Override

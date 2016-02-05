@@ -11,6 +11,6 @@ import org.exschool.pocketworld.dto.TimeOfBuilding;
  */
 public interface CommonCityService {
     void buildQueuedBuildings(String playerName);
-    Map<String, List<TimeOfBuilding>> getQueuedBuildings(String playerName);
-    boolean changeStatus(String playerName, int position, String type);
+    List<TimeOfBuilding> getQueuedBuildings(String playerName);
+    void changeStatus(String playerName, int position, String type);
 }

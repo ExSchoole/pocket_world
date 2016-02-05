@@ -62,19 +62,8 @@
 		'types' : "#springUrl('/city/resources/types')"
 	};
 
-	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'resource_building', 'building');
+	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'resource_building');
 	
-	var info = new Array();
-	#foreach( $key in $dto.getTimeInfo().entrySet() )
-		info[info.length] = {
-			key : "$key.getValue()",
-			value : {
-					type : "$key.getKey().getBuildingType().name().toLowerCase()",
-					level : "$key.getKey().getLevel()",
-					},
-		}
-	#end
-	
-    CityResources("building_empty", "building", urls, "$dto.getNickName()", info, 'resource_building');
+    CityResources("building_empty", "building", urls, "$dto.getNickName()", 'resource_building');
 </script>
 #end

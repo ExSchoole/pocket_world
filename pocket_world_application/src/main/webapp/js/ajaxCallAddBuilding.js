@@ -1,4 +1,4 @@
-function build(classOfEmptyElement, urls, building, position, playerName, info, type){
+function build(classOfEmptyElement, urls, building, position, playerName, type){
     var typeOfSelectedBuilding = $(building).attr("id");
     var selectedPosition = $(position).attr("id");
 
@@ -18,11 +18,7 @@ function build(classOfEmptyElement, urls, building, position, playerName, info, 
 	                            
 	                            console.log($( "#"+selectedPosition ).attr('class'));
 	                            
-	                            $.each(info, function(index, object){
-	                            	if (typeOfSelectedBuilding.localeCompare(object['value']['type']) == 0 &&
-	                            		object['value']['level'] == 1)
-	                            		timer(selectedPosition,object['key']*1000, playerName, urls, type);
-	    			   			});
+	                            ajaxCallGetTimeInfo(typeOfSelectedBuilding, 1, selectedPosition, playerName, urls, type);
 	                            
 	                            $("#"+typeOfSelectedBuilding).remove();
     		   			 }
