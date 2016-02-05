@@ -57,10 +57,7 @@
 </div> 
 #end
 
-
-<script src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
 <script src="#springUrl('/js/jquery-ui.min.js')"></script>
-<script src="#springUrl('/js/bootstrap.min.js')"></script>
 <script src="#springUrl('/js/DragDrop.js')"></script>
 <script src="#springUrl('/js/ajaxCalls.js')"></script>
 <script src="#springUrl('/js/ajaxCallAddBuilding.js')"></script>
