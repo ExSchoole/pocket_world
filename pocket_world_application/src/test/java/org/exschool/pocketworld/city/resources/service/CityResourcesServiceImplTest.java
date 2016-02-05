@@ -83,25 +83,25 @@ public class CityResourcesServiceImplTest {
     @Test
     public void testCreateResourceBuilding() {
         int notExistingPosition = 3;
-        assertTrue(cityResourcesService.createResourceBuilding(new PositionOfBuilding(notExistingPosition, ResourceType.GOLD.name(), player.getLogin())));
+        assertTrue(cityResourcesService.createResourceBuilding(new PositionOfBuilding(notExistingPosition, ResourceType.GOLD.name()), player.getLogin()));
     }
 
     @Test
     public void testCreateResourceBuilding_cityContainsBuildingAtPosition() {
         int existingPosition = 2;
-        assertFalse(cityResourcesService.createResourceBuilding(new PositionOfBuilding(existingPosition, ResourceType.GOLD.name(), player.getLogin())));
+        assertFalse(cityResourcesService.createResourceBuilding(new PositionOfBuilding(existingPosition, ResourceType.GOLD.name()), player.getLogin()));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateResourceBuildingNullPlayer() {
         when(playerService.getPlayerByLogin(anyString())).thenReturn(null);
-        cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name(), player.getLogin()));
+        cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name()), player.getLogin());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateResourceBuildingNullCity() {
         when(cityService.getCityByPlayerId(anyLong())).thenReturn(null);
-        cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name(), player.getLogin()));
+        cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name()), player.getLogin());
     }
 }
 

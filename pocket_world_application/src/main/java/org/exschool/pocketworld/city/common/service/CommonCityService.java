@@ -1,9 +1,7 @@
 package org.exschool.pocketworld.city.common.service;
 
 import java.util.List;
-import java.util.Map;
 
-import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
 
 /**

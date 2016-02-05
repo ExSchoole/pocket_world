@@ -1,10 +1,7 @@
 package org.exschool.pocketworld.controllers;
 
 import java.util.List;
-import java.util.Map;
 
-import org.exschool.pocketworld.building.model.BuildingType;
-import org.exschool.pocketworld.building.service.BuildingService;
 import org.exschool.pocketworld.city.common.service.CommonCityService;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
 import org.springframework.beans.factory.annotation.Autowired;

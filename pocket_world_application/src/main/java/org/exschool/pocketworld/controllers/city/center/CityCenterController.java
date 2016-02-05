@@ -4,8 +4,6 @@ package org.exschool.pocketworld.controllers.city.center;
 import java.util.Map;
 import java.util.Set;
 
-import org.exschool.pocketworld.building.model.BuildingType;
-import org.exschool.pocketworld.building.service.BuildingService;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
 import org.exschool.pocketworld.city.common.service.CommonCityService;

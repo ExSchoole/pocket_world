@@ -35,8 +35,13 @@ public class CommonCityServiceImpl implements CommonCityService {
     
     public List<TimeOfBuilding> getQueuedBuildings(String playerName){	
     	List<TimeOfBuilding> currentQueue = new ArrayList<>(); 
-    	for (BuildQueueRecord r : buildQueueService.getAllByUserStatus(playerService.getPlayerByLogin(playerName).getId(),Status.QUEUED)){
-    		currentQueue.add(new TimeOfBuilding(r.getPosition(),Seconds.secondsBetween(new DateTime(System.currentTimeMillis()), new DateTime(r.getBuildEnd())).getSeconds(), r.getType().name().toLowerCase()));
+    	for (BuildQueueRecord r : buildQueueService.getAllByUserStatus(
+    							  playerService.getPlayerByLogin(playerName).getId(),
+    							  Status.QUEUED)){
+    		currentQueue.add(new TimeOfBuilding(r.getPosition(),Seconds.secondsBetween(
+    						 new DateTime(System.currentTimeMillis()), 
+    						 new DateTime(r.getBuildEnd())).getSeconds(), 
+    						 r.getType().name().toLowerCase()));
     	}	
     	return currentQueue;
     }
