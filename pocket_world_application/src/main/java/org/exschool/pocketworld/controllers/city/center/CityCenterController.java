@@ -21,8 +21,7 @@ public class CityCenterController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CityCenterController.class);
     @Autowired
     private CityCenterService cityCenterService;
-/*    @Autowired
-    private PlayerService playerService;*/
+
     private String playerLogin="test-user";
 
     @RequestMapping(value = "/populate")

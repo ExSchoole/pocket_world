@@ -19,6 +19,6 @@ public interface BuildingService {
 
     Boolean isBuildingExist(Long cityId, Integer position);
 
-    public Long createBuilding(Long cityId, BuildingType buildingType, int position, int level);
+    Long createBuilding(Long cityId, BuildingType buildingType, int position, int level);
 }
 

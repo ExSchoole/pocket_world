@@ -28,7 +28,7 @@ public class BuildingServiceImpl implements BuildingService {
     @Autowired
     private Dao dao;
 
-    //@Override
+    @Override
     public Long createBuilding(Long cityId, BuildingType buildingType, int position, int level) {
         Building building = BuildingBuilder.builder()
                 .buildingType(buildingType)
