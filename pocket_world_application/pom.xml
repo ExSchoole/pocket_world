@@ -41,8 +41,8 @@
     </build>
 
     <properties>
-        <building.version>1.0.2</building.version>
-        <resource_buildings.version>1.0.2</resource_buildings.version>
+        <building.version>1.0.3</building.version>
+        <resource_buildings.version>1.0.3</resource_buildings.version>
         <jackson.version>2.6.3</jackson.version>
         <json-path.version>2.1.0</json-path.version>
         <guava.version>18.0</guava.version>
