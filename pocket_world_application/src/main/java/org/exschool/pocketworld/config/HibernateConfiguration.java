@@ -1,7 +1,5 @@
 package org.exschool.pocketworld.config;
 
-import java.util.Properties;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +11,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import java.util.Properties;
 
 
 @Configuration
@@ -29,11 +29,11 @@ public class HibernateConfiguration {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(
-        		new String[]{"org.exschool.pocketworld.player.model",
-        					"org.exschool.pocketworld.city.model",
-        					"org.exschool.pocketworld.building.model",
-                            "org.exschool.pocketworld.resource.building.model",
-                            "org.exschool.pocketworld.buildQueue.model"});
+                "org.exschool.pocketworld.player.model",
+                "org.exschool.pocketworld.city.model",
+                "org.exschool.pocketworld.building.model",
+                "org.exschool.pocketworld.resource.building.model",
+                "org.exschool.pocketworld.buildQueue.model");
         sessionFactory.setHibernateProperties(additionalProperties());
         return sessionFactory;
     }
