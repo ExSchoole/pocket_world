@@ -46,11 +46,9 @@
 
 </div>
 
-<script type="text/javascript" src="#springUrl('/js/jquery-2.1.4.min.js')"></script>
-<script type="text/javascript" src="#springUrl('/js/bootstrap.min.js')"></script>
+
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/cityResources.js')"></script>
-
 <script type="text/javascript">
     CityResources("building_empty", "building", "#springUrl('/city/resources/buildings/')", "#springUrl('/city/resources/types')");
 </script>
