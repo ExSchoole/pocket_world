@@ -10,7 +10,7 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showCity() {
-        return "redirect:/city/center/";
+        return "redirect:/login";
     }
 
 }

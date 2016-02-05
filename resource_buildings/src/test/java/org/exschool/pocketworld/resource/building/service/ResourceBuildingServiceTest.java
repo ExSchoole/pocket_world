@@ -1,6 +1,12 @@
 package org.exschool.pocketworld.resource.building.service;
 
 import org.exschool.pocketworld.config.TestSpringConfig;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
+import org.exschool.pocketworld.config.TestSpringConfig;
 import org.exschool.pocketworld.dao.Dao;
 import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
 import org.exschool.pocketworld.resource.model.ResourceType;
@@ -34,7 +40,7 @@ public class ResourceBuildingServiceTest {
     @Before
     public void before() {
         bootstrap.fillDatabase();
-
+        buildingService.saveAllInformation();
     }
     @Test
     public void testCreateResourceBuilding() {
@@ -52,6 +58,11 @@ public class ResourceBuildingServiceTest {
         assertNotNull(savedBuilding);
         assertNotNull(savedBuilding.getId());
         assertAllFieldsEquals(building, savedBuilding);
+    }
+
+    @Test
+    public void testAllBuildings() {
+        assertEquals(bootstrap.getBuildings(),buildingService.allBuildings());
     }
 
     @Test
@@ -79,9 +90,24 @@ public class ResourceBuildingServiceTest {
 
     @Test
     public void allCityBuildings() {
-        List<ResourceBuilding> existingBuildings = buildingService.allCityBuildings(5L);
+        List<ResourceBuilding> existingBuildings = buildingService.allCityResources(5L);
         assertNotNull(existingBuildings);
         assertNotNull(existingBuildings.get(0));
+    }
+
+    @Test
+    public void testGetResourcesByBuildingTypeLevel(){
+    	assertNotNull(buildingService.getResourcesByBuildingTypeLevel(ResourceType.CLAY, ResourceType.CORN, 1));
+    }
+
+    @Test
+    public void testGetTimeByBuildingTypeLevel(){
+    	assertNotNull(buildingService.getTimeByBuildingTypeLevel(ResourceType.GOLD, 2));
+    }
+
+    @Test
+    public void testGetProductionByBuildingTypeLevel(){
+    	assertNotNull(buildingService.getProductionByBuildingTypeLevel(ResourceType.TIMBER, 3));
     }
 
     @Test

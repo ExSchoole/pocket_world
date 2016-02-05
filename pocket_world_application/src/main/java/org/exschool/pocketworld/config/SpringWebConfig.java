@@ -1,11 +1,15 @@
 package org.exschool.pocketworld.config;
 
 import org.apache.velocity.app.event.implement.IncludeRelativePath;
+import org.exschool.pocketworld.buildQueue.model.Status;
+import org.exschool.pocketworld.schedule.ScheduleJob;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.scheduling.quartz.*;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -23,6 +27,7 @@ import java.util.Map;
 @EnableWebMvc
 @Configuration
 @ComponentScan({"org.exschool.pocketworld.controllers"})
+@Import({ SpringSecurityConfig.class })
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Override
@@ -83,5 +88,35 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         localeChangeInterceptor = new LocaleChangeInterceptor();
         localeChangeInterceptor.setParamName("lang");
         return localeChangeInterceptor;
+    }
+    //quartz beans
+
+    @Bean
+    public JobDetailFactoryBean jobDetailFactoryBean(){
+        JobDetailFactoryBean factory = new JobDetailFactoryBean();
+        factory.setJobClass(ScheduleJob.class);
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("status", Status.DONE);
+        factory.setJobDataAsMap(map);
+        factory.setGroup("schedule");
+        factory.setName("deleteAllByStatus");
+        return factory;
+    }
+    @Bean
+    public CronTriggerFactoryBean cronTriggerFactoryBean(){
+        CronTriggerFactoryBean stFactory = new CronTriggerFactoryBean();
+        stFactory.setJobDetail(jobDetailFactoryBean().getObject());
+        stFactory.setStartDelay(60000);
+        stFactory.setName("cronTrigger");
+        stFactory.setGroup("schedule");
+        stFactory.setCronExpression("0 0 12 * * ?");
+        return stFactory;
+    }
+
+    @Bean
+    public SchedulerFactoryBean schedulerFactoryBean() {
+        SchedulerFactoryBean scheduler = new SchedulerFactoryBean();
+        scheduler.setTriggers(cronTriggerFactoryBean().getObject());
+        return scheduler;
     }
 }

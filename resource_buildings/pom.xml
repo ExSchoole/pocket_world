@@ -10,6 +10,9 @@
     <packaging>jar</packaging>
     <version>1.0.2</version>
 
+    <properties>
+        <jackson.version>1.5.3</jackson.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.exschool</groupId>
@@ -17,6 +20,4 @@
             <version>${common.version}</version>
         </dependency>
     </dependencies>
-
-
 </project>

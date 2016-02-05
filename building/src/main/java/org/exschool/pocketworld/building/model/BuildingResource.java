@@ -2,15 +2,26 @@ package org.exschool.pocketworld.building.model;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "BuildingInformation")
 public class BuildingResource {
 
 	@EmbeddedId
 	private BuildingResourceId buildingResourceId;
 	private int amount;
 
+	public BuildingResource(){
+		
+	}
+	
+	public BuildingResource(BuildingResourceId buildingResourceId, int amount){
+		this.buildingResourceId = buildingResourceId;
+		this.amount = amount;
+	}
+	
 	public BuildingResourceId getBuildingResourceId() {
 		return buildingResourceId;
 	}
