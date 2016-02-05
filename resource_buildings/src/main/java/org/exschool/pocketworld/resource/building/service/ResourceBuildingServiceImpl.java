@@ -221,7 +221,6 @@ public class ResourceBuildingServiceImpl implements ResourceBuildingService {
 
             ;
         };
-<<<<<<< HEAD
       
         TIME_RESOURCE_BUILDINGS_INFO = new HashMap<TimeId, Integer>(){
         	{	  
@@ -265,8 +264,6 @@ public class ResourceBuildingServiceImpl implements ResourceBuildingService {
             ;
         };
 
-    }
-
-    ;
+    };
 
 }
