@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.Assert;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.config.TestSpringConfig;
@@ -77,7 +78,9 @@ public class BuildingServiceTest {
 
     @Test
     public void testAllBuildings() {
-        assertEquals(bootstrap.getBuildings(),buildingService.allBuildings());
+        List<Building> buildings = buildingService.allBuildings();
+        assertNotNull(buildings);
+        assertFalse(buildings.size() == 0);
     }
 
     @Test

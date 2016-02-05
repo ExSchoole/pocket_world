@@ -50,8 +50,8 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Long getPlayerId(String login) {
-        return getPlayerByLogin(login) != null?
-                getPlayerByLogin(login).getId():
+        return getPlayerByLogin(login) != null ?
+                getPlayerByLogin(login).getId() :
                 null;
     }
 

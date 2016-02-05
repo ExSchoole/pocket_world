@@ -1,12 +1,6 @@
 package org.exschool.pocketworld.resource.building.service;
 
 import org.exschool.pocketworld.config.TestSpringConfig;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.util.List;
-
-import org.exschool.pocketworld.config.TestSpringConfig;
 import org.exschool.pocketworld.dao.Dao;
 import org.exschool.pocketworld.resource.building.model.ResourceBuilding;
 import org.exschool.pocketworld.resource.model.ResourceType;
@@ -22,7 +16,6 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by manoylo on 20.11.15.
@@ -42,12 +35,13 @@ public class ResourceBuildingServiceTest {
         bootstrap.fillDatabase();
         buildingService.saveAllInformation();
     }
+
     @Test
     public void testCreateResourceBuilding() {
         Long cityId = 11L;
         int position = 55;
         int level = 49;
-        Long createdResourceBuilding = buildingService.createResourceBuilding(cityId, ResourceType.CLAY,position,level);
+        Long createdResourceBuilding = buildingService.createResourceBuilding(cityId, ResourceType.CLAY, position, level);
         assertNotNull(createdResourceBuilding);
     }
 
@@ -62,7 +56,9 @@ public class ResourceBuildingServiceTest {
 
     @Test
     public void testAllBuildings() {
-        assertEquals(bootstrap.getBuildings(),buildingService.allBuildings());
+        List<ResourceBuilding> resourceBuildings = buildingService.allBuildings();
+        assertNotNull(resourceBuildings);
+        assertFalse(resourceBuildings.size() == 0);
     }
 
     @Test
@@ -96,18 +92,18 @@ public class ResourceBuildingServiceTest {
     }
 
     @Test
-    public void testGetResourcesByBuildingTypeLevel(){
-    	assertNotNull(buildingService.getResourcesByBuildingTypeLevel(ResourceType.CLAY, ResourceType.CORN, 1));
+    public void testGetResourcesByBuildingTypeLevel() {
+        assertNotNull(buildingService.getResourcesByBuildingTypeLevel(ResourceType.CLAY, ResourceType.CORN, 1));
     }
 
     @Test
-    public void testGetTimeByBuildingTypeLevel(){
-    	assertNotNull(buildingService.getTimeByBuildingTypeLevel(ResourceType.GOLD, 2));
+    public void testGetTimeByBuildingTypeLevel() {
+        assertNotNull(buildingService.getTimeByBuildingTypeLevel(ResourceType.GOLD, 2));
     }
 
     @Test
-    public void testGetProductionByBuildingTypeLevel(){
-    	assertNotNull(buildingService.getProductionByBuildingTypeLevel(ResourceType.TIMBER, 3));
+    public void testGetProductionByBuildingTypeLevel() {
+        assertNotNull(buildingService.getProductionByBuildingTypeLevel(ResourceType.TIMBER, 3));
     }
 
     @Test

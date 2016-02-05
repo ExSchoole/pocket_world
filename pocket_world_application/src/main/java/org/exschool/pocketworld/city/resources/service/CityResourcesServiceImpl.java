@@ -113,7 +113,7 @@ public class CityResourcesServiceImpl implements CityResourcesService {
         return true;
     }
 
-    @PostConstruct
+//    @PostConstruct
     public void afterInitialization() {
         // -- temporary
         String playerLogin = "login-1";

@@ -14,8 +14,8 @@ import javax.annotation.PostConstruct;
 
 @Component
 public class Populator {
-        @Autowired
-        private BuildingService buildingService;
+    @Autowired
+    private BuildingService buildingService;
 
     @Autowired
     private PlayerService playerService;
@@ -47,13 +47,13 @@ public class Populator {
 
         Long city1Id = cityService.isCityExist(player1Id) ?
                 cityService.getCityId(player1Id) :
-                cityService.createCity(player1Id,"First 1");
+                cityService.createCity(player1Id, "First 1");
         Long city2Id = cityService.isCityExist(player2Id) ?
                 cityService.getCityId(player2Id) :
-                cityService.createCity(player2Id,"Second  2");
+                cityService.createCity(player2Id, "Second  2");
         Long city3Id = cityService.isCityExist(player3Id) ?
                 cityService.getCityId(player3Id) :
-                cityService.createCity(player1Id,"Third  3");
+                cityService.createCity(player1Id, "Third  3");
 
         if (!buildingService.isBuildingExist(city1Id, 1)) {
             buildingService.createBuilding(city1Id, BuildingType.BARN, 1, 0);

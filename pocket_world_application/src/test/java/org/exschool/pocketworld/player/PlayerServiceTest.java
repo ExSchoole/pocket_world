@@ -8,9 +8,6 @@ import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.junit.Before;
 import org.junit.Test;
-import org.exschool.pocketworld.player.builder.PlayerBuilder;
-import org.exschool.pocketworld.player.service.PlayerServiceImpl;
-import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -40,7 +37,7 @@ public class PlayerServiceTest {
     public void testCreatePlayerForPopulator() {
         String playerlogin = "testLogin";
         PlayerResources playerresources = new PlayerResources(1, 1, 1, 1);
-        playerService.createPlayer(playerlogin,playerresources);
+        playerService.createPlayer(playerlogin, playerresources);
         Player createdPlayer = playerService.getPlayerByLogin(playerlogin);
         assertNotNull(createdPlayer);
         assertNotNull(createdPlayer.getId());
@@ -61,7 +58,7 @@ public class PlayerServiceTest {
         String existingPlayerLogin = "login-2";
         Player existingPlayer = playerService.getPlayerByLogin(existingPlayerLogin);
         assertNotNull(existingPlayer);
-        existingPlayer.setPlayerResources(new PlayerResources(90,80,70,60));
+        existingPlayer.setPlayerResources(new PlayerResources(90, 80, 70, 60));
         playerService.savePlayer(existingPlayer);
         Player savedPlayer = playerService.getPlayerByLogin(existingPlayerLogin);
         assertTrue(savedPlayer.equals(existingPlayer));
@@ -72,7 +69,7 @@ public class PlayerServiceTest {
         String existingPlayerLogin = "login-1";
         Player existingPlayer = playerService.getPlayerByLogin(existingPlayerLogin);
         Long id = playerService.getPlayerId(existingPlayerLogin);
-        assertEquals(existingPlayer.getId(),id);
+        assertEquals(existingPlayer.getId(), id);
     }
 
     @Test

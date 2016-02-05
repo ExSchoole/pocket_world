@@ -29,11 +29,11 @@ public class HibernateConfiguration {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(
-        		new String[]{"org.exschool.pocketworld.player.model",
-        					"org.exschool.pocketworld.city.model",
-        					"org.exschool.pocketworld.building.model",
-                            "org.exschool.pocketworld.resource.building.model",
-                            "org.exschool.pocketworld.buildQueue.model"});
+                "org.exschool.pocketworld.player.model",
+                "org.exschool.pocketworld.city.model",
+                "org.exschool.pocketworld.building.model",
+                "org.exschool.pocketworld.resource.building.model",
+                "org.exschool.pocketworld.buildQueue.model");
         sessionFactory.setHibernateProperties(additionalProperties());
         return sessionFactory;
     }
