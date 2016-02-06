@@ -346,5 +346,11 @@ public class BuildingServiceImpl implements BuildingService {
 
             ;
         };
-    };
+    }
+
+	@Override
+	public void increaseLevel(Long cityId, Integer[] ids) {
+		System.out.println("can't see");
+		
+	}
 }

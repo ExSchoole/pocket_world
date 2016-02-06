@@ -36,5 +36,7 @@ public interface BuildingService {
     Boolean isBuildingExist(Long cityId, Integer position);
 
     Long createBuilding(Long cityId, BuildingType buildingType, int position, int level);
+    
+    void increaseLevel(Long cityId, Integer[] ids);
 }
 

@@ -7,6 +7,7 @@ import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
 import org.exschool.pocketworld.buildQueue.model.Status;
 import org.exschool.pocketworld.buildQueue.model.Type;
 import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
+import org.exschool.pocketworld.building.service.BuildingService;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.joda.time.DateTime;
@@ -25,12 +26,15 @@ public class CommonCityServiceImpl implements CommonCityService {
     private BuildQueueService buildQueueService;
     @Autowired
     private PlayerService playerService;
+    @Autowired
+    private BuildingService buildingService;
 
     @Override
     public void buildQueuedBuildings(String playerName) {
         Long userId = playerService.getPlayerByLogin(playerName).getId();
         buildQueueService.updateAll(Status.DONE, userId, Type.BUILDING); 
         buildQueueService.updateAll(Status.DONE, userId, Type.RESOURCE_BUILDING); 
+        buildingService.increaseLevel(4L, new Integer[]{1,2,3,4});
     }
     
     public List<TimeOfBuilding> getQueuedBuildings(String playerName){	
