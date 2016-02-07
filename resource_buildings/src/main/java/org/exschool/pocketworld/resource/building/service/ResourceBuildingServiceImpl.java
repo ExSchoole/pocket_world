@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +85,18 @@ public class ResourceBuildingServiceImpl implements ResourceBuildingService {
         return getAtPosition(cityId, position) != null;
     }
 
+    @Override
+	public void increaseLevel(Long cityId, List<Long> ids) {
+		if (ids.size()!=0){
+			Map<String, List<Serializable>> parametrs = new HashMap<>();
+			parametrs.put("cityId", new ArrayList<Serializable>(Arrays.asList(cityId)));
+			parametrs.put("ids",  new ArrayList<Serializable>(ids));
+			
+			dao.update("UPDATE resource_building SET level=level+1 WHERE cityId=:cityId AND id IN (:ids)", 
+						parametrs);		
+		}
+	}
+    
     /**
      * Returns ResourceBuilding by id
      *

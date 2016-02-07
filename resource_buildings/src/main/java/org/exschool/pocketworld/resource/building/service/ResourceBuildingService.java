@@ -40,5 +40,7 @@ public interface ResourceBuildingService {
     int getResourcesByBuildingTypeLevel(ResourceType buildingType, ResourceType resourceType, int level);
 
     void saveAllInformation();
+    
+    void increaseLevel(Long cityId, List<Long> ids);
 }
 

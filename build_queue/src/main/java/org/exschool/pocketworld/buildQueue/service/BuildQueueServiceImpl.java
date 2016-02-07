@@ -4,14 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
 import org.exschool.pocketworld.buildQueue.model.Status;
-import org.exschool.pocketworld.buildQueue.model.Type;
 import org.exschool.pocketworld.dao.Dao;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Property;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,41 +82,50 @@ public class BuildQueueServiceImpl implements BuildQueueService {
     	DetachedCriteria detachedCriteria = DetachedCriteria.forClass(BuildQueueRecord.class)
                 .add(Property.forName("userId").eq(userId))
     			.add(Property.forName("status").eq(status));
+    			
     	    	
     	 return dao.getAllBy(detachedCriteria);
     }
+    
+    @Override
+    public List<BuildQueueRecord> getAllByUserStatusDate(Long userId, Status status, Date date) {
+    	DetachedCriteria detachedCriteria = DetachedCriteria.forClass(BuildQueueRecord.class)
+                .add(Property.forName("userId").eq(userId))
+    			.add(Property.forName("status").eq(status))
+    			.add(Restrictions.lt("buildEnd", date));
+    	    	
+    	 return dao.getAllBy(detachedCriteria);
+    }
+    
 
     @Override
-    public void updateAll(Status status, Long userId, Type type){
-    	String sqlUpdateStatus = String.format("UPDATE buildqueue SET status=? "
-    			+ "FROM %s "
-				+ "WHERE buildqueue.building_id = id AND buildqueue.user_id=? "
-				+ "AND buildqueue.build_end<?", type.name());
-    	String sqlUpdateLevel = String.format("UPDATE %s SET level=buildqueue.level "
-    			+ "FROM buildqueue "
-    			+"WHERE buildqueue.building_id = id AND user_id=? AND buildqueue.build_end<?", type.name());
-    	
-    	List<Serializable> parametrs = new ArrayList<Serializable>(Arrays.asList(status.name(), userId, 
-    										new Date()));
-    	System.out.println("TIME: "+parametrs.get(2));
+    public void updateAll(Status status, Long userId, Date date){
+    	String sqlUpdateStatus = "UPDATE buildqueue SET status=:status "
+				+ "WHERE user_id=:user_id "
+				+ "AND build_end<:build_end ";
+ 
+    	Map<String, List<Serializable>> parametrs = new HashMap<>();
+    	parametrs.put("status", new ArrayList<Serializable>(Arrays.asList(status)));
+    	parametrs.put("user_id", new ArrayList<Serializable>(Arrays.asList(userId)));
+		parametrs.put("build_end", new ArrayList<Serializable>(Arrays.asList(date)));
+    
     	dao.update(sqlUpdateStatus, parametrs);
-    	parametrs.remove(0);
-    	dao.update(sqlUpdateLevel, parametrs);
     }
     
     @Override
-    public void updateStatus(Status status, int buildingPosition, String type, Long userId){
-    	String sqlUpdateStatus = String.format("UPDATE buildqueue SET status=? FROM %s "
-				+ "WHERE buildqueue.building_id = id AND buildqueue.position=?  "
-				+ "AND buildqueue.build_type=? AND buildqueue.user_id=?", type);
-    	String sqlUpdateLevel = String.format("UPDATE %s SET level=buildqueue.level FROM buildqueue "
-    			+"WHERE buildqueue.building_id = id AND buildqueue.position=? "
-    			+ "AND buildqueue.build_type=? AND buildqueue.user_id=?", type);
-    	List<Serializable> parametrs = new ArrayList<Serializable>(Arrays.asList(status.name(), 
-    								   buildingPosition, type.toUpperCase(), userId));
+    public void updateStatus(Status status, int buildingPosition, Long userId, String type){
+    	String sqlUpdateStatus = "UPDATE buildqueue SET status=:status "
+				+ "WHERE position=:position "
+				+ "AND build_type=:build_type "		
+				+ "AND user_id=:user_id";
+    	
+    	Map<String, List<Serializable>> parametrs = new HashMap<>();
+    	parametrs.put("status", new ArrayList<Serializable>(Arrays.asList(status)));
+    	parametrs.put("position", new ArrayList<Serializable>(Arrays.asList(buildingPosition)));
+    	parametrs.put("build_type", new ArrayList<Serializable>(Arrays.asList(type.toUpperCase())));
+    	parametrs.put("user_id", new ArrayList<Serializable>(Arrays.asList(userId)));
+    	
     	dao.update(sqlUpdateStatus, parametrs);
-    	parametrs.remove(0);
-    	dao.update(sqlUpdateLevel,parametrs);
     }
     
     @Override

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -117,11 +118,11 @@ public class Dao {
         return entity;
     }
         
-    public void update(String sql, List<Serializable> parametrs){    		
-    	Query query = currentSession().createSQLQuery(sql);
-    	for (int i=0; i<parametrs.size(); i++)
-    		query.setParameter(i, parametrs.get(i));
-    		
+    public void update(String sql, Map<String, List<Serializable>> parametrs){    		
+    	Query query = currentSession().createSQLQuery(sql);    	
+    	for (Entry<String, List<Serializable>> s : parametrs.entrySet())
+    		query.setParameterList(s.getKey(), s.getValue());
+    	
     	query.executeUpdate();
     }
 

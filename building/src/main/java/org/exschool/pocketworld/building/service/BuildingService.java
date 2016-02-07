@@ -37,6 +37,6 @@ public interface BuildingService {
 
     Long createBuilding(Long cityId, BuildingType buildingType, int position, int level);
     
-    void increaseLevel(Long cityId, Integer[] ids);
+    void increaseLevel(Long cityId, List<Long> ids);
 }
 

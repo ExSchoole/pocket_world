@@ -15,9 +15,6 @@ function build(classOfEmptyElement, urls, building, position, playerName, type){
 
 	                            $( position ).droppable( "disable" );
 	                            
-	                            
-	                            console.log($( "#"+selectedPosition ).attr('class'));
-	                            
 	                            ajaxCallGetTimeInfo(typeOfSelectedBuilding, 1, selectedPosition, playerName, urls, type);
 	                            
 	                            $("#"+typeOfSelectedBuilding).remove();

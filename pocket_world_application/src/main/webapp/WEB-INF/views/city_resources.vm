@@ -58,7 +58,8 @@
 		'types' : "#springUrl('/city/resources/types')",
 		'getBuildingQueue' : "#springUrl('/getBuildingQueue')",
 		'changeStatus' : "#springUrl('/changeStatus')",
-		'types' : "#springUrl('/city/resources/types')"
+		'types' : "#springUrl('/city/resources/types')",
+		'timeInfo' : "#springUrl('/city/resources/timeInfo')"
 	};
 
 	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'resource_building');
