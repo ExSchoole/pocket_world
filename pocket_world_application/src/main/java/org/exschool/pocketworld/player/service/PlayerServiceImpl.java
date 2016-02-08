@@ -1,7 +1,9 @@
 package org.exschool.pocketworld.player.service;
 
 import org.exschool.pocketworld.dao.Dao;
+import org.exschool.pocketworld.player.builder.PlayerBuilder;
 import org.exschool.pocketworld.player.model.Player;
+import org.exschool.pocketworld.player.model.PlayerResources;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,20 @@ public class PlayerServiceImpl implements PlayerService {
     @Autowired
     private Dao dao;
 
+    public void setDao(Dao dao) {
+        this.dao = dao;
+    }
+
+    @Override
+    public Long createPlayer(String playerLogin, PlayerResources playerResources) {
+        Player player = PlayerBuilder.builder()
+                .login(playerLogin)
+                .playerResources(playerResources)
+                .build();
+        savePlayer(player);
+        return player.getId();
+    }
+
     @Override
     public void savePlayer(Player player) {
         dao.save(player);
@@ -27,8 +43,16 @@ public class PlayerServiceImpl implements PlayerService {
         return dao.getBy(query);
     }
 
-    public void setDao(Dao dao){
-        this.dao = dao;
+    @Override
+    public boolean isPlayerExist(String login) {
+        return getPlayerByLogin(login) != null;
+    }
+
+    @Override
+    public Long getPlayerId(String login) {
+        return getPlayerByLogin(login) != null ?
+                getPlayerByLogin(login).getId() :
+                null;
     }
 
 }

@@ -9,9 +9,17 @@ import java.util.List;
  */
 public interface CityService {
     List<City> allCities();
-    City get (long id);
+
+    City get(long id);
+
     City save(City entity);
+
     City getCityByPlayerId(Long playerId);
 
+    Long getCityId(Long playerId);
+
+    Boolean isCityExist(Long playerId);
+
+    Long createCity(Long playerId, String cityName);
 }
 

@@ -1,4 +1,4 @@
- function levelUpBuilding(url,playerName){
+ function levelUpBuilding(url,playerName,template){
       $( ".building" ).click(function() {
 
           var $div = $(this);
@@ -12,7 +12,7 @@
                contentType: "application/json; charset=utf-8",
                data : { playerName: playerName , position: $(this).attr("id")},
                          success : function(info) {
-                            showPopover($div,url,playerName,info)
+                            showPopover($div,url,playerName,info,template)
                          }
 
                })     
@@ -27,7 +27,7 @@
      
 }
 
-function showPopover(element,url,playerName,info){
+function showPopover(element,url,playerName,info,template){
 
 var contentHtml = [
 '<div>',
@@ -42,7 +42,7 @@ var contentHtml = [
 
     element.popover({
         title: "Upgrade",
-        content: contentHtml,
+        content: template(info),
         placement: top,
         trigger: "focus",
         html: true

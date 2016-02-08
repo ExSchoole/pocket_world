@@ -32,6 +32,7 @@ import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
+import org.exschool.pocketworld.resource.model.ResourceType;
 import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -195,4 +196,37 @@ public class CityCenterServiceImpl implements CityCenterService {
     public void setPlayerService(PlayerService playerService) {
         this.playerService = playerService;
     }
+    @Override
+  	public void levelUp(String playerName, int position) {
+  		Player currentPlayer = new Player();
+  		currentPlayer=playerService.getPlayerByLogin(playerName);
+  		City city = new City();
+  		city = cityService.getCityByPlayerId(currentPlayer.getId());
+  		Building building= new Building();
+  		building =buildingService.getAtPosition(city.getId(), position);
+      	building.levelUp();
+      	buildingService.save(building);
+  		
+  	}
+
+  	@Override
+  	public List<Integer> getInfo(String playerName, int position) {
+  		List<Integer> info= new ArrayList<>();
+  		Player currentPlayer = playerService.getPlayerByLogin(playerName);
+  		City city = cityService.getCityByPlayerId(currentPlayer.getId());
+  		Building building=  buildingService.getAtPosition(city.getId(), position);
+  		
+  		Integer level =building.getLevel();
+  		BuildingType buildingType = building.getBuildingType();
+  		info.add(buildingService.getTimeByBuildingTypeLevel(buildingType, level));
+  		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, 
+  				ResourceType.CLAY, level));       			
+  		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, 
+  				ResourceType.CORN, level));   
+  		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, 
+  				ResourceType.GOLD, level));
+  		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, 
+  				ResourceType.TIMBER, level));
+  		return info;
+  	}
 }

@@ -35,6 +35,7 @@ import org.exschool.pocketworld.city.service.CityService;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
+import org.exschool.pocketworld.resource.model.ResourceType;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,6 +49,7 @@ import java.util.*;
 import static org.exschool.pocketworld.building.model.BuildingType.*;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
@@ -93,6 +95,7 @@ public class CityCenterServiceImplTest {
         when(cityService.getCityByPlayerId(anyLong())).thenReturn(city);
         when(buildingService.getBuildingsByCityId(anyLong())).thenReturn(buildings);
         when(buildingService.save(any(Building.class))).thenReturn(building);
+        when(buildingService.getAtPosition(anyLong(), anyInt())).thenReturn(building);
     }
 
 
@@ -130,7 +133,34 @@ public class CityCenterServiceImplTest {
         Collection<String> availableForBuildBuildingTypes = cityCenterService.availableForBuildBuildingTypes(cityCenterDtoMock.getBuildingTypes());
         assertEquals(BuildingType.asListLowerCase().size(), availableForBuildBuildingTypes.size());
     }
-
+    @Test
+    public void testGetInfo() {
+    	List<Integer> info= new ArrayList<>();
+		Player currentPlayer = playerService.getPlayerByLogin(playerName);
+		City city = cityService.getCityByPlayerId(currentPlayer.getId());
+		Building building=  buildingService.getAtPosition(city.getId(), 1);
+		
+		int level =building.getLevel();
+		BuildingType buildingType = building.getBuildingType();
+		info.add(buildingService.getTimeByBuildingTypeLevel(buildingType, level));
+		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, ResourceType.CLAY, level));       			
+		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, ResourceType.CORN, level));   
+		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, ResourceType.GOLD, level));
+		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, ResourceType.TIMBER, level));
+		
+		assertNotNull(info);
+    }
+    @Test
+    public void testLevelUp(){
+    	Player currentPlayer = playerService.getPlayerByLogin(playerName);
+		City city = cityService.getCityByPlayerId(currentPlayer.getId());
+		Building building=  buildingService.getAtPosition(city.getId(), 1);
+		int level= building.getLevel();
+    	building.levelUp();
+    	int currentLevel = building.getLevel();
+    	assertNotEquals(level, currentLevel);
+    	
+    }
     private static CityCenterDto cityCenterDto(Collection<String> buildingTypesAsStrings) {
         return CityCenterDtoBuilder.builder().buildings(buildings(buildingTypesAsStrings)).build();
     }
