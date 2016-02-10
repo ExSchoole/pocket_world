@@ -2,9 +2,6 @@
       $( ".building" ).click(function() {
 
           var $div = $(this);
-          
-          var id_name = $(this).attr('id');
-          var $position = id_name.substr('square_'.length,id_name.length);
           $.ajax({
                url: url+"/getInfo",
                dataType:'json',
@@ -12,33 +9,17 @@
                contentType: "application/json; charset=utf-8",
                data : { playerName: playerName , position: $(this).attr("id")},
                          success : function(info) {
-                            showPopover($div,url,playerName,info,template)
+            	   			showPopoverInfo($div,url,playerName,info,template)
                          }
-
                })     
       });
       
-      $( "body" ).click(function() {
-    	  $(".popover").each(function(index){
-              $(this).popover('hide');
-          })
-      });
-
-     
+      $( "body" ).mouseup(function() {
+    	  hideAllPopovers();
+      });   
 }
 
-function showPopover(element,url,playerName,info,template){
-
-var contentHtml = [
-'<div>',
-	'<h5>Time: '+info[0].value+' </h5>',
-	'<h5>Clay: '+info[1].value+'</h5>',
-	'<h5>Corn: '+info[2].value+'</h5>',
-    '<h5>Gold: '+info[3].value+'</h5>',
-    '<h5>Timber: '+info[4].value+'</h5>',
-    
-    '<button class="btn btn-primary lvlUp">Level Up</button>',
-'</div>'].join('\n');
+function showPopoverInfo(element,url,playerName,info,template){
 
     element.popover({
         title: "Upgrade",

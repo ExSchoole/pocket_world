@@ -89,4 +89,9 @@ public class ResourceBuilding {
         return result;
     }
 
+	public void levelUp() {
+		this.level++;
+		
+	}
+
 }

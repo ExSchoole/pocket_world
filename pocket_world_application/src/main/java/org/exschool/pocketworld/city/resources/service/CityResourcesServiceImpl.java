@@ -10,7 +10,6 @@ import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.resources.builder.CityResourcesDtoBuilder;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.service.CityService;
-import org.exschool.pocketworld.dto.PositionOfBuilding;
 import org.exschool.pocketworld.player.builder.PlayerBuilder;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
@@ -28,6 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,8 +53,8 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     }
 
     @Override
-    public CityResourcesDto cityResourcesInfo() {
-        String login = "login-1";
+    public CityResourcesDto cityResourcesInfo(String login ) {
+       
         Player player = playerService.getPlayerByLogin(login);
         notNull(player);
         PlayerResources playerResources = player.getPlayerResources();
@@ -82,9 +83,9 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     }
 
     @Override
-    public boolean createResourceBuilding(final PositionOfBuilding positionOfBuilding) {
-        String playerLogin = "login-1";
-        Player player = playerService.getPlayerByLogin(playerLogin);
+    public boolean createResourceBuilding(String playerName, String type, final int position) {
+        
+        Player player = playerService.getPlayerByLogin(playerName);
         notNull(player);
         City city = cityService.getCityByPlayerId(player.getId());
         notNull(city);
@@ -94,19 +95,19 @@ public class CityResourcesServiceImpl implements CityResourcesService {
                 new Predicate<ResourceBuilding>() {
                     @Override
                     public boolean apply(ResourceBuilding resourceBuilding) {
-                        return resourceBuilding.getPosition() == positionOfBuilding.getPosition();
+                        return resourceBuilding.getPosition() == position;
                     }
                 });
 
         if (resourceBuildingAtPosition.isPresent()) return false;
 
-        ResourceType resourceType = ResourceType.valueOf(positionOfBuilding.getType().toUpperCase());
+        ResourceType resourceType = ResourceType.valueOf(type.toUpperCase());
 
         ResourceBuilding resourceBuilding = ResourceBuildingBuilder.builder()
                 .buildingType(resourceType)
                 .cityId(city.getId())
-                .level(INITIAL_BUILDING_LEVEL)
-                .position(positionOfBuilding.getPosition())
+                .level(INITIAL_BUILDING_LEVEL+1)
+                .position(position)
                 .build();
 
         resourceBuildingService.save(resourceBuilding);
@@ -114,9 +115,9 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     }
 
 //    @PostConstruct
-    public void afterInitialization() {
+    public void afterInitialization(String playerLogin) {
         // -- temporary
-        String playerLogin = "login-1";
+       
         if (playerService.getPlayerByLogin(playerLogin) == null) {
             Player player = PlayerBuilder.builder()
                     .login("login-1")
@@ -173,4 +174,39 @@ public class CityResourcesServiceImpl implements CityResourcesService {
 
                 }
             };
+            @Override
+          	public void levelUp(String playerName, int position) {
+          		Player currentPlayer = new Player();
+          		currentPlayer=playerService.getPlayerByLogin(playerName);
+          		City city = new City();
+          		city = cityService.getCityByPlayerId(currentPlayer.getId());
+          		ResourceBuilding building= new ResourceBuilding();
+          		building =resourceBuildingService.getAtPosition(city.getId(), position);
+              	building.levelUp();
+              	resourceBuildingService.save(building);
+          		
+          	}
+
+          	@Override
+          	public List<Integer> getInfo(String playerName, int position) {
+          		List<Integer> info= new ArrayList<>();
+          		Player currentPlayer = playerService.getPlayerByLogin(playerName);
+          		City city = cityService.getCityByPlayerId(currentPlayer.getId());
+          		ResourceBuilding building=  resourceBuildingService.getAtPosition(city.getId(), position);
+          		
+          		Integer level =building.getLevel();
+          		ResourceType resourceType = building.getResourceType();
+          		info.add(resourceBuildingService.getTimeByBuildingTypeLevel(resourceType, level));
+          		info.add(resourceBuildingService.getResourcesByBuildingTypeLevel(resourceType, 
+          				ResourceType.CLAY, level));       			
+          		info.add(resourceBuildingService.getResourcesByBuildingTypeLevel(resourceType, 
+          				ResourceType.CORN, level));   
+          		info.add(resourceBuildingService.getResourcesByBuildingTypeLevel(resourceType, 
+          				ResourceType.GOLD, level));
+          		info.add(resourceBuildingService.getResourcesByBuildingTypeLevel(resourceType, 
+          				ResourceType.TIMBER, level));
+          		
+          		
+          		return info;
+          	}
 }

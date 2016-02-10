@@ -46,10 +46,29 @@
 
 </div>
 
+<script type="text/template" class="template">
 
+        <h5>Time: <%- rc[0] %> </h5>
+        <h5>Clay: <%- rc[1] %></h5>
+        <h5>Corn: <%- rc[2] %></h5>
+        <h5>Gold: <%- rc[3] %></h5>
+        <h5>Timber: <%- rc[4] %></h5>
+        <button class="btn btn-primary lvlUp">Level Up</button>
+
+    </script>
+#end
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/cityResources.js')"></script>
-<script type="text/javascript">
-    CityResources("building_empty", "building", "#springUrl('/city/resources/buildings/')", "#springUrl('/city/resources/types')");
+<script type="text/javascript" src="#springUrl('/js/levelUp.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/underscore.js')"></script>
+
+<script>
+    CityResources("building_empty", "building", "#springUrl('/city/resources/buildings/')", "#springUrl('/city/resources/types')","$dto.getNickName()");
+   
+    _.templateSettings.variable = "rc";
+        var template = _.template(
+            $( "script.template" ).html()
+        );
+     levelUpBuilding("#springUrl('/city/resources/')","$dto.getNickName()",template);
+      
 </script>
-#end

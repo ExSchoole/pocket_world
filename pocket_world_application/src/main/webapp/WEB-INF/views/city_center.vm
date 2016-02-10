@@ -74,6 +74,7 @@
 <script src="#springUrl('/js/jquery.verticalCarousel.js')"></script>
 <script src="#springUrl('/js/levelUp.js')"></script>
 <script src="#springUrl('/js/underscore.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 <script>
 	DragDropBuild("building_karusel","building_empty", "#springUrl('/city/center/addBuilding')","$dto.getNickName()");
 
