@@ -17,6 +17,9 @@ public class Player {
     @Column(name = "login")
     private String login;
 
+    @Column(name = "password")
+    private String password;
+
     public Player() {
         this.login = "";
     }
@@ -34,6 +37,9 @@ public class Player {
         return login;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -41,6 +47,10 @@ public class Player {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public PlayerResources getPlayerResources() {
@@ -59,11 +69,11 @@ public class Player {
         Player player = (Player) o;
 
         if (id != null ? !id.equals(player.id) : player.id != null) return false;
-        if (login != null ? !login.equals(player.login) : player.login != null) return false;
         if (playerResources != null ? !playerResources.equals(player.playerResources) : player.playerResources != null)
             return false;
+        if (login != null ? !login.equals(player.login) : player.login != null) return false;
+        return password != null ? password.equals(player.password) : player.password == null;
 
-        return true;
     }
 
     @Override
@@ -71,6 +81,7 @@ public class Player {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (playerResources != null ? playerResources.hashCode() : 0);
         result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
     }
 
@@ -80,6 +91,7 @@ public class Player {
                 "id=" + id +
                 ", playerResources=" + playerResources +
                 ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

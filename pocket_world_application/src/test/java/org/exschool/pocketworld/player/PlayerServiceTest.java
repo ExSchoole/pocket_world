@@ -36,21 +36,25 @@ public class PlayerServiceTest {
     @Test
     public void testCreatePlayerForPopulator() {
         String playerlogin = "testLogin";
+        String password = "testPassword";
         PlayerResources playerresources = new PlayerResources(1, 1, 1, 1);
-        playerService.createPlayer(playerlogin, playerresources);
+        playerService.createPlayer(playerlogin, password, playerresources);
         Player createdPlayer = playerService.getPlayerByLogin(playerlogin);
         assertNotNull(createdPlayer);
         assertNotNull(createdPlayer.getId());
+        assertNotNull(createdPlayer.getPassword());
     }
 
     @Test
     public void testCreate() {
         String login = "test-login";
-        Player player = PlayerBuilder.builder().login(login).build();
+        String password = "test-password";
+        Player player = PlayerBuilder.builder().login(login).password(password).build();
         playerService.savePlayer(player);
         Player savedPlayer = playerService.getPlayerByLogin(login);
         assertNotNull(savedPlayer);
         assertNotNull(savedPlayer.getId());
+        assertTrue(savedPlayer.getPassword().equals(password));
     }
 
     @Test

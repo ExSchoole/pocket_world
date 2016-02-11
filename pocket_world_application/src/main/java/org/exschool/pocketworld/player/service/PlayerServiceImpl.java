@@ -22,9 +22,10 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Long createPlayer(String playerLogin, PlayerResources playerResources) {
+    public Long createPlayer(String playerLogin, String playerPassword, PlayerResources playerResources) {
         Player player = PlayerBuilder.builder()
                 .login(playerLogin)
+                .password(playerPassword)
                 .playerResources(playerResources)
                 .build();
         savePlayer(player);
