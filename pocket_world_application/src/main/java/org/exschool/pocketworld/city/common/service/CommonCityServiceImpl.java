@@ -64,7 +64,8 @@ public class CommonCityServiceImpl implements CommonCityService {
     		currentQueue.add(new TimeOfBuilding(r.getPosition(),Seconds.secondsBetween(
     						 new DateTime(System.currentTimeMillis()), 
     						 new DateTime(r.getBuildEnd())).getSeconds(), 
-    						 r.getType().name().toLowerCase()));
+    						 r.getType().name().toLowerCase(),
+    						 r.getName()));
     	}	
     	return currentQueue;
     }

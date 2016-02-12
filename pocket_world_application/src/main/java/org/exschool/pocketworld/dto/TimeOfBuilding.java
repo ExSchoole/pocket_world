@@ -4,11 +4,13 @@ public class TimeOfBuilding {
 	private int position;
 	private int time;
 	private String type;
+	private String buildingType;
 	
-	public TimeOfBuilding(int position, int time, String type){
+	public TimeOfBuilding(int position, int time, String type, String buildingType){
 		this.position = position;
 		this.time = time;
-		this.setType(type);
+		this.type = type;
+		this.buildingType = buildingType;
 	}
 	
 	public int getTime() {
@@ -32,6 +34,14 @@ public class TimeOfBuilding {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getBuildingType() {
+		return buildingType;
+	}
+
+	public void setBuildingType(String buildingType) {
+		this.buildingType = buildingType;
 	}
 
 }

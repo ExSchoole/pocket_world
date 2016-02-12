@@ -117,3 +117,19 @@ div.over {
 div.notover {
     border-style: groove;
 }
+
+div.info_names {
+    border-style: outset;
+    border-color: darkblue;
+    width: 200px;
+}
+
+div.info_timers {
+    border-style: outset;
+    border-color: blue;
+    width: 200px;
+}
+
+div.center_align {
+    text-align: center;
+}

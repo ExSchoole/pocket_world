@@ -118,7 +118,8 @@ public class BuildQueueRecord implements Serializable {
     }
 
     public BuildQueueRecord(
-           Long id, String name, int level, Type type, Date buildEnd, Long userId, Status status, Long buildingId){
+           Long id, String name, int level, Type type, Date buildEnd, 
+           Long userId, Status status, Long buildingId, String buildingType){
         this.id = id;
         this.name = name;
         this.level = level;

@@ -7,10 +7,10 @@ function ajaxCallGetBuildingQueue(playerName, urls, currentType){
 		   success : function(data) {
 			   			console.log(data);
 			   			$.each(data, function(index, object){
-			   				timer(object['position'], object['time']*1000, playerName,  urls, object['type']);
-			   				
 			   				if (currentType.localeCompare(object['type']) == 0)
 			   					$( "#"+'clock'+object['position'] ).addClass('clock');
+			   				
+			   				timer(object['position'], object['time']*1000, playerName,  urls, object['type'], object['buildingType']);			   							   	
 			   			});
 		   			 }
 	   });
@@ -36,7 +36,7 @@ function ajaxCallGetTimeInfo(type, level, selectedPosition, playerName, urls, gl
 		   success : function(data) {
 			   			console.log('success');
 			   			console.log(data);
-			   			timer(selectedPosition,data*1000, playerName, urls,globalType);
+			   			timer(selectedPosition,data*1000, playerName, urls, globalType, type);
 		   			 }
 	   });
 	

@@ -45,6 +45,31 @@
     </div>
 
 </div>
+<div class="col-md-2">
+</div>
+<div class="col-md-3 center_align">
+            
+            <div class="col-md-9 info_names">
+                 <h3>$dto.getNickName()</h3>
+            </div>
+            
+            <div class="col-md-9 info_names">
+                 <h4>Timers:</h4>
+            </div>
+            
+        <div class="col-md-9 info_timers"
+        
+            #foreach($position in [1,2,3,4,5,6,7,8,9,10,11,12])
+            	#timer("building", $position)
+            #end
+           
+           
+            #foreach($position in [1,2,3,4,5,6,7,8,9,10,11,12])
+            	#timer("resource_building", $position)
+            #end
+        
+        </div>
+</div>
 
 
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>

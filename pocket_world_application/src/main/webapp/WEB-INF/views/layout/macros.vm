@@ -61,6 +61,10 @@
     #end
 #end
 
+#macro( timer $type $position )
+	<h5 id="timer$position$type"></h5>
+#end
+
 #macro (showResources $gold $timber $clay $corn)
     <div class ="container">
         <div class="col-md-2" id="res1">
