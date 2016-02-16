@@ -295,7 +295,9 @@ public class BuildingServiceImpl implements BuildingService {
                 put(new BuildingResourceId(BuildingType.TOWNHALL, ResourceType.CORN, 3), 40);
                 put(new BuildingResourceId(BuildingType.TOWNHALL, ResourceType.TIMBER, 3), 80);
                 put(new BuildingResourceId(BuildingType.TOWNHALL, ResourceType.GOLD, 3), 100);
-            };
+            }
+
+            ;
 
         };
 
@@ -340,7 +342,11 @@ public class BuildingServiceImpl implements BuildingService {
                 put(new TimeId(BuildingType.TOWNHALL, 1), 5);
                 put(new TimeId(BuildingType.TOWNHALL, 2), 10);
                 put(new TimeId(BuildingType.TOWNHALL, 3), 15);
-            };
+            }
+
+            ;
         };
     }
+
+    ;
 }

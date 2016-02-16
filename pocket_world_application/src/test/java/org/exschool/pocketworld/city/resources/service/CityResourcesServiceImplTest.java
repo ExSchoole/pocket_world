@@ -1,10 +1,9 @@
 package org.exschool.pocketworld.city.resources.service;
 
-import org.exschool.pocketworld.building.model.Building;
-import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.service.CityService;
+import org.exschool.pocketworld.dto.PositionOfBuilding;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
@@ -19,9 +18,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
 
@@ -49,7 +48,8 @@ public class CityResourcesServiceImplTest {
     CityResourcesServiceImpl cityResourcesService = new CityResourcesServiceImpl();
     List<ResourceBuilding> buildings;
     PlayerResources playerResources;
-    String playerName = "login";
+    
+    String playerName = "player-test";
 
     @Before
     public void before() {
@@ -62,7 +62,6 @@ public class CityResourcesServiceImplTest {
         when(playerService.getPlayerByLogin(anyString())).thenReturn(player);
         when(cityService.getCityByPlayerId(anyLong())).thenReturn(new City());
         when(resourceBuildingService.allCityResources(anyLong())).thenReturn(buildings);
-        when(resourceBuildingService.getAtPosition(anyLong(), anyInt())).thenReturn(buildings.get(0));
     }
 
     @Test
@@ -72,7 +71,7 @@ public class CityResourcesServiceImplTest {
                 playerResources.getClayAmount(),
                 playerResources.getCornAmount());
 
-        CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo(playerName);
+        CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo();
 
         assertEquals(cityResourcesDto.getNickName(), "login");
         assertEquals(cityResourcesDto.getResourceDto(), resourceDto);
@@ -85,25 +84,25 @@ public class CityResourcesServiceImplTest {
     @Test
     public void testCreateResourceBuilding() {
         int notExistingPosition = 3;
-        assertTrue(cityResourcesService.createResourceBuilding(playerName,"GOLD",notExistingPosition));
+        assertTrue(cityResourcesService.createResourceBuilding(new PositionOfBuilding(notExistingPosition, ResourceType.GOLD.name())));
     }
 
     @Test
     public void testCreateResourceBuilding_cityContainsBuildingAtPosition() {
         int existingPosition = 2;
-        assertFalse(cityResourcesService.createResourceBuilding(playerName,"GOLD",existingPosition));
+        assertFalse(cityResourcesService.createResourceBuilding(new PositionOfBuilding(existingPosition, ResourceType.GOLD.name())));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateResourceBuildingNullPlayer() {
         when(playerService.getPlayerByLogin(anyString())).thenReturn(null);
-        cityResourcesService.createResourceBuilding(playerName, ResourceType.GOLD.name(),3);
+        cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name()));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateResourceBuildingNullCity() {
         when(cityService.getCityByPlayerId(anyLong())).thenReturn(null);
-        cityResourcesService.createResourceBuilding(playerName, ResourceType.GOLD.name(),3);
+        cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name()));
     }
     @Test
     public void testGetInfo() {
@@ -115,15 +114,9 @@ public class CityResourcesServiceImplTest {
   		Integer level =building.getLevel();
   		ResourceType resourceType = building.getResourceType();
   		info.add(resourceBuildingService.getTimeByBuildingTypeLevel(resourceType, level));
-  		info.add(resourceBuildingService.getResourcesByBuildingTypeLevel(resourceType, 
-  				ResourceType.CLAY, level));       			
-  		info.add(resourceBuildingService.getResourcesByBuildingTypeLevel(resourceType, 
-  				ResourceType.CORN, level));   
-  		info.add(resourceBuildingService.getResourcesByBuildingTypeLevel(resourceType, 
-  				ResourceType.GOLD, level));
-  		info.add(resourceBuildingService.getResourcesByBuildingTypeLevel(resourceType, 
-  				ResourceType.TIMBER, level));
-  		
+  		for (ResourceType r : ResourceType.values()){
+		     info.add(resourceBuildingService.getResourcesByBuildingTypeLevel(resourceType, r, level));
+ 		}
 		assertNotNull(info);
     }
     @Test
@@ -137,7 +130,6 @@ public class CityResourcesServiceImplTest {
     	assertNotEquals(level, currentLevel);
     	
     }
-
 }
 
 

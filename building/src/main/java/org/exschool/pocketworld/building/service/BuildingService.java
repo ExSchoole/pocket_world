@@ -12,7 +12,6 @@ import java.util.Map;
 /**
  * Created by skandy on 12.11.15.
  */
-
 public interface BuildingService {
     List<Building> allBuildings();
 
@@ -37,6 +36,5 @@ public interface BuildingService {
     Boolean isBuildingExist(Long cityId, Integer position);
 
     Long createBuilding(Long cityId, BuildingType buildingType, int position, int level);
-
 }
 

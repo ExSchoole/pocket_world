@@ -12,6 +12,6 @@ public interface CityCenterService {
     CityCenterDto cityCenterInfo(String playerName);
     boolean addBuilding(String playerName, String type, int position);
     Collection<String> availableForBuildBuildingTypes(Set<String> builtBuildingTypes);
-	void levelUp(String playerName, int position);
 	List<Integer> getInfo(String playerName, int position);
+	void levelUp(String playerName, int position);
 }

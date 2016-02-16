@@ -1,10 +1,10 @@
-function CityResources(emptyResourcesClassName, resourcesClassName, addResourcesUrl, loadTypesUrl,playerName) {
+function CityResources(emptyResourcesClassName, resourcesClassName, addResourcesUrl, loadTypesUrl) {
 
     var availableTypes = [];
     fillAvailableTypes();
 
     $(function () {
-        $(".building_empty").click(function (event) {
+        $("."+emptyResourcesClassName).click(function (event) {
             event.preventDefault();
             var div = $(this);
             var position = $(this).attr('id');
@@ -19,13 +19,13 @@ function CityResources(emptyResourcesClassName, resourcesClassName, addResources
 
             $.ajax({
                 url: addResourcesUrl,
-                data: {playerName: playerName, type: type, position: position},
+                data: JSON.stringify({position: position, type: type}),
+                contentType: "application/json",
                 type: "POST",
                 success: function (json) {
                     var resourceBuilding = $("."+emptyResourcesClassName + "#" +position);
                     resourceBuilding.removeClass(emptyResourcesClassName).addClass("building_" +type).addClass(resourcesClassName);
                     destroyPopover(resourceBuilding);
-                    
                 },
                 error: function (xhr, status, errorThrown) {
                     alert("Error occured:" + errorThrown);

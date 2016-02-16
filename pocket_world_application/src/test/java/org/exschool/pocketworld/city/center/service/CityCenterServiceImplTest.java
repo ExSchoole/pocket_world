@@ -133,6 +133,7 @@ public class CityCenterServiceImplTest {
         Collection<String> availableForBuildBuildingTypes = cityCenterService.availableForBuildBuildingTypes(cityCenterDtoMock.getBuildingTypes());
         assertEquals(BuildingType.asListLowerCase().size(), availableForBuildBuildingTypes.size());
     }
+    
     @Test
     public void testGetInfo() {
     	List<Integer> info= new ArrayList<>();
@@ -143,11 +144,9 @@ public class CityCenterServiceImplTest {
 		int level =building.getLevel();
 		BuildingType buildingType = building.getBuildingType();
 		info.add(buildingService.getTimeByBuildingTypeLevel(buildingType, level));
-		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, ResourceType.CLAY, level));       			
-		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, ResourceType.CORN, level));   
-		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, ResourceType.GOLD, level));
-		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, ResourceType.TIMBER, level));
-		
+		for (ResourceType r : ResourceType.values()){
+ 		     info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, r, level));
+ 		}
 		assertNotNull(info);
     }
     @Test

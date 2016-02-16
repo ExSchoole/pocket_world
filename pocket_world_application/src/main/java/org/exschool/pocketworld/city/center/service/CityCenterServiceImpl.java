@@ -219,14 +219,9 @@ public class CityCenterServiceImpl implements CityCenterService {
   		Integer level =building.getLevel();
   		BuildingType buildingType = building.getBuildingType();
   		info.add(buildingService.getTimeByBuildingTypeLevel(buildingType, level));
-  		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, 
-  				ResourceType.CLAY, level));       			
-  		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, 
-  				ResourceType.CORN, level));   
-  		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, 
-  				ResourceType.GOLD, level));
-  		info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, 
-  				ResourceType.TIMBER, level));
+  		for (ResourceType r : ResourceType.values()){
+  		     info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, r, level));
+  		}
   		return info;
   	}
 }

@@ -85,4 +85,5 @@ public class CityCenterController {
                  playerName, position);
      	return cityCenterService.getInfo(playerName, position);
      }
+
 }

@@ -49,10 +49,10 @@
 <script type="text/template" class="template">
 
         <h5>Time: <%- rc[0] %> </h5>
-        <h5>Clay: <%- rc[1] %></h5>
-        <h5>Corn: <%- rc[2] %></h5>
-        <h5>Gold: <%- rc[3] %></h5>
-        <h5>Timber: <%- rc[4] %></h5>
+        <h5>Gold: <%- rc[1] %></h5>
+        <h5>Timber: <%- rc[2] %></h5>
+        <h5>Clay: <%- rc[3] %></h5>
+        <h5>Corn: <%- rc[4] %></h5>
         <button class="btn btn-primary lvlUp">Level Up</button>
 
     </script>
@@ -70,5 +70,4 @@
             $( "script.template" ).html()
         );
      levelUpBuilding("#springUrl('/city/resources/')","$dto.getNickName()",template);
-      
 </script>

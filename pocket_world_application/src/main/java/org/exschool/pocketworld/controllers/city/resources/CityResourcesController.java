@@ -2,6 +2,7 @@ package org.exschool.pocketworld.controllers.city.resources;
 
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.resources.service.CityResourcesService;
+import org.exschool.pocketworld.dto.PositionOfBuilding;
 import org.exschool.pocketworld.resource.model.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +22,12 @@ public class CityResourcesController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CityResourcesController.class);
     @Autowired
     private CityResourcesService cityResourcesService;
-    
-    private static final String PLAYER_NAME = "player-login"; //temporary
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showCityResources(
             @RequestParam Map<String, String> allRequestParams, Model model) {
         LOGGER.info("Requested params:" + allRequestParams);
-        CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo(PLAYER_NAME);
+        CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo();
         model.addAttribute("dto", cityResourcesDto);
         LOGGER.info("Out:" + model);
         return "city_resources";
@@ -43,11 +42,9 @@ public class CityResourcesController {
 
     @RequestMapping(value = "/buildings", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Void> createResourceBuilding(@RequestParam String playerName, 
-    		@RequestParam String type, @RequestParam int position) {
-    	LOGGER.info("player - {} has built new resourseBuilding with type - {} in position - {}",
-                playerName, type, position);
-        if (cityResourcesService.createResourceBuilding(playerName, type, position)) {
+    public ResponseEntity<Void> createResourceBuilding(@RequestBody PositionOfBuilding positionOfBuilding) {
+        LOGGER.info("RequestBody:" + positionOfBuilding);
+        if (cityResourcesService.createResourceBuilding(positionOfBuilding)) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

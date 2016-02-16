@@ -59,10 +59,10 @@
 <script type="text/template" class="template">
 
         <h5>Time: <%- rc[0] %> </h5>
-        <h5>Clay: <%- rc[1] %></h5>
-        <h5>Corn: <%- rc[2] %></h5>
-        <h5>Gold: <%- rc[3] %></h5>
-        <h5>Timber: <%- rc[4] %></h5>
+        <h5>Gold: <%- rc[1] %></h5>
+        <h5>Timber: <%- rc[2] %></h5>
+        <h5>Clay: <%- rc[3] %></h5>
+        <h5>Corn: <%- rc[4] %></h5>
         <button class="btn btn-primary lvlUp">Level Up</button>
 
     </script>
@@ -75,6 +75,7 @@
 <script src="#springUrl('/js/levelUp.js')"></script>
 <script src="#springUrl('/js/underscore.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
+
 <script>
 	DragDropBuild("building_karusel","building_empty", "#springUrl('/city/center/addBuilding')","$dto.getNickName()");
 
