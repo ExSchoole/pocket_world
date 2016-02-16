@@ -33,6 +33,7 @@ import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
+import org.exschool.pocketworld.resource.model.ResourceType;
 import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -71,7 +72,7 @@ public class CityCenterServiceImpl implements CityCenterService {
     private void initialization(String playerName) { //temporary
         if(playerService.getPlayerByLogin(playerName)==null) {
             String cityName = "City name";
-            PlayerResources playerResources = new PlayerResources(1, 1, 1, 1);
+            PlayerResources playerResources = new PlayerResources(100, 100, 100, 100);
             Player player = new Player(playerResources, playerName);
             playerService.savePlayer(player);
 
@@ -142,11 +143,33 @@ public class CityCenterServiceImpl implements CityCenterService {
             }
         });
     }
-
+    
+    @Override
+    public boolean checkResources(String playerName, String buildingType, int level){
+    	PlayerResources playerResources = playerService.getPlayerByLogin(playerName).getPlayerResources();
+    	for (ResourceType resourceType : ResourceType.values())
+    		if (buildingService.getResourceByBuildingTypeResourceTypeLevel(BuildingType.valueOf(buildingType.toUpperCase()), resourceType, level)
+    				>playerResources.getAmount(resourceType)) return false;
+    	
+    	return true;
+    }
+    
+    @Override
+    public void reduceResources(Player player, BuildingType buildingType, int level){
+    	for (ResourceType resourceType : ResourceType.values())
+    		player.getPlayerResources().setAmount(resourceType, 
+    				player.getPlayerResources().getAmount(resourceType) - 
+    				buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, resourceType, level));
+    	
+    	playerService.savePlayer(player);
+    }
+    
     @Override
     public boolean addBuilding(String playerName, String type, final int position) {
         if (position > MAX_POSITION || position < MIN_POSITION) return false;
-        Long userId = playerService.getPlayerByLogin(playerName).getId();
+        
+        Player player = playerService.getPlayerByLogin(playerName);        
+        Long userId = player.getId();
         City city = cityService.getCityByPlayerId(userId);
         notNull(city);
         Long cityId = city.getId();
@@ -162,7 +185,8 @@ public class CityCenterServiceImpl implements CityCenterService {
         if (buildingAtPosition.isPresent()) {
             return false;
         }
-
+        reduceResources(player, BuildingType.valueOf(type.toUpperCase()), 1);
+        
         Building buildingEntity = new Building();
         buildingEntity.setCityId(cityId);
         buildingEntity.setLevel(INITIAL_BUILDING_LEVEL);

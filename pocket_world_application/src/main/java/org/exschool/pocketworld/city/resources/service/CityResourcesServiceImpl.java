@@ -14,6 +14,7 @@ import org.exschool.pocketworld.buildQueue.model.Status;
 import org.exschool.pocketworld.buildQueue.model.Type;
 import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.building.ResourceBuildingDto;
+import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.resources.builder.CityResourcesDtoBuilder;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
@@ -111,6 +112,8 @@ public class CityResourcesServiceImpl implements CityResourcesService {
 
         if (resourceBuildingAtPosition.isPresent()) return false;
 
+        reduceResources(player, ResourceType.valueOf(positionOfBuilding.getType().toUpperCase()), 1);
+        
         ResourceType resourceType = ResourceType.valueOf(positionOfBuilding.getType().toUpperCase());
 
         ResourceBuilding resourceBuilding = ResourceBuildingBuilder.builder()
@@ -141,6 +144,26 @@ public class CityResourcesServiceImpl implements CityResourcesService {
         return true;
     }
 
+    @Override
+    public boolean checkResources(String playerName, String resourceBuildingType, int level){
+    	PlayerResources playerResources = playerService.getPlayerByLogin(playerName).getPlayerResources();
+    	for (ResourceType resourceType : ResourceType.values())
+    		if (resourceBuildingService.getResourcesByBuildingTypeLevel(ResourceType.valueOf(resourceBuildingType.toUpperCase()), resourceType, level)
+    				>playerResources.getAmount(resourceType)) return false;
+    	
+    	return true;
+    }
+    
+    @Override
+    public void reduceResources(Player player, ResourceType resourceBuildingType, int level){
+    	for (ResourceType resourceType : ResourceType.values())
+    		player.getPlayerResources().setAmount(resourceType, 
+    				player.getPlayerResources().getAmount(resourceType) - 
+    				resourceBuildingService.getResourcesByBuildingTypeLevel(resourceBuildingType, resourceType, level));
+    	
+    	playerService.savePlayer(player);
+    }
+    
 //    @PostConstruct
     public void afterInitialization() {
         // -- temporary

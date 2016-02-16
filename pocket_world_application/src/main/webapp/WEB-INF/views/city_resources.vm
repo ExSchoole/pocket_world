@@ -84,7 +84,8 @@
 		'getBuildingQueue' : "#springUrl('/getBuildingQueue')",
 		'changeStatus' : "#springUrl('/changeStatus')",
 		'types' : "#springUrl('/city/resources/types')",
-		'timeInfo' : "#springUrl('/city/resources/timeInfo')"
+		'timeInfo' : "#springUrl('/city/resources/timeInfo')",
+		'checkResources' : "#springUrl('/city/resources/checkResources')"
 	};
 
 	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'resource_building');

@@ -41,3 +41,17 @@ function ajaxCallGetTimeInfo(type, level, selectedPosition, playerName, urls, gl
 	   });
 	
 }
+
+function ajaxCallCheckResources(playerName, type, level, urls, emptyElement, position, globalType){	
+	$.ajax({
+		   type: 'GET',
+		   url: urls['checkResources'],
+		   data : {playerName: playerName, type: type, level: level},
+		   success : function(data) {
+			   			console.log(data);
+			   
+			   			if (data) 
+			   				build(emptyElement, urls, type, position, playerName, globalType);
+		   			 }
+	   });
+}

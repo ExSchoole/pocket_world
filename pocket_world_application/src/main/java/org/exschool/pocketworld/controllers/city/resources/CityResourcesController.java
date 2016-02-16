@@ -67,6 +67,15 @@ public class CityResourcesController {
      	return cityResourcesService.getTimeInfo(type.toUpperCase(), level);
     }
     
+    @RequestMapping(value = "/checkResources", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Boolean> checkResources(@RequestParam String playerName, @RequestParam String type, @RequestParam int level){
+    	if (cityResourcesService.checkResources(playerName, type, level)) 
+    		return new ResponseEntity<Boolean>(true, HttpStatus.OK) ;
+    	else 
+    		return new ResponseEntity<Boolean>(false, HttpStatus.I_AM_A_TEAPOT); 
+    }
+    
     public void setCityResourcesService(CityResourcesService cityResourcesService) {
         this.cityResourcesService = cityResourcesService;
     }

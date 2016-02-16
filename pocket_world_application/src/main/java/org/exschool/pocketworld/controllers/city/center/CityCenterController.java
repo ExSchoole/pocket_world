@@ -10,6 +10,8 @@ import org.exschool.pocketworld.city.common.service.CommonCityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +59,15 @@ public class CityCenterController {
         return "city_center";
     }
 
+    @RequestMapping(value = "/checkResources", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Boolean> checkResources(@RequestParam String playerName, @RequestParam String type, @RequestParam int level){
+    	if (cityCenterService.checkResources(playerName, type, level)) 
+    		return new ResponseEntity<Boolean>(true, HttpStatus.OK) ;
+    	else 
+    		return new ResponseEntity<Boolean>(false, HttpStatus.I_AM_A_TEAPOT); 
+    }
+    
      public void setCityCenterService(CityCenterService cityCenterService) {
         this.cityCenterService = cityCenterService;
     }

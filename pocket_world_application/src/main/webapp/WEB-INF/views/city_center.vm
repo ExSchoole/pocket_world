@@ -89,7 +89,8 @@
 		'addBuilding' : "#springUrl('/city/center/addBuilding')",
 		'getBuildingQueue' : "#springUrl('/getBuildingQueue')",
 		'changeStatus' : "#springUrl('/changeStatus')",
-		'timeInfo' : "#springUrl('/city/center/timeInfo')"
+		'timeInfo' : "#springUrl('/city/center/timeInfo')",
+		'checkResources' : "#springUrl('/city/center/checkResources')"
 	};
 	
 	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'building');

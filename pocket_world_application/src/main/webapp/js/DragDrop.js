@@ -1,4 +1,4 @@
-function DragDropBuild(draggableElement,emptyElement,urls,playerName,info,type){
+function DragDropBuild(draggableElement,emptyElement,urls,playerName, type){
 	 $(function () {
 	    $("." + draggableElement ).draggable({
 	        appendTo: 'body',
@@ -9,7 +9,7 @@ function DragDropBuild(draggableElement,emptyElement,urls,playerName,info,type){
 	    $("." + emptyElement ).droppable({
 	    	hoverClass: "over",
 	        drop: function( event, ui ) {
-	                    build(emptyElement,urls,ui.draggable,this,playerName, info, type);
+	        			ajaxCallCheckResources(playerName, $(ui.draggable).attr("id"), 1, urls, emptyElement, $(this).attr("id"), type);
 	        },
 	      });
 	 });

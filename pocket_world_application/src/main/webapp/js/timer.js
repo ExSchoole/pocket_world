@@ -1,14 +1,13 @@
 function timer(position, timeLeft, playerName, urls, globalType, typeOfBuilding){
 	if (timeLeft<=0){
 		console.log('end');
-		console.log(urls['changeStatus']);
 		$( "#"+'clock'+position ).removeClass( 'clock' );
-		ajaxCallFinishBuild(playerName, position, urls, globalType, typeOfBuilding);
+		ajaxCallFinishBuild(playerName, position, urls, globalType);
 		$("#"+'timer'+position+globalType).text("");
 	}
 	else{
 		$("#"+'timer'+position+globalType).text(typeOfBuilding+" - "+convertTime(timeLeft/1000));
-		console.log(convertTime(timeLeft/1000));
+		//console.log(convertTime(timeLeft/1000));
 		setTimeout(function(){timer(position, timeLeft-1000, playerName, urls, globalType, typeOfBuilding);}, 1000);
 	}
 }
