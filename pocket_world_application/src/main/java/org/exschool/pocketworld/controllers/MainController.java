@@ -13,4 +13,9 @@ public class MainController {
         return "redirect:/login";
     }
 
+    @RequestMapping(value ="/registration", method = RequestMethod.GET)
+    public String showRegistrationPage() {
+        return "registration";
+    }
+
 }

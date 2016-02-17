@@ -1,0 +1,26 @@
+#parse("layout/macros.vm")
+#head("Sign up")
+#@body()
+<link href="#springUrl('/css/registration.css')" rel="stylesheet">
+<div id="container">
+    <div id="topnav" class="topnav"><a href="login" class="signup"><span>Sign up</span></a> </div>
+    <fieldset id="signup_menu">
+        <form id="signup">
+            <label for="username">Username</label>
+            <input id="username" name="username" value="" title="username" tabindex="4" type="text">
+            </p>
+            <p>
+                <label for="password">Password</label>
+                <input id="password" name="password" value="" title="password" tabindex="5" type="password">
+                <label for="reenter_password">Re-enter Password</label>
+                <input id="reenter_password" name="reenter_password" value="" title="Re-enter password" tabindex="5" type="password">
+            </p>
+            <input id="signup_submit" value="Sign up" tabindex="6" type="submit">
+
+            <p class="ahave"> <a href="login" id="already_have">Already have an account?</a> </p>
+        </form>
+    </fieldset>
+</div>
+#end
+
+<script type="text/javascript" src="#springUrl('/js/registration.js')"></script>
