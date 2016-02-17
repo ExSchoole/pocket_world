@@ -8,11 +8,8 @@
     </parent>
     <artifactId>resource_buildings</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
-    <properties>
-        <jackson.version>1.5.3</jackson.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.exschool</groupId>

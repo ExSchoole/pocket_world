@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.Assert;
 import org.exschool.pocketworld.building.model.Building;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.config.TestSpringConfig;
@@ -19,6 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
@@ -35,6 +40,15 @@ public class BuildingServiceTest {
         bootstrap.fillDatabase();
         buildingService.saveAllInformation();
 
+    }
+
+    @Test
+    public void testCreateBuildingForPopulator() {
+        Long cityId= 111L;
+        int position = 22;
+        int level = 33;
+        Long createBuilding = buildingService.createBuilding(cityId,BuildingType.FARM,position,level);
+        assertNotNull(createBuilding);
     }
 
     @Test
@@ -64,7 +78,9 @@ public class BuildingServiceTest {
 
     @Test
     public void testAllBuildings() {
-        assertEquals(bootstrap.getBuildings(),buildingService.allBuildings());
+        List<Building> buildings = buildingService.allBuildings();
+        assertNotNull(buildings);
+        assertFalse(buildings.size() == 0);
     }
 
     @Test
@@ -83,17 +99,62 @@ public class BuildingServiceTest {
         Building existingBuilding = buildingService.get(3L);
         assertNotNull(existingBuilding);
     }
-    
+
     @Test
     public void testGetResourceByBuildingTypeResourceTypeLevel(){
     	assertNotNull(buildingService.getResourceByBuildingTypeResourceTypeLevel(BuildingType.BARN, ResourceType.CLAY, 1));
     }
-    
+
     @Test
     public void testGetTimeByBuildingTypeLevel(){
     	assertNotNull(buildingService.getTimeByBuildingTypeLevel(BuildingType.MALL, 2));
     }
-    
+
+
+    @Test
+    public void testGetAtPositionIfBuildingExist() {
+        Integer position = 1;
+        Long cityId = 1L;
+        Long buildingIdAtThePosition = 1L;
+        Building building = buildingService.getAtPosition(cityId, position);
+        assertNotNull(building);
+        assertEquals(buildingIdAtThePosition, building.getId());
+        assertEquals(cityId, building.getCityId());
+    }
+
+    @Test
+    public void testGetAtPositionIfBuildingDoesntExist() {
+        Integer position = 12;
+        Long cityId = 1L;
+        Building building = buildingService.getAtPosition(cityId, position);
+        assertNull(building);
+    }
+
+    @Test
+    public void testGetAtProperPositionButInDifferentCity() {
+        Integer position = 1;
+        Long nonExistingCityId = 2L;
+        Building building = buildingService.getAtPosition(nonExistingCityId,
+                position);
+        assertNull(building);
+    }
+
+    @Test
+    public void givenBuildingExistInCityAtPosition_isBuildingExistReturnsTrue() {
+        Integer position = 1;
+        Long cityId = 1L;
+        Boolean result = buildingService.isBuildingExist(cityId, position);
+        assertTrue(result);
+    }
+
+    @Test
+    public void givenBuildingDoesntExistInCityAtPosition_isBuildingExistReturnsFalse() {
+        Integer position = 12;
+        Long cityId = 1L;
+        Boolean result = buildingService.isBuildingExist(cityId, position);
+        assertFalse(result);
+    }
+
     private void assertAllFieldsEquals(Building building1, Building building2) {
         assertEquals(building2.getId(), building1.getId());
         assertEquals(building2.getBuildingType(), building1.getBuildingType());
