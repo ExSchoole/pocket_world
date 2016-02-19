@@ -21,6 +21,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
 
@@ -48,6 +49,8 @@ public class CityResourcesServiceImplTest {
     CityResourcesServiceImpl cityResourcesService = new CityResourcesServiceImpl();
     List<ResourceBuilding> buildings;
     PlayerResources playerResources;
+    
+    String playerName = "player-test";
 
     @Before
     public void before() {
@@ -60,6 +63,7 @@ public class CityResourcesServiceImplTest {
         when(playerService.getPlayerByLogin(anyString())).thenReturn(player);
         when(cityService.getCityByPlayerId(anyLong())).thenReturn(new City());
         when(resourceBuildingService.allCityResources(anyLong())).thenReturn(buildings);
+        when(resourceBuildingService.getAtPosition(anyLong(), anyInt())).thenReturn(buildings.get(0));
     }
 
     @Test
@@ -101,6 +105,32 @@ public class CityResourcesServiceImplTest {
     public void testCreateResourceBuildingNullCity() {
         when(cityService.getCityByPlayerId(anyLong())).thenReturn(null);
         cityResourcesService.createResourceBuilding(new PositionOfBuilding(3, ResourceType.GOLD.name()));
+    }
+    @Test
+    public void testGetInfo() {
+    	List<Integer> info= new ArrayList<>();
+  		Player currentPlayer = playerService.getPlayerByLogin(playerName);
+  		City city = cityService.getCityByPlayerId(currentPlayer.getId());
+  		ResourceBuilding building=  resourceBuildingService.getAtPosition(city.getId(), 1);
+  		
+  		Integer level =building.getLevel();
+  		ResourceType resourceType = building.getResourceType();
+  		info.add(resourceBuildingService.getTimeByBuildingTypeLevel(resourceType, level));
+  		for (ResourceType r : ResourceType.values()){
+		     info.add(resourceBuildingService.getResourcesByBuildingTypeLevel(resourceType, r, level));
+ 		}
+		assertNotNull(info);
+    }
+    @Test
+    public void testLevelUp(){
+    	Player currentPlayer = playerService.getPlayerByLogin(playerName);
+		City city = cityService.getCityByPlayerId(currentPlayer.getId());
+		ResourceBuilding building=  resourceBuildingService.getAtPosition(city.getId(), 1);
+		int level= building.getLevel();
+    	building.levelUp();
+    	int currentLevel = building.getLevel();
+    	assertNotEquals(level, currentLevel);
+    	
     }
 }
 

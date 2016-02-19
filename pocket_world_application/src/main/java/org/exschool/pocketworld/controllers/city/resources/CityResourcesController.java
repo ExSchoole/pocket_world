@@ -54,4 +54,28 @@ public class CityResourcesController {
     public void setCityResourcesService(CityResourcesService cityResourcesService) {
         this.cityResourcesService = cityResourcesService;
     }
+    @RequestMapping(value = "/levelUp", method = RequestMethod.POST)
+    public String levelUp(@RequestParam String playerName, @RequestParam int position) {
+    	try {
+    		cityResourcesService.levelUp(playerName, position);
+        	LOGGER.info("player - {} has upgrate building in position - {}",
+        			playerName,position);
+        	return "successMessage";
+		} catch (Exception e) {
+			LOGGER.info("Building has not been upgrated for player - {} in position - {}",
+                    playerName, position);
+			return "errorMessage";
+		}
+    	
+    }
+   
+    @RequestMapping(value="/getInfo",method=RequestMethod.GET)
+    @ResponseBody
+    public List<Integer> getInfo(@RequestParam String playerName, @RequestParam int position){
+    	
+		
+    	LOGGER.info("layer - {} get type of building in position - {}",
+                playerName, position);
+    	return cityResourcesService.getInfo(playerName, position);
+    }
 }

@@ -12,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -59,5 +61,29 @@ public class CityCenterController {
      public void setCityCenterService(CityCenterService cityCenterService) {
         this.cityCenterService = cityCenterService;
     }
+     @RequestMapping(value = "/levelUp", method = RequestMethod.POST)
+     public String levelUp(@RequestParam String playerName, @RequestParam int position) {
+     	try {
+     		cityCenterService.levelUp(playerName, position);
+         	LOGGER.info("player - {} has upgrate building in position - {}",
+         			playerName,position);
+         	return "successMessage";
+ 		} catch (Exception e) {
+ 			LOGGER.info("Building has not been upgrated for player - {} in position - {}",
+                     playerName, position);
+ 			return "errorMessage";
+ 		}
+     	
+     }
+    
+     @RequestMapping(value="/getInfo",method=RequestMethod.GET)
+     @ResponseBody
+     public List<Integer> getInfo(@RequestParam String playerName, @RequestParam int position){
+     	
+ 		
+     	LOGGER.info("layer - {} get type of building in position - {}",
+                 playerName, position);
+     	return cityCenterService.getInfo(playerName, position);
+     }
 
 }
