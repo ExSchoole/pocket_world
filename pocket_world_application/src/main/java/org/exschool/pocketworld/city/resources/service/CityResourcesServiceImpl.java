@@ -14,7 +14,6 @@ import org.exschool.pocketworld.buildQueue.model.Status;
 import org.exschool.pocketworld.buildQueue.model.Type;
 import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.building.ResourceBuildingDto;
-import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.resources.builder.CityResourcesDtoBuilder;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
@@ -148,7 +147,8 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     public boolean checkResources(String playerName, String resourceBuildingType, int level){
     	PlayerResources playerResources = playerService.getPlayerByLogin(playerName).getPlayerResources();
     	for (ResourceType resourceType : ResourceType.values())
-    		if (resourceBuildingService.getResourcesByBuildingTypeLevel(ResourceType.valueOf(resourceBuildingType.toUpperCase()), resourceType, level)
+    		if (resourceBuildingService.getResourcesByBuildingTypeLevel(
+    				ResourceType.valueOf(resourceBuildingType.toUpperCase()), resourceType, level)
     				>playerResources.getAmount(resourceType)) return false;
     	
     	return true;
@@ -159,7 +159,8 @@ public class CityResourcesServiceImpl implements CityResourcesService {
     	for (ResourceType resourceType : ResourceType.values())
     		player.getPlayerResources().setAmount(resourceType, 
     				player.getPlayerResources().getAmount(resourceType) - 
-    				resourceBuildingService.getResourcesByBuildingTypeLevel(resourceBuildingType, resourceType, level));
+    				resourceBuildingService.getResourcesByBuildingTypeLevel(
+    						resourceBuildingType, resourceType, level));
     	
     	playerService.savePlayer(player);
     }

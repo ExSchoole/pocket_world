@@ -61,7 +61,8 @@ public class CityCenterController {
 
     @RequestMapping(value = "/checkResources", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Boolean> checkResources(@RequestParam String playerName, @RequestParam String type, @RequestParam int level){
+    public ResponseEntity<Boolean> checkResources(
+    		@RequestParam String playerName, @RequestParam String type, @RequestParam int level){
     	if (cityCenterService.checkResources(playerName, type, level)) 
     		return new ResponseEntity<Boolean>(true, HttpStatus.OK) ;
     	else 

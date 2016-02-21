@@ -24,7 +24,7 @@ public class MainController {
     public String showCity() {
         return "redirect:/login";
     }
-
+    
     @RequestMapping(value = "/getBuildingQueue", method = RequestMethod.GET)	
     @ResponseBody
     public List<TimeOfBuilding> getBuildingQueue(@RequestParam String playerName) { 

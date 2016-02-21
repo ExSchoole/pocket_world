@@ -144,6 +144,16 @@ public class ResourceBuildingServiceImpl implements ResourceBuildingService {
         return PRODUCTION_RESOURCE_BUILDINGS_INFO.get(new ProductionId(buildingType, level));
     }
 
+	@Override
+	public int getDifferenceBetweenProductionByBuildingTypeLevel(ResourceType buildingType, int newLevel) {
+		if (newLevel==1) 
+			return PRODUCTION_RESOURCE_BUILDINGS_INFO.get(new ProductionId(buildingType, newLevel));
+		else 
+			return PRODUCTION_RESOURCE_BUILDINGS_INFO.get(new ProductionId(buildingType, newLevel))-
+				   PRODUCTION_RESOURCE_BUILDINGS_INFO.get(new ProductionId(buildingType, newLevel-1));
+	};
+
+    
     @Override
     public int getTimeByBuildingTypeLevel(ResourceType buildingType, int level) {
         return TIME_RESOURCE_BUILDINGS_INFO.get(new TimeId(buildingType, level));
@@ -279,6 +289,5 @@ public class ResourceBuildingServiceImpl implements ResourceBuildingService {
             ;
         };
 
-    };
-
+    }
 }

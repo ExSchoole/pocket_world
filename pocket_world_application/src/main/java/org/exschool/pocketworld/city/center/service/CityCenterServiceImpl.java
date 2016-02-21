@@ -7,6 +7,7 @@ import static org.exschool.pocketworld.building.model.BuildingType.PLANT;
 import static org.exschool.pocketworld.building.model.BuildingType.POOL;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,7 @@ import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
+import org.exschool.pocketworld.resource.building.service.ResourceProductionService;
 import org.exschool.pocketworld.resource.model.ResourceType;
 import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
 import org.joda.time.DateTime;
@@ -57,6 +59,8 @@ public class CityCenterServiceImpl implements CityCenterService {
     private PlayerService playerService;
     @Autowired
     private BuildQueueService buildQueueService;
+    @Autowired
+    private ResourceProductionService resourceSpeedService;
 
     @PostConstruct
     private void fillDataBaseInfo(){
@@ -75,7 +79,8 @@ public class CityCenterServiceImpl implements CityCenterService {
             PlayerResources playerResources = new PlayerResources(100, 100, 100, 100);
             Player player = new Player(playerResources, playerName);
             playerService.savePlayer(player);
-
+            resourceSpeedService.createResourceSpeed(player.getId(),new Date());
+            
             City city = new City(player.getId(), cityName);
             cityService.save(city);
 
@@ -148,7 +153,8 @@ public class CityCenterServiceImpl implements CityCenterService {
     public boolean checkResources(String playerName, String buildingType, int level){
     	PlayerResources playerResources = playerService.getPlayerByLogin(playerName).getPlayerResources();
     	for (ResourceType resourceType : ResourceType.values())
-    		if (buildingService.getResourceByBuildingTypeResourceTypeLevel(BuildingType.valueOf(buildingType.toUpperCase()), resourceType, level)
+    		if (buildingService.getResourceByBuildingTypeResourceTypeLevel(
+    				BuildingType.valueOf(buildingType.toUpperCase()), resourceType, level)
     				>playerResources.getAmount(resourceType)) return false;
     	
     	return true;
@@ -158,8 +164,9 @@ public class CityCenterServiceImpl implements CityCenterService {
     public void reduceResources(Player player, BuildingType buildingType, int level){
     	for (ResourceType resourceType : ResourceType.values())
     		player.getPlayerResources().setAmount(resourceType, 
-    				player.getPlayerResources().getAmount(resourceType) - 
-    				buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, resourceType, level));
+    			player.getPlayerResources().getAmount(resourceType) - 
+    			buildingService.getResourceByBuildingTypeResourceTypeLevel(
+    					buildingType, resourceType, level));
     	
     	playerService.savePlayer(player);
     }
