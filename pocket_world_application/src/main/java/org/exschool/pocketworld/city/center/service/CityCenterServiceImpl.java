@@ -6,6 +6,7 @@ import static org.exschool.pocketworld.building.model.BuildingType.MARKETPLACE;
 import static org.exschool.pocketworld.building.model.BuildingType.PLANT;
 import static org.exschool.pocketworld.building.model.BuildingType.POOL;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -258,4 +259,32 @@ public class CityCenterServiceImpl implements CityCenterService {
     public void setPlayerService(PlayerService playerService) {
         this.playerService = playerService;
     }
+    @Override
+  	public void levelUp(String playerName, int position) {
+  		Player currentPlayer = new Player();
+  		currentPlayer=playerService.getPlayerByLogin(playerName);
+  		City city = new City();
+  		city = cityService.getCityByPlayerId(currentPlayer.getId());
+  		Building building= new Building();
+  		building =buildingService.getAtPosition(city.getId(), position);
+      	building.levelUp();
+      	buildingService.save(building);
+  		
+  	}
+
+  	@Override
+  	public List<Integer> getInfo(String playerName, int position) {
+  		List<Integer> info= new ArrayList<>();
+  		Player currentPlayer = playerService.getPlayerByLogin(playerName);
+  		City city = cityService.getCityByPlayerId(currentPlayer.getId());
+  		Building building=  buildingService.getAtPosition(city.getId(), position);
+  		
+  		Integer level =building.getLevel();
+  		BuildingType buildingType = building.getBuildingType();
+  		info.add(buildingService.getTimeByBuildingTypeLevel(buildingType, level));
+  		for (ResourceType r : ResourceType.values()){
+  		     info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, r, level));
+  		}
+  		return info;
+  	}
 }

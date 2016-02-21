@@ -2,6 +2,7 @@ package org.exschool.pocketworld.city.resources.service;
 
 import static org.apache.commons.lang.Validate.notNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -188,9 +189,39 @@ public class CityResourcesServiceImpl implements CityResourcesService {
         // -- end temporary
     }
     
+
     public int getTimeInfo(String type, int level){
     	return resourceBuildingService.getTimeByBuildingTypeLevel(ResourceType.valueOf(type), level);
     }
+
+
+    public void levelUp(String playerName, int position) {
+  		Player currentPlayer = new Player();
+  		currentPlayer=playerService.getPlayerByLogin(playerName);
+  		City city = new City();
+  		city = cityService.getCityByPlayerId(currentPlayer.getId());
+  		ResourceBuilding building= new ResourceBuilding();
+  		building =resourceBuildingService.getAtPosition(city.getId(), position);
+      	building.levelUp();
+      	resourceBuildingService.save(building);
+  		
+  	}
+
+  	@Override
+  	public List<Integer> getInfo(String playerName, int position) {
+  		List<Integer> info= new ArrayList<>();
+  		Player currentPlayer = playerService.getPlayerByLogin(playerName);
+  		City city = cityService.getCityByPlayerId(currentPlayer.getId());
+  		ResourceBuilding building=  resourceBuildingService.getAtPosition(city.getId(), position);
+  		
+  		Integer level =building.getLevel();
+  		ResourceType resourceType = building.getResourceType();
+  		info.add(resourceBuildingService.getTimeByBuildingTypeLevel(resourceType, level));
+  		for (ResourceType r : ResourceType.values()){
+ 		     info.add(resourceBuildingService.getResourcesByBuildingTypeLevel(resourceType, r, level));
+  		}
+  		return info;
+  	}
 
     private static Map<BuildingResourceId, Integer> getResourceInfo(Map<BuildingResourceId, Integer> resourcesInfo) {
         Map<BuildingResourceId, Integer> result = new HashMap<>();
@@ -229,4 +260,6 @@ public class CityResourcesServiceImpl implements CityResourcesService {
 
                 }
             };
+    
+    
 }

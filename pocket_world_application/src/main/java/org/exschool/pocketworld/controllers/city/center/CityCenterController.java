@@ -1,6 +1,7 @@
 package org.exschool.pocketworld.controllers.city.center;
 
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -78,5 +79,30 @@ public class CityCenterController {
     public int getTimeInfo(@RequestParam String type, @RequestParam int level){ 
      	return cityCenterService.getTimeInfo(type.toUpperCase(), level);
     }
+
+     @RequestMapping(value = "/levelUp", method = RequestMethod.POST)
+     public String levelUp(@RequestParam String playerName, @RequestParam int position) {
+     	try {
+     		cityCenterService.levelUp(playerName, position);
+         	LOGGER.info("player - {} has upgrate building in position - {}",
+         			playerName,position);
+         	return "successMessage";
+ 		} catch (Exception e) {
+ 			LOGGER.info("Building has not been upgrated for player - {} in position - {}",
+                     playerName, position);
+ 			return "errorMessage";
+ 		}
+     	
+     }
+    
+     @RequestMapping(value="/getInfo",method=RequestMethod.GET)
+     @ResponseBody
+     public List<Integer> getInfo(@RequestParam String playerName, @RequestParam int position){
+     	
+ 		
+     	LOGGER.info("layer - {} get type of building in position - {}",
+                 playerName, position);
+     	return cityCenterService.getInfo(playerName, position);
+     }
 
 }

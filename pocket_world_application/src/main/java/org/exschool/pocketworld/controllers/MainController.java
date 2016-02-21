@@ -36,4 +36,10 @@ public class MainController {
     public void changeStatus(@RequestParam String playerName, int position, String type){ 
     	commonCityService.changeStatus(playerName, position, type);
     }
+
+    @RequestMapping(value ="/registration", method = RequestMethod.GET)
+    public String showRegistrationPage() {
+        return "registration";
+    }
+
 }
