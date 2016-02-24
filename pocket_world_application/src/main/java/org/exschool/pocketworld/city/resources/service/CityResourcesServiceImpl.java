@@ -2,7 +2,6 @@ package org.exschool.pocketworld.city.resources.service;
 
 import static org.apache.commons.lang.Validate.notNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +18,7 @@ import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.resources.builder.CityResourcesDtoBuilder;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.service.CityService;
+import org.exschool.pocketworld.dto.BuildingInfo;
 import org.exschool.pocketworld.dto.PositionOfBuilding;
 import org.exschool.pocketworld.player.builder.PlayerBuilder;
 import org.exschool.pocketworld.player.model.Player;
@@ -196,31 +196,54 @@ public class CityResourcesServiceImpl implements CityResourcesService {
 
 
     public void levelUp(String playerName, int position) {
-  		Player currentPlayer = new Player();
-  		currentPlayer=playerService.getPlayerByLogin(playerName);
-  		City city = new City();
-  		city = cityService.getCityByPlayerId(currentPlayer.getId());
-  		ResourceBuilding building= new ResourceBuilding();
-  		building =resourceBuildingService.getAtPosition(city.getId(), position);
-      	building.levelUp();
-      	resourceBuildingService.save(building);
-  		
+    	Player player = playerService.getPlayerByLogin(playerName);        
+        Long userId = player.getId();
+        City city = cityService.getCityByPlayerId(userId);
+        notNull(city);
+        Long cityId = city.getId();
+    	
+    	ResourceBuilding building = resourceBuildingService.getAtPosition(cityId, position);
+    	
+    	Long buildingTimeMillis = (long) resourceBuildingService.getTimeByBuildingTypeLevel(
+                building.getResourceType(),
+                building.getLevel()+1)*1000;
+    	
+    	reduceResources(player, building.getResourceType(), building.getLevel()+1);
+    	
+    	BuildQueueRecord record = BuildQueueBuilder.builder().name(building.getResourceType().name().toLowerCase())
+        		.position(position)
+                .level(building.getLevel()+1)
+                .type(Type.RESOURCE_BUILDING)
+                .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis )
+                					.withZone(DateTimeZone.UTC).toDate())
+                .userId(userId)
+                .status(Status.QUEUED)
+                .buildingId(building.getId()).build();
+    	
+        buildQueueService.save(record); 		
   	}
 
   	@Override
-  	public List<Integer> getInfo(String playerName, int position) {
-  		List<Integer> info= new ArrayList<>();
+  	public BuildingInfo getInfo(String playerName, int position) {
+  		BuildingInfo buildingInfo = new BuildingInfo();
+  		
   		Player currentPlayer = playerService.getPlayerByLogin(playerName);
   		City city = cityService.getCityByPlayerId(currentPlayer.getId());
-  		ResourceBuilding building=  resourceBuildingService.getAtPosition(city.getId(), position);
+  		ResourceBuilding building = resourceBuildingService.getAtPosition(city.getId(), position);
   		
-  		Integer level =building.getLevel();
-  		ResourceType resourceType = building.getResourceType();
-  		info.add(resourceBuildingService.getTimeByBuildingTypeLevel(resourceType, level));
+  		buildingInfo.setLevel(building.getLevel());
+  		buildingInfo.setType(building.getResourceType().name().toLowerCase());
+  		buildingInfo.setTime(resourceBuildingService.getTimeByBuildingTypeLevel(
+  				building.getResourceType(), building.getLevel()+1));
+  		buildingInfo.setResourceDto(new ResourceDto());
+  		
   		for (ResourceType r : ResourceType.values()){
- 		     info.add(resourceBuildingService.getResourcesByBuildingTypeLevel(resourceType, r, level));
+  			buildingInfo.getResourceDto().setAmount(r, 
+  					resourceBuildingService.getResourcesByBuildingTypeLevel(
+  							building.getResourceType(), r, building.getLevel()+1)); 
   		}
-  		return info;
+  		
+  		return buildingInfo;
   	}
 
     private static Map<BuildingResourceId, Integer> getResourceInfo(Map<BuildingResourceId, Integer> resourcesInfo) {

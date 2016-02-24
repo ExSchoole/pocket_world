@@ -73,20 +73,21 @@
 
 <script type="text/template" class="template">
 
-        <h5>Time: <%- rc[0] %> </h5>
-        <h5>Gold: <%- rc[1] %></h5>
-        <h5>Timber: <%- rc[2] %></h5>
-        <h5>Clay: <%- rc[3] %></h5>
-        <h5>Corn: <%- rc[4] %></h5>
+        <h5>Time: <%- convertTime(rc['time']) %> </h5>
+        <h5>Gold: <%- rc['resourceDto']['gold'] %></h5>
+        <h5>Timber: <%- rc['resourceDto']['timber'] %></h5>
+        <h5>Clay: <%- rc['resourceDto']['clay'] %></h5>
+        <h5>Corn: <%- rc['resourceDto']['corn'] %></h5>
         <button class="btn btn-primary lvlUp">Level Up</button>
 
     </script>
 #end
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/cityResources.js')"></script>
-<<<<<<< HEAD
 <script type="text/javascript" src="#springUrl('/js/timer.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/ajaxCalls.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/levelUp.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/underscore.js')"></script>
 
 <script type="text/javascript">
 	var urls = {
@@ -94,25 +95,22 @@
 		'types' : "#springUrl('/city/resources/types')",
 		'getBuildingQueue' : "#springUrl('/getBuildingQueue')",
 		'changeStatus' : "#springUrl('/changeStatus')",
-		'types' : "#springUrl('/city/resources/types')",
 		'timeInfo' : "#springUrl('/city/resources/timeInfo')",
-		'checkResources' : "#springUrl('/city/resources/checkResources')"
+		'checkResources' : "#springUrl('/city/resources/checkResources')",
+		'levelUp' : "#springUrl('/city/resources/levelUp')",
+		'getInfo' : "#springUrl('/city/resources/getInfo')",
+		'getTypeLevel' : "#springUrl('/city/resources/getTypeLevel')"
 	};
 
 	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'resource_building');
 	
     CityResources("building_empty", "building", urls, "$dto.getNickName()", 'resource_building');
-=======
-<script type="text/javascript" src="#springUrl('/js/levelUp.js')"></script>
-<script type="text/javascript" src="#springUrl('/js/underscore.js')"></script>
-
-<script>
-    CityResources("building_empty", "building", "#springUrl('/city/resources/buildings/')", "#springUrl('/city/resources/types')","$dto.getNickName()");
    
     _.templateSettings.variable = "rc";
         var template = _.template(
             $( "script.template" ).html()
         );
-     levelUpBuilding("#springUrl('/city/resources/')","$dto.getNickName()",template);
->>>>>>> origin
+
+
+      levelUpBuilding(urls,"$dto.getNickName()",template,'resource_building');
 </script>

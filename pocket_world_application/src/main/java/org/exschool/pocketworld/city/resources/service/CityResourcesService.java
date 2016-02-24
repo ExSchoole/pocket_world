@@ -1,8 +1,7 @@
 package org.exschool.pocketworld.city.resources.service;
 
-import java.util.List;
-
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
+import org.exschool.pocketworld.dto.BuildingInfo;
 import org.exschool.pocketworld.dto.PositionOfBuilding;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.resource.model.ResourceType;
@@ -20,5 +19,5 @@ public interface CityResourcesService {
 
 	void levelUp(String playerName, int position);
 
-	List<Integer> getInfo(String playerName, int position);
+	BuildingInfo getInfo(String playerName, int position);
 }

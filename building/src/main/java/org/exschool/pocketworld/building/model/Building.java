@@ -96,9 +96,4 @@ public class Building {
         result = 31 * result + (cityId != null ? cityId.hashCode() : 0);
         return result;
     }
-
-	public void levelUp() {
-		this.level++;
-		
-	}
 }

@@ -1,15 +1,18 @@
- function levelUpBuilding(url,playerName,template){
-      $( ".building" ).click(function() {
+ function levelUpBuilding(urls,playerName,template,globalType){
+      $( ".building:not(:has(.timer))" ).click(function() {
 
+    	  console.log($(this).attr("id"));
+    	  
           var $div = $(this);
           $.ajax({
-               url: url+"/getInfo",
+               url: urls['getInfo'],
                dataType:'json',
                type: "GET",
                contentType: "application/json; charset=utf-8",
                data : { playerName: playerName , position: $(this).attr("id")},
                          success : function(info) {
-            	   			showPopoverInfo($div,url,playerName,info,template)
+            	   			 console.log(info);
+                        	 showPopoverInfo($div, urls, playerName, info, template, globalType)
                          }
                })     
       });
@@ -19,8 +22,7 @@
       });   
 }
 
-function showPopoverInfo(element,url,playerName,info,template){
-
+function showPopoverInfo(element,urls,playerName,info,template,globalType){
     element.popover({
         title: "Upgrade",
         content: template(info),
@@ -30,22 +32,13 @@ function showPopoverInfo(element,url,playerName,info,template){
     }).on('shown.bs.popover', function () {
         var $popup = $(this);
         $(this).next('.popover').find('button.lvlUp').click(function (e) {
-                  
-               ajaxLvlUp(url,playerName,element.attr("id"));    
+            
+        	//ajaxCallGetTypeLevel(playerName, urls, element.attr("id"), globalType);
+        	ajaxCallCheckResources(playerName, info['type'], info['level']+1, urls, "", element.attr("id"), globalType, false);
+            //ajaxLvlUp(urls,playerName,element.attr("id"));    
             $popup.popover('hide');
+        
         });
 
     }).popover('show');
-}
-
-function ajaxLvlUp(url,playerName,id){
-$.ajax({
-           type: 'POST',
-           url: url+"/levelUp",
-           data : { playerName: playerName , position: id},
-           success : function(data,textStatus) {
-                            $("#message").html(data);
-                            console.log(textStatus);
-                     }
-           });          
 }

@@ -46,6 +46,18 @@ div.clock{
     background-image: url(../images/clock.png);
 }
 
+div.level1{
+    background-image: url(../images/level1.png);
+}
+
+div.level2{
+    background-image: url(../images/level2.png);
+}
+
+div.level3{
+    background-image: url(../images/level3.png);
+}
+
 div.building_market {
     background-image: url(../images/marketplace.png);
 }
@@ -58,6 +70,12 @@ div.building_null {
     background-image: url(../images/museum39.png);
     height: 310px;
     width: 310px;
+}
+
+div.building_clock, div.building_level  {
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
 }
 
 div.building, div.building_empty {
@@ -129,6 +147,8 @@ div.info_timers {
     border-color: blue;
     width: 200px;
 }
+
+
 
 div.center_align {
     text-align: center;

@@ -1,13 +1,13 @@
 package org.exschool.pocketworld.controllers.city.center;
 
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
 import org.exschool.pocketworld.city.common.service.CommonCityService;
+import org.exschool.pocketworld.dto.BuildingInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,12 +97,10 @@ public class CityCenterController {
     
      @RequestMapping(value="/getInfo",method=RequestMethod.GET)
      @ResponseBody
-     public List<Integer> getInfo(@RequestParam String playerName, @RequestParam int position){
-     	
- 		
+     public BuildingInfo getInfo(@RequestParam String playerName, @RequestParam int position){ 		
      	LOGGER.info("layer - {} get type of building in position - {}",
                  playerName, position);
+     	
      	return cityCenterService.getInfo(playerName, position);
      }
-
 }

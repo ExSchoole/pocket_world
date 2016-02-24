@@ -6,7 +6,6 @@ import static org.exschool.pocketworld.building.model.BuildingType.MARKETPLACE;
 import static org.exschool.pocketworld.building.model.BuildingType.PLANT;
 import static org.exschool.pocketworld.building.model.BuildingType.POOL;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,6 +30,7 @@ import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.service.CityService;
+import org.exschool.pocketworld.dto.BuildingInfo;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
@@ -77,7 +77,7 @@ public class CityCenterServiceImpl implements CityCenterService {
     private void initialization(String playerName) { //temporary
         if(playerService.getPlayerByLogin(playerName)==null) {
             String cityName = "City name";
-            PlayerResources playerResources = new PlayerResources(100, 100, 100, 100);
+            PlayerResources playerResources = new PlayerResources(1000, 1000, 1000, 1000);
             Player player = new Player(playerResources, playerName);
             playerService.savePlayer(player);
             resourceSpeedService.createResourceSpeed(player.getId(),new Date());
@@ -173,6 +173,35 @@ public class CityCenterServiceImpl implements CityCenterService {
     }
     
     @Override
+  	public void levelUp(String playerName, int position) {
+    	Player player = playerService.getPlayerByLogin(playerName);        
+        Long userId = player.getId();
+        City city = cityService.getCityByPlayerId(userId);
+        notNull(city);
+        Long cityId = city.getId();
+    	
+    	Building building = buildingService.getAtPosition(cityId, position);
+    	
+    	Long buildingTimeMillis = (long) buildingService.getTimeByBuildingTypeLevel(
+                building.getBuildingType(),
+                building.getLevel()+1)*1000;
+    	
+    	reduceResources(player, building.getBuildingType(), building.getLevel()+1);
+    	
+    	BuildQueueRecord record = BuildQueueBuilder.builder().name(building.getBuildingType().name().toLowerCase())
+        		.position(position)
+                .level(building.getLevel()+1)
+                .type(Type.BUILDING)
+                .buildEnd(new DateTime(System.currentTimeMillis() + buildingTimeMillis )
+                					.withZone(DateTimeZone.UTC).toDate())
+                .userId(userId)
+                .status(Status.QUEUED)
+                .buildingId(building.getId()).build();
+    	
+        buildQueueService.save(record);
+  	}
+    
+    @Override
     public boolean addBuilding(String playerName, String type, final int position) {
         if (position > MAX_POSITION || position < MIN_POSITION) return false;
         
@@ -259,32 +288,27 @@ public class CityCenterServiceImpl implements CityCenterService {
     public void setPlayerService(PlayerService playerService) {
         this.playerService = playerService;
     }
-    @Override
-  	public void levelUp(String playerName, int position) {
-  		Player currentPlayer = new Player();
-  		currentPlayer=playerService.getPlayerByLogin(playerName);
-  		City city = new City();
-  		city = cityService.getCityByPlayerId(currentPlayer.getId());
-  		Building building= new Building();
-  		building =buildingService.getAtPosition(city.getId(), position);
-      	building.levelUp();
-      	buildingService.save(building);
-  		
-  	}
 
   	@Override
-  	public List<Integer> getInfo(String playerName, int position) {
-  		List<Integer> info= new ArrayList<>();
+  	public BuildingInfo getInfo(String playerName, int position) {
+  		BuildingInfo buildingInfo = new BuildingInfo();
+  		
   		Player currentPlayer = playerService.getPlayerByLogin(playerName);
   		City city = cityService.getCityByPlayerId(currentPlayer.getId());
-  		Building building=  buildingService.getAtPosition(city.getId(), position);
+  		Building building = buildingService.getAtPosition(city.getId(), position);
   		
-  		Integer level =building.getLevel();
-  		BuildingType buildingType = building.getBuildingType();
-  		info.add(buildingService.getTimeByBuildingTypeLevel(buildingType, level));
+  		buildingInfo.setLevel(building.getLevel());
+  		buildingInfo.setType(building.getBuildingType().name().toLowerCase());
+  		buildingInfo.setTime(buildingService.getTimeByBuildingTypeLevel(
+  				building.getBuildingType(), building.getLevel()+1));
+  		buildingInfo.setResourceDto(new ResourceDto());
+  		
   		for (ResourceType r : ResourceType.values()){
-  		     info.add(buildingService.getResourceByBuildingTypeResourceTypeLevel(buildingType, r, level));
+  			buildingInfo.getResourceDto().setAmount(r, 
+  					buildingService.getResourceByBuildingTypeResourceTypeLevel(
+  							building.getBuildingType(), r, building.getLevel()+1)); 
   		}
-  		return info;
+  		
+  		return buildingInfo;
   	}
 }

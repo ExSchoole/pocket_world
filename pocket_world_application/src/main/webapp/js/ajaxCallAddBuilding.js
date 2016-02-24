@@ -7,7 +7,9 @@ function build(classOfEmptyElement, urls, typeOfSelectedBuilding, selectedPositi
         						$("#message").html(data);
             					$('#' + selectedPosition ).removeClass( classOfEmptyElement )
 	                                         .addClass( "building_" + typeOfSelectedBuilding )
-	                                         .addClass( 'building' );
+	                                         .addClass( 'building' )
+            								 .addClass( 'timer' );
+            					
             					$( "#"+'clock'+selectedPosition ).addClass( 'clock' );
 
 	                            $('#' + selectedPosition ).droppable( "disable" );

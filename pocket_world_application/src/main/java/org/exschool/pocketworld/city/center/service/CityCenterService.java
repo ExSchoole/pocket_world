@@ -3,11 +3,11 @@ package org.exschool.pocketworld.city.center.service;
 
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
+import org.exschool.pocketworld.dto.BuildingInfo;
 import org.exschool.pocketworld.player.model.Player;
 
 public interface CityCenterService {
@@ -23,7 +23,7 @@ public interface CityCenterService {
     
     void reduceResources(Player player, BuildingType buildingType, int level);
 	
-    List<Integer> getInfo(String playerName, int position);
+    BuildingInfo getInfo(String playerName, int position);
 	
     void levelUp(String playerName, int position);
 }

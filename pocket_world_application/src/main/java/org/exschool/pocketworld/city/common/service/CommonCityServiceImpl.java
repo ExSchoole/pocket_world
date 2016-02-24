@@ -102,6 +102,7 @@ public class CommonCityServiceImpl implements CommonCityService {
     		currentQueue.add(new TimeOfBuilding(r.getPosition(),Seconds.secondsBetween(
     						 new DateTime(System.currentTimeMillis()), 
     						 new DateTime(r.getBuildEnd())).getSeconds(), 
+    						 r.getLevel(),
     						 r.getType().name().toLowerCase(),
     						 r.getName()));
     	}	
@@ -112,11 +113,11 @@ public class CommonCityServiceImpl implements CommonCityService {
     	buildQueueService.updateStatus(Status.DONE, position, playerService.getPlayerByLogin(playerName).getId(), type);
     	Long userId = playerService.getPlayerByLogin(playerName).getId();
     	Long cityId = cityService.getCityId(userId);
-    	if (type.equals(Type.BUILDING.name().toLowerCase()))
-    		buildingService.increaseLevel(cityId, 
-    					new ArrayList<Long>(Arrays.asList(
-    						buildingService.getAtPosition(cityId, position).getId())));
-    	else{ 
+    	if (type.equals(Type.BUILDING.name().toLowerCase())){
+    		ArrayList<Long> list = new ArrayList<Long>(Arrays.asList(
+					buildingService.getAtPosition(cityId, position).getId()));
+    		buildingService.increaseLevel(cityId, list);
+    	}else{ 
     		resourceBuildingService.increaseLevel(cityId, 
     					new ArrayList<Long>(Arrays.asList(
     						resourceBuildingService.getAtPosition(cityId, position).getId())));

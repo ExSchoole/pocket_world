@@ -9,7 +9,7 @@ function DragDropBuild(draggableElement,emptyElement,urls,playerName, type){
 	    $("." + emptyElement ).droppable({
 	    	hoverClass: "over",
 	        drop: function( event, ui ) {
-	        			ajaxCallCheckResources(playerName, $(ui.draggable).attr("id"), 1, urls, emptyElement, $(this).attr("id"), type);
+	        			ajaxCallCheckResources(playerName, $(ui.draggable).attr("id"), 1, urls, emptyElement, $(this).attr("id"), type, true);
 	        },
 	      });
 	 });

@@ -1,14 +1,17 @@
-function timer(position, timeLeft, playerName, urls, globalType, typeOfBuilding){
+function timer(position, timeLeft, playerName, level, urls, globalType, typeOfBuilding){
 	if (timeLeft<=0){
-		console.log('end');
+		console.log('end '+ level);
+		$( '#' + position ).removeClass( 'timer' );
 		$( "#"+'clock'+position ).removeClass( 'clock' );
+		$( "#"+'level'+position ).removeClass( 'level' + level-1 );
+		$( "#"+'level'+position ).addClass( 'level' + level );
+		
 		ajaxCallFinishBuild(playerName, position, urls, globalType);
 		$("#"+'timer'+position+globalType).text("");
 	}
 	else{
 		$("#"+'timer'+position+globalType).text(typeOfBuilding+" - "+convertTime(timeLeft/1000));
-		//console.log(convertTime(timeLeft/1000));
-		setTimeout(function(){timer(position, timeLeft-1000, playerName, urls, globalType, typeOfBuilding);}, 1000);
+		setTimeout(function(){timer(position, timeLeft-1000, playerName, level, urls, globalType, typeOfBuilding);}, 1000);
 	}
 }
 

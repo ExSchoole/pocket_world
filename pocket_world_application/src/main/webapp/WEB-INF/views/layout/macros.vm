@@ -52,11 +52,13 @@
     #set($building = ${buildings.get($position)})
     #if(  $building  )
         <div class="building_$building.getType() building_position building" id=$position>
-        	<div class="building" id=clock$position></div>
+        	<div class="col-md-8 building_clock" id=clock$position></div>
+        	<div class="col-md-4 building_level level$building.getLevel()" id=level$position></div>
         </div>
     #else
         <div class="building_position building_empty" id=$position>
-       		<div class="building" id=clock$position></div>
+       		<div class="col-md-8 building_clock" id=clock$position></div>
+       		<div class="col-md-4 building_level" id=level$position></div>
         </div>
     #end
 #end

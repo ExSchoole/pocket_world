@@ -7,10 +7,12 @@ function ajaxCallGetBuildingQueue(playerName, urls, currentType){
 		   success : function(data) {
 			   			console.log(data);
 			   			$.each(data, function(index, object){
-			   				if (currentType.localeCompare(object['type']) == 0)
+			   				if (currentType.localeCompare(object['type']) == 0){
 			   					$( "#"+'clock'+object['position'] ).addClass('clock');
+			   				}
 			   				
-			   				timer(object['position'], object['time']*1000, playerName,  urls, object['type'], object['buildingType']);			   							   	
+			   				$( '#' + object['position'] ).addClass( 'timer' );
+			   				timer(object['position'], object['time']*1000, playerName, object['level'],  urls, object['type'], object['buildingType']);			   							   	
 			   			});
 		   			 }
 	   });
@@ -36,22 +38,46 @@ function ajaxCallGetTimeInfo(type, level, selectedPosition, playerName, urls, gl
 		   success : function(data) {
 			   			console.log('success');
 			   			console.log(data);
-			   			timer(selectedPosition,data*1000, playerName, urls, globalType, type);
+			   			
+			   			$( '#' + selectedPosition ).addClass( 'timer' );
+			   			timer(selectedPosition,data*1000, playerName, level, urls, globalType, type);
 		   			 }
 	   });
 	
 }
 
-function ajaxCallCheckResources(playerName, type, level, urls, emptyElement, position, globalType){	
+function ajaxCallCheckResources(playerName, type, level, urls, emptyElement, position, globalType, boolNewBuilding){	
 	$.ajax({
 		   type: 'GET',
 		   url: urls['checkResources'],
 		   data : {playerName: playerName, type: type, level: level},
 		   success : function(data) {
 			   			console.log(data);
-			   
-			   			if (data) 
-			   				build(emptyElement, urls, type, position, playerName, globalType);
+			   		
+			   			if (data){ 
+			   				if (boolNewBuilding == true){
+			   					build(emptyElement, urls, type, position, playerName, globalType);
+			   				}
+			   				else{ 
+			   					ajaxCallLevelUp(urls, type, position, level, playerName, globalType);
+			   				}
+			   			}
 		   			 }
 	   });
 }
+
+
+function ajaxCallLevelUp(urls, typeOfSelectedBuilding, position, level, playerName, type){
+    $.ajax({
+        type: 'POST',
+        url: urls['levelUp'],
+        data : { playerName: playerName , position: position},
+        success: function (data, textStatus) {
+        						$("#message").html(data);
+        						
+            					$( "#"+'clock'+position ).addClass( 'clock' );
+	                            
+	                            ajaxCallGetTimeInfo(typeOfSelectedBuilding, level, position, playerName, urls, type);
+    		   			 }
+    	   });
+};

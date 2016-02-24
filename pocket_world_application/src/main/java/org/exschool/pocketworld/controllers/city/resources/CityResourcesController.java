@@ -6,6 +6,7 @@ import java.util.Map;
 import org.exschool.pocketworld.city.common.service.CommonCityService;
 import org.exschool.pocketworld.city.resources.dto.CityResourcesDto;
 import org.exschool.pocketworld.city.resources.service.CityResourcesService;
+import org.exschool.pocketworld.dto.BuildingInfo;
 import org.exschool.pocketworld.dto.PositionOfBuilding;
 import org.exschool.pocketworld.resource.model.ResourceType;
 import org.slf4j.Logger;
@@ -97,7 +98,7 @@ public class CityResourcesController {
    
     @RequestMapping(value="/getInfo",method=RequestMethod.GET)
     @ResponseBody
-    public List<Integer> getInfo(@RequestParam String playerName, @RequestParam int position){
+    public BuildingInfo getInfo(@RequestParam String playerName, @RequestParam int position){
     	
 		
     	LOGGER.info("layer - {} get type of building in position - {}",
