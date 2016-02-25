@@ -32,18 +32,21 @@ public class Populator {
         String player1Login = "login-1";
         String player2Login = "login-2";
         String player3Login = "login-3";
+        String password1 = "user1";
+        String password2 = "user2";
+        String password3 = "user3";
 
         Long player1Id = playerService.isPlayerExist(player1Login) ?
                 playerService.getPlayerId(player1Login) :
-                playerService.createPlayer(player1Login, new PlayerResources(0, 1, 2, 3));
+                playerService.createPlayer(player1Login, password1, new PlayerResources(0, 1, 2, 3));
 
         Long player2Id = playerService.isPlayerExist(player2Login) ?
                 playerService.getPlayerId(player2Login) :
-                playerService.createPlayer(player2Login, new PlayerResources(0, 1, 2, 3));
+                playerService.createPlayer(player2Login, password2, new PlayerResources(0, 1, 2, 3));
 
         Long player3Id = playerService.isPlayerExist(player3Login) ?
                 playerService.getPlayerId(player3Login) :
-                playerService.createPlayer(player3Login, new PlayerResources(9, 9, 9, 9));
+                playerService.createPlayer(player3Login, password3, new PlayerResources(9, 9, 9, 9));
 
         Long city1Id = cityService.isCityExist(player1Id) ?
                 cityService.getCityId(player1Id) :
@@ -59,7 +62,7 @@ public class Populator {
             buildingService.createBuilding(city1Id, BuildingType.BARN, 1, 0);
         }
         if (!buildingService.isBuildingExist(city1Id, 2)) {
-            buildingService.createBuilding(city1Id, BuildingType.FARM, 24, 1);
+            buildingService.createBuilding(city1Id, BuildingType.FARM, 6, 1);
         }
         if (!buildingService.isBuildingExist(city1Id, 12)) {
             buildingService.createBuilding(city1Id, BuildingType.GILOTHOME, 12, 0);

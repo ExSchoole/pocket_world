@@ -8,7 +8,7 @@ public interface PlayerService {
 
     Player getPlayerByLogin(String login);
 
-    Long createPlayer(String playerLogin, PlayerResources playerResources);
+    Long createPlayer(String playerLogin, String password, PlayerResources playerResources);
 
     boolean isPlayerExist(String login);
 
