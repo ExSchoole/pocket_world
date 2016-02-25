@@ -21,6 +21,7 @@
       $( "body" ).mouseup(function() {
     	  console.log("back");
     	  hideAllPopovers();
+    	  destroyAllPopovers();
       });   
 }
 
