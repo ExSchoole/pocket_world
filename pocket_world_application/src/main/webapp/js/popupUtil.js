@@ -17,3 +17,9 @@ function hideAllPopovers(){
         $(this).popover('hide');
     })
 }
+
+function destroyAllPopovers(){
+    $(".popover").each(function(index){
+        $(this).popover('destroy');
+    })
+}
