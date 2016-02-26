@@ -1,12 +1,12 @@
-function build(classOfEmptyElement, urls, typeOfSelectedBuilding, selectedPosition, playerName, type){
-    $.ajax({
+function build(playerName, typeOfBuilding, urls, classOfEmptyElement, selectedPosition, globalType){
+	$.ajax({
         type: 'POST',
         url: urls['addBuilding'],
-        data: {playerName: playerName, type: typeOfSelectedBuilding, position: selectedPosition},
+        data: {playerName: playerName, type: typeOfBuilding, position: selectedPosition},
         success: function (data, textStatus) {
         						$("#message").html(data);
             					$('#' + selectedPosition ).removeClass( classOfEmptyElement )
-	                                         .addClass( "building_" + typeOfSelectedBuilding )
+	                                         .addClass( "building_" + typeOfBuilding )
 	                                         .addClass( 'building' )
             								 .addClass( 'timer' );
             					
@@ -14,9 +14,9 @@ function build(classOfEmptyElement, urls, typeOfSelectedBuilding, selectedPositi
 
 	                            $('#' + selectedPosition ).droppable( "disable" );
 	                            
-	                            ajaxCallGetTimeInfo(typeOfSelectedBuilding, 1, selectedPosition, playerName, urls, type);
+	                            ajaxCallGetTimeInfo(playerName, typeOfBuilding, 1, urls, selectedPosition, globalType);
 	                            
-	                            $("#"+typeOfSelectedBuilding).remove();
+	                            $("#"+typeOfBuilding).remove();
     		   			 }
     	   });
 };

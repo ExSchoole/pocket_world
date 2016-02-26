@@ -110,7 +110,7 @@
 		'getTypeLevel' : "#springUrl('/city/center/getTypeLevel')"
 	};
 	
-	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'building');
+	ajaxCallGetBuildingQueue(urls, "$dto.getNickName()", 'building');
 	
 	DragDropBuild("building_karusel","building_empty", urls, "$dto.getNickName()", 'building');
 	

@@ -102,7 +102,7 @@
 		'getTypeLevel' : "#springUrl('/city/resources/getTypeLevel')"
 	};
 
-	ajaxCallGetBuildingQueue("$dto.getNickName()", urls, 'resource_building');
+	ajaxCallGetBuildingQueue(urls, "$dto.getNickName()", 'resource_building');
 	
     CityResources("building_empty", "building", urls, "$dto.getNickName()", 'resource_building');
    

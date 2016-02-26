@@ -1,11 +1,12 @@
  function levelUpBuilding(urls,playerName,template,globalType){
-      
+	 var flag = false;
+	 
 	 $( ".building" ).click(function() {
-
-    	  console.log($(this).attr("id"));
-    	  
-          var $div = $(this);
-          $.ajax({
+		if ($(this).hasClass('timer')==false && flag==false){ 
+			flag = true;
+			console.log($(this).attr("id"));   	  
+			var $div = $(this);
+			$.ajax({
                url: urls['getInfo'],
                dataType:'json',
                type: "GET",
@@ -13,13 +14,16 @@
                data : { playerName: playerName , position: $(this).attr("id")},
                          success : function(info) {
             	   			 console.log(info);
-                        	 showPopoverInfo($div, urls, playerName, info, template, globalType)
+            	   			 flag = false;
+            	   			 if(info['level']<3){
+            	   				 showPopoverInfo($div, urls, playerName, info, template, globalType);
+            	   			 }
                          }
                })     
-      });
+		}
+	});
       
       $( "body" ).mouseup(function() {
-    	  console.log("back");
     	  hideAllPopovers();
     	  destroyAllPopovers();
       });   

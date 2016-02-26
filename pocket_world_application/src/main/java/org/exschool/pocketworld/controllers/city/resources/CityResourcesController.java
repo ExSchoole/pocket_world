@@ -37,10 +37,10 @@ public class CityResourcesController {
     public String showCityResources(
             @RequestParam Map<String, String> allRequestParams, Model model) {
         LOGGER.info("Requested params:" + allRequestParams);
+        commonCityService.buildQueuedBuildings(PLAYER_NAME);
         CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo(PLAYER_NAME);
         model.addAttribute("dto", cityResourcesDto);
         LOGGER.info("Out:" + model);
-        commonCityService.buildQueuedBuildings(PLAYER_NAME);
         return "city_resources";
     }
 

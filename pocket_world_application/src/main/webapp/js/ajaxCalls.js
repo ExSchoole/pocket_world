@@ -1,4 +1,4 @@
-function ajaxCallGetBuildingQueue(playerName, urls, currentType){	
+function ajaxCallGetBuildingQueue(urls, playerName, globalType){	
 	$.ajax({
 		   type: 'GET',
 		   url: urls['getBuildingQueue'],
@@ -7,12 +7,13 @@ function ajaxCallGetBuildingQueue(playerName, urls, currentType){
 		   success : function(data) {
 			   			console.log(data);
 			   			$.each(data, function(index, object){
-			   				if (currentType.localeCompare(object['type']) == 0){
+			   				if (globalType.localeCompare(object['type']) == 0){
 			   					$( "#"+'clock'+object['position'] ).addClass('clock');
 			   				}
 			   				
 			   				$( '#' + object['position'] ).addClass( 'timer' );
-			   				timer(object['position'], object['time']*1000, playerName, object['level'],  urls, object['type'], object['buildingType']);			   							   	
+			   	
+			   				timer(playerName, object['buildingType'], object['level'], urls, object['position'], object['time']*1000, object['type']);			   							   	
 			   			});
 		   			 }
 	   });
@@ -30,36 +31,36 @@ function ajaxCallFinishBuild(playerName, position, urls, type){
 	   });
 }
 
-function ajaxCallGetTimeInfo(type, level, selectedPosition, playerName, urls, globalType){
+function ajaxCallGetTimeInfo(playerName, typeOfBuilding, level, urls, position, globalType){
 	$.ajax({
 		   type: 'GET',
 		   url: urls['timeInfo'],
-		   data : {type: type, level: level},
+		   data : {type: typeOfBuilding, level: level},
 		   success : function(data) {
 			   			console.log('success');
 			   			console.log(data);
 			   			
-			   			$( '#' + selectedPosition ).addClass( 'timer' );
-			   			timer(selectedPosition,data*1000, playerName, level, urls, globalType, type);
+			   			$( '#' + position ).addClass( 'timer' );
+			   			timer(playerName, typeOfBuilding, level, urls, position, data*1000, globalType);
 		   			 }
 	   });
 	
 }
 
-function ajaxCallCheckResources(playerName, type, level, urls, emptyElement, position, globalType, boolNewBuilding){	
+function ajaxCallCheckResources(playerName, typeOfBuilding, level, urls, emptyElement, position, globalType, boolNewBuilding){	
 	$.ajax({
 		   type: 'GET',
 		   url: urls['checkResources'],
-		   data : {playerName: playerName, type: type, level: level},
+		   data : {playerName: playerName, type: typeOfBuilding, level: level},
 		   success : function(data) {
 			   			console.log(data);
 			   		
 			   			if (data){ 
 			   				if (boolNewBuilding == true){
-			   					build(emptyElement, urls, type, position, playerName, globalType);
+			   					build(playerName, typeOfBuilding, urls, emptyElement, position, globalType);
 			   				}
 			   				else{ 
-			   					ajaxCallLevelUp(urls, type, position, level, playerName, globalType);
+			   					ajaxCallLevelUp(playerName, typeOfBuilding, level, urls, position, globalType);
 			   				}
 			   			}
 		   			 }
@@ -67,7 +68,7 @@ function ajaxCallCheckResources(playerName, type, level, urls, emptyElement, pos
 }
 
 
-function ajaxCallLevelUp(urls, typeOfSelectedBuilding, position, level, playerName, type){
+function ajaxCallLevelUp(playerName, typeOfBuilding, level, urls, position, globalType){
     $.ajax({
         type: 'POST',
         url: urls['levelUp'],
@@ -77,7 +78,7 @@ function ajaxCallLevelUp(urls, typeOfSelectedBuilding, position, level, playerNa
         						
             					$( "#"+'clock'+position ).addClass( 'clock' );
 	                            
-	                            ajaxCallGetTimeInfo(typeOfSelectedBuilding, level, position, playerName, urls, type);
+	                            ajaxCallGetTimeInfo(playerName, typeOfBuilding, level, urls, position, globalType);
     		   			 }
     	   });
 };

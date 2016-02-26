@@ -30,7 +30,7 @@ public class CityCenterController {
     @Autowired
     private CommonCityService commonCityService;
 
-    private static final String PLAYER_NAME = "player-login"; //temporary
+    public static final String PLAYER_NAME = "player-login"; //temporary
 
     @RequestMapping(value = "/addBuilding", method = RequestMethod.POST)
     public String addBuilding(@RequestParam String playerName, @RequestParam String type, @RequestParam int position) {
@@ -51,12 +51,12 @@ public class CityCenterController {
             @RequestParam Map<String, String> allRequestParams, Model model) {
 
         LOGGER.info("Requested params:" + allRequestParams);
+        commonCityService.buildQueuedBuildings(PLAYER_NAME);
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo(PLAYER_NAME);
         model.addAttribute("dto", cityCenterDto);
         Set<String> builtBuildingTypes = cityCenterDto.getBuildingTypes();
         model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(builtBuildingTypes));
         LOGGER.info("Out:" + model);
-        commonCityService.buildQueuedBuildings(PLAYER_NAME);
         return "city_center";
     }
 

@@ -30,6 +30,7 @@ import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.model.City;
 import org.exschool.pocketworld.city.service.CityService;
+import org.exschool.pocketworld.controllers.city.center.CityCenterController;
 import org.exschool.pocketworld.dto.BuildingInfo;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
@@ -66,6 +67,7 @@ public class CityCenterServiceImpl implements CityCenterService {
     @PostConstruct
     private void fillDataBaseInfo(){
     	buildingService.saveAllInformation();
+    	initialization(CityCenterController.PLAYER_NAME);
     }
     
     public static final int MIN_POSITION = 1;
@@ -115,8 +117,6 @@ public class CityCenterServiceImpl implements CityCenterService {
 
     @Override
     public CityCenterDto cityCenterInfo(String playerName) {
-        initialization(playerName);
-
         Player player = playerService.getPlayerByLogin(playerName);
         notNull(player);
         City city = cityService.getCityByPlayerId(player.getId());

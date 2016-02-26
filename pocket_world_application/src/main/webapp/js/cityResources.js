@@ -1,4 +1,4 @@
-function CityResources(emptyResourcesClassName, resourcesClassName, urls, playerName, typeOfBuilding) {
+function CityResources(emptyResourcesClassName, resourcesClassName, urls, playerName, globalType) {
     var availableTypes = [];
     fillAvailableTypes();
     var variable;
@@ -14,24 +14,25 @@ function CityResources(emptyResourcesClassName, resourcesClassName, urls, player
         });
 
         $("div.container").on("click", "a.popover_item", function (event) {
+        	if ($(this).hasClass('timer')==false){
             event.preventDefault();
             var position = $(this).attr('position');
-            var type = $(this).attr('type');
+            var typeOfBuilding = $(this).attr('type');
             var level = 1;
 
             $.ajax({
      		   type: 'GET',
      		   url: urls['checkResources'],
-     		   data : {playerName: playerName, type: type, level: level},
+     		   data : {playerName: playerName, type: typeOfBuilding, level: level},
      		   success : function(data) {
      			   			console.log(data);
      			   
      			   			if (data) 
-     			   				buildResourceBuilding(type, position, playerName, urls, typeOfBuilding, emptyResourcesClassName, resourcesClassName);
+     			   				buildResourceBuilding(playerName, typeOfBuilding, urls, emptyResourcesClassName, position, resourcesClassName, globalType);
      		   			 }
-     	   });
-            
-        });
+     	   				});
+        	}
+        	});
     });
     function generateListOfLinks(elements, position){
         var result = '';
@@ -57,23 +58,23 @@ function CityResources(emptyResourcesClassName, resourcesClassName, urls, player
 
 }
 
-function buildResourceBuilding(type, position, playerName, urls, typeOfBuilding, emptyResourcesClassName, resourcesClassName){
+function buildResourceBuilding(playerName, typeOfBuilding, urls, emptyResourcesClassName, position, resourcesClassName, globalType){
 	$.ajax({
         url: urls['buildings'],
-        data: JSON.stringify({position: position, type: type}),
+        data: JSON.stringify({position: position, type: typeOfBuilding}),
         contentType: "application/json",
         type: "POST",
         success: function (json) {
             var resourceBuilding = $("."+emptyResourcesClassName + "#" +position);
             $( "#"+position ).removeClass(emptyResourcesClassName)
-            				 .addClass("building_" +type)
+            				 .addClass("building_" +typeOfBuilding)
             			     .addClass(resourcesClassName);
             
             $( "#"+'clock'+position ).addClass( 'clock' );
             
             destroyPopover(resourceBuilding);
             
-            ajaxCallGetTimeInfo(type, 1, position, playerName, urls,  typeOfBuilding);
+            ajaxCallGetTimeInfo(playerName, typeOfBuilding, 1, urls, position, globalType);
 
         },
         error: function (xhr, status, errorThrown) {

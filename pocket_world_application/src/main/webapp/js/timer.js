@@ -1,4 +1,4 @@
-function timer(position, timeLeft, playerName, level, urls, globalType, typeOfBuilding){
+function timer(playerName, typeOfBuilding, level,  urls, position, timeLeft, globalType){
 	if (timeLeft<=0){
 		console.log('end '+ level);
 		$( '#' + position ).removeClass( 'timer' );
@@ -11,7 +11,9 @@ function timer(position, timeLeft, playerName, level, urls, globalType, typeOfBu
 	}
 	else{
 		$("#"+'timer'+position+globalType).text(typeOfBuilding+" - "+convertTime(timeLeft/1000));
-		setTimeout(function(){timer(position, timeLeft-1000, playerName, level, urls, globalType, typeOfBuilding);}, 1000);
+		setTimeout(function(){
+						timer(playerName, typeOfBuilding, level, urls, position, timeLeft-1000, globalType);
+					}, 1000);
 	}
 }
 
