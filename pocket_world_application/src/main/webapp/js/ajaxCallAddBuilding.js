@@ -1,23 +1,22 @@
-function build(classOfEmptyElement, url, building, position, playerName) {
-    var typeOfSelectedBuilding = $(building).attr("id");
-    var selectedPosition = $(position).attr("id");
-
-    $.ajax({
+function build(playerName, typeOfBuilding, urls, classOfEmptyElement, selectedPosition, globalType){
+	$.ajax({
         type: 'POST',
-        url: url,
-        data: {playerName: playerName, type: typeOfSelectedBuilding, position: selectedPosition},
+        url: urls['addBuilding'],
+        data: {playerName: playerName, type: typeOfBuilding, position: selectedPosition},
         success: function (data, textStatus) {
-            $("#message").html(data);
+        						$("#message").html(data);
+            					$('#' + selectedPosition ).removeClass( classOfEmptyElement )
+	                                         .addClass( "building_" + typeOfBuilding )
+	                                         .addClass( 'building' )
+            								 .addClass( 'timer' );
+            					
+            					$( "#"+'clock'+selectedPosition ).addClass( 'clock' );
 
-            $(position).removeClass(classOfEmptyElement)
-                .addClass("building_" + typeOfSelectedBuilding)
-                .addClass('building');
-
-            $(position).droppable("disable");
-
-            $("#" + typeOfSelectedBuilding).remove();
-
-            console.log(textStatus);
-        }
-    });
-}
+	                            $('#' + selectedPosition ).droppable( "disable" );
+	                            
+	                            ajaxCallGetTimeInfo(playerName, typeOfBuilding, 1, urls, selectedPosition, globalType);
+	                            
+	                            $("#"+typeOfBuilding).remove();
+    		   			 }
+    	   });
+};

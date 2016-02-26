@@ -1,5 +1,13 @@
 package org.exschool.pocketworld.buildQueue.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
 import org.exschool.pocketworld.buildQueue.model.Status;
 import org.exschool.pocketworld.config.TestSpringConfig;
@@ -12,10 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
@@ -30,7 +34,6 @@ public class BuildQueueRecordServiceTest {
     @Before
     public void before() {
         bootstrap.fillDatabase();
-
     }
 
     @Test
@@ -84,6 +87,12 @@ public class BuildQueueRecordServiceTest {
 
     }
 
+    @Test
+    public void testGetAllByUserStatus() {
+    	assertEquals(bootstrap.getResords(), buildQueueService.getAllByUserStatus(1L, Status.QUEUED));
+    	assertTrue(buildQueueService.getAllByUserStatus(1L, Status.DONE).isEmpty());
+    }
+    
     private void assertAllFieldsEquals(BuildQueueRecord buildQueueRecord1, BuildQueueRecord buildQueueRecord2) {
         assertEquals(buildQueueRecord1.getId(), buildQueueRecord2.getId());
         assertEquals(buildQueueRecord1.getName(), buildQueueRecord2.getName());
@@ -93,7 +102,5 @@ public class BuildQueueRecordServiceTest {
         assertEquals(buildQueueRecord1.getUserId(), buildQueueRecord2.getUserId());
         assertEquals(buildQueueRecord1.getStatus(), buildQueueRecord2.getStatus());
         assertEquals(buildQueueRecord1.getBuildingId(), buildQueueRecord2.getBuildingId());
-
-
     }
 }

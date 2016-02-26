@@ -1,18 +1,27 @@
- function levelUpBuilding(url,playerName,template){
-      $( ".building" ).click(function() {
-
-          var $div = $(this);
-          $.ajax({
-               url: url+"/getInfo",
+ function levelUpBuilding(urls,playerName,template,globalType){
+	 var flag = false;
+	 
+	 $( ".building" ).click(function() {
+		if ($(this).hasClass('timer')==false && flag==false){ 
+			flag = true;
+			console.log($(this).attr("id"));   	  
+			var $div = $(this);
+			$.ajax({
+               url: urls['getInfo'],
                dataType:'json',
                type: "GET",
                contentType: "application/json; charset=utf-8",
                data : { playerName: playerName , position: $(this).attr("id")},
                          success : function(info) {
-            	   			showPopoverInfo($div,url,playerName,info,template)
+            	   			 console.log(info);
+            	   			 flag = false;
+            	   			 if(info['level']<3){
+            	   				 showPopoverInfo($div, urls, playerName, info, template, globalType);
+            	   			 }
                          }
                })     
-      });
+		}
+	});
       
       $( "body" ).mouseup(function() {
     	  hideAllPopovers();
@@ -20,9 +29,8 @@
       });   
 }
 
-function showPopoverInfo(element,url,playerName,info,template){
-
-    element.popover({
+function showPopoverInfo(element,urls,playerName,info,template,globalType){	
+	element.popover({
         title: "Upgrade",
         content: template(info),
         placement: top,
@@ -31,22 +39,10 @@ function showPopoverInfo(element,url,playerName,info,template){
     }).on('shown.bs.popover', function () {
         var $popup = $(this);
         $(this).next('.popover').find('button.lvlUp').click(function (e) {
-                  
-               ajaxLvlUp(url,playerName,element.attr("id"));    
+        	ajaxCallCheckResources(playerName, info['type'], info['level']+1, urls, "", element.attr("id"), globalType, false);  
             $popup.popover('hide');
+        
         });
 
     }).popover('show');
-}
-
-function ajaxLvlUp(url,playerName,id){
-$.ajax({
-           type: 'POST',
-           url: url+"/levelUp",
-           data : { playerName: playerName , position: id},
-           success : function(data,textStatus) {
-                            $("#message").html(data);
-                            console.log(textStatus);
-                     }
-           });          
 }

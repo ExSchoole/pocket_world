@@ -47,22 +47,42 @@
 </div>
 
 
-<div class="col-md-5">
-         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-3">
-            	#addcarousel($buildingTypes)
+<div class="col-md-3">
+	#addcarousel($buildingTypes)
+</div>
+
+<div class="col-md-2 center_align">
+            
+            <div class="col-md-9 info_names">
+                 <h3>$dto.getNickName()</h3>
             </div>
+            
+            <div class="col-md-9 info_names">
+                 <h4>Timers:</h4>
+            </div>
+            
+        <div class="col-md-9 info_timers"
+        
+            #foreach($position in [0,1,2,3,4,5,6,7,8,9,10,11,12])
+            	#timer("building", $position)
+            #end
+           
+           
+            #foreach($position in [1,2,3,4,5,6,7,8,9,10,11,12])
+            	#timer("resource_building", $position)
+            #end
+        
+        </div>
+</div>
         </div> 
 </div> 
 
 <script type="text/template" class="template">
-
-        <h5>Time: <%- rc[0] %> </h5>
-        <h5>Gold: <%- rc[1] %></h5>
-        <h5>Timber: <%- rc[2] %></h5>
-        <h5>Clay: <%- rc[3] %></h5>
-        <h5>Corn: <%- rc[4] %></h5>
+        <h5>Time: <%- convertTime(rc['time']) %> </h5>
+        <h5>Gold: <%- rc['resourceDto']['gold'] %></h5>
+        <h5>Timber: <%- rc['resourceDto']['timber'] %></h5>
+        <h5>Clay: <%- rc['resourceDto']['clay'] %></h5>
+        <h5>Corn: <%- rc['resourceDto']['corn'] %></h5>
         <button class="btn btn-primary lvlUp">Level Up</button>
 
     </script>
@@ -70,15 +90,30 @@
 
 <script src="#springUrl('/js/jquery-ui.min.js')"></script>
 <script src="#springUrl('/js/DragDrop.js')"></script>
+<script src="#springUrl('/js/ajaxCalls.js')"></script>
 <script src="#springUrl('/js/ajaxCallAddBuilding.js')"></script>
 <script src="#springUrl('/js/jquery.verticalCarousel.js')"></script>
+<script src="#springUrl('/js/timer.js')"></script>
 <script src="#springUrl('/js/levelUp.js')"></script>
 <script src="#springUrl('/js/underscore.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 
-<script>
-	DragDropBuild("building_karusel","building_empty", "#springUrl('/city/center/addBuilding')","$dto.getNickName()");
-
+<script>	
+	var urls = {
+		'addBuilding' : "#springUrl('/city/center/addBuilding')",
+		'getBuildingQueue' : "#springUrl('/getBuildingQueue')",
+		'changeStatus' : "#springUrl('/changeStatus')",
+		'timeInfo' : "#springUrl('/city/center/timeInfo')",
+		'checkResources' : "#springUrl('/city/center/checkResources')",
+		'levelUp' : "#springUrl('/city/center/levelUp')",
+		'getInfo' : "#springUrl('/city/center/getInfo')",
+		'getTypeLevel' : "#springUrl('/city/center/getTypeLevel')"
+	};
+	
+	ajaxCallGetBuildingQueue(urls, "$dto.getNickName()", 'building');
+	
+	DragDropBuild("building_karusel","building_empty", urls, "$dto.getNickName()", 'building');
+	
      $(function () {
 	     $("#carouselId").verticalCarousel({nSlots: 3, speed: 900});
      });
@@ -87,5 +122,6 @@
         var template = _.template(
             $( "script.template" ).html()
         );
-     levelUpBuilding("#springUrl('/city/center/')","$dto.getNickName()",template);
+        
+     levelUpBuilding(urls,"$dto.getNickName()",template,'building');
 </script> 

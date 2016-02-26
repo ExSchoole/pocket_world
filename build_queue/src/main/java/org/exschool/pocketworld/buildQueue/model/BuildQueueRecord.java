@@ -1,10 +1,17 @@
 package org.exschool.pocketworld.buildQueue.model;
 
 
-import org.joda.time.DateTime;
-
-import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 /**
@@ -29,8 +36,7 @@ public class BuildQueueRecord implements Serializable {
     private Type type;
 
     @Column(name="build_end")
-    @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime buildEnd;
+    private Date buildEnd;
 
     @Column(name="user_id")
     private Long userId;
@@ -41,6 +47,8 @@ public class BuildQueueRecord implements Serializable {
 
     @Column(name="building_id")
     private Long buildingId;
+    
+    private int position;
 
     public Long getId() {
         return id;
@@ -74,11 +82,11 @@ public class BuildQueueRecord implements Serializable {
         this.type = type;
     }
 
-    public DateTime getBuildEnd() {
+    public Date getBuildEnd() {
         return buildEnd;
     }
 
-    public void setBuildEnd(DateTime buildEnd) {
+    public void setBuildEnd(Date buildEnd) {
         this.buildEnd = buildEnd;
     }
 
@@ -110,7 +118,8 @@ public class BuildQueueRecord implements Serializable {
     }
 
     public BuildQueueRecord(
-           Long id, String name, int level, Type type, DateTime buildEnd, Long userId, Status status, Long buildingId){
+           Long id, String name, int level, Type type, Date buildEnd, 
+           Long userId, Status status, Long buildingId, String buildingType){
         this.id = id;
         this.name = name;
         this.level = level;
@@ -152,6 +161,14 @@ public class BuildQueueRecord implements Serializable {
         result = 31 * result + (buildingId != null ? buildingId.hashCode() : 0);
         return result;
     }
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
 
 
 }

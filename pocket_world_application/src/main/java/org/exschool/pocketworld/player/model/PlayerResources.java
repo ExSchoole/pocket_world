@@ -1,6 +1,8 @@
 package org.exschool.pocketworld.player.model;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+
+import org.exschool.pocketworld.resource.model.ResourceType;
 
 /**
  * Created by skandy on 26.11.15.
@@ -22,6 +24,26 @@ public class PlayerResources {
         this.cornAmount = cornAmount;
     }
 
+    public int getAmount(ResourceType resourceType){
+    	switch (resourceType){
+    		case GOLD : 	return this.goldAmount;
+    		case TIMBER : 	return this.timberAmount;
+    		case CLAY : 	return this.clayAmount;
+    		case CORN :	 	return this.cornAmount;
+    	}
+    	
+    	return 0;
+    }
+    
+    public void setAmount(ResourceType resourceType, int amount){
+    	switch (resourceType){
+    		case GOLD : 	this.setGoldAmount(amount); break;
+    		case TIMBER : 	this.setTimberAmount(amount); break;
+    		case CLAY : 	this.setClayAmount(amount); break;
+    		case CORN : 	this.setCornAmount(amount); break;
+    	}
+    }
+    
     public int getGoldAmount() {
         return goldAmount;
     }

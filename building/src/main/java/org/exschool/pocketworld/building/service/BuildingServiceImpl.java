@@ -1,7 +1,20 @@
 package org.exschool.pocketworld.building.service;
 
 
-import org.exschool.pocketworld.building.model.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.exschool.pocketworld.building.model.Building;
+import org.exschool.pocketworld.building.model.BuildingResource;
+import org.exschool.pocketworld.building.model.BuildingResourceId;
+import org.exschool.pocketworld.building.model.BuildingType;
+import org.exschool.pocketworld.building.model.Time;
+import org.exschool.pocketworld.building.model.TimeId;
 import org.exschool.pocketworld.dao.Dao;
 import org.exschool.pocketworld.resource.model.ResourceType;
 import org.exschool.pocketworld.util.builder.BuildingBuilder;
@@ -10,11 +23,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 
 /**
@@ -113,6 +121,18 @@ public class BuildingServiceImpl implements BuildingService {
         return getAtPosition(cityId, position) != null;
     }
 
+    @Override
+	public void increaseLevel(Long cityId, List<Long> ids) {
+		if (ids.size()!=0){
+			Map<String, List<Serializable>> parametrs = new HashMap<>();
+			parametrs.put("cityId", new ArrayList<Serializable>(Arrays.asList(cityId)));
+			parametrs.put("ids",  new ArrayList<Serializable>(ids));
+			
+			dao.update("UPDATE building SET level=level+1 WHERE cityId=:cityId AND id IN (:ids)", 
+						parametrs);		
+		}
+	}
+    
     /**
      * Setter for dao
      *
@@ -327,11 +347,11 @@ public class BuildingServiceImpl implements BuildingService {
                 put(new TimeId(BuildingType.PLANT, 2), 10);
                 put(new TimeId(BuildingType.PLANT, 3), 15);
 
-                put(new TimeId(BuildingType.POOL, 1), 5);
+                put(new TimeId(BuildingType.POOL, 1), 4280);
                 put(new TimeId(BuildingType.POOL, 2), 10);
                 put(new TimeId(BuildingType.POOL, 3), 15);
 
-                put(new TimeId(BuildingType.SCHOOL, 1), 5);
+                put(new TimeId(BuildingType.SCHOOL, 1), 20);
                 put(new TimeId(BuildingType.SCHOOL, 2), 10);
                 put(new TimeId(BuildingType.SCHOOL, 3), 15);
 
@@ -347,6 +367,4 @@ public class BuildingServiceImpl implements BuildingService {
             ;
         };
     }
-
-    ;
 }

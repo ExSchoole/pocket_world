@@ -1,6 +1,7 @@
 package org.exschool.pocketworld.resource;
 
 import org.exschool.pocketworld.player.model.PlayerResources;
+import org.exschool.pocketworld.resource.model.ResourceType;
 
 public class ResourceDto {
 	  private int gold;
@@ -25,7 +26,16 @@ public class ResourceDto {
     	this.clay = playerResources.getClayAmount();
     	this.corn = playerResources.getCornAmount();
     }
-      
+    
+    public void setAmount(ResourceType resourceType, int amount){
+    	switch (resourceType){
+    		case GOLD : 	this.setGold(amount); break;
+    		case TIMBER : 	this.setTimber(amount); break;
+    		case CLAY : 	this.setClay(amount); break;
+    		case CORN : 	this.setCorn(amount); break;
+    	}
+    }
+    
 	public int getGold() {
 		return gold;
 	}
