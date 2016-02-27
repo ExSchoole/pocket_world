@@ -8,6 +8,7 @@ import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.center.service.CityCenterService;
 import org.exschool.pocketworld.city.common.service.CommonCityService;
 import org.exschool.pocketworld.dto.BuildingInfo;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,7 @@ public class CityCenterController {
         commonCityService.buildQueuedBuildings(PLAYER_NAME);
         CityCenterDto cityCenterDto = cityCenterService.cityCenterInfo(PLAYER_NAME);
         model.addAttribute("dto", cityCenterDto);
+        model.addAttribute("time", new DateTime());
         Set<String> builtBuildingTypes = cityCenterDto.getBuildingTypes();
         model.addAttribute("buildingTypes", cityCenterService.availableForBuildBuildingTypes(builtBuildingTypes));
         LOGGER.info("Out:" + model);

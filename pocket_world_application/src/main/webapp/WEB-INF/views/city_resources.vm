@@ -1,13 +1,16 @@
 #parse("layout/macros.vm")
 #head("City Resources")
 
-#@body()
+#@body(${time.getHourOfDay()})
 <div class="row">
     <a href="#springUrl('/city/center/')" class="btn btn-primary">#springMessage('city.center')</a>
 </div>
 <div class="col-md-7">
-    <h1>${dto.NickName}'s city resources</h1>
-    #showResources(${dto.getResourceDto().getGold()},${dto.getResourceDto().getTimber()},${dto.getResourceDto().getClay()},${dto.getResourceDto().getCorn()})
+    <div class ="row container">
+    	<div class ="col-md-7 container info_resources">
+    		#showResources(${dto.getResourceDto().getGold()},${dto.getResourceDto().getTimber()},${dto.getResourceDto().getClay()},${dto.getResourceDto().getCorn()})
+   		</div>
+    </div>
     <div class="row">
         #foreach($position in [1,2,3,4])
             <div class="col-md-3">
@@ -57,9 +60,9 @@
                  <h4>Timers:</h4>
             </div>
             
-        <div class="col-md-9 info_timers"
+        <div class="col-md-9 info_timers">
         
-            #foreach($position in [1,2,3,4,5,6,7,8,9,10,11,12])
+            #foreach($position in [0,1,2,3,4,5,6,7,8,9,10,11,12])
             	#timer("building", $position)
             #end
            

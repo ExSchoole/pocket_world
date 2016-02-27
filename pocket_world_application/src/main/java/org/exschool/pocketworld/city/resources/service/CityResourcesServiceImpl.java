@@ -231,6 +231,10 @@ public class CityResourcesServiceImpl implements CityResourcesService {
   		City city = cityService.getCityByPlayerId(currentPlayer.getId());
   		ResourceBuilding building = resourceBuildingService.getAtPosition(city.getId(), position);
   		
+  		if (building.getLevel()==3){ 
+  			return null; 
+  		}
+  		
   		buildingInfo.setLevel(building.getLevel());
   		buildingInfo.setType(building.getResourceType().name().toLowerCase());
   		buildingInfo.setTime(resourceBuildingService.getTimeByBuildingTypeLevel(
@@ -276,7 +280,7 @@ public class CityResourcesServiceImpl implements CityResourcesService {
                 public ResourceBuildingDto apply(ResourceBuilding resourceBuilding) {
                     notNull(resourceBuilding);
                     return ResourceBuildingDto.builder().
-                            type(resourceBuilding.getResourceType().name()).
+                            type(resourceBuilding.getResourceType().name().toLowerCase()).
                             level(resourceBuilding.getLevel()).
                             position(resourceBuilding.getPosition()).
                             build();

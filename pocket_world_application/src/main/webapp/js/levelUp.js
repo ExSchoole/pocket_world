@@ -2,7 +2,8 @@
 	 var flag = false;
 	 
 	 $( ".building" ).click(function() {
-		if ($(this).hasClass('timer')==false && flag==false){ 
+		 console.log("ok1");
+		 if ($(this).hasClass('timer')==false && flag==false){ 
 			flag = true;
 			console.log($(this).attr("id"));   	  
 			var $div = $(this);
@@ -13,9 +14,10 @@
                contentType: "application/json; charset=utf-8",
                data : { playerName: playerName , position: $(this).attr("id")},
                          success : function(info) {
-            	   			 console.log(info);
+                        	 console.log("ok2");
+                        	 console.log(info);
             	   			 flag = false;
-            	   			 if(info['level']<3){
+            	   			 if(info!=null){
             	   				 showPopoverInfo($div, urls, playerName, info, template, globalType);
             	   			 }
                          }

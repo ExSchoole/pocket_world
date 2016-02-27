@@ -79,7 +79,7 @@ public class CityCenterServiceImpl implements CityCenterService {
     private void initialization(String playerName) { //temporary
         if(playerService.getPlayerByLogin(playerName)==null) {
             String cityName = "City name";
-            PlayerResources playerResources = new PlayerResources(1000, 1000, 1000, 1000);
+            PlayerResources playerResources = new PlayerResources(500, 500, 500, 500);
             Player player = new Player(playerResources, playerName);
             playerService.savePlayer(player);
             resourceSpeedService.createResourceSpeed(player.getId(),new Date());
@@ -296,6 +296,10 @@ public class CityCenterServiceImpl implements CityCenterService {
   		Player currentPlayer = playerService.getPlayerByLogin(playerName);
   		City city = cityService.getCityByPlayerId(currentPlayer.getId());
   		Building building = buildingService.getAtPosition(city.getId(), position);
+  		
+  		if (building.getLevel()==3){ 
+  			return null; 
+  		}
   		
   		buildingInfo.setLevel(building.getLevel());
   		buildingInfo.setType(building.getBuildingType().name().toLowerCase());
