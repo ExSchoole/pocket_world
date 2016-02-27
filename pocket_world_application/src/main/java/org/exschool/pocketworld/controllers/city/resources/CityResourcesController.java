@@ -9,6 +9,7 @@ import org.exschool.pocketworld.city.resources.service.CityResourcesService;
 import org.exschool.pocketworld.dto.BuildingInfo;
 import org.exschool.pocketworld.dto.PositionOfBuilding;
 import org.exschool.pocketworld.resource.model.ResourceType;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class CityResourcesController {
         commonCityService.buildQueuedBuildings(PLAYER_NAME);
         CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo(PLAYER_NAME);
         model.addAttribute("dto", cityResourcesDto);
+        model.addAttribute("time", new DateTime());
         LOGGER.info("Out:" + model);
         return "city_resources";
     }

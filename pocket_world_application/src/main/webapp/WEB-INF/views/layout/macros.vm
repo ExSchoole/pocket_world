@@ -25,8 +25,8 @@
    </html>
 #end
 
-#macro(body)
-<body>
+#macro(body $time)
+<body class="time_$time">
     <div class="container">
         $!bodyContent
     </div>
@@ -68,18 +68,16 @@
 #end
 
 #macro (showResources $gold $timber $clay $corn)
-    <div class ="container">
-        <div class="col-md-2" id="res1">
+        <div class="col-md-3" id="res1">
             <h3>#springMessage('resources.gold'): $gold</h3>
         </div>
-        <div class="col-md-2" id="res2">
+        <div class="col-md-3" id="res2">
             <h3>#springMessage('resources.timber'): $timber</h3>
         </div>
-        <div class="col-md-2" id="res3">
+        <div class="col-md-3" id="res3">
             <h3>#springMessage('resources.clay'): $clay</h3>
         </div>
-        <div class="col-md-2" id="res4">
+        <div class="col-md-3" id="res4">
             <h3>#springMessage('resources.corn'): $corn</h3>
         </div>
-    </div>
 #end

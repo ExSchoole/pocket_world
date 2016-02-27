@@ -1,10 +1,13 @@
-function timer(playerName, typeOfBuilding, level,  urls, position, timeLeft, globalType){
+function timer(playerName, typeOfBuilding, level,  urls, position, timeLeft, globalType, typeofBuildingMatchGlobalType){
 	if (timeLeft<=0){
-		console.log('end '+ level);
-		$( '#' + position ).removeClass( 'timer' );
-		$( "#"+'clock'+position ).removeClass( 'clock' );
-		$( "#"+'level'+position ).removeClass( 'level' + level-1 );
-		$( "#"+'level'+position ).addClass( 'level' + level );
+		console.log('end '+ position);
+		
+		if (typeofBuildingMatchGlobalType == true){
+			$( '#' + position ).removeClass( 'timer' );
+			$( "#"+'clock'+position ).removeClass( 'clock' );
+			$( "#"+'level'+position ).removeClass( 'level' + level-1 );
+			$( "#"+'level'+position ).addClass( 'level' + level );
+		}
 		
 		ajaxCallFinishBuild(playerName, position, urls, globalType);
 		$("#"+'timer'+position+globalType).text("");
@@ -12,7 +15,7 @@ function timer(playerName, typeOfBuilding, level,  urls, position, timeLeft, glo
 	else{
 		$("#"+'timer'+position+globalType).text(typeOfBuilding+" - "+convertTime(timeLeft/1000));
 		setTimeout(function(){
-						timer(playerName, typeOfBuilding, level, urls, position, timeLeft-1000, globalType);
+						timer(playerName, typeOfBuilding, level, urls, position, timeLeft-1000, globalType, typeofBuildingMatchGlobalType);
 					}, 1000);
 	}
 }

@@ -1,4 +1,6 @@
 function ajaxCallGetBuildingQueue(urls, playerName, globalType){	
+	var typeofBuildingMatchGlobalType;
+	
 	$.ajax({
 		   type: 'GET',
 		   url: urls['getBuildingQueue'],
@@ -9,11 +11,14 @@ function ajaxCallGetBuildingQueue(urls, playerName, globalType){
 			   			$.each(data, function(index, object){
 			   				if (globalType.localeCompare(object['type']) == 0){
 			   					$( "#"+'clock'+object['position'] ).addClass('clock');
+			   					$( '#' + object['position'] ).addClass( 'timer' );
+			   					typeofBuildingMatchGlobalType = true;
+			   				}else{
+			   					typeofBuildingMatchGlobalType = false;
 			   				}
 			   				
-			   				$( '#' + object['position'] ).addClass( 'timer' );
-			   	
-			   				timer(playerName, object['buildingType'], object['level'], urls, object['position'], object['time']*1000, object['type']);			   							   	
+		   	
+			   				timer(playerName, object['buildingType'], object['level'], urls, object['position'], object['time']*1000, object['type'], typeofBuildingMatchGlobalType);			   							   	
 			   			});
 		   			 }
 	   });
@@ -41,7 +46,7 @@ function ajaxCallGetTimeInfo(playerName, typeOfBuilding, level, urls, position, 
 			   			console.log(data);
 			   			
 			   			$( '#' + position ).addClass( 'timer' );
-			   			timer(playerName, typeOfBuilding, level, urls, position, data*1000, globalType);
+			   			timer(playerName, typeOfBuilding, level, urls, position, data*1000, globalType, true);
 		   			 }
 	   });
 	

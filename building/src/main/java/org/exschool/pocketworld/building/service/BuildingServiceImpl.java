@@ -340,8 +340,8 @@ public class BuildingServiceImpl implements BuildingService {
                 put(new TimeId(BuildingType.MARKETPLACE, 3), 15);
 
                 put(new TimeId(BuildingType.MALL, 1), 5);
-                put(new TimeId(BuildingType.MALL, 2), 10);
-                put(new TimeId(BuildingType.MALL, 3), 15);
+                put(new TimeId(BuildingType.MALL, 2), 100);
+                put(new TimeId(BuildingType.MALL, 3), 150);
 
                 put(new TimeId(BuildingType.PLANT, 1), 5);
                 put(new TimeId(BuildingType.PLANT, 2), 10);
