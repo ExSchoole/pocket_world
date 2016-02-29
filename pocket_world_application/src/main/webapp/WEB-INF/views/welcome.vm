@@ -1,0 +1,11 @@
+#parse("layout/macros.vm")
+#head("Homepage")
+#@body()
+#parse ("registration.vm")
+<link href="#springUrl('/css/welcome.css')" rel="stylesheet">
+<div id="container">
+    <h1>POCKET WORLD</h1>
+    <p><a href="https://github.com/ExSchoole/pocket_world"><strong>Go to repo</strong></a></p>
+    <p><a href="https://github.com/orgs/ExSchoole/people"><strong>This project is being developed by extremely lazy team, so don't expect neither bug fixes nor improvements soon</strong></a></p>
+</div>
+#end

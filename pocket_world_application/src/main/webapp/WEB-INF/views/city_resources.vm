@@ -2,6 +2,7 @@
 #head("City Resources")
 
 #@body()
+#parse("logout_button.vm")
 <div class="row">
     <a href="#springUrl('/city/center/')" class="btn btn-primary">#springMessage('city.center')</a>
 </div>
