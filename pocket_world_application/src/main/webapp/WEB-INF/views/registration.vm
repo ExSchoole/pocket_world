@@ -15,8 +15,12 @@
                 <label for="reenter_password">Re-enter Password</label>
                 <input id="reenter_password" name="reenter_password" value="" title="Re-enter password" tabindex="5" type="password">
             </p>
-            <input id="signup_submit" value="Sign up" tabindex="6" type="submit">
-
+            <p>
+                <label for="cityname">Cityname</label>
+                <input id="cityname" name="cityname" value="" title="cityname" tabindex="6" type="text">
+            </p>
+            <input id="signup_submit" value="Sign up" tabindex="7" type="submit">
+            
             <p class="ahave"> <a href="login" id="already_have">Already have an account?</a> </p>
         </form>
     </fieldset>
@@ -24,3 +28,7 @@
 #end
 
 <script type="text/javascript" src="#springUrl('/js/registration.js')"></script>
+
+<script>
+registration("#springUrl('/registerNewPlayer')");
+</script> 

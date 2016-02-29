@@ -16,7 +16,9 @@ public class Player {
 
     @Column(name = "login")
     private String login;
-
+    
+    private String password;
+    
     public Player() {
         this.login = "";
     }
@@ -24,6 +26,12 @@ public class Player {
     public Player(PlayerResources playerResources, String login) {
         this.playerResources = playerResources;
         this.login = login;
+    }
+    
+    public Player(PlayerResources playerResources, String login,String password) {
+        this.playerResources = playerResources;
+        this.login = login;
+        this.password=password;
     }
 
     public Long getId() {
