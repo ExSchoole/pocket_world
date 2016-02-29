@@ -2,12 +2,12 @@
 #head("City Center")
 
 #@body(${time.getHourOfDay()})
+#parse("logout_button.vm")
 <div class="row">
     <a href="#springUrl('/city/resources/')" class="btn btn-primary">#springMessage('city.resources')</a>
 </div>
 <div id="message">
 </div>
-
 <div class="col-md-7">
 	<div class ="row container">
     	<div class ="col-md-7 container info_resources">
@@ -95,10 +95,8 @@
 
 <script src="#springUrl('/js/jquery-ui.min.js')"></script>
 <script src="#springUrl('/js/DragDrop.js')"></script>
-<script src="#springUrl('/js/ajaxCalls.js')"></script>
 <script src="#springUrl('/js/ajaxCallAddBuilding.js')"></script>
 <script src="#springUrl('/js/jquery.verticalCarousel.js')"></script>
-<script src="#springUrl('/js/timer.js')"></script>
 <script src="#springUrl('/js/levelUp.js')"></script>
 <script src="#springUrl('/js/underscore.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
