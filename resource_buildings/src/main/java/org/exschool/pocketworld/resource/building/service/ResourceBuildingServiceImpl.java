@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +85,18 @@ public class ResourceBuildingServiceImpl implements ResourceBuildingService {
         return getAtPosition(cityId, position) != null;
     }
 
+    @Override
+	public void increaseLevel(Long cityId, List<Long> ids) {
+		if (ids.size()!=0){
+			Map<String, List<Serializable>> parametrs = new HashMap<>();
+			parametrs.put("cityId", new ArrayList<Serializable>(Arrays.asList(cityId)));
+			parametrs.put("ids",  new ArrayList<Serializable>(ids));
+			
+			dao.update("UPDATE resource_building SET level=level+1 WHERE cityId=:cityId AND id IN (:ids)", 
+						parametrs);		
+		}
+	}
+    
     /**
      * Returns ResourceBuilding by id
      *
@@ -129,6 +144,16 @@ public class ResourceBuildingServiceImpl implements ResourceBuildingService {
         return PRODUCTION_RESOURCE_BUILDINGS_INFO.get(new ProductionId(buildingType, level));
     }
 
+	@Override
+	public int getDifferenceBetweenProductionByBuildingTypeLevel(ResourceType buildingType, int newLevel) {
+		if (newLevel==1) 
+			return PRODUCTION_RESOURCE_BUILDINGS_INFO.get(new ProductionId(buildingType, newLevel));
+		else 
+			return PRODUCTION_RESOURCE_BUILDINGS_INFO.get(new ProductionId(buildingType, newLevel))-
+				   PRODUCTION_RESOURCE_BUILDINGS_INFO.get(new ProductionId(buildingType, newLevel-1));
+	};
+
+    
     @Override
     public int getTimeByBuildingTypeLevel(ResourceType buildingType, int level) {
         return TIME_RESOURCE_BUILDINGS_INFO.get(new TimeId(buildingType, level));
@@ -221,27 +246,25 @@ public class ResourceBuildingServiceImpl implements ResourceBuildingService {
 
             ;
         };
-
-        TIME_RESOURCE_BUILDINGS_INFO = new HashMap<TimeId, Integer>() {
-            {
-                put(new TimeId(ResourceType.CLAY, 1), 5);
-                put(new TimeId(ResourceType.CLAY, 2), 10);
-                put(new TimeId(ResourceType.CLAY, 3), 15);
-
-                put(new TimeId(ResourceType.TIMBER, 1), 5);
-                put(new TimeId(ResourceType.TIMBER, 2), 10);
-                put(new TimeId(ResourceType.TIMBER, 3), 15);
-
-                put(new TimeId(ResourceType.GOLD, 1), 5);
-                put(new TimeId(ResourceType.GOLD, 2), 10);
-                put(new TimeId(ResourceType.GOLD, 3), 15);
-
-                put(new TimeId(ResourceType.CORN, 1), 5);
-                put(new TimeId(ResourceType.CORN, 2), 10);
-                put(new TimeId(ResourceType.CORN, 3), 15);
-            }
-
-            ;
+      
+        TIME_RESOURCE_BUILDINGS_INFO = new HashMap<TimeId, Integer>(){
+        	{	  
+        		put(new TimeId(ResourceType.CLAY,1),20);
+        		put(new TimeId(ResourceType.CLAY,2),10);
+        		put(new TimeId(ResourceType.CLAY,3),15);
+        		
+        		put(new TimeId(ResourceType.TIMBER,1),20);
+        		put(new TimeId(ResourceType.TIMBER,2),10);
+        		put(new TimeId(ResourceType.TIMBER,3),15);
+        		
+        		put(new TimeId(ResourceType.GOLD,1),20);
+        		put(new TimeId(ResourceType.GOLD,2),10);
+        		put(new TimeId(ResourceType.GOLD,3),15);
+        		
+        		put(new TimeId(ResourceType.CORN,1),20);
+        		put(new TimeId(ResourceType.CORN,2),10);
+        		put(new TimeId(ResourceType.CORN,3),15);
+        	};
         };
 
         PRODUCTION_RESOURCE_BUILDINGS_INFO = new HashMap<ProductionId, Integer>() {
@@ -267,7 +290,4 @@ public class ResourceBuildingServiceImpl implements ResourceBuildingService {
         };
 
     }
-
-    ;
-
 }

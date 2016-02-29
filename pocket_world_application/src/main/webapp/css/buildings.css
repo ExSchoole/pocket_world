@@ -1,53 +1,100 @@
+body.time_7, body.time_8, body.time_9, body.time_10, body.time_11, body.time_12,
+body.time_13, body.time_14, body.time_15, body.time_16, body.time_17, body.time_18  {
+	background: url(../images/bg_day.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body.time_19, body.time_20, body.time_21, body.time_22, body.time_23, body.time_24,
+body.time_1, body.time_2, body.time_3, body.time_4, body.time_5, body.time_6  {
+	background: url(../images/bg_night.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 div.building_storage {
     background-image: url(../images/storage.png);
+	background-size: cover;
 }
 
 div.building_gilothome {
     background-image: url(../images/gilothome.png);
+	background-size: cover;
 }
 
 div.building_townhall {
     background-image: url(../images/townhall.png);
+	background-size: cover;
 }
 
 div.building_marketplace {
     background-image: url(../images/marketplace.png);
+	background-size: cover;
 }
 
 div.building_pool {
     background-image: url(../images/pool.png);
+	background-size: cover;
 }
 
 div.building_factory {
     background-image: url(../images/factory.png);
+	background-size: cover;
 }
 
 div.building_farm {
     background-image: url(../images/farm.png);
+	background-size: cover;
 }
 
 div.building_barn {
     background-image: url(../images/barn.png);
+	background-size: cover;
 }
 
 div.building_school {
     background-image: url(../images/school.png);
+	background-size: cover;
 }
 
 div.building_mall {
     background-image: url(../images/mall.png);
+    background-size: cover;
 }
 
 div.building_plant{
     background-image: url(../images/factory.png);
+	background-size: cover;
+}
+
+div.clock{
+    background-image: url(../images/clock.png);
+}
+
+div.level1{
+    background-image: url(../images/level1.png);
+}
+
+div.level2{
+    background-image: url(../images/level2.png);
+}
+
+div.level3{
+    background-image: url(../images/level3.png);
 }
 
 div.building_market {
     background-image: url(../images/marketplace.png);
+	background-size: cover;
 }
 
 div.building_shop {
     background-image: url(../images/farm.png);
+	background-size: cover;
 }
 
 div.building_null {
@@ -56,16 +103,33 @@ div.building_null {
     width: 310px;
 }
 
-div.building, div.building_empty {
+div.building_clock, div.building_level  {
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+}
+
+div.building {
     background-repeat: no-repeat;
     height: 154px;
     width: 171px;
+    border-radius: 12px; 
+}
+
+div.building_empty {
+    background-repeat: no-repeat;
+    height: 154px;
+    width: 171px;
+    border-radius: 12px; 
+    background-color: white;
+    opacity: 0.8;
 }
 
 div.central_image {
 	background-image: url(../images/central_image.jpg);
 	height: 308px;
     width:  335px;
+    border-radius: 12px;
 }
 
 div.building_position {
@@ -75,32 +139,29 @@ div.building_position {
 
 div.building_gold {
     background-image: url(../images/gold_mine.png);
-    height: 154px;
-    width: 171px;
+	background-size: cover;
 }
 
 div.building_timber {
     background-image: url(../images/timber_factory.png);
-    height: 154px;
-    width: 171px;
+	background-size: cover;
 }
 
 div.building_clay {
     background-image: url(../images/clay_factory.png);
-    height: 154px;
-    width: 171px;
+	background-size: cover;
 }
 
 div.building_corn {
     background-image: url(../images/corn_field.png);
-    height: 154px;
-    width: 171px;
+	background-size: cover;
 }
 
 div.res_central_image {
     background-image: url(../images/central_image.jpg);
     height: 308px;
     width:  335px;
+    border-radius: 12px;
 }
 
 div.building_karusel {
@@ -120,4 +181,34 @@ div.over {
 
 div.notover {
     border-style: groove;
+}
+
+div.info_names {
+    border-style: outset;
+    border-color: #e6ce00;
+    width: 200px;
+    border-radius: 8px;
+    background-color: white;
+    opacity: 0.8;
+}
+
+div.info_resources {
+    border-style: outset;
+    border-color: yellow;
+    border-radius: 8px;
+    background-color: white;
+    opacity: 0.8;
+}
+
+div.info_timers {
+    border-style: outset;
+    border-color: #ffff00;
+    width: 200px;
+    border-radius: 8px;
+    background-color: white;
+    opacity: 0.8;
+}
+
+div.center_align {
+    text-align: center;
 }

@@ -40,8 +40,8 @@ public class CityCenterDto {
     }
 
     
-	public int getTimeByBuildingTypeLevel(BuildingType buildingType, int level) {
-		return  timeInfo.get(new TimeId(buildingType,level));
+	public int getTimeByBuildingTypeLevel(String buildingType, int level) {
+		return  timeInfo.get(new TimeId(BuildingType.valueOf(buildingType.toUpperCase()),level));
 	}
 	
 	public ResourceDto getResourceByBuildingTypeResourceTypeLevel(BuildingType buildingType, int level) {

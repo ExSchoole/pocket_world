@@ -25,8 +25,8 @@
    </html>
 #end
 
-#macro(body)
-<body>
+#macro(body $time)
+<body class="time_$time">
     <div class="container">
         $!bodyContent
     </div>
@@ -51,25 +51,33 @@
     #set($building = false)
     #set($building = ${buildings.get($position)})
     #if(  $building  )
-        <div class="building_$building.getType() building_position building" id=$position></div>
+        <div class="building_$building.getType() building_position building" id=$position>
+        	<div class="col-md-8 building_clock" id=clock$position></div>
+        	<div class="col-md-4 building_level level$building.getLevel()" id=level$position></div>
+        </div>
     #else
-        <div class="building_position building_empty" id=$position></div>
+        <div class="building_position building_empty" id=$position>
+       		<div class="col-md-8 building_clock" id=clock$position></div>
+       		<div class="col-md-4 building_level" id=level$position></div>
+        </div>
     #end
 #end
 
+#macro( timer $type $position )
+	<h5 id="timer$position$type"></h5>
+#end
+
 #macro (showResources $gold $timber $clay $corn)
-    <div class ="container">
-        <div class="col-md-2" id="res1">
+        <div class="col-md-3" id="res1">
             <h3>#springMessage('resources.gold'): $gold</h3>
         </div>
-        <div class="col-md-2" id="res2">
+        <div class="col-md-3" id="res2">
             <h3>#springMessage('resources.timber'): $timber</h3>
         </div>
-        <div class="col-md-2" id="res3">
+        <div class="col-md-3" id="res3">
             <h3>#springMessage('resources.clay'): $clay</h3>
         </div>
-        <div class="col-md-2" id="res4">
+        <div class="col-md-3" id="res4">
             <h3>#springMessage('resources.corn'): $corn</h3>
         </div>
-    </div>
 #end

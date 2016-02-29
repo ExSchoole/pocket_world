@@ -1,5 +1,12 @@
 package org.exschool.pocketworld.dao;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,12 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by kgavrylchenko on 10/23/2015.
@@ -116,7 +117,14 @@ public class Dao {
         LOG.info("Found entity - {}", entity);
         return entity;
     }
-
+        
+    public void update(String sql, Map<String, List<Serializable>> parametrs){    		
+    	Query query = currentSession().createSQLQuery(sql);    	
+    	for (Entry<String, List<Serializable>> s : parametrs.entrySet())
+    		query.setParameterList(s.getKey(), s.getValue());
+    	
+    	query.executeUpdate();
+    }
 
     /**
      * Return the persistent instances of the given entity class which meet given parameters,
@@ -170,7 +178,6 @@ public class Dao {
         LOG.info("Found entities - {}", entities);
         return entities;
     }
-
 
     protected Session currentSession() {
         return sessionFactory.getCurrentSession();

@@ -1,14 +1,17 @@
 #parse("layout/macros.vm")
 #head("City Resources")
 
-#@body()
+#@body(${time.getHourOfDay()})
 #parse("logout_button.vm")
 <div class="row">
     <a href="#springUrl('/city/center/')" class="btn btn-primary">#springMessage('city.center')</a>
 </div>
 <div class="col-md-7">
-    <h1>${dto.NickName}'s city resources</h1>
-    #showResources(${dto.getResourceDto().getGold()},${dto.getResourceDto().getTimber()},${dto.getResourceDto().getClay()},${dto.getResourceDto().getCorn()})
+    <div class ="row container">
+    	<div class ="col-md-7 container info_resources">
+    		#showResources(${dto.getResourceDto().getGold()},${dto.getResourceDto().getTimber()},${dto.getResourceDto().getClay()},${dto.getResourceDto().getCorn()})
+   		</div>
+    </div>
     <div class="row">
         #foreach($position in [1,2,3,4])
             <div class="col-md-3">
@@ -46,29 +49,72 @@
     </div>
 
 </div>
+<div class="col-md-2">
+</div>
+<div class="col-md-3 center_align">
+            
+            <div class="col-md-9 info_names">
+                 <h3>$dto.getNickName()</h3>
+            </div>
+            
+            <div class="col-md-9 info_names">
+                 <h4>Timers:</h4>
+            </div>
+            
+        <div class="col-md-9 info_timers">
+        
+            #foreach($position in [0,1,2,3,4,5,6,7,8,9,10,11,12])
+            	#timer("building", $position)
+            #end
+           
+           
+            #foreach($position in [1,2,3,4,5,6,7,8,9,10,11,12])
+            	#timer("resource_building", $position)
+            #end
+        
+        </div>
+</div>
 
 <script type="text/template" class="template">
 
-        <h5>Time: <%- rc[0] %> </h5>
-        <h5>Gold: <%- rc[1] %></h5>
-        <h5>Timber: <%- rc[2] %></h5>
-        <h5>Clay: <%- rc[3] %></h5>
-        <h5>Corn: <%- rc[4] %></h5>
+        <h5>Time: <%- convertTime(rc['time']) %> </h5>
+        <h5>Gold: <%- rc['resourceDto']['gold'] %></h5>
+        <h5>Timber: <%- rc['resourceDto']['timber'] %></h5>
+        <h5>Clay: <%- rc['resourceDto']['clay'] %></h5>
+        <h5>Corn: <%- rc['resourceDto']['corn'] %></h5>
         <button class="btn btn-primary lvlUp">Level Up</button>
 
     </script>
 #end
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/cityResources.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/timer.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/ajaxCalls.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/levelUp.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/underscore.js')"></script>
 
-<script>
-    CityResources("building_empty", "building", "#springUrl('/city/resources/buildings/')", "#springUrl('/city/resources/types')","$dto.getNickName()");
+<script type="text/javascript">
+	var urls = {
+		'buildings' : "#springUrl('/city/resources/buildings/')",
+		'types' : "#springUrl('/city/resources/types')",
+		'getBuildingQueue' : "#springUrl('/getBuildingQueue')",
+		'changeStatus' : "#springUrl('/changeStatus')",
+		'timeInfo' : "#springUrl('/city/resources/timeInfo')",
+		'checkResources' : "#springUrl('/city/resources/checkResources')",
+		'levelUp' : "#springUrl('/city/resources/levelUp')",
+		'getInfo' : "#springUrl('/city/resources/getInfo')",
+		'getTypeLevel' : "#springUrl('/city/resources/getTypeLevel')"
+	};
+
+	ajaxCallGetBuildingQueue(urls, "$dto.getNickName()", 'resource_building');
+	
+    CityResources("building_empty", "building", urls, "$dto.getNickName()", 'resource_building');
    
     _.templateSettings.variable = "rc";
         var template = _.template(
             $( "script.template" ).html()
         );
-     levelUpBuilding("#springUrl('/city/resources/')","$dto.getNickName()",template);
+
+
+      levelUpBuilding(urls,"$dto.getNickName()",template,'resource_building');
 </script>
