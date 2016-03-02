@@ -20,6 +20,10 @@
             	   			 if(info!=null){
             	   				 showPopoverInfo($div, urls, playerName, info, template, globalType);
             	   			 }
+                         },
+                         error: function (xhr, status, errorThrown) {
+                        	 console.log("Error: " + errorThrown);
+                        	 flag = false;	
                          }
                })     
 		}

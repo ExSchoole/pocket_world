@@ -95,8 +95,10 @@
 
 <script src="#springUrl('/js/jquery-ui.min.js')"></script>
 <script src="#springUrl('/js/DragDrop.js')"></script>
+<script src="#springUrl('/js/ajaxCalls.js')"></script>
 <script src="#springUrl('/js/ajaxCallAddBuilding.js')"></script>
 <script src="#springUrl('/js/jquery.verticalCarousel.js')"></script>
+<script src="#springUrl('/js/timer.js')"></script>
 <script src="#springUrl('/js/levelUp.js')"></script>
 <script src="#springUrl('/js/underscore.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
