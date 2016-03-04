@@ -1,13 +1,14 @@
 #parse("layout/macros.vm")
 #head("City Center")
 
-#@body(${time.getHourOfDay()})
+#@body()
 #parse("logout_button.vm")
 <div class="row">
     <a href="#springUrl('/city/resources/')" class="btn btn-primary">#springMessage('city.resources')</a>
 </div>
 <div id="message">
 </div>
+
 <div class="col-md-7">
 	<div class ="row container">
     	<div class ="col-md-7 container info_resources">
@@ -51,13 +52,12 @@
     </div>
 </div>
 
-
-<div class="col-md-3">
+<div class="col-md-2 left_align">
 	#addcarousel($buildingTypes)
 </div>
 
-<div class="col-md-2 center_align">
-            
+<div class="col-md-3 center_align" id="timerstable">
+        <div class="row">    
             <div class="col-md-9 info_names">
                  <h3>$dto.getNickName()</h3>
             </div>
@@ -78,6 +78,42 @@
             #end
         
         </div>
+        </div>
+        
+        <div class="row">
+        <div class="portlet portlet-default chat"> <!-- start -->
+                <div class="portlet-heading">
+                    <div class="portlet-title">
+                        <h4><i class="fa fa-circle text-green"></i> Jane Smith</h4>
+                    </div>
+                    <div class="portlet-widgets">
+                        <span class="divider"></span>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#chat"><i class="fa fa-chevron-down"></i></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="chat" class="panel-collapse collapse in">
+                    <div>
+                    <div class="portlet-body chat-widget" style="overflow-y: auto; width: auto; height: 300px;" id="content">
+                    <!-- MESSAGES WILL BE HERE -->
+                    </div>
+                    </div>
+                    <div class="portlet-footer">
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Enter message..." id="textarea"></textarea>
+                            </div>
+                            <div class="form-line">
+                                <input type="text" class="input-large" placeholder="Login"> 
+                                <button type="button" class="btn btn-default pull-right" id="send_btn">Send</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- end -->
+            </div>
+        
 </div>
         </div> 
 </div> 
@@ -101,9 +137,12 @@
 <script src="#springUrl('/js/timer.js')"></script>
 <script src="#springUrl('/js/levelUp.js')"></script>
 <script src="#springUrl('/js/underscore.js')"></script>
+<script src="#springUrl('/js/chat.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 
-<script>	
+<script>
+	sendSystemMessage('Welcome to chat');
+		
 	var urls = {
 		'addBuilding' : "#springUrl('/city/center/addBuilding')",
 		'getBuildingQueue' : "#springUrl('/getBuildingQueue')",
@@ -129,4 +168,8 @@
         );
         
      levelUpBuilding(urls,"$dto.getNickName()",template,'building');
+     sendMessage(urls, "$dto.getNickName()");
+     
+     var date = new Date();
+	 $('body').addClass('time_'+date.getHours());
 </script> 

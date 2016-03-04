@@ -1,14 +1,14 @@
 
 div#carouselId{
     position: relative;
-    top:120px;
-    left:30px;
+    top:0px;
+    left:10px;
 }
 
 .vertical-carousel {
 background-color: #EEE;
-padding: 10px;
-width: 190px;
+padding: 5px;
+width: 172px;
 }
 
 .vertical-carousel a {
@@ -32,7 +32,7 @@ list-style: none;
 margin: 0px;padding:0px;
 color: #333;
 display: block;
-padding: 5px;
+padding: 2px;
 margin-bottom: 5px;
 text-align: center;
 background-color: #ddd;
