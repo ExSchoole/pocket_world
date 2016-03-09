@@ -1,4 +1,4 @@
-        function registration(url){
+        function registration(urls){
 			$(document).ready(function() {
 
             $(".signup").click(function(e) {
@@ -16,30 +16,42 @@
 					$("fieldset#signup_menu").hide();
 				}
 			});
-			$('#signup_submit').click(function(event){
+			$('#signup_submit').mouseup(function(event){
 				event.preventDefault();
+				
+				
+				
 				  
-				var userLog = $.trim($('#username').val());
-				var userPas = $.trim($('#password').val());
+				var playerName = $.trim($('#username').val());
+				var playerPas = $.trim($('#password').val());
 				var cityName = $.trim($('#cityname').val());
-				if(userPas!=$.trim($('#reenter_password').val())){
-					alert("Houston, we have a problem");
-				} else {
-					alert(url);
-					$.ajax({
-						type: 'POST',
-						url: url,
-						data: {playerName : userLog, password: userPas, cityName:cityName},
-						error: function(req, text, error) {
-							alert('Error AJAX: ' + text + ' | ' + error);
-						},
-						success: function (data) {
-							alert(data);
-							if(data=="Success!"){
-								document.location.replace("/pocket-world/login");
-							}
-						}
-					});	
+				if(playerName!=""&&playerPas!=""&&cityName!=""){
+					
+					if(playerPas!=$.trim($('#reenter_password').val())){
+						alert("Houston, we have a problem");
+					} else {
+						$.ajax({
+				            url: urls['registerNewPlayer'],
+				            type: "POST",
+				            data : {playerName: playerName, password: playerPas, cityName: cityName},	
+				            success: function (data, textStatus) {
+				            	if(data=="success"){
+				            		document.location.href = "/pocket-world/login";
+				            	}else{
+				            		$('.registerError').popover('show');
+									$('.registerError').on('shown.bs.popover', function () {
+										setTimeout(function(){ $('.registerError').popover('hide'); }, 3000);
+									   });
+				            	}
+				            },
+				            error: function (xhr, status, errorThrown) {
+				                console.log("Error: " + errorThrown);
+				            }
+				        })
+					
+					
+						
+					}
 				}
 			});
 

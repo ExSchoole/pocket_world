@@ -48,15 +48,16 @@ public class MainController {
         return "registration";
     }
     @RequestMapping(value ="/registerNewPlayer", method = RequestMethod.POST)
+    @ResponseBody
     public String registerNewPlayer(@RequestParam String playerName,@RequestParam String password,
     		@RequestParam String cityName) {
     	
     	if (playerService.createPlayer(playerName,password)) {
     		cityService.createCity(playerService.getPlayerId(playerName), cityName);
-            return "successMessage";
+            return "success";
         } else {
             
-            return "errorMessage";
+            return "error";
         }
        
     }
