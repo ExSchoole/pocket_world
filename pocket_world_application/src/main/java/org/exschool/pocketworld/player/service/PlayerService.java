@@ -13,4 +13,6 @@ public interface PlayerService {
     boolean isPlayerExist(String login);
 
     Long getPlayerId(String login);
+
+	boolean createPlayer(String playerName, String password);
 }
