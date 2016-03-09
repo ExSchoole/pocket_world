@@ -3,7 +3,10 @@
 #@body()
 <link href="#springUrl('/css/registration.css')" rel="stylesheet">
 <div id="container">
-    <div id="topnav" class="topnav"><a href="login" class="signup"><span>Sign up</span></a> </div>
+    <div id="topnav" class="topnav">
+        <a href="login" class="signin"><span>Sign in</span></a>
+        <a href="login" class="signup"><span>Sign up</span></a>
+    </div>
     <fieldset id="signup_menu">
         <form id="signup">
         
