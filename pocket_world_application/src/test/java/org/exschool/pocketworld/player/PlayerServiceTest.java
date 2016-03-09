@@ -105,6 +105,16 @@ public class PlayerServiceTest {
         Player existingPlayer = playerService.getPlayerByLogin("login-3");
         assertNotNull(existingPlayer);
     }
+    
+    @Test
+    public void testCreatePlayer() {
+        String playerlogin = "testLogin";
+        String password ="pass";
+        playerService.createPlayer(playerlogin, password);
+        Player createdPlayer = playerService.getPlayerByLogin(playerlogin);
+        assertNotNull(createdPlayer);
+        assertNotNull(createdPlayer.getId());
+    }
 }
 
 

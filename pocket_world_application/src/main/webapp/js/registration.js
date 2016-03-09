@@ -19,9 +19,6 @@
 			$('#signup_submit').mouseup(function(event){
 				event.preventDefault();
 				
-				
-				
-				  
 				var playerName = $.trim($('#username').val());
 				var playerPas = $.trim($('#password').val());
 				var cityName = $.trim($('#cityname').val());

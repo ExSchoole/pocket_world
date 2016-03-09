@@ -2,12 +2,12 @@
 #head("City Center")
 
 #@body(${time.getHourOfDay()})
+#parse("logout_button.vm")
 <div class="row">
     <a href="#springUrl('/city/resources/')" class="btn btn-primary">#springMessage('city.resources')</a>
 </div>
 <div id="message">
 </div>
-
 <div class="col-md-7">
 	<div class ="row container">
     	<div class ="col-md-7 container info_resources">

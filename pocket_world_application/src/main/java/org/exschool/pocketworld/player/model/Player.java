@@ -31,7 +31,7 @@ public class Player {
     public Player(PlayerResources playerResources, String login,String password) {
         this.playerResources = playerResources;
         this.login = login;
-        this.password=password;
+        this.setPassword(password);
     }
 
     public Long getId() {
@@ -90,4 +90,12 @@ public class Player {
                 ", login='" + login + '\'' +
                 '}';
     }
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }
