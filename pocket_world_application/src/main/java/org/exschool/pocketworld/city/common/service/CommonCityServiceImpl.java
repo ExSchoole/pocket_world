@@ -13,6 +13,8 @@ import org.exschool.pocketworld.buildQueue.model.Status;
 import org.exschool.pocketworld.buildQueue.model.Type;
 import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.building.service.BuildingService;
+import org.exschool.pocketworld.chat.model.Message;
+import org.exschool.pocketworld.chat.service.ChatService;
 import org.exschool.pocketworld.city.service.CityService;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
 import org.exschool.pocketworld.player.model.Player;
@@ -22,6 +24,7 @@ import org.exschool.pocketworld.resource.building.model.ResourceProduction;
 import org.exschool.pocketworld.resource.building.service.ResourceBuildingService;
 import org.exschool.pocketworld.resource.building.service.ResourceProductionService;
 import org.exschool.pocketworld.resource.model.ResourceType;
+import org.exschool.pocketworld.util.builder.MessageBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +49,8 @@ public class CommonCityServiceImpl implements CommonCityService {
     private ResourceBuildingService resourceBuildingService;
     @Autowired
     private ResourceProductionService resourceSpeedService;
+	@Autowired
+	private ChatService chatService;
 
     @Override
     public void buildQueuedBuildings(String playerName) {
@@ -129,4 +134,15 @@ public class CommonCityServiceImpl implements CommonCityService {
     						resourceBuilding.getResourceType(), resourceBuilding.getLevel()));
     	}
     }
+
+	public Message sendMessage(String sender, String recipient, String message){
+        Message messageEntity = new MessageBuilder()
+                        .message(message)
+                        .recipient(recipient)
+                        .sender(sender)
+                        .time(new DateTime().toDate()).build();
+
+        //return chatService.save(messageEntity);
+        return messageEntity;
+	}
 }

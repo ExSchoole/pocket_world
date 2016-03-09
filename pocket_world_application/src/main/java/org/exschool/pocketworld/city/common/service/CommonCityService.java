@@ -2,6 +2,7 @@ package org.exschool.pocketworld.city.common.service;
 
 import java.util.List;
 
+import org.exschool.pocketworld.chat.model.Message;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
 
 /**
@@ -9,6 +10,10 @@ import org.exschool.pocketworld.dto.TimeOfBuilding;
  */
 public interface CommonCityService {
     void buildQueuedBuildings(String playerName);
+
     List<TimeOfBuilding> getQueuedBuildings(String playerName);
+
     void changeStatus(String playerName, int position, String type);
+
+    Message sendMessage(String sender, String recipient, String message);
 }

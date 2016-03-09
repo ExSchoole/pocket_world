@@ -1,5 +1,6 @@
 package org.exschool.pocketworld.controllers;
 
+import org.exschool.pocketworld.chat.model.Message;
 import org.exschool.pocketworld.city.common.service.CommonCityService;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,11 @@ public class MainController {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login?logout";
+    }
+
+    @RequestMapping(value = "/sendMessage", method = RequestMethod.GET)
+    public Message sendMessage(@RequestParam String sender, String recipient, String message){
+        return commonCityService.sendMessage(sender, recipient, message);
     }
 
 }

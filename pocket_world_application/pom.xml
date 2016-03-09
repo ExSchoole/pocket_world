@@ -47,6 +47,7 @@
         <json-path.version>2.1.0</json-path.version>
         <guava.version>18.0</guava.version>
         <build_queue.version>0.0.1</build_queue.version>
+        <chat.version>0.0.1</chat.version>
         <spring.security.version>4.0.3.RELEASE</spring.security.version>
     </properties>
 
@@ -70,6 +71,11 @@
             <groupId>org.exschool</groupId>
             <artifactId>build_queue</artifactId>
             <version>${build_queue.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.exschool</groupId>
+            <artifactId>chat</artifactId>
+            <version>${chat.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>

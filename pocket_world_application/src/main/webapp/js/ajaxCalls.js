@@ -87,3 +87,14 @@ function ajaxCallLevelUp(playerName, typeOfBuilding, level, urls, position, glob
     		   			 }
     	   });
 };
+
+function ajaxCallSendMessage(playerName, recipientName, message, urls){
+    $.ajax({
+        type: 'GET',
+        url: urls['sendMessage'],
+        data : { sender: playerName, recipient: recipientName, message: message},
+        success: function (data, textStatus) {
+                            console.log(data);
+    		   			 }
+    	   });
+};

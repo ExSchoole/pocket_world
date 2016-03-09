@@ -33,7 +33,8 @@ public class HibernateConfiguration {
                 "org.exschool.pocketworld.city.model",
                 "org.exschool.pocketworld.building.model",
                 "org.exschool.pocketworld.resource.building.model",
-                "org.exschool.pocketworld.buildQueue.model");
+                "org.exschool.pocketworld.buildQueue.model",
+                "org.exschool.pocketworld.chat.model");
         sessionFactory.setHibernateProperties(additionalProperties());
         return sessionFactory;
     }

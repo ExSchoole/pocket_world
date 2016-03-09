@@ -140,7 +140,8 @@
 		'checkResources' : "#springUrl('/city/resources/checkResources')",
 		'levelUp' : "#springUrl('/city/resources/levelUp')",
 		'getInfo' : "#springUrl('/city/resources/getInfo')",
-		'getTypeLevel' : "#springUrl('/city/resources/getTypeLevel')"
+		'getTypeLevel' : "#springUrl('/city/resources/getTypeLevel')",
+		'sendMessage' : "#springUrl('/sendMessage')"
 	};
 
 	ajaxCallGetBuildingQueue(urls, "$dto.getNickName()", 'resource_building');
@@ -154,7 +155,7 @@
 
 
       levelUpBuilding(urls,"$dto.getNickName()",template,'resource_building');
-      sendMessage(urls, "$dto.getNickName()");
+      sendMessage("$dto.getNickName()", urls);
       
       var date = new Date();
 	  $('body').addClass('time_'+date.getHours());

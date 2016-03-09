@@ -1,10 +1,13 @@
-function sendMessage(urls, playerName){	
+function sendMessage(playerName, urls){
 	$('#send_btn').click(function(){
-		
-		var newMessage = messageTemplate(playerName, new Date(), $('#textarea').val());		
+
+		var message = $('#textarea').val();
+		var newMessage = messageTemplate(playerName, new Date(), message);
 		var allMessages = $('#content').html();
 		
 		$('#content').html(allMessages + newMessage);
+
+		ajaxCallSendMessage(playerName, 'system', message, urls);
 	});
 }
 
