@@ -108,8 +108,8 @@ public class PlayerServiceTest {
     
     @Test
     public void testCreatePlayer() {
-        String playerlogin = "testLogin";
-        String password ="pass";
+        String playerlogin = "playerlogin";
+        String password ="password";
         playerService.createPlayer(playerlogin, password);
         Player createdPlayer = playerService.getPlayerByLogin(playerlogin);
         assertNotNull(createdPlayer);
