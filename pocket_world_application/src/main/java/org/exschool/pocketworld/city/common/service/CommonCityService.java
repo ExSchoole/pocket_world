@@ -16,4 +16,6 @@ public interface CommonCityService {
     void changeStatus(String playerName, int position, String type);
 
     Message sendMessage(String sender, String recipient, String message);
+
+    List<Message> getAllMessages(String playerName);
 }

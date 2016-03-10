@@ -119,4 +119,28 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         scheduler.setTriggers(cronTriggerFactoryBean().getObject());
         return scheduler;
     }
+
+    /*@Bean
+    public FilterRegistrationBean someFilterRegistration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(someFilter());
+        return registration;
+    }
+
+    @Bean(name = "someFilter")
+    public Filter someFilter() {
+        CharacterEncodingFilter encFilter;
+
+        encFilter = new CharacterEncodingFilter();
+
+        encFilter.setEncoding("UTF-8");
+        encFilter.setForceEncoding(true);
+
+        return encFilter;
+    }
+
+    @Bean
+    public StringHttpMessageConverter stringHttpMessageConverter() {
+        return new StringHttpMessageConverter(Charset.forName("UTF-8"));
+    }*/
 }

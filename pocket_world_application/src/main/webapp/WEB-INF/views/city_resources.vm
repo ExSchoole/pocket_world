@@ -118,7 +118,26 @@
         <h5>Corn: <%- rc['resourceDto']['corn'] %></h5>
         <button class="btn btn-primary lvlUp">Level Up</button>
 
-    </script>
+</script>
+
+<script type="text/template" class="msg_template">
+
+        <% if (message['sender'] == "$dto.getNickName()") { %>
+             <h4 class="media-heading"> to
+                    <%- message['recipient']%>
+                        <span class="small pull-right"> <%-message['time']%> </span>
+             </h4>
+             <p class="text-left"> <%-message['message']%> </p> <hr>
+        <% } else { %>
+             <h4 class="media-heading"> from
+                    <%-message['sender']%>
+                        <span class="small pull-right"> <%-message['time']%> </span>
+             </h4>
+            <p class="text-right"> <%-message['message']%> </p> <hr>
+        <% } %>
+
+</script>
+
 #end
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/cityResources.js')"></script>
@@ -129,8 +148,6 @@
 <script type="text/javascript" src="#springUrl('/js/chat.js')"></script>
 
 <script type="text/javascript">
-	sendSystemMessage('Welcome to chat');
-	
 	var urls = {
 		'buildings' : "#springUrl('/city/resources/buildings/')",
 		'types' : "#springUrl('/city/resources/types')",
@@ -141,7 +158,8 @@
 		'levelUp' : "#springUrl('/city/resources/levelUp')",
 		'getInfo' : "#springUrl('/city/resources/getInfo')",
 		'getTypeLevel' : "#springUrl('/city/resources/getTypeLevel')",
-		'sendMessage' : "#springUrl('/sendMessage')"
+		'sendMessage' : "#springUrl('/sendMessage')",
+		'allMessages' : "#springUrl('/allMessages')"
 	};
 
 	ajaxCallGetBuildingQueue(urls, "$dto.getNickName()", 'resource_building');
@@ -153,10 +171,16 @@
             $( "script.template" ).html()
         );
 
-
       levelUpBuilding(urls,"$dto.getNickName()",template,'resource_building');
+
+      _.templateSettings.variable = "message";
+              var msg_template = _.template(
+                      $("script.msg_template").html()
+      );
+
       sendMessage("$dto.getNickName()", urls);
-      
+      ajaxCallGetAllMessages("$dto.getNickName()", urls, msg_template);
+
       var date = new Date();
 	  $('body').addClass('time_'+date.getHours());
 </script>

@@ -142,7 +142,10 @@ public class CommonCityServiceImpl implements CommonCityService {
                         .sender(sender)
                         .time(new DateTime().toDate()).build();
 
-        //return chatService.save(messageEntity);
-        return messageEntity;
+        return chatService.save(messageEntity);
+	}
+
+	public List<Message> getAllMessages(String playerName){
+		return chatService.getAllByPlayerName(playerName);
 	}
 }

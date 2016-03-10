@@ -2,10 +2,9 @@
 	 var flag = false;
 	 
 	 $( ".building" ).click(function() {
-		 console.log("ok1");
+
 		 if ($(this).hasClass('timer')==false && flag==false){ 
 			flag = true;
-			console.log($(this).attr("id"));   	  
 			var $div = $(this);
 			$.ajax({
                url: urls['getInfo'],

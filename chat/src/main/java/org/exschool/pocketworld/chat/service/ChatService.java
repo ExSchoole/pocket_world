@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ChatService {
 
-    List<Message> getAllByRecipient(String recipient);
+    List<Message> getAllByPlayerName(String recipient);
 
     Message save(Message entity);
 }

@@ -59,8 +59,15 @@ public class MainController {
     }
 
     @RequestMapping(value = "/sendMessage", method = RequestMethod.GET)
+    @ResponseBody
     public Message sendMessage(@RequestParam String sender, String recipient, String message){
+        System.out.println("MESSAGE "+message); //wrong coding
         return commonCityService.sendMessage(sender, recipient, message);
     }
 
+    @RequestMapping(value = "/allMessages", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Message> sendMessage(@RequestParam String playerName){
+        return commonCityService.getAllMessages(playerName);
+    }
 }

@@ -88,13 +88,38 @@ function ajaxCallLevelUp(playerName, typeOfBuilding, level, urls, position, glob
     	   });
 };
 
-function ajaxCallSendMessage(playerName, recipientName, message, urls){
+function ajaxCallSendMessage(playerName, recipientName, message, urls, msg_template){
+
     $.ajax({
         type: 'GET',
         url: urls['sendMessage'],
         data : { sender: playerName, recipient: recipientName, message: message},
         success: function (data, textStatus) {
-                            console.log(data);
+    		   			    $('#textarea').val('');
+    		   			    data['time'] = dateTemplate(new Date(data['time']));
+                            var allMessages = $('#content').html();
+
+                            $('#content').html(allMessages + msg_template(data));
+    		   			 }
+    	   });
+};
+
+
+function ajaxCallGetAllMessages(playerName, urls, msg_template){
+
+    $.ajax({
+        type: 'GET',
+        url: urls['allMessages'],
+        data : { playerName: playerName},
+        success: function (data, textStatus) {
+    		   			    var allMessages;
+
+    		   			    $.each(data, function(index, object){
+    		   			        object['time'] = dateTemplate(new Date(object['time']));
+                                allMessages = $('#content').html();
+
+                                $('#content').html(allMessages + msg_template(object));
+    		   			    });
     		   			 }
     	   });
 };

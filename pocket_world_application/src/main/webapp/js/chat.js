@@ -1,29 +1,11 @@
-function sendMessage(playerName, urls){
+function sendMessage(playerName, urls, msg_template){
 	$('#send_btn').click(function(){
 
 		var message = $('#textarea').val();
-		var newMessage = messageTemplate(playerName, new Date(), message);
-		var allMessages = $('#content').html();
-		
-		$('#content').html(allMessages + newMessage);
+		var recipientName = $('#recipientName').val();
 
-		ajaxCallSendMessage(playerName, 'system', message, urls);
+		ajaxCallSendMessage(playerName, recipientName, message, urls, msg_template);
 	});
-}
-
-function sendSystemMessage(message){
-	var newMessage = messageTemplate('System', new Date(), message);
-	var allMessages = $('#content').html();
-	
-	$('#content').html(allMessages + newMessage);
-}
-
-function messageTemplate(playerName, date, text){
-	var message = '<p>' + text + '</p>'+'<hr>';
-	var dateStr = '<span class="small pull-right">' + dateTemplate(date) + '</span>';
-	var name = '<h4 class="media-heading">' + playerName + dateStr + '</h4>';
-	
-	return name + message;
 }
 
 function dateTemplate(date){
