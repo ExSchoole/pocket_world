@@ -4,6 +4,8 @@ import org.exschool.pocketworld.chat.model.Message;
 import org.exschool.pocketworld.city.common.service.CommonCityService;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -60,9 +62,14 @@ public class MainController {
 
     @RequestMapping(value = "/sendMessage", method = RequestMethod.GET)
     @ResponseBody
-    public Message sendMessage(@RequestParam String sender, String recipient, String message){
+    public ResponseEntity<Message> sendMessage(@RequestParam String sender, String recipient, String message){
         System.out.println("MESSAGE "+message); //wrong coding
-        return commonCityService.sendMessage(sender, recipient, message);
+        Message messageObj = commonCityService.sendMessage(sender, recipient, message);
+        if (messageObj != null) {
+            return new ResponseEntity<Message>(messageObj, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Message>(messageObj, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(value = "/allMessages", method = RequestMethod.GET)

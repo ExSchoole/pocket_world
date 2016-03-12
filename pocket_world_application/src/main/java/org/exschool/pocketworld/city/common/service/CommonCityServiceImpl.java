@@ -136,13 +136,17 @@ public class CommonCityServiceImpl implements CommonCityService {
     }
 
 	public Message sendMessage(String sender, String recipient, String message){
-        Message messageEntity = new MessageBuilder()
-                        .message(message)
-                        .recipient(recipient)
-                        .sender(sender)
-                        .time(new DateTime().toDate()).build();
+            if (playerService.getPlayerByLogin(recipient.toLowerCase())==null) {
+                return null;
+            }
 
-        return chatService.save(messageEntity);
+            Message messageEntity = new MessageBuilder()
+					.message(message)
+					.recipient(recipient)
+					.sender(sender)
+					.time(new DateTime().toDate()).build();
+
+			return chatService.save(messageEntity);
 	}
 
 	public List<Message> getAllMessages(String playerName){

@@ -1,10 +1,18 @@
 function sendMessage(playerName, urls, msg_template){
 	$('#send_btn').click(function(){
 
-		var message = $('#textarea').val();
-		var recipientName = $('#recipientName').val();
+		var message = $('#textarea').val().trim();
+		var recipientName = $('#recipientName').val().trim();
 
-		ajaxCallSendMessage(playerName, recipientName, message, urls, msg_template);
+        if (message == ''){
+            alert("Message is empty");
+        } else {
+            if (recipientName == ''){
+                alert("Login is empty");
+            } else {
+                ajaxCallSendMessage(playerName, recipientName, message, urls, msg_template);
+            }
+        }
 	});
 }
 

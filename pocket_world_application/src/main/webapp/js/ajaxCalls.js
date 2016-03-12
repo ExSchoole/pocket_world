@@ -100,7 +100,11 @@ function ajaxCallSendMessage(playerName, recipientName, message, urls, msg_templ
                             var allMessages = $('#content').html();
 
                             $('#content').html(allMessages + msg_template(data));
-    		   			 }
+    		   			 },
+        error: function (xhr, status, errorThrown) {
+                            alert('Player < ' + recipientName + ' > does not exist. Please try again.');
+                            console.log("Error: " + errorThrown);
+                         }
     	   });
 };
 
@@ -112,6 +116,7 @@ function ajaxCallGetAllMessages(playerName, urls, msg_template){
         url: urls['allMessages'],
         data : { playerName: playerName},
         success: function (data, textStatus) {
+    		   			    console.log(data==null);
     		   			    var allMessages;
 
     		   			    $.each(data, function(index, object){
