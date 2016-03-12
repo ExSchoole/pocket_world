@@ -99,7 +99,7 @@
                                 <textarea class="form-control" placeholder="Enter message..." id="textarea"></textarea>
                             </div>
                             <div class="form-line">
-                                <input type="text" class="input-large" placeholder="Login"> 
+                                <input type="text" class="input-large" placeholder="Login" id="recipientName">
                                 <button type="button" class="btn btn-default pull-right" id="send_btn">Send</button>
                                 <div class="clearfix"></div>
                             </div>
@@ -139,6 +139,7 @@
 </script>
 
 #end
+<script type="text/javascript" src="#springUrl('/js/jquery-ui.min.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/cityResources.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/timer.js')"></script>
@@ -178,7 +179,7 @@
                       $("script.msg_template").html()
       );
 
-      sendMessage("$dto.getNickName()", urls);
+      sendMessage("$dto.getNickName()", urls, msg_template);
       ajaxCallGetAllMessages("$dto.getNickName()", urls, msg_template);
 
       var date = new Date();

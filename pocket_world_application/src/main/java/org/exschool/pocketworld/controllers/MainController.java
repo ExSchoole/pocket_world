@@ -81,10 +81,11 @@ public class MainController {
        
     }
 
-    @RequestMapping(value = "/sendMessage", method = RequestMethod.GET)
+    @RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Message> sendMessage(@RequestParam String sender, String recipient, String message){
-        System.out.println("MESSAGE "+message); //wrong coding
+    public ResponseEntity<Message> sendMessage(@RequestParam String sender, @RequestParam String recipient,
+                                               @RequestParam String message){
+
         Message messageObj = commonCityService.sendMessage(sender, recipient, message);
         if (messageObj != null) {
             return new ResponseEntity<Message>(messageObj, HttpStatus.OK);

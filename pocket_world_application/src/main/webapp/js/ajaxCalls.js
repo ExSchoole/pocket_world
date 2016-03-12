@@ -91,7 +91,7 @@ function ajaxCallLevelUp(playerName, typeOfBuilding, level, urls, position, glob
 function ajaxCallSendMessage(playerName, recipientName, message, urls, msg_template){
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: urls['sendMessage'],
         data : { sender: playerName, recipient: recipientName, message: message},
         success: function (data, textStatus) {
@@ -116,7 +116,6 @@ function ajaxCallGetAllMessages(playerName, urls, msg_template){
         url: urls['allMessages'],
         data : { playerName: playerName},
         success: function (data, textStatus) {
-    		   			    console.log(data==null);
     		   			    var allMessages;
 
     		   			    $.each(data, function(index, object){
