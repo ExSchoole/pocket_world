@@ -2,7 +2,9 @@ package org.exschool.pocketworld.controllers;
 
 import org.exschool.pocketworld.chat.model.Message;
 import org.exschool.pocketworld.city.common.service.CommonCityService;
+import org.exschool.pocketworld.city.service.CityService;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
+import org.exschool.pocketworld.player.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,10 @@ public class MainController {
 
 	@Autowired
     private CommonCityService commonCityService;
+	@Autowired
+    private PlayerService playerService;
+	@Autowired
+	private CityService cityService;
 	
 	private static final String PLAYER_NAME = "player-login"; //temporary
 
@@ -58,6 +64,21 @@ public class MainController {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login?logout";
+    }
+    
+    @RequestMapping(value ="/registerNewPlayer", method = RequestMethod.POST)
+    @ResponseBody
+    public String registerNewPlayer(@RequestParam String playerName,@RequestParam String password,
+    		@RequestParam String cityName) {
+    	
+    	if (playerService.createPlayer(playerName.toLowerCase(),password)) {
+    		cityService.createCity(playerService.getPlayerId(playerName.toLowerCase()), cityName);
+            return "success";
+        } else {
+            
+            return "error";
+        }
+       
     }
 
     @RequestMapping(value = "/sendMessage", method = RequestMethod.GET)

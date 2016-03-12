@@ -55,4 +55,22 @@ public class PlayerServiceImpl implements PlayerService {
                 null;
     }
 
+	@Override
+	public boolean createPlayer(String playerName, String password) {
+		try {
+			if (!isPlayerExist(playerName)) {
+				PlayerResources playerResources =  new PlayerResources(100,100, 100, 100);
+				Player player = new Player(playerResources,playerName,password);
+				savePlayer(player);
+			}else{
+				return false;
+			}
+			
+		} catch (Exception e) {
+			return false;
+		}
+		
+		return true;
+	}
+
 }
