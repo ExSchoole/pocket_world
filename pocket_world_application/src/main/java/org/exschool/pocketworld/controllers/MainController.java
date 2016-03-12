@@ -10,7 +10,12 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showCity() {
-        return "redirect:/login";
+        return "redirect:/index";
+    }
+
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String login() {
+        return "/index";
     }
 
 }
