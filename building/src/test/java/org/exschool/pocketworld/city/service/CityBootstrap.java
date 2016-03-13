@@ -23,6 +23,7 @@ public class CityBootstrap {
     Dao dao;
 
     final static List<Long> savedCitiesIds = new ArrayList<>();
+    private List<City> allCities = new ArrayList<>();
 
     private volatile boolean bootstraped = false;
 
@@ -30,14 +31,23 @@ public class CityBootstrap {
         if (bootstraped) return;
 
         City city1 = UserCityBuilder.builder().playerId(1L).name("City1").build();
+        allCities.add(city1);
+
         City city2 = UserCityBuilder.builder().playerId(2L).name("City2").build();
+        allCities.add(city2);
+
         City city3 = UserCityBuilder.builder().playerId(3L).name("City3").build();
+        allCities.add(city3);
 
         Collection<City> savedCities = dao.saveAll(Arrays.asList(city1, city2, city3));
         for (City city : savedCities) {
             savedCitiesIds.add(city.getId());
         }
         bootstraped = true;
+    }
+
+    public List<City> getAllCities(){
+        return allCities;
     }
 
 }

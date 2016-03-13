@@ -1,0 +1,6 @@
+<link href="#springUrl('/css/logout.css')" rel="stylesheet">
+<div>
+    <form action="#springUrl('/logout')">
+        <input id="logout" type="submit" value="Logout">
+    </form>
+</div>

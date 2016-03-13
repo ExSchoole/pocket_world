@@ -13,8 +13,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
+
+import static junit.framework.Assert.*;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestSpringConfig.class)
@@ -34,6 +38,15 @@ public class CityServiceTest {
     @AfterClass
     public static void afterClass() {
         CityBootstrap.savedCitiesIds.clear();
+    }
+
+    @Test
+    public void testCreateCityForPopulator() {
+        String cityName = "City111";
+        Long playerId = 111L;
+        cityService.createCity(playerId, cityName);
+        Long createdCityId = cityService.getCityId(playerId);
+        assertNotNull(createdCityId);
     }
 
     @Test
@@ -68,9 +81,48 @@ public class CityServiceTest {
         assertNotNull(existingBuilding);
     }
 
+    @Test
+    public void givenCityExistForPlayer_GetCityIdReturnsCityId() {
+        Long playerId = 1L;
+        Long expectedCityId = CityBootstrap.savedCitiesIds.get(0);
+        Long actualCityId = cityService.getCityId(playerId);
+        assertEquals(expectedCityId, actualCityId);
+    }
+
+    @Test
+    public void givenCityDoesntExistForPlayer_GetCityIdReturnsNull() {
+        Long playerId = 100L;
+        assertNull(cityService.getCityId(playerId));
+    }
+
+    @Test
+    public void givenCityExistForPlayer_IsCityExistReturnsTrue() {
+        Long playerId = 1L;
+        assertTrue(cityService.isCityExist(playerId));
+    }
+
+    @Test
+    public void givenCityDoesntExistForPlayer_IsCityExistReturnsFalse() {
+        Long playerId = 100L;
+        assertFalse(cityService.isCityExist(playerId));
+    }
+
     private void assertAllFieldsEquals(City city1, City city2) {
         assertEquals(city2.getId(), city1.getId());
         assertEquals(city2.getName(), city1.getName());
         assertEquals(city2.getPlayerId(), city1.getPlayerId());
+    }
+
+    @Test
+    public void testAllCities() {
+        List<City> cities = cityService.allCities();
+        assertNotNull(cities);
+        assertFalse(cities.size() == 0);
+    }
+
+    @Test
+    public void testGetPlayerByCityId() {
+        Long playerId = 1L;
+        assertNotNull(cityService.getCityByPlayerId(playerId));
     }
 }

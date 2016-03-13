@@ -11,7 +11,7 @@ public class Production {
     @EmbeddedId
     private ProductionId productionId;
 
-    private int amount;
+    private Integer amount;
 
     public Production() {
 

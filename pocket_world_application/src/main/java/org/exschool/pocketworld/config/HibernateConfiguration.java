@@ -28,7 +28,12 @@ public class HibernateConfiguration {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[]{"org.exschool.pocketworld.player.model"});
+        sessionFactory.setPackagesToScan(
+                "org.exschool.pocketworld.player.model",
+                "org.exschool.pocketworld.city.model",
+                "org.exschool.pocketworld.building.model",
+                "org.exschool.pocketworld.resource.building.model",
+                "org.exschool.pocketworld.buildQueue.model");
         sessionFactory.setHibernateProperties(additionalProperties());
         return sessionFactory;
     }

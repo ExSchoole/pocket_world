@@ -13,6 +13,7 @@
         <module>common</module>
         <module>building</module>
         <module>resource_buildings</module>
+        <module>build_queue</module>
         <module>pocket_world_application</module>
   </modules>
 
@@ -34,17 +35,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <path>/pocket-world</path>
-                    <port>8080</port>
-                    <contextReloadable>true</contextReloadable>
-                </configuration>
-                <executions/>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>2.17</version>
@@ -62,6 +52,16 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
             </plugin>
         </plugins>
     </build>
@@ -81,6 +81,10 @@
         <junit.version>4.12</junit.version>
         <servlet.api>2.5</servlet.api>
         <common.version>1.0.2</common.version>
+        <quartz.version>2.2.1</quartz.version>
+        <joda.time.version>2.9.2</joda.time.version>
+        <joda.time.hibernate.version>1.4</joda.time.hibernate.version>
+        <jadira.usertype.version>2.0.1</jadira.usertype.version>
     </properties>
 
     <dependencies>
@@ -117,6 +121,7 @@
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
+        
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -162,6 +167,8 @@
             <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+
 
 
         <!-- Postgres -->
@@ -211,6 +218,40 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>19.0-rc3</version>
+        </dependency>
+
+        <!-- Quartz scheduler -->
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.version}</version>
+        </dependency>
+
+        <!--joda time-->
+        
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda.time.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time-hibernate</artifactId>
+            <version>${joda.time.hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jadira.usertype</groupId>
+            <artifactId>usertype.jodatime</artifactId>
+            <version>${jadira.usertype.version}</version>
         </dependency>
 
     </dependencies>

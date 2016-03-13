@@ -1,0 +1,42 @@
+#parse("layout/macros.vm")
+#head("Sign up")
+#@body()
+<link href="#springUrl('/css/registration.css')" rel="stylesheet">
+<div id="container">
+    <div id="topnav" class="topnav"><a href="login" class="signup"><span>Sign up</span></a> </div>
+    <fieldset id="signup_menu">
+        <form id="signup">
+        
+                <label for="username">Username</label>
+         
+            <p class="registerError"  title = "Error" data-container = "body" data-toggle = "popover" data-placement = "bottom"
+                data-content = "This username already exists">
+               
+                <input id="username"  tabindex="4" type="text" placeholder="Enter username" data-toggle="tooltip" required/>
+            </p>
+                <label for="password">Password</label>
+                <input id="password" tabindex="5" type="password" placeholder="Enter  password..." required/>
+                <label for="reenter_password">Re-enter Password</label>
+                <input id="reenter_password"  tabindex="5" type="password" placeholder="Re-enter password" required/>
+            
+            
+                <label for="cityname">Cityname</label>
+                <input id="cityname" name="cityname" value="" title="cityname" tabindex="6" type="text" required/>
+            
+                <input id="signup_submit" value="Sign up" tabindex="7" type="button">
+            
+            <p class="ahave"> <a href="login" id="already_have">Already have an account?</a> </p>
+        </form>
+    </fieldset>
+</div>
+#end
+
+<script type="text/javascript" src="#springUrl('/js/registration.js')"></script>
+
+<script>
+var urls = {
+        'registerNewPlayer' : "#springUrl('/registerNewPlayer')"
+        'login' : "#springUrl('/login')"
+    };
+registration(urls);
+</script> 
