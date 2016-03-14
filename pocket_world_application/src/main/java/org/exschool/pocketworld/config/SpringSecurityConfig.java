@@ -28,7 +28,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/city/**").authenticated()
-                .and().formLogin().defaultSuccessUrl("/city/center/", true);
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/city/center/", true)
+                .usernameParameter("username").passwordParameter("password")
+                .and().csrf();
 
     }
 }
