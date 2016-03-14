@@ -33,7 +33,7 @@
 				            data : {playerName: playerName, password: playerPas, cityName: cityName},	
 				            success: function (data, textStatus) {
 				            	if(data=="success"){
-				            		document.location.href = "/pocket-world/login";
+				            		document.location.href = urls['login'];
 				            	}else{
 				            		$('.registerError').popover('show');
 									$('.registerError').on('shown.bs.popover', function () {
