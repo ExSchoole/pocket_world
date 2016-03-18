@@ -38,7 +38,8 @@
 
 <script>
 var urls = {
-        'registerNewPlayer' : "#springUrl('/registerNewPlayer')"
+        'registerNewPlayer' : "#springUrl('/registerNewPlayer')",
+        'login' : "#springUrl('/login')"
     };
 registration(urls);
 </script> 
