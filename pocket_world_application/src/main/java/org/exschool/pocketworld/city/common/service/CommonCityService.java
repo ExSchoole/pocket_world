@@ -25,4 +25,6 @@ public interface CommonCityService {
     UserRelation addUser(String playerName, String addingUser);
 
     void changeMessageStatus(String senderName, String recipientName);
+
+    boolean checkNewMessages(String playerName);
 }

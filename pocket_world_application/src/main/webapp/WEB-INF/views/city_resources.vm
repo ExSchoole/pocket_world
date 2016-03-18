@@ -82,6 +82,12 @@
                         <h4><i class="fa fa-circle text-green"></i> $dto.getNickName() </h4>
                     </div>
 
+                   <div class="portlet-widgets">
+                   <span class="glyphicon" id="new_message"></span>
+                   <span class="divider"></span>
+                        <a><i class="fa fa-refresh" id="refresh"></i></a>
+                   </div>
+
                     <div class="clearfix"></div>
                 </div>
                 <div id="chat" class="panel-collapse collapse in">
@@ -189,6 +195,7 @@
 
 #end
 <script type="text/javascript" src="#springUrl('/js/jquery-ui.min.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/jquery.modern-blink.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/cityResources.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/timer.js')"></script>
@@ -213,7 +220,8 @@
 		'allMessagesBetweenTwoUsers' : "#springUrl('/allMessagesBetweenTwoUsers')",
 		'allUsers' : "#springUrl('/getAllUsers')",
 		'addUser' : "#springUrl('/addUser')",
-		'changeMessageStatus' : "#springUrl('/changeMessageStatus')"
+		'changeMessageStatus' : "#springUrl('/changeMessageStatus')",
+        'checkNewMessages' : "#springUrl('/checkNewMessages')"
 	};
 
 	ajaxCallGetBuildingQueue(urls, "$dto.getNickName()", 'resource_building');
@@ -245,6 +253,8 @@
         );
 
      ajaxCallGetAllUsersRelations("$dto.getNickName()", urls, relation_template, adduser_template, msg_template);
-      var date = new Date();
-	  $('body').addClass('time_'+date.getHours());
+     ajaxCallCheckNewMessages("$dto.getNickName()", urls);
+
+     var date = new Date();
+	 $('body').addClass('time_'+date.getHours());
 </script>

@@ -55,6 +55,17 @@ public class ChatServiceImpl implements ChatService{
     }
 
     @Override
+    public List<Message> getAllNewMessages(String playerName){
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Message.class);
+
+        detachedCriteria.add(Restrictions.and(
+                                            Restrictions.eq("recipient", playerName),
+                                            Restrictions.eq("status", MessageStatus.NEW)));
+
+        return dao.getAllBy(detachedCriteria);
+    }
+
+    @Override
     public List<UserRelation> getAllRelationsByPlayerName(String playerName){
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(UserRelation.class);
         detachedCriteria.add(Restrictions.eq("playername1", playerName));

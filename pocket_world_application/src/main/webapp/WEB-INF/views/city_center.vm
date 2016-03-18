@@ -84,12 +84,18 @@
             <div class="portlet portlet-default chat">
                 <div class="portlet-heading">
                     <div class="portlet-title">
-                        <h4><i class="fa fa-circle text-green"></i> $dto.getNickName() </h4>
+                        <h4><i class="fa fa-circle text-green"></i> $dto.getNickName()</h4>
                     </div>
 
-                    <div class="clearfix"></div>
+                   <div class="portlet-widgets">
+                   <span class="glyphicon" id="new_message"></span>
+                   <span class="divider"></span>
+                        <a><i class="fa fa-refresh" id="refresh"></i></a>
+                   </div>
+
+                   <div class="clearfix"></div>
                 </div>
-                <div id="chat" class="panel-collapse collapse in">
+                <div id="chat">
                     <div>
                     <div class="portlet-body chat-widget" style="overflow-y: auto; width: auto; height: 300px;">
                         <div class="row">
@@ -200,6 +206,7 @@
 #end
 
 <script src="#springUrl('/js/jquery-ui.min.js')"></script>
+<script src="#springUrl('/js/jquery.modern-blink.js')"></script>
 <script src="#springUrl('/js/DragDrop.js')"></script>
 <script src="#springUrl('/js/ajaxCalls.js')"></script>
 <script src="#springUrl('/js/ajaxCallAddBuilding.js')"></script>
@@ -226,7 +233,8 @@
 		'allMessagesBetweenTwoUsers' : "#springUrl('/allMessagesBetweenTwoUsers')",
 		'allUsers' : "#springUrl('/getAllUsers')",
 		'addUser' : "#springUrl('/addUser')",
-		'changeMessageStatus' : "#springUrl('/changeMessageStatus')"
+		'changeMessageStatus' : "#springUrl('/changeMessageStatus')",
+		'checkNewMessages' : "#springUrl('/checkNewMessages')"
 	};
 	
 	ajaxCallGetBuildingQueue(urls, "$dto.getNickName()", 'building');
@@ -263,6 +271,7 @@
         );
 
      ajaxCallGetAllUsersRelations("$dto.getNickName()", urls, relation_template, adduser_template, msg_template);
+     ajaxCallCheckNewMessages("$dto.getNickName()", urls);
 
      var date = new Date();
 	 $('body').addClass('time_'+date.getHours());

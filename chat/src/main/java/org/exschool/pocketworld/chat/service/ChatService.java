@@ -15,6 +15,8 @@ public interface ChatService {
 
     Collection<Message> saveAll(Collection<Message> entities);
 
+    List<Message> getAllNewMessages(String playerName);
+
     List<Message> getAllMessagesBetweenTwoPlayers(String playerName1, String playerName2);
 
     List<Message> getAllNewMessagesBetweenTwoPlayers(String playerName1, String playerName2);

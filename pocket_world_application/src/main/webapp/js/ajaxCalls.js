@@ -111,6 +111,7 @@ function ajaxCallSendMessage(playerName, recipientName, message, urls, msg_templ
 
 function ajaxCallGetAllMessagesBetweenTwoUsers(playerName, recipientName, urls, msg_template){
     $('#content').empty();
+    ajaxCallCheckNewMessages(playerName, urls);
 
     $.ajax({
         type: 'GET',
@@ -146,6 +147,22 @@ function ajaxCallChangeMessageStatus(playerName, recipientName, urls){
         data : { senderName: playerName, recipientName: recipientName},
         success: function (data, textStatus) {
     		   			    console.log("SUCCESS");
+    		   			 }
+    	   });
+};
+
+function ajaxCallCheckNewMessages(playerName, urls){
+    $('#new_message').removeClass('glyphicon-envelope');
+
+    $.ajax({
+        type: 'GET',
+        url: urls['checkNewMessages'],
+        data : { playerName: playerName },
+        success: function (data, textStatus) {
+    		   			    if (data){
+    		   			        $('#new_message').addClass('glyphicon-envelope');
+    		   			        $('#new_message').modernBlink();
+    		   			    }
     		   			 }
     	   });
 };

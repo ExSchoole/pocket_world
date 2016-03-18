@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.comparator.BooleanComparator;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -124,6 +125,12 @@ public class MainController {
             allNames.add(s.getLogin());
         }
         return allNames;
+    }
+
+    @RequestMapping(value = "/checkNewMessages", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Boolean> changeMessageStatus(@RequestParam String playerName){
+        return new ResponseEntity<Boolean>(commonCityService.checkNewMessages(playerName) ,HttpStatus.OK);
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)

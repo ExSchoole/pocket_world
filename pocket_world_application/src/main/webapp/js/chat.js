@@ -14,6 +14,12 @@ function sendMessage(playerName, urls, msg_template){
             }
         }
 	});
+
+	$('#refresh').click(function(){
+	    $('#refresh').addClass('fa-spin');
+	    setTimeout( function() { $('#refresh').removeClass('fa-spin'); console.log("OK"); } , 1000);
+	    ajaxCallGetAllMessagesBetweenTwoUsers(playerName, $("#selecteduser").text().trim(), urls, msg_template);
+	});
 }
 
 function chooseUser(playerName, urls, msg_template){

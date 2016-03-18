@@ -197,4 +197,9 @@ public class CommonCityServiceImpl implements CommonCityService {
 
 		return chatService.saveRelation(playerName, addingUser);
 	}
+
+	@Override
+	public boolean checkNewMessages(String playerName){
+		return (chatService.getAllNewMessages(playerName).size()>0) ? true : false;
+	}
 }
