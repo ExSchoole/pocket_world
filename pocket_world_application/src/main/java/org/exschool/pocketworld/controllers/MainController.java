@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -97,7 +96,8 @@ public class MainController {
 
     @RequestMapping(value = "/allMessagesBetweenTwoUsers", method = RequestMethod.GET)
     @ResponseBody
-    public List<Message> allOldMessagesBetweenTwoUsers(@RequestParam String senderName, @RequestParam String recipientName){
+    public List<Message> allOldMessagesBetweenTwoUsers(@RequestParam String senderName,
+                                                       @RequestParam String recipientName){
         return commonCityService.allMessagesBetweenTwoUsers(senderName, recipientName);
     }
 
@@ -109,7 +109,8 @@ public class MainController {
 
     @RequestMapping(value = "/changeMessageStatus", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Void> changeMessageStatus(@RequestParam String senderName, @RequestParam String recipientName){
+    public ResponseEntity<Void> changeMessageStatus(@RequestParam String senderName,
+                                                    @RequestParam String recipientName){
         commonCityService.changeMessageStatus(senderName, recipientName);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }

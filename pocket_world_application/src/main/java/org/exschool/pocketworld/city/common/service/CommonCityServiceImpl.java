@@ -162,12 +162,11 @@ public class CommonCityServiceImpl implements CommonCityService {
 
 	@Override
 	public void changeMessageStatus(String senderName, String recipientName){
-		List<Message> allNewMessages = chatService.getAllNewMessagesBetweenTwoPlayers(senderName, recipientName);
+		List<Message> allNewMessages = chatService.getAllNewMessagesBetweenTwoPlayers(senderName,recipientName);
 		for (Message m: allNewMessages){
 			m.setStatus(MessageStatus.OLD);
+			chatService.save(m);
 		}
-
-		chatService.saveAll(allNewMessages);
 	}
 
 	@Override

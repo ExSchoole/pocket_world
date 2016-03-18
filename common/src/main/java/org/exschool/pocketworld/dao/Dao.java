@@ -81,7 +81,7 @@ public class Dao {
         Session session = currentSession();
         List<T> entitiesList = new ArrayList<>(entities);
         for (int i = 0; i < entities.size(); i++) {
-            session.saveOrUpdate(entitiesList.get(i));
+            session.save(entitiesList.get(i));
             if (i % 20 == 0) {
                 session.flush();
                 session.clear();
