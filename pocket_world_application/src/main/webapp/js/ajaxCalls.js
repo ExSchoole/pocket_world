@@ -99,7 +99,7 @@ function ajaxCallSendMessage(playerName, recipientName, message, urls, msg_templ
     		   			    data['time'] = dateTemplate(new Date(data['time']));
                             var allMessages = $('#content').html();
 
-                            $('#content').html(allMessages + msg_template(data));
+                            $('#content').html(msg_template(data) + allMessages);
     		   			 },
         error: function (xhr, status, errorThrown) {
                             alert('Player < ' + recipientName + ' > does not exist. Please try again.');
@@ -109,12 +109,13 @@ function ajaxCallSendMessage(playerName, recipientName, message, urls, msg_templ
 };
 
 
-function ajaxCallGetAllMessages(playerName, urls, msg_template){
+function ajaxCallGetAllMessagesBetweenTwoUsers(playerName, recipientName, urls, msg_template){
+    $('#content').empty();
 
     $.ajax({
         type: 'GET',
-        url: urls['allMessages'],
-        data : { playerName: playerName},
+        url: urls['allMessagesBetweenTwoUsers'],
+        data : { senderName: playerName, recipientName: recipientName},
         success: function (data, textStatus) {
     		   			    var allMessages;
 
@@ -122,8 +123,68 @@ function ajaxCallGetAllMessages(playerName, urls, msg_template){
     		   			        object['time'] = dateTemplate(new Date(object['time']));
                                 allMessages = $('#content').html();
 
-                                $('#content').html(allMessages + msg_template(object));
+                                $('#content').html(msg_template(object) + allMessages);
     		   			    });
     		   			 }
+    	   });
+};
+
+function ajaxCallGetAllUsersRelations(playerName, urls, relation_template, adduser_template, msg_template){
+
+    $.ajax({
+            type: 'GET',
+            url: urls['allUsersRelations'],
+            data : { playerName: playerName },
+            success: function (data, textStatus) {
+        		   			    var allUsersRelations;
+                                console.log(data);
+
+        		   			    $.each(data, function(index, object){
+                                    allUsersRelations = $('#users').html();
+                                    $('#users').html(allUsersRelations + relation_template(object));
+        		   			    });
+
+        		   			    allUsersRelations = $('#users').html();
+        		   			    $('#users').html(allUsersRelations + adduser_template());
+
+                                chooseUser(playerName, urls, msg_template);
+                                addUser(playerName, urls, relation_template, msg_template);
+        		   			 }
+        	   });
+}
+
+function ajaxCallGetAllUsers(urls){
+    $.ajax({
+            type: 'GET',
+            url: urls['allUsers'],
+            success: function (data, textStatus) {
+                                console.log(data);
+
+                                $("#search_user").autocomplete({
+                                    source: data
+                                });
+        		   			 }
+        	   });
+}
+
+function ajaxCallAddUser(playerName, newUserName, urls, relation_template, msg_template){
+
+    $.ajax({
+        type: 'POST',
+        url: urls['addUser'],
+        data : { playerName: playerName, addingUser: newUserName},
+        success: function (data, textStatus) {
+    		   			    var allUsersRelations = $('#users').html();
+                            $('#users').html(relation_template(data) + allUsersRelations);
+
+                            $("#selecteduser").html(newUserName+" <span class='caret'></span>");
+                            ajaxCallGetAllMessagesBetweenTwoUsers(playerName, newUserName, urls, msg_template);
+
+                            chooseUser(playerName, urls, msg_template);
+    		   			 },
+        error: function (xhr, status, errorThrown) {
+                            alert('Player < ' + newUserName + ' > does not exist or such user is already in your list.');
+                            console.log("Error: " + errorThrown);
+                         }
     	   });
 };

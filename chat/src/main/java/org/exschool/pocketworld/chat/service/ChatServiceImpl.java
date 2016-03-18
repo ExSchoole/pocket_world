@@ -2,10 +2,9 @@ package org.exschool.pocketworld.chat.service;
 
 
 import org.exschool.pocketworld.chat.model.Message;
+import org.exschool.pocketworld.chat.model.UserRelation;
 import org.exschool.pocketworld.dao.Dao;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,12 +21,37 @@ public class ChatServiceImpl implements ChatService{
     @Override
     public List<Message> getAllByPlayerName(String playerName) {
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Message.class);
-        Criterion criteria1 = Restrictions.eq("sender", playerName);
-        Criterion criteria2 = Restrictions.eq("recipient", playerName);
 
-        detachedCriteria.add(Restrictions.or(criteria1,criteria2));
+        detachedCriteria.add(Restrictions.or(Restrictions.eq("sender", playerName),
+                                             Restrictions.eq("recipient", playerName)));
 
         return dao.getAllBy(detachedCriteria);
+    }
+
+    @Override
+    public List<Message> getAllBetweenTwoPlayers(String playerName1, String playerName2){
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Message.class);
+
+        detachedCriteria.add(Restrictions.or(
+                Restrictions.and(Restrictions.eq("sender", playerName1), Restrictions.eq("recipient", playerName2)),
+                Restrictions.and(Restrictions.eq("sender", playerName2), Restrictions.eq("recipient", playerName1))));
+
+        return dao.getAllBy(detachedCriteria);
+    }
+
+    @Override
+    public List<UserRelation> getAllRelationsByPlayerName(String playerName){
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(UserRelation.class);
+        detachedCriteria.add(Restrictions.eq("playername1", playerName));
+
+        return dao.getAllBy(detachedCriteria);
+    }
+
+    @Override
+    public UserRelation saveRelation(String playerName1, String playerName2){
+        UserRelation entity = new UserRelation(playerName1, playerName2);
+
+        return dao.save(entity);
     }
 
     @Override

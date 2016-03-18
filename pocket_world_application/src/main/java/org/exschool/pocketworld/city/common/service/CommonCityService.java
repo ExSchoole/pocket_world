@@ -3,6 +3,7 @@ package org.exschool.pocketworld.city.common.service;
 import java.util.List;
 
 import org.exschool.pocketworld.chat.model.Message;
+import org.exschool.pocketworld.chat.model.UserRelation;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
 
 /**
@@ -17,5 +18,9 @@ public interface CommonCityService {
 
     Message sendMessage(String sender, String recipient, String message);
 
-    List<Message> getAllMessages(String playerName);
+    List<Message> allMessagesBetweenTwoUsers(String senderName, String recipientName);
+
+    List<UserRelation> getAllUsersRelations(String playerName);
+
+    UserRelation addUser(String playerName, String addingUser);
 }

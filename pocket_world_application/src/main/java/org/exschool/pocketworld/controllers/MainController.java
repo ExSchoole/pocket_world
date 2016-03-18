@@ -1,9 +1,11 @@
 package org.exschool.pocketworld.controllers;
 
 import org.exschool.pocketworld.chat.model.Message;
+import org.exschool.pocketworld.chat.model.UserRelation;
 import org.exschool.pocketworld.city.common.service.CommonCityService;
 import org.exschool.pocketworld.city.service.CityService;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
+import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -94,9 +97,38 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value = "/allMessages", method = RequestMethod.GET)
+    @RequestMapping(value = "/allMessagesBetweenTwoUsers", method = RequestMethod.GET)
     @ResponseBody
-    public List<Message> sendMessage(@RequestParam String playerName){
-        return commonCityService.getAllMessages(playerName);
+    public List<Message> allMessagesBetweenTwoUsers(@RequestParam String senderName, @RequestParam String recipientName){
+        return commonCityService.allMessagesBetweenTwoUsers(senderName, recipientName);
+    }
+
+    @RequestMapping(value = "/allUsersRelations", method = RequestMethod.GET)
+    @ResponseBody
+    public List<UserRelation> getAllUsersRelations(@RequestParam String playerName){
+        return commonCityService.getAllUsersRelations(playerName);
+    }
+
+    @RequestMapping(value = "/getAllUsers", method = RequestMethod.GET)
+    @ResponseBody
+    public List<String> getAllUsersRelations(){
+        List<Player> allPlayers = playerService.getAll();
+        List<String> allNames = new ArrayList<>();
+        for (Player s: allPlayers){
+            allNames.add(s.getLogin());
+        }
+        return allNames;
+    }
+
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<UserRelation> sendMessage(@RequestParam String playerName, @RequestParam String addingUser){
+
+        UserRelation userRelation = commonCityService.addUser(playerName, addingUser);
+        if (userRelation != null) {
+            return new ResponseEntity<UserRelation>(userRelation, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<UserRelation>(userRelation, HttpStatus.BAD_REQUEST);
+        }
     }
 }

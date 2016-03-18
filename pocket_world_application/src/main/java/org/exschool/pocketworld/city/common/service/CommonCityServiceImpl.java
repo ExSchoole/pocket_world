@@ -14,6 +14,7 @@ import org.exschool.pocketworld.buildQueue.model.Type;
 import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.building.service.BuildingService;
 import org.exschool.pocketworld.chat.model.Message;
+import org.exschool.pocketworld.chat.model.UserRelation;
 import org.exschool.pocketworld.chat.service.ChatService;
 import org.exschool.pocketworld.city.service.CityService;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
@@ -97,7 +98,8 @@ public class CommonCityServiceImpl implements CommonCityService {
         buildingService.increaseLevel(cityService.getCityId(player.getId()), ids.get(Type.BUILDING));
         resourceBuildingService.increaseLevel(cityService.getCityId(player.getId()), ids.get(Type.RESOURCE_BUILDING));
     }
-    
+
+	@Override
     public List<TimeOfBuilding> getQueuedBuildings(String playerName){	
     	List<TimeOfBuilding> currentQueue = new ArrayList<>(); 
 
@@ -113,7 +115,8 @@ public class CommonCityServiceImpl implements CommonCityService {
     	}	
     	return currentQueue;
     }
-    
+
+	@Override
     public void changeStatus(String playerName, int position, String type){
     	buildQueueService.updateStatus(Status.DONE, position, playerService.getPlayerByLogin(playerName).getId(), type);
     	Long userId = playerService.getPlayerByLogin(playerName).getId();
@@ -135,21 +138,51 @@ public class CommonCityServiceImpl implements CommonCityService {
     	}
     }
 
+	@Override
 	public Message sendMessage(String sender, String recipient, String message){
-            if (playerService.getPlayerByLogin(recipient.toLowerCase())==null) {
-                return null;
-            }
+		if (playerService.getPlayerByLogin(recipient.toLowerCase())==null) {
+			return null;
+		}
 
-            Message messageEntity = new MessageBuilder()
+		Message messageEntity = new MessageBuilder()
 					.message(message)
 					.recipient(recipient)
 					.sender(sender)
 					.time(new DateTime().toDate()).build();
 
-			return chatService.save(messageEntity);
+		return chatService.save(messageEntity);
 	}
 
-	public List<Message> getAllMessages(String playerName){
-		return chatService.getAllByPlayerName(playerName);
+	@Override
+	public List<Message> allMessagesBetweenTwoUsers(String senderName, String recipientName){
+		return chatService.getAllBetweenTwoPlayers(senderName, recipientName);
+	}
+
+	@Override
+	public List<UserRelation> getAllUsersRelations(String playerName){
+		return chatService.getAllRelationsByPlayerName(playerName);
+	}
+
+	@Override
+	public UserRelation addUser(String playerName, String addingUser){
+		if (playerService.getPlayerByLogin(addingUser.toLowerCase())==null) {
+			return null;
+		}
+
+		List<UserRelation> userRelationsList = chatService.getAllRelationsByPlayerName(playerName);
+		if (userRelationsList.contains(new UserRelation(playerName, addingUser))){
+			return null;
+		}
+
+		if (!playerName.equals(addingUser)) {
+			chatService.saveRelation(addingUser, playerName);
+			chatService.save(new MessageBuilder()
+								.message("Hello! I've added you to my chat.")
+								.sender(playerName)
+								.recipient(addingUser)
+								.time(new DateTime().toDate()).build());
+		}
+
+		return chatService.saveRelation(playerName, addingUser);
 	}
 }
