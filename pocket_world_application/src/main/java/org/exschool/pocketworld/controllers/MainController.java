@@ -14,15 +14,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -99,7 +97,7 @@ public class MainController {
 
     @RequestMapping(value = "/allMessagesBetweenTwoUsers", method = RequestMethod.GET)
     @ResponseBody
-    public List<Message> allMessagesBetweenTwoUsers(@RequestParam String senderName, @RequestParam String recipientName){
+    public List<Message> allOldMessagesBetweenTwoUsers(@RequestParam String senderName, @RequestParam String recipientName){
         return commonCityService.allMessagesBetweenTwoUsers(senderName, recipientName);
     }
 
@@ -107,6 +105,13 @@ public class MainController {
     @ResponseBody
     public List<UserRelation> getAllUsersRelations(@RequestParam String playerName){
         return commonCityService.getAllUsersRelations(playerName);
+    }
+
+    @RequestMapping(value = "/changeMessageStatus", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Void> changeMessageStatus(@RequestParam String senderName, @RequestParam String recipientName){
+        commonCityService.changeMessageStatus(senderName, recipientName);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getAllUsers", method = RequestMethod.GET)

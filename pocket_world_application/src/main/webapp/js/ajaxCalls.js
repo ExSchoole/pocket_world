@@ -118,13 +118,34 @@ function ajaxCallGetAllMessagesBetweenTwoUsers(playerName, recipientName, urls, 
         data : { senderName: playerName, recipientName: recipientName},
         success: function (data, textStatus) {
     		   			    var allMessages;
+                            var newMessages = [];
 
     		   			    $.each(data, function(index, object){
     		   			        object['time'] = dateTemplate(new Date(object['time']));
                                 allMessages = $('#content').html();
 
                                 $('#content').html(msg_template(object) + allMessages);
+
+                                if (object['sender'].localeCompare(recipientName)==0 &&
+                                    object['status'].localeCompare("NEW")==0){
+                                     newMessages.push(object);
+                                }
     		   			    });
+
+                            if (newMessages.length>0){
+                                ajaxCallChangeMessageStatus(playerName, recipientName, urls);
+                            }
+    		   			 }
+    	   });
+};
+
+function ajaxCallChangeMessageStatus(playerName, recipientName, urls){
+    $.ajax({
+        type: 'GET',
+        url: urls['changeMessageStatus'],
+        data : { senderName: playerName, recipientName: recipientName},
+        success: function (data, textStatus) {
+    		   			    console.log("SUCCESS");
     		   			 }
     	   });
 };

@@ -25,6 +25,10 @@ public class Message {
     @Column(name="time")
     private Date time;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private MessageStatus status;
+
     public Long getId() {
         return id;
     }
@@ -65,6 +69,14 @@ public class Message {
         this.time = time;
     }
 
+    public MessageStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(MessageStatus status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,4 +101,5 @@ public class Message {
         result = 31 * result + (time != null ? time.hashCode() : 0);
         return result;
     }
+
 }

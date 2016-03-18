@@ -26,6 +26,7 @@ import org.exschool.pocketworld.building.model.BuildingResourceId;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.building.model.TimeId;
 import org.exschool.pocketworld.building.service.BuildingService;
+import org.exschool.pocketworld.chat.model.MessageStatus;
 import org.exschool.pocketworld.chat.service.ChatService;
 import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
@@ -121,15 +122,13 @@ public class CityCenterServiceImpl implements CityCenterService {
             chatService.saveRelation(playerName,"login-2");
 
             chatService.save(new MessageBuilder().message("hi").recipient("login-1").
-                    sender("player-login").time(new DateTime().toDate()).build());
+                    sender("player-login").time(new DateTime().toDate()).status(MessageStatus.OLD).build());
             chatService.save(new MessageBuilder().message("hello").recipient("player-login").
-                    sender("login-1").time(new DateTime().toDate()).build());
+                    sender("login-1").time(new DateTime().toDate()).status(MessageStatus.NEW).build());
             chatService.save(new MessageBuilder().message("how").recipient("player-login").
-                    sender("login-1").time(new DateTime().toDate()).build());
-            chatService.save(new MessageBuilder().message("okey").recipient("login-1").
-                    sender("player-login").time(new DateTime().toDate()).build());
+                    sender("login-1").time(new DateTime().toDate()).status(MessageStatus.NEW).build());
             chatService.save(new MessageBuilder().message("Alloha").recipient("login-2").
-                    sender("player-login").time(new DateTime().toDate()).build());
+                    sender("player-login").time(new DateTime().toDate()).status(MessageStatus.NEW).build());
         }
     }
 

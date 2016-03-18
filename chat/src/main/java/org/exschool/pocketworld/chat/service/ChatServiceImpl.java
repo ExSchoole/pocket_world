@@ -2,6 +2,7 @@ package org.exschool.pocketworld.chat.service;
 
 
 import org.exschool.pocketworld.chat.model.Message;
+import org.exschool.pocketworld.chat.model.MessageStatus;
 import org.exschool.pocketworld.chat.model.UserRelation;
 import org.exschool.pocketworld.dao.Dao;
 import org.hibernate.criterion.*;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service("chatService")
@@ -29,12 +31,25 @@ public class ChatServiceImpl implements ChatService{
     }
 
     @Override
-    public List<Message> getAllBetweenTwoPlayers(String playerName1, String playerName2){
+    public List<Message> getAllMessagesBetweenTwoPlayers(String playerName1, String playerName2){
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Message.class);
 
         detachedCriteria.add(Restrictions.or(
-                Restrictions.and(Restrictions.eq("sender", playerName1), Restrictions.eq("recipient", playerName2)),
-                Restrictions.and(Restrictions.eq("sender", playerName2), Restrictions.eq("recipient", playerName1))));
+                Restrictions.and(Restrictions.eq("sender", playerName1),
+                                 Restrictions.eq("recipient", playerName2)),
+                Restrictions.and(Restrictions.eq("sender", playerName2),
+                                 Restrictions.eq("recipient", playerName1))));
+
+        return dao.getAllBy(detachedCriteria);
+    }
+
+    @Override
+    public List<Message> getAllNewMessagesBetweenTwoPlayers(String playerName1, String playerName2){
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Message.class);
+
+        detachedCriteria.add(Restrictions.and(Restrictions.eq("sender", playerName2),
+                                              Restrictions.eq("recipient", playerName1),
+                                              Restrictions.eq("status", MessageStatus.NEW)));
 
         return dao.getAllBy(detachedCriteria);
     }
@@ -57,5 +72,10 @@ public class ChatServiceImpl implements ChatService{
     @Override
     public Message save(Message entity) {
         return dao.save(entity);
+    }
+
+    @Override
+    public Collection<Message> saveAll(Collection<Message> entities){
+        return dao.saveAll(entities);
     }
 }

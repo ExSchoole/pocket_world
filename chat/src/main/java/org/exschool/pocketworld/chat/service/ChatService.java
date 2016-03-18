@@ -4,6 +4,7 @@ package org.exschool.pocketworld.chat.service;
 import org.exschool.pocketworld.chat.model.Message;
 import org.exschool.pocketworld.chat.model.UserRelation;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface ChatService {
@@ -12,7 +13,11 @@ public interface ChatService {
 
     Message save(Message entity);
 
-    List<Message> getAllBetweenTwoPlayers(String playerName1, String playerName2);
+    Collection<Message> saveAll(Collection<Message> entities);
+
+    List<Message> getAllMessagesBetweenTwoPlayers(String playerName1, String playerName2);
+
+    List<Message> getAllNewMessagesBetweenTwoPlayers(String playerName1, String playerName2);
 
     List<UserRelation> getAllRelationsByPlayerName(String playerName);
 

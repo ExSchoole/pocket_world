@@ -23,4 +23,6 @@ public interface CommonCityService {
     List<UserRelation> getAllUsersRelations(String playerName);
 
     UserRelation addUser(String playerName, String addingUser);
+
+    void changeMessageStatus(String senderName, String recipientName);
 }
