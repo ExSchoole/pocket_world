@@ -5,6 +5,8 @@
         <link href="#springUrl('/css/font-awesome.css')" rel="stylesheet">
         <link href="#springUrl('/css/carousel-style.css')" rel="stylesheet">
         <link href="#springUrl('/css/buildings.css')" rel="stylesheet">
+        <link href="#springUrl('/css/chat.css')" rel="stylesheet">
+        <link href="#springUrl('/css/jquery-ui/jquery-ui.min.css')" rel="stylesheet">
 
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<!-- default header name is X-CSRF-TOKEN -->
@@ -25,8 +27,8 @@
    </html>
 #end
 
-#macro(body $time)
-<body class="time_$time">
+#macro(body)
+<body class="">
     <div class="container">
         $!bodyContent
     </div>

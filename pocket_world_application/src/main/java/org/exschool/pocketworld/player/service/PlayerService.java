@@ -3,7 +3,11 @@ package org.exschool.pocketworld.player.service;
 import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 
+import java.util.List;
+
 public interface PlayerService {
+    List<Player> getAll();
+
     void savePlayer(Player player);
 
     Player getPlayerByLogin(String login);

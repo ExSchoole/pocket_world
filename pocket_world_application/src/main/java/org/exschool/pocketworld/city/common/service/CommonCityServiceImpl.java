@@ -13,6 +13,10 @@ import org.exschool.pocketworld.buildQueue.model.Status;
 import org.exschool.pocketworld.buildQueue.model.Type;
 import org.exschool.pocketworld.buildQueue.service.BuildQueueService;
 import org.exschool.pocketworld.building.service.BuildingService;
+import org.exschool.pocketworld.chat.model.Message;
+import org.exschool.pocketworld.chat.model.MessageStatus;
+import org.exschool.pocketworld.chat.model.UserRelation;
+import org.exschool.pocketworld.chat.service.ChatService;
 import org.exschool.pocketworld.city.service.CityService;
 import org.exschool.pocketworld.dto.TimeOfBuilding;
 import org.exschool.pocketworld.player.model.Player;
@@ -22,6 +26,7 @@ import org.exschool.pocketworld.resource.building.model.ResourceProduction;
 import org.exschool.pocketworld.resource.building.service.ResourceBuildingService;
 import org.exschool.pocketworld.resource.building.service.ResourceProductionService;
 import org.exschool.pocketworld.resource.model.ResourceType;
+import org.exschool.pocketworld.util.builder.MessageBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +51,8 @@ public class CommonCityServiceImpl implements CommonCityService {
     private ResourceBuildingService resourceBuildingService;
     @Autowired
     private ResourceProductionService resourceSpeedService;
+	@Autowired
+	private ChatService chatService;
 
     @Override
     public void buildQueuedBuildings(String playerName) {
@@ -92,7 +99,8 @@ public class CommonCityServiceImpl implements CommonCityService {
         buildingService.increaseLevel(cityService.getCityId(player.getId()), ids.get(Type.BUILDING));
         resourceBuildingService.increaseLevel(cityService.getCityId(player.getId()), ids.get(Type.RESOURCE_BUILDING));
     }
-    
+
+	@Override
     public List<TimeOfBuilding> getQueuedBuildings(String playerName){	
     	List<TimeOfBuilding> currentQueue = new ArrayList<>(); 
 
@@ -108,7 +116,8 @@ public class CommonCityServiceImpl implements CommonCityService {
     	}	
     	return currentQueue;
     }
-    
+
+	@Override
     public void changeStatus(String playerName, int position, String type){
     	buildQueueService.updateStatus(Status.DONE, position, playerService.getPlayerByLogin(playerName).getId(), type);
     	Long userId = playerService.getPlayerByLogin(playerName).getId();
@@ -129,4 +138,68 @@ public class CommonCityServiceImpl implements CommonCityService {
     						resourceBuilding.getResourceType(), resourceBuilding.getLevel()));
     	}
     }
+
+	@Override
+	public Message sendMessage(String sender, String recipient, String message){
+		if (playerService.getPlayerByLogin(recipient.toLowerCase())==null) {
+			return null;
+		}
+
+		Message messageEntity = new MessageBuilder()
+					.message(message)
+					.recipient(recipient)
+					.sender(sender)
+					.time(new DateTime().toDate())
+					.status(MessageStatus.NEW).build();
+
+		return chatService.save(messageEntity);
+	}
+
+	@Override
+	public List<Message> allMessagesBetweenTwoUsers(String senderName, String recipientName){
+		return chatService.getAllMessagesBetweenTwoPlayers(senderName, recipientName);
+	}
+
+	@Override
+	public void changeMessageStatus(String senderName, String recipientName){
+		List<Message> allNewMessages = chatService.getAllNewMessagesBetweenTwoPlayers(senderName,recipientName);
+		for (Message m: allNewMessages){
+			m.setStatus(MessageStatus.OLD);
+			chatService.save(m);
+		}
+	}
+
+	@Override
+	public List<UserRelation> getAllUsersRelations(String playerName){
+		return chatService.getAllRelationsByPlayerName(playerName);
+	}
+
+	@Override
+	public UserRelation addUser(String playerName, String addingUser){
+		if (playerService.getPlayerByLogin(addingUser.toLowerCase())==null) {
+			return null;
+		}
+
+		List<UserRelation> userRelationsList = chatService.getAllRelationsByPlayerName(playerName);
+		if (userRelationsList.contains(new UserRelation(playerName, addingUser))){
+			return null;
+		}
+
+		if (!playerName.equals(addingUser)) {
+			chatService.saveRelation(addingUser, playerName);
+			chatService.save(new MessageBuilder()
+								.message("Hello! I've added you to my chat.")
+								.sender(playerName)
+								.recipient(addingUser)
+								.time(new DateTime().toDate())
+								.status(MessageStatus.NEW).build());
+		}
+
+		return chatService.saveRelation(playerName, addingUser);
+	}
+
+	@Override
+	public boolean checkNewMessages(String playerName){
+		return (chatService.getAllNewMessages(playerName).size()>0) ? true : false;
+	}
 }

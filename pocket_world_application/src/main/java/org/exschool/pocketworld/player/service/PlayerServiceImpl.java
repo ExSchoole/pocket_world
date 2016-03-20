@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class PlayerServiceImpl implements PlayerService {
@@ -29,6 +31,11 @@ public class PlayerServiceImpl implements PlayerService {
                 .build();
         savePlayer(player);
         return player.getId();
+    }
+
+    @Override
+    public List<Player> getAll() {
+        return dao.all(Player.class);
     }
 
     @Override

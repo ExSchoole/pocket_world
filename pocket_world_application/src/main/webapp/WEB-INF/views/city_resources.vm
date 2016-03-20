@@ -1,7 +1,7 @@
 #parse("layout/macros.vm")
 #head("City Resources")
 
-#@body(${time.getHourOfDay()})
+#@body()
 #parse("logout_button.vm")
 <div class="row">
     <a href="#springUrl('/city/center/')" class="btn btn-primary">#springMessage('city.center')</a>
@@ -51,8 +51,8 @@
 </div>
 <div class="col-md-2">
 </div>
-<div class="col-md-3 center_align">
-            
+<div class="col-md-3 center_align" id="timerstable">
+        <div class="row">    
             <div class="col-md-9 info_names">
                  <h3>$dto.getNickName()</h3>
             </div>
@@ -73,6 +73,85 @@
             #end
         
         </div>
+        </div>
+        
+        <div class="row">
+            <div class="portlet portlet-default chat">
+                <div class="portlet-heading">
+                    <div class="portlet-title">
+                        <h4><i class="fa fa-circle text-green"></i> $dto.getNickName() </h4>
+                    </div>
+
+                   <div class="portlet-widgets">
+                   <span class="glyphicon" id="new_message"></span>
+                   <span class="divider"></span>
+                        <a><i class="fa fa-refresh" id="refresh"></i></a>
+                   </div>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div id="chat" class="panel-collapse collapse in">
+                    <div>
+                    <div class="portlet-body chat-widget" style="overflow-y: auto; width: auto; height: 300px;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="media">
+                                    <div class="media-body" id="content">
+                                        <!-- MESSAGES WILL BE HERE -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    </div>
+                    <div class="portlet-footer">
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Enter message..." id="textarea"></textarea>
+                            </div>
+                            <div class="form-line">
+                                <div class="dropup">
+                                    <button class="col-md-8 btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="selecteduser">Users
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" id="users">
+                                        <!-- USERS WILL BE HERE -->
+                                    </ul>
+                                    <button type="button" class="btn btn-default pull-right" id="send_btn">Send</button>
+                                     <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+</div>
+
+<div class="modal" id="myModal" role="dialog" >
+   <div class="modal-dialog modal-sm">
+
+   <!-- Modal content-->
+   <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Search user by login</h4>
+        </div>
+        <div class="modal-body text-left">
+           <div>
+               <div class="input-group ui-front">
+                 <input type="text" class="form-control ui-widget" placeholder="Search for..." id="search_user">
+                 <span class="input-group-btn">
+                   <button class="btn btn-default" type="button" data-dismiss="modal" id="btn_add_user">Add</button>
+                 </span>
+               </div><!-- /input-group -->
+             </div>
+             <div class="clearfix"></div>
+        </div>
+   </div>
+
+   </div>
 </div>
 
 <script type="text/template" class="template">
@@ -84,14 +163,46 @@
         <h5>Corn: <%- rc['resourceDto']['corn'] %></h5>
         <button class="btn btn-primary lvlUp">Level Up</button>
 
-    </script>
+</script>
+
+<script type="text/template" class="relation_template">
+
+        <li><a class="users"><%- relation['playername2'] %></a></li>
+
+</script>
+
+<script type="text/template" class="adduser_template">
+
+        <li class="divider"></li>
+        <li><a id="add_user" data-toggle="modal" data-target="#myModal">add user</a></li>
+
+</script>
+
+<script type="text/template" class="msg_template">
+    <% if (message['sender'] == "$dto.getNickName()") { %>
+     <h4 class="media-heading">
+       <span class="small pull-right"><%-message['time']%></span>
+     </h4><br>
+     <p class="text-right message_<%-message['status']%>"><%-message['message']%></p>
+    <% } else { %>
+     <h4 class="media-heading">
+       <span class="small pull-right"><%-message['time']%></span>
+     </h4><br>
+     <p class="text-left message_<%-message['status']%>"><%-message['message']%></p>
+    <% } %>
+    <hr>
+</script>
+
 #end
+<script type="text/javascript" src="#springUrl('/js/jquery-ui.min.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/jquery.modern-blink.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/popupUtil.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/cityResources.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/timer.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/ajaxCalls.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/levelUp.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/underscore.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/chat.js')"></script>
 
 <script type="text/javascript">
 	var urls = {
@@ -103,7 +214,14 @@
 		'checkResources' : "#springUrl('/city/resources/checkResources')",
 		'levelUp' : "#springUrl('/city/resources/levelUp')",
 		'getInfo' : "#springUrl('/city/resources/getInfo')",
-		'getTypeLevel' : "#springUrl('/city/resources/getTypeLevel')"
+		'getTypeLevel' : "#springUrl('/city/resources/getTypeLevel')",
+		'sendMessage' : "#springUrl('/sendMessage')",
+		'allUsersRelations' : "#springUrl('/allUsersRelations')",
+		'allMessagesBetweenTwoUsers' : "#springUrl('/allMessagesBetweenTwoUsers')",
+		'allUsers' : "#springUrl('/getAllUsers')",
+		'addUser' : "#springUrl('/addUser')",
+		'changeMessageStatus' : "#springUrl('/changeMessageStatus')",
+        'checkNewMessages' : "#springUrl('/checkNewMessages')"
 	};
 
 	ajaxCallGetBuildingQueue(urls, "$dto.getNickName()", 'resource_building');
@@ -115,6 +233,28 @@
             $( "script.template" ).html()
         );
 
-
       levelUpBuilding(urls,"$dto.getNickName()",template,'resource_building');
+
+      _.templateSettings.variable = "message";
+              var msg_template = _.template(
+                      $("script.msg_template").html()
+      );
+
+     sendMessage("$dto.getNickName()", urls, msg_template);
+
+     _.templateSettings.variable = "relation";
+        var relation_template = _.template(
+                     $("script.relation_template").html()
+        );
+
+     _.templateSettings.variable = "adduser";
+        var adduser_template = _.template(
+                          $("script.adduser_template").html()
+        );
+
+     ajaxCallGetAllUsersRelations("$dto.getNickName()", urls, relation_template, adduser_template, msg_template);
+     ajaxCallCheckNewMessages("$dto.getNickName()", urls);
+
+     var date = new Date();
+	 $('body').addClass('time_'+date.getHours());
 </script>
