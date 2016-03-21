@@ -26,6 +26,8 @@ import org.exschool.pocketworld.building.model.BuildingResourceId;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.building.model.TimeId;
 import org.exschool.pocketworld.building.service.BuildingService;
+import org.exschool.pocketworld.chat.model.MessageStatus;
+import org.exschool.pocketworld.chat.service.ChatService;
 import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
 import org.exschool.pocketworld.city.model.City;
@@ -39,6 +41,7 @@ import org.exschool.pocketworld.resource.ResourceDto;
 import org.exschool.pocketworld.resource.building.service.ResourceProductionService;
 import org.exschool.pocketworld.resource.model.ResourceType;
 import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
+import org.exschool.pocketworld.util.builder.MessageBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +66,8 @@ public class CityCenterServiceImpl implements CityCenterService {
     private BuildQueueService buildQueueService;
     @Autowired
     private ResourceProductionService resourceSpeedService;
+    @Autowired
+    private ChatService chatService;
 
     @PostConstruct
     private void fillDataBaseInfo(){
@@ -112,6 +117,18 @@ public class CityCenterServiceImpl implements CityCenterService {
             System.out.println("TIME: ");
             
             buildQueueService.save(record);
+
+            chatService.saveRelation(playerName,"login-1");
+            chatService.saveRelation(playerName,"login-2");
+
+            chatService.save(new MessageBuilder().message("hi").recipient("login-1").
+                    sender("player-login").time(new DateTime().toDate()).status(MessageStatus.OLD).build());
+            chatService.save(new MessageBuilder().message("hello").recipient("player-login").
+                    sender("login-1").time(new DateTime().toDate()).status(MessageStatus.NEW).build());
+            chatService.save(new MessageBuilder().message("how").recipient("player-login").
+                    sender("login-1").time(new DateTime().toDate()).status(MessageStatus.NEW).build());
+            chatService.save(new MessageBuilder().message("Alloha").recipient("login-2").
+                    sender("player-login").time(new DateTime().toDate()).status(MessageStatus.NEW).build());
         }
     }
 

@@ -13,6 +13,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,6 +44,11 @@ public class PlayerServiceImpl implements PlayerService, UserDetailsService {
                 .build();
         savePlayer(player);
         return player.getId();
+    }
+
+    @Override
+    public List<Player> getAll() {
+        return dao.all(Player.class);
     }
 
     @Override

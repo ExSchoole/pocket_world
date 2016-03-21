@@ -1,21 +1,3 @@
-body.time_7, body.time_8, body.time_9, body.time_10, body.time_11, body.time_12,
-body.time_13, body.time_14, body.time_15, body.time_16, body.time_17, body.time_18  {
-	background: url(../images/bg_day.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
-body.time_19, body.time_20, body.time_21, body.time_22, body.time_23, body.time_24,
-body.time_1, body.time_2, body.time_3, body.time_4, body.time_5, body.time_6  {
-	background: url(../images/bg_night.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
 div.building_storage {
     background-image: url(../images/storage.png);
 	background-size: cover;
@@ -186,7 +168,7 @@ div.notover {
 div.info_names {
     border-style: outset;
     border-color: #e6ce00;
-    width: 200px;
+    width: 300px;
     border-radius: 8px;
     background-color: white;
     opacity: 0.8;
@@ -203,7 +185,7 @@ div.info_resources {
 div.info_timers {
     border-style: outset;
     border-color: #ffff00;
-    width: 200px;
+    width: 300px;
     border-radius: 8px;
     background-color: white;
     opacity: 0.8;
@@ -211,4 +193,66 @@ div.info_timers {
 
 div.center_align {
     text-align: center;
+}
+
+div#timerstable{
+    position: relative;
+    top:0px;
+    left:20px;
+}
+
+body.time_6, body.time_7, body.time_8, body.time_9  {
+	background: url(../images/0800.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body.time_10, body.time_11, body.time_12, body.time_13 {
+	background: url(../images/1000.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body.time_14, body.time_15, body.time_16, body.time_17 {
+	background: url(../images/1200.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body.time_18, body.time_19  {
+	background: url(../images/1800.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body.time_20, body.time_21 {
+	background: url(../images/2000.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body.time_22, body.time_23, body.time_0, body.time_1  {
+	background: url(../images/2200.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body.time_2, body.time_3, body.time_4, body.time_5 {
+	background: url(../images/0200.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }

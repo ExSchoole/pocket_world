@@ -2,6 +2,8 @@ package org.exschool.pocketworld.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.*;
+
 
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 

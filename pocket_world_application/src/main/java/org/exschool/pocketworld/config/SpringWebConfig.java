@@ -119,4 +119,5 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         scheduler.setTriggers(cronTriggerFactoryBean().getObject());
         return scheduler;
     }
+
 }
