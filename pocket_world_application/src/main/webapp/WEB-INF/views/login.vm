@@ -1,0 +1,21 @@
+#parse("layout/macros.vm")
+#head("Signin")
+#@body()
+<link href="#springUrl('/css/login.css')" rel="stylesheet">
+<link href="#springUrl('/css/welcome.css')" rel="stylesheet">
+<fieldset id="signin_menu">
+    <form id="signin" action="#springUrl('/login')" method="post">
+        <label for="username">Username</label>
+        <input id="username" name ="username"  tabindex="4" type="text" placeholder="Enter username" data-toggle="tooltip" required/>
+        <label for="password">Password</label>
+        <input id="password" name ="password" tabindex="5" type="password" placeholder="Enter  password" required/>
+        <div class="form-actions">
+            <input type="submit"
+                   class="btn btn-block btn-primary btn-default" value="Log in">
+        </div>
+        <input type="hidden"
+               name="${_csrf.parameterName}"
+               value="${_csrf.token}"/>
+    </form>
+</fieldset>
+#end
