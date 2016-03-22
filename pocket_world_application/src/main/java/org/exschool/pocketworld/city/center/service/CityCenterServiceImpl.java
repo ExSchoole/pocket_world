@@ -1,21 +1,9 @@
 package org.exschool.pocketworld.city.center.service;
 
-import static org.apache.commons.lang.Validate.notNull;
-import static org.exschool.pocketworld.building.model.BuildingType.MALL;
-import static org.exschool.pocketworld.building.model.BuildingType.MARKETPLACE;
-import static org.exschool.pocketworld.building.model.BuildingType.PLANT;
-import static org.exschool.pocketworld.building.model.BuildingType.POOL;
-
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.annotation.PostConstruct;
-
+import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 import org.exschool.pocketworld.buildQueue.model.BuildQueueRecord;
 import org.exschool.pocketworld.buildQueue.model.Status;
 import org.exschool.pocketworld.buildQueue.model.Type;
@@ -26,7 +14,6 @@ import org.exschool.pocketworld.building.model.BuildingResourceId;
 import org.exschool.pocketworld.building.model.BuildingType;
 import org.exschool.pocketworld.building.model.TimeId;
 import org.exschool.pocketworld.building.service.BuildingService;
-import org.exschool.pocketworld.chat.model.MessageStatus;
 import org.exschool.pocketworld.chat.service.ChatService;
 import org.exschool.pocketworld.city.center.builder.CityCenterDtoBuilder;
 import org.exschool.pocketworld.city.center.dto.CityCenterDto;
@@ -37,19 +24,18 @@ import org.exschool.pocketworld.player.model.Player;
 import org.exschool.pocketworld.player.model.PlayerResources;
 import org.exschool.pocketworld.player.service.PlayerService;
 import org.exschool.pocketworld.resource.ResourceDto;
-import org.exschool.pocketworld.resource.building.service.ResourceProductionService;
 import org.exschool.pocketworld.resource.model.ResourceType;
 import org.exschool.pocketworld.util.builder.BuildQueueBuilder;
-import org.exschool.pocketworld.util.builder.MessageBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Iterables;
+import javax.annotation.PostConstruct;
+import java.util.*;
+import java.util.Map.Entry;
+
+import static org.apache.commons.lang.Validate.notNull;
 
 
 @Service
