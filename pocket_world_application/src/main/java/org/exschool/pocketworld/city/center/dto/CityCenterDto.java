@@ -24,7 +24,8 @@ public class CityCenterDto {
     }
 
     public CityCenterDto(Map<Integer, BuildingDto> buildings, Map<BuildingResourceId, Integer> resourceInfo, 
-    					 Map<TimeId, Integer> timeInfo, ResourceDto resourceDto, String nickName, String cityName) {
+    					 Map<TimeId, Integer> timeInfo, ResourceDto resourceDto,
+                         String nickName, String cityName) {
     	this.resourceDto = resourceDto;
     	this.resourceInfo = resourceInfo;
     	this.timeInfo = timeInfo;
