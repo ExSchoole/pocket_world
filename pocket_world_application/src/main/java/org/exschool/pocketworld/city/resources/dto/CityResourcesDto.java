@@ -21,7 +21,18 @@ public class CityResourcesDto {
 
 	private ResourceDto resourceDto;
     private String nickName;
-	private String cityName;
+
+    public CityResourcesDto() {
+    }
+
+    public CityResourcesDto(Map<Integer, ResourceBuildingDto> buildings, Map<BuildingResourceId, Integer> resourceInfo,
+    						Map<TimeId, Integer> timeInfo, 
+    						Map<ProductionId, Integer> productionInfo, 
+    						ResourceDto resourceDto, String nickName) {
+    	this.resourceDto = resourceDto;
+        this.nickName = nickName;
+        this.resourceBuildings = buildings;
+    }
 
 	public int getProductionByBuildingTypeLevel(ResourceType buildingType, int level) {
 		return productionInfo.get(new ProductionId(buildingType,level));
@@ -85,12 +96,5 @@ public class CityResourcesDto {
     public ResourceDto getResourceDto() {
         return resourceDto;
     }
-
-	public String getCityName() {
-		return cityName;
-	}
-
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
+    
 }

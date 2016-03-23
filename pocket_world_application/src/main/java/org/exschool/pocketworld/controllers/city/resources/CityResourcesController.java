@@ -1,6 +1,5 @@
 package org.exschool.pocketworld.controllers.city.resources;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -32,18 +31,15 @@ public class CityResourcesController {
     private CityResourcesService cityResourcesService;
     @Autowired
     private CommonCityService commonCityService;
-
-    private String playerName;
+    
+    private static final String PLAYER_NAME = "player-login"; //temporary
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showCityResources(
-            @RequestParam Map<String, String> allRequestParams, Model model, Principal principal) {
-
-        playerName = principal.getName();
+            @RequestParam Map<String, String> allRequestParams, Model model) {
         LOGGER.info("Requested params:" + allRequestParams);
-        LOGGER.info("Player name:" + principal);
-        commonCityService.buildQueuedBuildings(principal.getName());
-        CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo(playerName);
+        commonCityService.buildQueuedBuildings(PLAYER_NAME);
+        CityResourcesDto cityResourcesDto = cityResourcesService.cityResourcesInfo(PLAYER_NAME);
         model.addAttribute("dto", cityResourcesDto);
         model.addAttribute("time", new DateTime());
         LOGGER.info("Out:" + model);
@@ -61,7 +57,7 @@ public class CityResourcesController {
     @ResponseBody
     public ResponseEntity<Void> createResourceBuilding(@RequestBody PositionOfBuilding positionOfBuilding) {
         LOGGER.info("RequestBody:" + positionOfBuilding);
-        if (cityResourcesService.createResourceBuilding(positionOfBuilding, playerName)) {
+        if (cityResourcesService.createResourceBuilding(positionOfBuilding, PLAYER_NAME)) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

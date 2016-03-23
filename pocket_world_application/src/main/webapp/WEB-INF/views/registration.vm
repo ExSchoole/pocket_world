@@ -19,20 +19,22 @@
             </p>
                 <label for="password">Password</label>
                 <input id="password" tabindex="5" type="password" placeholder="Enter  password..." required/>
+
                 <label for="reenter_password">Re-enter Password</label>
-                <input id="reenter_password"  tabindex="5" type="password" placeholder="Re-enter password" required/>
+                <input id="reenter_password" tabindex="5" type="password" placeholder="Re-enter password" required/>
             
             
                 <label for="cityname">Cityname</label>
                 <input id="cityname" name="cityname" value="" title="cityname" tabindex="6" type="text" required/>
             
-                <input id="signup_submit" value="Sign up" tabindex="7" type="button">
+                <input id="signup_submit" value="Sign up" tabindex="7" type="submit">
             
             <p class="ahave"> <a href="login" id="already_have">Already have an account?</a> </p>
         </form>
     </fieldset>
 </div>
 #end
+
 
 <script type="text/javascript" src="#springUrl('/js/registration.js')"></script>
 

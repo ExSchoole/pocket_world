@@ -15,7 +15,6 @@ public final class CityCenterDtoBuilder {
 	private Map<BuildingResourceId, Integer> resourceInfo;
     private Map<TimeId, Integer> timeInfo;
     private String nickname;
-    private String cityName;
 
     public static CityCenterDtoBuilder builder() {
         return new CityCenterDtoBuilder();
@@ -49,12 +48,7 @@ public final class CityCenterDtoBuilder {
     	this.timeInfo = timeInfo;
     	return this;
     }
-
-    public CityCenterDtoBuilder cityName(String cityName){
-        this.cityName = cityName;
-        return this;
-    }
-
+   
     public CityCenterDto build() {
         CityCenterDto cityCenterDto = new CityCenterDto();
         cityCenterDto.setNickName(nickname);
@@ -62,7 +56,6 @@ public final class CityCenterDtoBuilder {
         cityCenterDto.setBuildings(buildings);
         cityCenterDto.setResourceInfo(resourceInfo);
         cityCenterDto.setTimeInfo(timeInfo);
-        cityCenterDto.setCityName(cityName);
         return cityCenterDto;
     }
 }

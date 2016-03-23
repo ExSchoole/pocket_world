@@ -16,7 +16,7 @@
 					$("fieldset#signup_menu").hide();
 				}
 			});
-			$('#signup_submit').mouseup(function(event){
+			$('#signup').submit(function(event){
 				event.preventDefault();
 				
 				var playerName = $.trim($('#username').val());
@@ -28,6 +28,7 @@
 						alert("Houston, we have a problem");
 					} else {
 						$.ajax({
+
 				            url: urls['registerNewPlayer'],
 				            type: "POST",
 				            data : {playerName: playerName, password: playerPas, cityName: cityName},	
@@ -45,7 +46,6 @@
 				                console.log("Error: " + errorThrown);
 				            }
 				        })
-					
 					
 						
 					}

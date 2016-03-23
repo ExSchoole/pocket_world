@@ -19,7 +19,6 @@ public final class CityResourcesDtoBuilder {
     private Map<TimeId, Integer> timeInfo;
     private Map<ProductionId, Integer> productionInfo;
     private String nickname;
-    private String cityName;
 
     public static CityResourcesDtoBuilder builder() {
         return new CityResourcesDtoBuilder();
@@ -66,11 +65,6 @@ public final class CityResourcesDtoBuilder {
     	return this;
     }
 
-    public CityResourcesDtoBuilder cityName(String citeName) {
-        this.cityName = citeName;
-        return this;
-    }
-
     public CityResourcesDto build() {
         CityResourcesDto cityResourcesDto = new CityResourcesDto();
         cityResourcesDto.setNickName(nickname);
@@ -79,7 +73,6 @@ public final class CityResourcesDtoBuilder {
         cityResourcesDto.setProductionInfo(productionInfo);
         cityResourcesDto.setResourceInfo(resourceInfo);
         cityResourcesDto.setTimeInfo(timeInfo);
-        cityResourcesDto.setCityName(cityName);
         return cityResourcesDto;
     }
 }
