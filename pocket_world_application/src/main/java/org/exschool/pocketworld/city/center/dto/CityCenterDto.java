@@ -18,17 +18,20 @@ public class CityCenterDto {
     private Map<TimeId, Integer> timeInfo;
     private ResourceDto resourceDto;
     private String nickName;
+    private String cityName;
 
     public CityCenterDto() {
     }
 
     public CityCenterDto(Map<Integer, BuildingDto> buildings, Map<BuildingResourceId, Integer> resourceInfo, 
-    					 Map<TimeId, Integer> timeInfo, ResourceDto resourceDto, String nickName) {
+    					 Map<TimeId, Integer> timeInfo, ResourceDto resourceDto,
+                         String nickName, String cityName) {
     	this.resourceDto = resourceDto;
     	this.resourceInfo = resourceInfo;
     	this.timeInfo = timeInfo;
         this.nickName = nickName;
         this.buildings = buildings;
+        this.cityName = cityName;
     }
 
     public Set<String> getBuildingTypes() {
@@ -76,6 +79,14 @@ public class CityCenterDto {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public void setCityName(String cityName){
+        this.cityName = cityName;
+    }
+
+    public String getCityName(){
+        return cityName;
     }
 
     public Map<Integer, BuildingDto> getBuildings() {

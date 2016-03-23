@@ -28,7 +28,6 @@
 						alert("Houston, we have a problem");
 					} else {
 						$.ajax({
-
 				            url: urls['registerNewPlayer'],
 				            type: "POST",
 				            data : {playerName: playerName, password: playerPas, cityName: cityName},	

@@ -89,6 +89,7 @@ public class CityResourcesServiceImpl implements CityResourcesService {
                 .productionInfo(getProductionInfo(resourceBuildingService.getPRODUCTION_RESOURCE_BUILDINGS_INFO()))
                 .resourceInfo(getResourceInfo(resourceBuildingService.getRESOURCE_BUILDINGS_INFO()))
                 .timeInfo(getTimeInfo(resourceBuildingService.getTIME_RESOURCE_BUILDINGS_INFO()))
+                .cityName(city.getName())
                 .build();
     }
 
